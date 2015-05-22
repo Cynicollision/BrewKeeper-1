@@ -1,0 +1,15 @@
+{
+  "name": "BrewKeeper",
+  "version": "0.0.0",
+  "description": "Journal and scheduler for home brewers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sean Normoyle",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.12.4",
+    "jade": "^1.9.2"
+  }
+}
