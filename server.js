@@ -1,12 +1,11 @@
-﻿var express = require('express'),
+﻿// modules
+var express = require('express'),
     stylus = require('stylus'),
     logger = require('morgan'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose');
 
-
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
 var app = express();
 
 function compile(str, path) {
@@ -20,11 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(stylus.middleware(
     {
         src: __dirname + '/public/css',
-        compile: compile,
-        debug: true,
-        dest: __dirname + "/public/css"
+        compile: compile
     }
 ));
+
 app.use(express.static(__dirname + '/public'));
 
 if (env === 'development') {
@@ -54,6 +52,8 @@ app.get('*', function (req, res) {
         mongoMessage: mongoMessage
     });
 });
+
+
 
 var port = process.env.PORT || 3030;
 app.listen(port);

@@ -1,2 +1,7 @@
 node_modules
+*.suo
+*.tmp
+
+# will need to include this when deploying
 public/vendor
+.ntvs_analysis.dat
