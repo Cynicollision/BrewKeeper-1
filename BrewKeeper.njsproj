@@ -31,29 +31,30 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="public\app\account\mvNavBarLoginCtrl.js" />
     <Compile Include="public\app\app.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
     <Compile Include="server.js" />
     <Content Include="package.json" />
+    <Content Include="public\app\account\navbar-login.jade" />
+    <Content Include="public\app\main\featured-brews.jade" />
+    <Content Include="public\app\main\main.jade" />
+    <Content Include="public\app\main\new-brews.jade" />
     <Content Include="public\css\site.css" />
     <Content Include="README.md" />
     <Content Include="server\includes\layout.jade" />
     <Content Include="server\includes\scripts.jade" />
     <Content Include="server\views\index.jade" />
-    <Content Include="server\views\partials\featured-brews.jade" />
-    <Content Include="server\views\partials\main.jade" />
-    <Content Include="server\views\partials\navbar-login.jade" />
-    <Content Include="server\views\partials\new-brews.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\" />
+    <Folder Include="public\app\account\" />
     <Folder Include="public\app\main\" />
     <Folder Include="public\css\" />
     <Folder Include="public\app\" />
     <Folder Include="server\" />
     <Folder Include="server\includes\" />
     <Folder Include="server\views\" />
-    <Folder Include="server\views\partials\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
