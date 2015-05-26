@@ -35,6 +35,10 @@
     <Compile Include="public\app\app.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
     <Compile Include="server.js" />
+    <Compile Include="server\config\config.js" />
+    <Compile Include="server\config\express.js" />
+    <Compile Include="server\config\mongoose.js" />
+    <Compile Include="server\config\routes.js" />
     <Content Include="package.json" />
     <Content Include="public\app\account\navbar-login.jade" />
     <Content Include="public\app\main\featured-brews.jade" />
@@ -54,6 +58,7 @@
     <Folder Include="public\app\" />
     <Folder Include="server\" />
     <Folder Include="server\includes\" />
+    <Folder Include="server\config\" />
     <Folder Include="server\views\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
