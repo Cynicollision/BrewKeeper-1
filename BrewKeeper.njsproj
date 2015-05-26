@@ -36,7 +36,6 @@
     <Compile Include="server.js" />
     <Content Include="package.json" />
     <Content Include="public\css\site.css" />
-    <Content Include="public\css\site.styl" />
     <Content Include="README.md" />
     <Content Include="server\includes\layout.jade" />
     <Content Include="server\includes\scripts.jade" />
