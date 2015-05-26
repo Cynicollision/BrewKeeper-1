@@ -43,6 +43,7 @@
     <Content Include="server\views\index.jade" />
     <Content Include="server\views\partials\featured-brews.jade" />
     <Content Include="server\views\partials\main.jade" />
+    <Content Include="server\views\partials\navbar-login.jade" />
     <Content Include="server\views\partials\new-brews.jade" />
   </ItemGroup>
   <ItemGroup>
