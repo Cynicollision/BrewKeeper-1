@@ -1,0 +1,5 @@
+﻿.panel.panel-primary
+    .panel-heading.text-center Featured Brews
+    .panel-body 
+        .row(ng-repeat="brew in brews | filter:{featured:true}")
+            .col-md-12 {{brew.name}}

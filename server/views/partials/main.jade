@@ -1,2 +1,10 @@
-﻿h1 This is a partial
-h2 {{ myVar }} 
+﻿.container
+    .jumbotron
+        h1 BrewKeeper
+        p The keeper of brews. BrewCreeper.
+
+    .row
+        .col-md-6
+            div(ng-include="'/partials/featured-brews'")
+        .col-md-6
+            div(ng-include="'/partials/new-brews'")

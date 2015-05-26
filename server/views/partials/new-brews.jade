@@ -1,0 +1,6 @@
+﻿.panel.panel-primary
+    .panel-heading.text-center New Brews
+    .panel-body 
+        .row(ng-repeat="brew in brews | orderBy:'brewedOn':true | limitTo:3")
+            .col-md-3 {{brew.brewedOn | date:"MMM d" }}
+            .col-md-9 {{brew.name}}
