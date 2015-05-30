@@ -31,10 +31,14 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="public\app\account\mvAuth.js" />
+    <Compile Include="public\app\account\mvIdentity.js" />
     <Compile Include="public\app\account\mvNavBarLoginCtrl.js" />
     <Compile Include="public\app\app.js" />
+    <Compile Include="public\app\common\mvNotifier.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
     <Compile Include="server.js" />
+    <Compile Include="server\config\auth.js" />
     <Compile Include="server\config\config.js" />
     <Compile Include="server\config\express.js" />
     <Compile Include="server\config\mongoose.js" />
@@ -54,6 +58,7 @@
     <Folder Include="public\" />
     <Folder Include="public\app\account\" />
     <Folder Include="public\app\main\" />
+    <Folder Include="public\app\common\" />
     <Folder Include="public\css\" />
     <Folder Include="public\app\" />
     <Folder Include="server\" />

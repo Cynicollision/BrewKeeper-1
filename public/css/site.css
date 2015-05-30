@@ -1,9 +1,19 @@
 ﻿body {
     padding-top: 61px;
 }
+
+.navbar {
+    background-color: #13987e;
+}
+
+.navbar a {
+    color: #eee;
+}
+
 .navbar-header a.navbar-brand {
     margin-top: -15px;
     margin-bottom: -20px;
+    color: #eee;
 }
 .navbar-header a.navbar-brand h6 {
     color: #ccc;
@@ -23,4 +33,12 @@ footer p {
 
 .navbar-form button {
     margin-left: 10px;
+}
+
+.toast-top-right {
+    top: 70px;
+}
+
+.toast-success {
+    background-color: #13987e;
 }
