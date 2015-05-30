@@ -42,6 +42,7 @@
     <Compile Include="server\config\config.js" />
     <Compile Include="server\config\express.js" />
     <Compile Include="server\config\mongoose.js" />
+    <Compile Include="server\config\passport.js" />
     <Compile Include="server\config\routes.js" />
     <Content Include="package.json" />
     <Content Include="public\app\account\navbar-login.jade" />
@@ -50,6 +51,7 @@
     <Content Include="public\app\main\new-brews.jade" />
     <Content Include="public\css\site.css" />
     <Content Include="README.md" />
+    <Content Include="server\includes\currentUser.jade" />
     <Content Include="server\includes\layout.jade" />
     <Content Include="server\includes\scripts.jade" />
     <Content Include="server\views\index.jade" />
