@@ -13,7 +13,8 @@ module.exports = function (config) {
         lastName: String,
         username: String,
         salt: String,
-        hashed_pwd: String
+        hashed_pwd: String,
+        roles: [String]
     });
     
     userSchema.methods = {
@@ -31,11 +32,15 @@ module.exports = function (config) {
 
             salt = createSalt();
             hash = hashPwd(salt, 'password');
-            User.create({ firstName: 'Sean', lastName: 'Normoyle', username: 'happyjack825', salt: salt, hashed_pwd: hash });
+            User.create({ firstName: 'Sean', lastName: 'Normoyle', username: 'happyjack825', salt: salt, hashed_pwd: hash, roles: ['admin'] });
             
             salt = createSalt();
             hash = hashPwd(salt, 'cynical');
-            User.create({ firstName: 'Herp', lastName: 'Derp', username: 'cynical', salt: salt, hashed_pwd: hash });
+            User.create({ firstName: 'Herp', lastName: 'Derpington', username: 'cynical', salt: salt, hashed_pwd: hash, roles: [] });
+
+            salt = createSalt();
+            hash = hashPwd(salt, 'dan');
+            User.create({ firstName: 'Dan', lastName: 'Derp', username: 'dan', salt: salt, hashed_pwd: hash });
         }
     });
 };

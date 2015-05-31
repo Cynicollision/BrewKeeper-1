@@ -34,6 +34,7 @@
     <Compile Include="public\app\account\mvAuth.js" />
     <Compile Include="public\app\account\mvIdentity.js" />
     <Compile Include="public\app\account\mvNavBarLoginCtrl.js" />
+    <Compile Include="public\app\account\mvUser.js" />
     <Compile Include="public\app\app.js" />
     <Compile Include="public\app\common\mvNotifier.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
