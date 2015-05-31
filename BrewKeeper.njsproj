@@ -35,6 +35,7 @@
     <Compile Include="public\app\account\mvIdentity.js" />
     <Compile Include="public\app\account\mvNavBarLoginCtrl.js" />
     <Compile Include="public\app\account\mvUser.js" />
+    <Compile Include="public\app\admin\mvUserListCtrl.js" />
     <Compile Include="public\app\app.js" />
     <Compile Include="public\app\common\mvNotifier.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
@@ -47,6 +48,7 @@
     <Compile Include="server\config\routes.js" />
     <Content Include="package.json" />
     <Content Include="public\app\account\navbar-login.jade" />
+    <Content Include="public\app\admin\user-list.jade" />
     <Content Include="public\app\main\featured-brews.jade" />
     <Content Include="public\app\main\main.jade" />
     <Content Include="public\app\main\new-brews.jade" />
@@ -62,6 +64,7 @@
     <Folder Include="public\app\account\" />
     <Folder Include="public\app\main\" />
     <Folder Include="public\app\common\" />
+    <Folder Include="public\app\admin\" />
     <Folder Include="public\css\" />
     <Folder Include="public\app\" />
     <Folder Include="server\" />
