@@ -29,6 +29,38 @@
 
             return dfd.promise;
         },
+        
+        createUser: function (newUserData) {
+            var newUser = new mvUser(newUserData);
+            var dfd = $q.defer();
+            
+            $http({
+                method: 'POST',
+                url: '/api/users',
+                data: newUserData,
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).then(function () {
+                mvIdentity.currentUser = newUser;
+                dfd.resolve();
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+
+            //newUser.$save().then(function () {
+            //    mvIdentity.currentUser = newUser;
+            //    dfd.resolve();
+            //}, function (response) {
+            //    dfd.reject(response.data.reason);
+            //});
+
+            return dfd.promise;
+        },
 
         logoutUser: function () {
             var dfd = $q.defer();
