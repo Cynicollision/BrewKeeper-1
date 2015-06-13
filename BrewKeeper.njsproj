@@ -48,6 +48,7 @@
     <Compile Include="server\config\passport.js" />
     <Compile Include="server\config\routes.js" />
     <Compile Include="server\controllers\users.js" />
+    <Compile Include="server\models\User.js" />
     <Compile Include="server\utilities\encryption.js" />
     <Content Include="package.json" />
     <Content Include="public\app\account\navbar-login.jade" />
@@ -75,6 +76,7 @@
     <Folder Include="server\includes\" />
     <Folder Include="server\config\" />
     <Folder Include="server\controllers\" />
+    <Folder Include="server\models\" />
     <Folder Include="server\utilities\" />
     <Folder Include="server\views\" />
   </ItemGroup>
