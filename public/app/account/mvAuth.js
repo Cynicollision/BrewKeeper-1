@@ -52,13 +52,33 @@
                 dfd.reject(response.data.reason);
             });
 
-            //newUser.$save().then(function () {
-            //    mvIdentity.currentUser = newUser;
-            //    dfd.resolve();
-            //}, function (response) {
-            //    dfd.reject(response.data.reason);
-            //});
+            return dfd.promise;
+        },
+        
+        updateCurrentUser: function (newUserData) {
+            var dfd = $q.defer();
 
+            var clone = angular.copy(mvIdentity.currentUser);
+            angular.extend(clone, newUserData);
+            
+            $http({
+                method: 'PUT',
+                url: '/api/users',
+                data: newUserData,
+                transformRequest: function (obj) {
+                    var str = [];
+                    for (var p in obj)
+                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    return str.join("&");
+                },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).then(function () {
+                mvIdentity.currentUser = clone;
+                dfd.resolve();
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+            
             return dfd.promise;
         },
 
@@ -87,6 +107,14 @@
 
         authorizeCurrentUserForRoute: function (role) {
             if (mvIdentity.isAuthorized(role)) {
+                return true;
+            } else {
+                return $q.reject('not authorized');
+            }
+        },
+
+        authorizeAuthenticatedUserForRoute: function () {
+            if (mvIdentity.isAuthenticated()) {
                 return true;
             } else {
                 return $q.reject('not authorized');
