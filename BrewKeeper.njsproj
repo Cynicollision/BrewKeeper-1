@@ -39,6 +39,8 @@
     <Compile Include="public\app\account\mvUser.js" />
     <Compile Include="public\app\admin\mvUserListCtrl.js" />
     <Compile Include="public\app\app.js" />
+    <Compile Include="public\app\brews\mvBrew.js" />
+    <Compile Include="public\app\brews\mvBrewListCtrl.js" />
     <Compile Include="public\app\common\mvNotifier.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
     <Compile Include="server.js" />
@@ -56,6 +58,7 @@
     <Content Include="public\app\account\profile.jade" />
     <Content Include="public\app\account\signup.jade" />
     <Content Include="public\app\admin\user-list.jade" />
+    <Content Include="public\app\brews\brew-list.jade" />
     <Content Include="public\app\main\featured-brews.jade" />
     <Content Include="public\app\main\main.jade" />
     <Content Include="public\app\main\new-brews.jade" />
@@ -72,6 +75,7 @@
     <Folder Include="public\app\main\" />
     <Folder Include="public\app\common\" />
     <Folder Include="public\app\admin\" />
+    <Folder Include="public\app\brews\" />
     <Folder Include="public\css\" />
     <Folder Include="public\app\" />
     <Folder Include="server\" />

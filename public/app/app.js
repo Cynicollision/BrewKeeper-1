@@ -10,7 +10,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
 
         user: {
             auth: function (mvAuth) {
-                return mvAuth.authorizeAuthenticatedUserForRoute()
+                return mvAuth.authorizeAuthenticatedUserForRoute();
             }
 
         }
@@ -42,6 +42,11 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
         templateUrl: '/partials/account/profile', 
         controller: 'mvProfileCtrl',
         resolve: routeRoleChecks.user
+    })
+
+    .when('/brews', {
+        templateUrl: '/partials/brews/brew-list', 
+        controller: 'mvBrewListCtrl'
     });
 });
 
