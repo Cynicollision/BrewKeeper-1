@@ -47,6 +47,11 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     .when('/brews', {
         templateUrl: '/partials/brews/brew-list', 
         controller: 'mvBrewListCtrl'
+    })
+
+    .when('/brews/:id', {
+        templateUrl: '/partials/brews/brew-details', 
+        controller: 'mvBrewDetailCtrl'
     });
 });
 

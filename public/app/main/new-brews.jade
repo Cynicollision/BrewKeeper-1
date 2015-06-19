@@ -3,4 +3,5 @@
     .panel-body 
         .row(ng-repeat="brew in brews | orderBy:'brewedOn':true | limitTo:3")
             .col-md-3 {{brew.brewedOn | date:"MMM d" }}
-            .col-md-9 {{brew.name}}
+            .col-md-9 
+                a(href="/brews/{{brew._id}}") {{brew.name}}

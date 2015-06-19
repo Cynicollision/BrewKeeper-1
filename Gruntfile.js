@@ -5,16 +5,19 @@
         pkg: grunt.file.readJSON('package.json'),
 
         jshint: {
-            all: [  'server.js', 
-                    'public/app/*.js',
-                    'public/app/account/*.js',
-                    'public/app/admin/*.js',
-                    'public/app/common/*.js',
-                    'public/app/main/*.js',
-                    'server/config/*.js',
-                    'server/controllers/users.js',
-                    'server/models/*.js',
-                    'server/utilities/*.js']
+            all: [  
+                'server.js', 
+                'public/app/*.js',
+                'public/app/account/*.js',
+                'public/app/admin/*.js',
+                'public/app/brews/*.js',
+                'public/app/common/*.js',
+                'public/app/main/*.js',
+                'server/config/*.js',
+                'server/controllers/users.js',
+                'server/models/*.js',
+                'server/utilities/*.js'
+            ]
         }
     });
 
