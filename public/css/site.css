@@ -3,17 +3,22 @@
 }
 
 .navbar {
-    background-color: #13987e;
+    background-color: #23A98f;
 }
 
 .navbar a {
-    color: #eee;
+    color: #fff;
 }
+
 
 .navbar-header a.navbar-brand {
     margin-top: -15px;
     margin-bottom: -20px;
     color: #eee;
+}
+
+.navbar-header a {
+    color: #fff;
 }
 .navbar-header a.navbar-brand h6 {
     color: #ccc;
@@ -40,5 +45,13 @@ footer p {
 }
 
 .toast-success {
-    background-color: #13987e;
+    background-color: #23A98f;
+}
+
+.top-padding-med {
+    padding-top: 10px;
+}
+
+.margin-left-med {
+    margin-left: 10px;
 }
