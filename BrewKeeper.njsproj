@@ -50,7 +50,9 @@
     <Compile Include="server\config\mongoose.js" />
     <Compile Include="server\config\passport.js" />
     <Compile Include="server\config\routes.js" />
+    <Compile Include="server\controllers\brews.js" />
     <Compile Include="server\controllers\users.js" />
+    <Compile Include="server\models\Brew.js" />
     <Compile Include="server\models\User.js" />
     <Compile Include="server\utilities\encryption.js" />
     <Content Include="package.json" />

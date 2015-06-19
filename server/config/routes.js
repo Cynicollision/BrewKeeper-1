@@ -1,5 +1,6 @@
 ﻿var auth = require('./auth'),
     users = require('../controllers/users'),
+    brews = require('../controllers/brews'),
     mongoose = require('mongoose'),
     User = mongoose.model('User');
 
@@ -8,6 +9,8 @@ module.exports = function (app) {
     app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
     app.post('/api/users', users.createUser);
     app.put('/api/users', users.updateUser);
+    
+    app.get('/api/brews', brews.getBrews);
 
     app.get('/partials/*', function (req, res) {
         res.render('../../public/app/' + req.params[0]);
