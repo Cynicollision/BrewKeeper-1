@@ -57,7 +57,6 @@
     <Compile Include="server\models\Brew.js" />
     <Compile Include="server\models\User.js" />
     <Compile Include="server\utilities\encryption.js" />
-    <Content Include="package.json" />
     <Content Include="public\app\account\navbar-login.jade" />
     <Content Include="public\app\account\profile.jade" />
     <Content Include="public\app\account\signup.jade" />
@@ -68,7 +67,6 @@
     <Content Include="public\app\main\main.jade" />
     <Content Include="public\app\main\new-brews.jade" />
     <Content Include="public\css\site.css" />
-    <Content Include="README.md" />
     <Content Include="server\includes\currentUser.jade" />
     <Content Include="server\includes\layout.jade" />
     <Content Include="server\includes\scripts.jade" />
