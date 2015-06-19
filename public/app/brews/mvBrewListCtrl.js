@@ -1,5 +1,5 @@
-﻿angular.module('app').controller('mvBrewListCtrl', function ($scope, mvBrew) {
-    $scope.brews = mvBrew.query();
+﻿angular.module('app').controller('mvBrewListCtrl', function ($scope, mvCachedBrews) {
+    $scope.brews = mvCachedBrews.query();
 
     $scope.sortOptions = [
         { value: 'name', text: 'Sort by Name' },
