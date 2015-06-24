@@ -1,5 +1,4 @@
-﻿
-var express = require('express'),
+﻿var express = require('express'),
     env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     app = express(),
     config = require('./server/config/config')[env];

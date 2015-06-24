@@ -1,0 +1,7 @@
+﻿.container
+    h1 {{recipe.name}}
+        .row
+            .col-md-12
+                h3 Type: {{ recipe.type }}
+                h4 Source: 
+                    a(href="{{ recipe.sourceUrl }} ") {{ recipe.source }}

@@ -45,6 +45,10 @@
     <Compile Include="public\app\brews\mvCachedBrews.js" />
     <Compile Include="public\app\common\mvNotifier.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
+    <Compile Include="public\app\recipes\mvCachedRecipes.js" />
+    <Compile Include="public\app\recipes\mvRecipe.js" />
+    <Compile Include="public\app\recipes\mvRecipeDetailCtrl.js" />
+    <Compile Include="public\app\recipes\mvRecipeListCtrl.js" />
     <Compile Include="server.js" />
     <Compile Include="server\config\auth.js" />
     <Compile Include="server\config\config.js" />
@@ -53,8 +57,10 @@
     <Compile Include="server\config\passport.js" />
     <Compile Include="server\config\routes.js" />
     <Compile Include="server\controllers\brews.js" />
+    <Compile Include="server\controllers\recipes.js" />
     <Compile Include="server\controllers\users.js" />
     <Compile Include="server\models\Brew.js" />
+    <Compile Include="server\models\Recipe.js" />
     <Compile Include="server\models\User.js" />
     <Compile Include="server\utilities\encryption.js" />
     <Content Include="public\app\account\navbar-login.jade" />
@@ -66,6 +72,8 @@
     <Content Include="public\app\main\featured-brews.jade" />
     <Content Include="public\app\main\main.jade" />
     <Content Include="public\app\main\new-brews.jade" />
+    <Content Include="public\app\recipes\recipe-details.jade" />
+    <Content Include="public\app\recipes\recipe-list.jade" />
     <Content Include="public\css\site.css" />
     <Content Include="server\includes\currentUser.jade" />
     <Content Include="server\includes\layout.jade" />
@@ -79,6 +87,7 @@
     <Folder Include="public\app\common\" />
     <Folder Include="public\app\admin\" />
     <Folder Include="public\app\brews\" />
+    <Folder Include="public\app\recipes\" />
     <Folder Include="public\css\" />
     <Folder Include="public\app\" />
     <Folder Include="server\" />

@@ -27,6 +27,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
         controller: 'mvMainCtrl'
     })
 
+    // user stuff
     .when('/admin/users', {
         templateUrl: '/partials/admin/user-list', 
         controller: 'mvUserListCtrl',
@@ -44,6 +45,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
         resolve: routeRoleChecks.user
     })
 
+    // brews
     .when('/brews', {
         templateUrl: '/partials/brews/brew-list', 
         controller: 'mvBrewListCtrl'
@@ -52,6 +54,17 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     .when('/brews/:id', {
         templateUrl: '/partials/brews/brew-details', 
         controller: 'mvBrewDetailCtrl'
+    })
+
+    // recipes
+    .when('/recipes', {
+        templateUrl: '/partials/recipes/recipe-list', 
+        controller: 'mvRecipeListCtrl'
+    })
+
+    .when('/recipes/:id', {
+        templateUrl: '/partials/recipes/recipe-details', 
+        controller: 'mvRecipeDetailCtrl'
     });
 });
 

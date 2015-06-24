@@ -1,0 +1,20 @@
+﻿.container.top-padding-med
+    .pull-right
+        form.form-inline
+            .form-group
+                input.form-control(ng-model="searchText", placeholder="Filter")
+            .form-group.margin-left-med
+                select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
+    table.table.table-hover.table-striped.table-condensed
+        thead
+            tr
+                th Name
+                th Type
+                th Source
+        tbody
+            tr(ng-repeat="recipe in recipes | filter:searchText | orderBy:sortOrder")
+                td 
+                    a(href="/recipes/{{recipe._id}}") {{recipe.name}}
+                td {{recipe.type }}
+                td {{recipe.source }}
+                
