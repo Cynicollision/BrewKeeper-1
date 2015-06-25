@@ -1,0 +1,19 @@
+﻿.container
+    .well
+        form.form-horizontal(name="addBrewForm")
+            fieldset
+                legend New Brew Information
+                .form-group
+                    label.col-md-2.control-label(for="name") Name
+                    .col-md-10
+                        input.form-control(name="name", type="text", placeholder="Name", ng-model="name", required)
+                .form-group
+                    label.col-md-2.control-label(for="brewedOn") Date Brewed
+                    .col-md-10
+                        input.form-control(name="brewedOn", type="text", placeholder="Date Brewed", ng-model="brewedOn", required)
+                .form-group
+                    .col-md-10.col-md-offset-2
+                        .pull-right
+                            button.btn.btn-primary(ng-click="saveBrew()", ng-disabled="signupForm.$invalid") Save
+                            | &nbsp;
+                            a.btn.btn-default(href="/") Cancel

@@ -39,6 +39,7 @@
     <Compile Include="public\app\account\mvUser.js" />
     <Compile Include="public\app\admin\mvUserListCtrl.js" />
     <Compile Include="public\app\app.js" />
+    <Compile Include="public\app\brews\mvAddBrewCtrl.js" />
     <Compile Include="public\app\brews\mvBrew.js" />
     <Compile Include="public\app\brews\mvBrewDetailCtrl.js" />
     <Compile Include="public\app\brews\mvBrewListCtrl.js" />
@@ -67,6 +68,7 @@
     <Content Include="public\app\account\profile.jade" />
     <Content Include="public\app\account\signup.jade" />
     <Content Include="public\app\admin\user-list.jade" />
+    <Content Include="public\app\brews\add-brew.jade" />
     <Content Include="public\app\brews\brew-details.jade" />
     <Content Include="public\app\brews\brew-list.jade" />
     <Content Include="public\app\main\featured-brews.jade" />

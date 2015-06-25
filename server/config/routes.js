@@ -16,11 +16,14 @@ module.exports = function (app) {
     
     // brews
     app.get('/api/brews', brews.getBrews);
-    app.get('/api/brews/:id', brews.getBrewById);
+    app.post('/api/brews', brews.saveBrew);
+    // TODO: 
+    //app.get('/api/brews/:user', brews.getBrewsByUser);
+    app.get('/api/brews/view/:id', brews.getBrewById);
     
     // recipes
     app.get('/api/recipes', recipes.getRecipes);
-    app.get('/api/recipes/:id', recipes.getRecipeById);
+    app.get('/api/recipes/view/:id', recipes.getRecipeById);
     
     // views
     app.get('/partials/*', function (req, res) {

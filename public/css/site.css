@@ -6,8 +6,8 @@
     background-color: #23A98f;
 }
 
-.navbar a {
-    color: #fff;
+.navbar-inverse .navbar-nav li a {
+    color: #ddd;
 }
 
 

@@ -3,10 +3,10 @@
 
     return {
         query: function () {
-            if (!brewList) {
+            //if (!brewList) {
                 brewList = mvBrew.query();
-            }
-
+            //}
+            
             return brewList;
         }
     };

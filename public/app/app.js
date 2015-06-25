@@ -46,23 +46,35 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     })
 
     // brews
+    // TODO: won't need this?
     .when('/brews', {
         templateUrl: '/partials/brews/brew-list', 
         controller: 'mvBrewListCtrl'
     })
 
-    .when('/brews/:id', {
+    .when('/brews/add', {
+        templateUrl: '/partials/brews/add-brew', 
+        controller: 'mvAddBrewCtrl'
+    })
+
+    .when('/brews/:user', {
+        templateUrl: '/partials/brews/brew-list', 
+        controller: 'mvBrewListCtrl'
+    })
+
+    .when('/brews/view/:id', {
         templateUrl: '/partials/brews/brew-details', 
         controller: 'mvBrewDetailCtrl'
     })
 
     // recipes
+    // TODO: won't need this?
     .when('/recipes', {
         templateUrl: '/partials/recipes/recipe-list', 
         controller: 'mvRecipeListCtrl'
     })
 
-    .when('/recipes/:id', {
+    .when('/recipes/view/:id', {
         templateUrl: '/partials/recipes/recipe-details', 
         controller: 'mvRecipeDetailCtrl'
     });
