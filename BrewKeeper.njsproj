@@ -44,6 +44,7 @@
     <Compile Include="public\app\brews\mvBrewDetailCtrl.js" />
     <Compile Include="public\app\brews\mvBrewListCtrl.js" />
     <Compile Include="public\app\brews\mvCachedBrews.js" />
+    <Compile Include="public\app\common\mvDefaultRequest.js" />
     <Compile Include="public\app\common\mvNotifier.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
     <Compile Include="public\app\recipes\mvCachedRecipes.js" />

@@ -1,4 +1,4 @@
-﻿angular.module('app').factory('mvBrew', function ($resource, $http, $q) {
+﻿angular.module('app').factory('mvBrew', function ($resource, $http, $q, mvDefaultRequest) {
     return {
         query: function () {
             var dfd = $q.defer();
@@ -7,13 +7,8 @@
                 method: 'GET',
                 isArray: false,
                 url: '/api/brews',
-                transformRequest: function (obj) {
-                    var str = [];
-                    for (var p in obj)
-                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                    return str.join("&");
-                },
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                transformRequest: mvDefaultRequest.transform,
+                headers: mvDefaultRequest.headers
             }).then(function (response) {
                 dfd.resolve(response);
             }, function (response) {
@@ -23,6 +18,7 @@
             return dfd.promise;
         },
         
+        
         save: function (newBrewData) {
             var dfd = $q.defer();
             
@@ -31,13 +27,8 @@
                 isArray: false,
                 url: '/api/brews',
                 data: newBrewData,
-                transformRequest: function (obj) {
-                    var str = [];
-                    for (var p in obj)
-                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                    return str.join("&");
-                },
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                transformRequest: mvDefaultRequest.transform,
+                headers: mvDefaultRequest.headers
             }).then(function () {
                 dfd.resolve();
             }, function (response) {

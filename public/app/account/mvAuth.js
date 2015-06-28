@@ -1,4 +1,4 @@
-﻿angular.module('app').factory('mvAuth', function ($http, mvIdentity, $q, mvUser) {
+﻿angular.module('app').factory('mvAuth', function ($http, $q, mvIdentity, mvUser, mvDefaultRequest) {
     return {
         authenticateUser: function (username, password) {
             var dfd = $q.defer();
@@ -9,13 +9,8 @@
                     username: username,
                     password: password
                 },
-                transformRequest: function (obj) {
-                    var str = [];
-                    for (var p in obj)
-                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                    return str.join("&");
-                },
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                transformRequest: mvDefaultRequest.transform,
+                headers: mvDefaultRequest.headers
             }).then(function (response) {
                 if (response.data.success) {
                     var user = new mvUser();
@@ -38,13 +33,8 @@
                 method: 'POST',
                 url: '/api/users',
                 data: newUserData,
-                transformRequest: function (obj) {
-                    var str = [];
-                    for (var p in obj)
-                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                    return str.join("&");
-                },
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                transformRequest: mvDefaultRequest.transform,
+                headers: mvDefaultRequest.headers
             }).then(function () {
                 mvIdentity.currentUser = newUser;
                 dfd.resolve();
@@ -65,13 +55,8 @@
                 method: 'PUT',
                 url: '/api/users',
                 data: newUserData,
-                transformRequest: function (obj) {
-                    var str = [];
-                    for (var p in obj)
-                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                    return str.join("&");
-                },
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                transformRequest: mvDefaultRequest.transform,
+                headers: mvDefaultRequest.headers
             }).then(function () {
                 mvIdentity.currentUser = clone;
                 dfd.resolve();
@@ -90,13 +75,8 @@
                 data: {
                     logout: true
                 },
-                transformRequest: function (obj) {
-                    var str = [];
-                    for (var p in obj)
-                        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                    return str.join("&");
-                },
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                transformRequest: mvDefaultRequest.transform,
+                headers: mvDefaultRequest.headers
             }).then(function () {
                 mvIdentity.currentUser = undefined;
                 dfd.resolve();
