@@ -6,17 +6,18 @@ exports.getBrews = function (req, res) {
     });
 };
 
-// TODO: 
-//exports.getBrewsByUser = function (req, res) {
-//    Brew.find({}).exec(function (err, collection) {
-//        res.send(collection);
-//    });
-//};
+exports.getBrewsByUserId = function (req, res) {
+    var userId = req.params.id;
+
+    Brew.find({brewedBy: userId}).exec(function (err, collection) {
+        res.send(collection);
+    });
+};
 
 exports.saveBrew = function (req, res) {
     var brewData = req.body;
     
-    Brew.create(brewData, function (err, jellybean, snickers) {
+    Brew.create(brewData, function (err) {
         if (err) {
             res.send({ reason: err.toString() });
         }

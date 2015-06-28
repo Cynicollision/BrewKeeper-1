@@ -1,7 +1,7 @@
 ﻿angular.module('app').controller('mvSignupCtrl', function ($scope, $location, mvUser, mvAuth, mvNotifier) {
     $scope.signup = function () {
         var newUserData = {
-            username: $scope.email,
+            username: $scope.username,
             password: $scope.password,
             firstName: $scope.fname,
             lastName: $scope.lname

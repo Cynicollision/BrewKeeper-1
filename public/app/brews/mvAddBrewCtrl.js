@@ -3,9 +3,9 @@
         var newBrewData = {
             name: $scope.name,
             brewedOn: $scope.brewedOn,
-            brewedBy: mvIdentity.currentUser._id
+            brewedBy: mvIdentity.getCurrentUserId()
         };
-
+        
         mvBrew.save(newBrewData).then(function (err) {
             if (!err) {
                 mvNotifier.notify('Brew saved!');
