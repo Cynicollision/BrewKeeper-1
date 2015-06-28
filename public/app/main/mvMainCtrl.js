@@ -1,3 +1,3 @@
-﻿angular.module('app').controller('mvMainCtrl', function ($scope, mvCachedBrews) {
-    $scope.brews = mvCachedBrews.query();
+﻿angular.module('app').controller('mvMainCtrl', function ($scope) {
+    //$scope.brews = mvCachedBrews.query();
 });

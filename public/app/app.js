@@ -57,12 +57,12 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
         controller: 'mvAddBrewCtrl'
     })
 
-    .when('/brews/:user', {
+    .when('/brews/', {
         templateUrl: '/partials/brews/brew-list', 
         controller: 'mvBrewListCtrl'
     })
 
-    .when('/brews/view/:id', {
+    .when('/brews/:id', {
         templateUrl: '/partials/brews/brew-details', 
         controller: 'mvBrewDetailCtrl'
     })

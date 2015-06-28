@@ -14,6 +14,6 @@
         tbody
             tr(ng-repeat="brew in brews | filter:searchText | orderBy:sortOrder")
                 td 
-                    a(href="/brews/view/{{brew._id}}") {{brew.name}}
+                    a(href="/brews/{{brew._id}}") {{brew.name}}
                 td {{brew.brewedOn | date}}
                 

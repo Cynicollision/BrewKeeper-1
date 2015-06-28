@@ -1,5 +1,5 @@
-﻿angular.module('app').controller('mvBrewListCtrl', function ($scope, mvBrew) {
-    mvBrew.query().then(function (response) {
+﻿angular.module('app').controller('mvBrewListCtrl', function ($scope, mvBrew, mvIdentity) {
+    mvBrew.queryForUser(mvIdentity.getCurrentUserId()).then(function (response) {
         $scope.brews = response.data;
     });
 
