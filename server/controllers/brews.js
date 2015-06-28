@@ -15,9 +15,7 @@ exports.getBrews = function (req, res) {
 
 exports.saveBrew = function (req, res) {
     var brewData = req.body;
-    brewData.featured; // temp
     
-    // doesn't actually work...
     Brew.create(brewData, function (err, jellybean, snickers) {
         if (err) {
             res.send({ reason: err.toString() });

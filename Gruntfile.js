@@ -11,6 +11,7 @@
                 'public/app/account/*.js',
                 'public/app/admin/*.js',
                 'public/app/brews/*.js',
+                'public/app/recipes/*.js',
                 'public/app/common/*.js',
                 'public/app/main/*.js',
                 'server/config/*.js',

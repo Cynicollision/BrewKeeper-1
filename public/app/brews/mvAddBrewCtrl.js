@@ -9,7 +9,7 @@
         mvBrew.save(newBrewData).then(function (err) {
             if (!err) {
                 mvNotifier.notify('Brew saved!');
-                $location.path('/brews').search({ refresh: 1 });
+                $location.path('/brews');
             } else {
                 mvNotifier.error(err.reason);
             }

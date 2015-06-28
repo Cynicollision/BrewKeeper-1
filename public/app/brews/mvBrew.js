@@ -1,13 +1,4 @@
 ﻿angular.module('app').factory('mvBrew', function ($resource, $http, $q) {
-    //var BrewResource = $resource('/api/brews/:_id', { _id: "@id" }, {
-    //    update: { method: 'PUT', isArray: false },
-    //    //save: { method: 'POST', isArray: false }
-        
-        
-    //});
-
-    //return BrewResource;
-
     return {
         query: function () {
             var dfd = $q.defer();
@@ -16,7 +7,6 @@
                 method: 'GET',
                 isArray: false,
                 url: '/api/brews',
-                //data: newBrewData,
                 transformRequest: function (obj) {
                     var str = [];
                     for (var p in obj)
@@ -32,7 +22,6 @@
             
             return dfd.promise;
         },
-        
         
         save: function (newBrewData) {
             var dfd = $q.defer();
