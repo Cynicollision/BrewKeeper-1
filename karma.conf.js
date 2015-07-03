@@ -17,10 +17,12 @@ module.exports = function(config) {
         files: [
             'public/vendor/jquery/dist/jquery.min.js',
             'public/vendor/angular/angular.min.js',
+            'public/vendor/angular-route/angular-route.min.js',
             'public/vendor/angular-resource/angular-resource.min.js',
             'public/vendor/angular-mocks/angular-mocks.js',
             'public/app/*.js',
-            'test/app/**/*Spec.js'
+            'public/app/PasswordController.js',
+            'test/*Spec.js'
         ],
 
 

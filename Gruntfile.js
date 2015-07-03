@@ -1,6 +1,4 @@
 ﻿module.exports = function (grunt) {
-
-    // init
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -19,14 +17,33 @@
                 'server/models/*.js',
                 'server/utilities/*.js'
             ]
+        },
+
+        karma: {
+            unit: {
+                options: {
+                    frameworks: ['jasmine'],
+                    singleRun: true,
+                    browsers: ['PhantomJS'],
+                    files: [
+                        'public/vendor/angular/angular.min.js',
+                        'public/vendor/angular-resource/angular-resource.js',
+                        'public/vendor/angular-route/angular-route.js',
+                        'public/vendor/angular-mocks/angular-mocks.js',
+                        'public/vendor/toastr/toastr.min.js',
+                        'public/app/app.js',
+                        'public/app/common/*.js',
+                        'public/app/brews/*.js'
+                    ]
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-karma');
     
-
-    // register the tasks
-    grunt.registerTask('hint', 'jshint');
+    grunt.registerTask('test', [ 'jshint', 'karma']);
 	grunt.registerTask('default', function () {
         grunt.log.write('So vast!').ok();
     });

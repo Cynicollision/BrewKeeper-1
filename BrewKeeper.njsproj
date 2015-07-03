@@ -21,7 +21,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartWebBrowser>True</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -40,13 +40,14 @@
     <Compile Include="public\app\admin\mvUserListCtrl.js" />
     <Compile Include="public\app\app.js" />
     <Compile Include="public\app\brews\mvAddBrewCtrl.js" />
-    <Compile Include="public\app\brews\mvBrew.js" />
+    <Compile Include="public\app\brews\BrewService.js" />
     <Compile Include="public\app\brews\mvBrewDetailCtrl.js" />
     <Compile Include="public\app\brews\mvBrewListCtrl.js" />
     <Compile Include="public\app\brews\mvCachedBrews.js" />
     <Compile Include="public\app\common\mvDefaultRequest.js" />
     <Compile Include="public\app\common\mvNotifier.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
+    <Compile Include="public\app\PasswordController.js" />
     <Compile Include="public\app\recipes\mvCachedRecipes.js" />
     <Compile Include="public\app\recipes\mvRecipe.js" />
     <Compile Include="public\app\recipes\mvRecipeDetailCtrl.js" />
@@ -65,6 +66,7 @@
     <Compile Include="server\models\Recipe.js" />
     <Compile Include="server\models\User.js" />
     <Compile Include="server\utilities\encryption.js" />
+    <Compile Include="public\app\brews\BrewServiceTest.js" />
     <Content Include="public\app\account\navbar-login.jade" />
     <Content Include="public\app\account\profile.jade" />
     <Content Include="public\app\account\signup.jade" />
@@ -82,8 +84,10 @@
     <Content Include="server\includes\layout.jade" />
     <Content Include="server\includes\scripts.jade" />
     <Content Include="server\views\index.jade" />
+    <Content Include="test\SpecRunner.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="test\" />
     <Folder Include="public\" />
     <Folder Include="public\app\account\" />
     <Folder Include="public\app\main\" />

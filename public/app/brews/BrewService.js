@@ -1,4 +1,4 @@
-﻿angular.module('app').factory('mvBrew', function ($resource, $http, $q, mvDefaultRequest) {
+﻿angular.module('app').factory('BrewService', function ($resource, $http, $q, mvDefaultRequest) {
     return {
         query: function () {
             var dfd = $q.defer();

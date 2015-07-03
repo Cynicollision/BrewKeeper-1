@@ -1,10 +1,10 @@
-﻿angular.module('app').factory('mvCachedBrews', function (mvBrew) {
+﻿angular.module('app').factory('mvCachedBrews', function (BrewService) {
     var brewList;
 
     return {
         query: function () {
             if (!brewList) {
-                brewList = mvBrew.query();
+                brewList = BrewService.query();
             }
             
             return brewList;
