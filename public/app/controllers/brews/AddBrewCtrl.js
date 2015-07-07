@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('mvAddBrewCtrl', function ($scope, $location, BrewService, mvIdentity, mvNotifier) {
+﻿angular.module('app').controller('AddBrewCtrl', function ($scope, $location, BrewService, mvIdentity, mvNotifier) {
     $scope.saveBrew = function () {
         var newBrewData = {
             name: $scope.name,

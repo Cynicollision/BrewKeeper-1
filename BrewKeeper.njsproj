@@ -21,7 +21,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartWebBrowser>True</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -31,6 +31,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Gruntfile.js" />
     <Compile Include="public\app\account\mvAuth.js" />
     <Compile Include="public\app\account\mvIdentity.js" />
     <Compile Include="public\app\account\mvNavBarLoginCtrl.js" />
@@ -39,13 +40,13 @@
     <Compile Include="public\app\account\mvUser.js" />
     <Compile Include="public\app\admin\mvUserListCtrl.js" />
     <Compile Include="public\app\app.js" />
-    <Compile Include="public\app\brews\mvAddBrewCtrl_test.js" />
-    <Compile Include="public\app\brews\mvAddBrewCtrl.js" />
-    <Compile Include="public\app\brews\BrewService.js" />
-    <Compile Include="public\app\brews\mvBrewDetailCtrl.js" />
-    <Compile Include="public\app\brews\mvBrewDetailCtrlTest.js" />
-    <Compile Include="public\app\brews\mvBrewListCtrl.js" />
-    <Compile Include="public\app\brews\mvCachedBrews.js" />
+    <Compile Include="public\app\controllers\brews\AddBrewCtrl_test.js" />
+    <Compile Include="public\app\controllers\brews\AddBrewCtrl.js" />
+    <Compile Include="public\app\controllers\brews\BrewListCtrl_test.js" />
+    <Compile Include="public\app\services\brews\BrewService.js" />
+    <Compile Include="public\app\controllers\brews\BrewDetailCtrl.js" />
+    <Compile Include="public\app\controllers\brews\BrewDetailCtrl_test.js" />
+    <Compile Include="public\app\controllers\brews\BrewListCtrl.js" />
     <Compile Include="public\app\common\mvDefaultRequest.js" />
     <Compile Include="public\app\common\mvNotifier.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
@@ -67,7 +68,8 @@
     <Compile Include="server\models\Recipe.js" />
     <Compile Include="server\models\User.js" />
     <Compile Include="server\utilities\encryption.js" />
-    <Compile Include="public\app\brews\BrewServiceTest.js" />
+    <Compile Include="public\app\services\brews\BrewServiceTest.js" />
+    <Content Include="package.json" />
     <Content Include="public\app\views\account\navbar-login.jade" />
     <Content Include="public\app\views\account\profile.jade" />
     <Content Include="public\app\views\account\signup.jade" />
@@ -89,11 +91,13 @@
   <ItemGroup>
     <Folder Include="public\" />
     <Folder Include="public\app\account\" />
+    <Folder Include="public\app\controllers\brews\" />
     <Folder Include="public\app\main\" />
     <Folder Include="public\app\common\" />
     <Folder Include="public\app\admin\" />
-    <Folder Include="public\app\brews\" />
     <Folder Include="public\app\controllers\" />
+    <Folder Include="public\app\services\" />
+    <Folder Include="public\app\services\brews\" />
     <Folder Include="public\app\views\" />
     <Folder Include="public\app\recipes\" />
     <Folder Include="public\app\views\main\" />

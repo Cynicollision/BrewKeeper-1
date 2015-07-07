@@ -54,17 +54,17 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
 
     .when('/brews/add', {
         templateUrl: '/partials/views/brews/add-brew', 
-        controller: 'mvAddBrewCtrl'
+        controller: 'AddBrewCtrl'
     })
 
     .when('/brews/', {
         templateUrl: '/partials/views/brews/brew-list', 
-        controller: 'mvBrewListCtrl'
+        controller: 'BrewListCtrl'
     })
 
     .when('/brews/:id', {
         templateUrl: '/partials/views/brews/brew-details', 
-        controller: 'mvBrewDetailCtrl'
+        controller: 'BrewDetailCtrl'
     })
 
     // recipes
