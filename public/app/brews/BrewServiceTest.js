@@ -1,4 +1,5 @@
-﻿describe('mvBrew', function () {
+﻿
+describe('BrewService', function () {
     var BrewServiceMock,
         httpBackend;
     

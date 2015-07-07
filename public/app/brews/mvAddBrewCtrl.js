@@ -11,7 +11,7 @@
                 mvNotifier.notify('Brew saved!');
                 $location.path('/brews');
             } else {
-                mvNotifier.error(err.reason);
+                mvNotifier.error('ERROR: '+ err.reason);
             }
         }, function (reason) {
             mvNotifier.error(reason);

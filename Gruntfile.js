@@ -26,20 +26,41 @@
                     singleRun: true,
                     browsers: ['PhantomJS'],
                     files: [
-                        'public/vendor/angular/angular.min.js',
+                        'public/vendor/angular/angular.js',
                         'public/vendor/angular-resource/angular-resource.js',
                         'public/vendor/angular-route/angular-route.js',
                         'public/vendor/angular-mocks/angular-mocks.js',
-                        'public/vendor/toastr/toastr.min.js',
-                        'public/app/app.js',
-                        'public/app/common/*.js',
-                        'public/app/brews/*.js'
+                        'public/vendor/jquery/dist/jquery.js',
+                        'public/vendor/toastr/toastr.js',
+                        'public/app/*.js',
+                        'public/app/account/*.js',
+                        'public/app/brews/*.js',
+                        'public/app/common/*.js'
                     ]
                 }
             }
+        },
+        
+        jasmine: {
+            'run-all-tests': {
+                src: [
+                    'public/vendor/angular/angular.js',
+                    'public/vendor/angular-resource/angular-resource.js',
+                    'public/vendor/angular-route/angular-route.js',
+                    'public/vendor/angular-mocks/angular-mocks.js',
+                    'public/vendor/jquery/dist/jquery.js',
+                    'public/vendor/toastr/toastr.js',
+                    'public/app/*.js',
+                    'public/app/account/*.js',
+                    'public/app/brews/*.js',
+                    'public/app/common/*.js'
+                ]
+            }
         }
     });
-
+    
+    // TODO: don't need grunt-contrib-jasmine AND grunt-karma
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-karma');
     

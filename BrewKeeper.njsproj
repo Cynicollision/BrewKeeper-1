@@ -39,19 +39,22 @@
     <Compile Include="public\app\account\mvUser.js" />
     <Compile Include="public\app\admin\mvUserListCtrl.js" />
     <Compile Include="public\app\app.js" />
+    <Compile Include="public\app\brews\mvAddBrewCtrl_test.js" />
+    <Compile Include="public\app\brews\testsTest.js" />
     <Compile Include="public\app\brews\mvAddBrewCtrl.js" />
     <Compile Include="public\app\brews\BrewService.js" />
     <Compile Include="public\app\brews\mvBrewDetailCtrl.js" />
+    <Compile Include="public\app\brews\mvBrewDetailCtrlTest.js" />
     <Compile Include="public\app\brews\mvBrewListCtrl.js" />
     <Compile Include="public\app\brews\mvCachedBrews.js" />
     <Compile Include="public\app\common\mvDefaultRequest.js" />
     <Compile Include="public\app\common\mvNotifier.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
-    <Compile Include="public\app\PasswordController.js" />
     <Compile Include="public\app\recipes\mvCachedRecipes.js" />
     <Compile Include="public\app\recipes\mvRecipe.js" />
     <Compile Include="public\app\recipes\mvRecipeDetailCtrl.js" />
     <Compile Include="public\app\recipes\mvRecipeListCtrl.js" />
+    <Compile Include="public\app\testApp.js" />
     <Compile Include="server.js" />
     <Compile Include="server\config\auth.js" />
     <Compile Include="server\config\config.js" />
@@ -84,10 +87,8 @@
     <Content Include="server\includes\layout.jade" />
     <Content Include="server\includes\scripts.jade" />
     <Content Include="server\views\index.jade" />
-    <Content Include="test\SpecRunner.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="test\" />
     <Folder Include="public\" />
     <Folder Include="public\app\account\" />
     <Folder Include="public\app\main\" />
