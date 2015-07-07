@@ -23,24 +23,24 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
 
     $routeProvider
     .when('/', {
-        templateUrl: '/partials/main/main', 
+        templateUrl: '/partials/views/main/main', 
         controller: 'mvMainCtrl'
     })
 
     // user stuff
     .when('/admin/users', {
-        templateUrl: '/partials/admin/user-list', 
+        templateUrl: '/partials/views/admin/user-list', 
         controller: 'mvUserListCtrl',
         resolve: routeRoleChecks.admin
     })
     
     .when('/signup', {
-        templateUrl: '/partials/account/signup', 
+        templateUrl: '/partials/views/account/signup', 
         controller: 'mvSignupCtrl'
     })
 
     .when('/profile', {
-        templateUrl: '/partials/account/profile', 
+        templateUrl: '/partials/views/account/profile', 
         controller: 'mvProfileCtrl',
         resolve: routeRoleChecks.user
     })
@@ -48,34 +48,34 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     // brews
     // TODO: won't need this?
     .when('/brews', {
-        templateUrl: '/partials/brews/brew-list', 
+        templateUrl: '/partials/views/brews/brew-list', 
         controller: 'mvBrewListCtrl'
     })
 
     .when('/brews/add', {
-        templateUrl: '/partials/brews/add-brew', 
+        templateUrl: '/partials/views/brews/add-brew', 
         controller: 'mvAddBrewCtrl'
     })
 
     .when('/brews/', {
-        templateUrl: '/partials/brews/brew-list', 
+        templateUrl: '/partials/views/brews/brew-list', 
         controller: 'mvBrewListCtrl'
     })
 
     .when('/brews/:id', {
-        templateUrl: '/partials/brews/brew-details', 
+        templateUrl: '/partials/views/brews/brew-details', 
         controller: 'mvBrewDetailCtrl'
     })
 
     // recipes
     // TODO: won't need this?
     .when('/recipes', {
-        templateUrl: '/partials/recipes/recipe-list', 
+        templateUrl: '/partials/views/recipes/recipe-list', 
         controller: 'mvRecipeListCtrl'
     })
 
     .when('/recipes/view/:id', {
-        templateUrl: '/partials/recipes/recipe-details', 
+        templateUrl: '/partials/views/recipes/recipe-details', 
         controller: 'mvRecipeDetailCtrl'
     });
 });
