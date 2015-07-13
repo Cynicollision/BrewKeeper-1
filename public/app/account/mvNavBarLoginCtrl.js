@@ -1,5 +1,5 @@
-﻿angular.module('app').controller('mvNavBarLoginCtrl', function ($scope, $http, $location, IdentityService, mvNotifier, mvAuth) {
-    $scope.identity = IdentityService;
+﻿angular.module('app').controller('mvNavBarLoginCtrl', function ($scope, $http, $location, Identity, mvNotifier, mvAuth) {
+    $scope.identity = Identity;
 
     $scope.signin = function (username, password) {
         mvAuth.authenticateUser(username, password).then(function (success) {

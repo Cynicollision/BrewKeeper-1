@@ -1,6 +1,6 @@
-﻿angular.module('app').controller('BrewListCtrl', function ($scope, BrewService, IdentityService) {
+﻿angular.module('app').controller('BrewListCtrl', function ($scope, BrewService, Identity) {
     $scope.getCurrentUserBrews = function () {
-        BrewService.queryForUser(IdentityService.getCurrentUserId()).then(function (response) {
+        BrewService.queryForUser(Identity.getCurrentUserId()).then(function (response) {
             $scope.brews = response.data;
         });
     };

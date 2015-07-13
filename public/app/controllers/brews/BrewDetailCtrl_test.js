@@ -10,12 +10,12 @@
 };
 
 describe('BrewDetailCtrl', function () {
-    var brewDetailScope, succeedPromise, BrewServiceMock, IdentityServiceMock;
+    var brewDetailScope, succeedPromise, BrewServiceMock, IdentityMock;
     
     beforeEach(function () {
         module('app');
         BrewServiceMock = jasmine.createSpyObj('BrewService', ['queryForUser']);
-        IdentityServiceMock = jasmine.createSpyObj('IdentityServiceMock', ['getCurrentUserId']);
+        IdentityMock = jasmine.createSpyObj('IdentityMock', ['getCurrentUserId']);
         
         inject(function ($rootScope, $controller, $q, BrewService) {
             brewDetailScope = $rootScope.$new();
@@ -30,7 +30,7 @@ describe('BrewDetailCtrl', function () {
                 }
             });
             
-            IdentityServiceMock.getCurrentUserId.and.callFake(function () {
+            IdentityMock.getCurrentUserId.and.callFake(function () {
                 return 82589;
             });
             
@@ -40,7 +40,7 @@ describe('BrewDetailCtrl', function () {
                     id: 123
                 },
                 BrewService: BrewServiceMock,
-                IdentityService: IdentityServiceMock
+                Identity: IdentityMock
             });
         });
     });

@@ -1,9 +1,9 @@
-﻿angular.module('app').controller('AddBrewCtrl', function ($scope, $location, BrewService, IdentityService, mvNotifier) {
+﻿angular.module('app').controller('AddBrewCtrl', function ($scope, $location, BrewService, Identity, mvNotifier) {
     $scope.saveBrew = function () {
         var newBrewData = {
             name: $scope.name,
             brewedOn: $scope.brewedOn,
-            brewedBy: IdentityService.getCurrentUserId()
+            brewedBy: Identity.getCurrentUserId()
         };
         
         BrewService.save(newBrewData).then(function (err) {
