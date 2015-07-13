@@ -1,15 +1,15 @@
 ﻿describe('AddBrewCtrl', function () {
-    var $scope, ctrl, $timeout, BrewServiceMock;
+    var $scope, ctrl, $timeout, BrewMock;
 
     beforeEach(function () {
         module('app');
-        BrewServiceMock = jasmine.createSpyObj('BrewService', ['save']);
+        BrewMock = jasmine.createSpyObj('Brew', ['save']);
 
         inject(function ($rootScope, $location, $controller, $q, _$timeout_) {
             $scope = $rootScope.$new();
             //$timeout = _$timeout_;
 
-            BrewServiceMock.save.and.callFake(function () {
+            BrewMock.save.and.callFake(function () {
                 var deferred = $q.defer();
                 deferred.resolve();
                 return deferred.promise;
@@ -17,18 +17,18 @@
 
             ctrl = $controller('AddBrewCtrl', {
                 $scope: $scope,
-                BrewService: BrewServiceMock
+                Brew: BrewMock
             });
         });
     });
 
-    it('Saves a new brew using BrewService', function () {
+    it('Saves a new brew using Brew', function () {
         $scope.name = 'test';
         $scope.brewedOn = '7/7/2015';
         $scope.brewedBy = -1;
 
         $scope.saveBrew();
-        expect(BrewServiceMock.save).toHaveBeenCalled();
+        expect(BrewMock.save).toHaveBeenCalled();
         //$timeout.flush();
     });
 });

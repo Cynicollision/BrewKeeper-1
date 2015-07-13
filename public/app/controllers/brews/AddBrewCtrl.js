@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('AddBrewCtrl', function ($scope, $location, BrewService, Identity, mvNotifier) {
+﻿angular.module('app').controller('AddBrewCtrl', function ($scope, $location, Brew, Identity, mvNotifier) {
     $scope.saveBrew = function () {
         var newBrewData = {
             name: $scope.name,
@@ -6,7 +6,7 @@
             brewedBy: Identity.getCurrentUserId()
         };
         
-        BrewService.save(newBrewData).then(function (err) {
+        Brew.save(newBrewData).then(function (err) {
             if (!err) {
                 mvNotifier.notify('Brew saved!');
                 $location.path('/brews');

@@ -1,12 +1,12 @@
 ﻿
-describe('BrewService', function () {
-    var BrewServiceMock,
+describe('Brew', function () {
+    var BrewMock,
         httpBackend;
     
     beforeEach(function () {
         module('app');
-        inject(function ($injector, _BrewService_) {
-            BrewServiceMock = _BrewService_;
+        inject(function ($injector, _Brew_) {
+            BrewMock = _Brew_;
             httpBackend = $injector.get('$httpBackend'); 
         });
     });
@@ -25,7 +25,7 @@ describe('BrewService', function () {
         httpBackend.expectGET('/api/brews').respond(returnData);
         
         // make the call.
-        var result, returnedPromise = BrewServiceMock.query();
+        var result, returnedPromise = BrewMock.query();
         returnedPromise.then(function (response) {
             result = response.data;
         });
