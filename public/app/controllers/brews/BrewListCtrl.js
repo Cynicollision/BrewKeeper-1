@@ -1,7 +1,9 @@
-﻿angular.module('app').controller('BrewListCtrl', function ($scope, BrewService, mvIdentity) {
-    BrewService.queryForUser(mvIdentity.getCurrentUserId()).then(function (response) {
-        $scope.brews = response.data;
-    });
+﻿angular.module('app').controller('BrewListCtrl', function ($scope, BrewService, IdentityService) {
+    $scope.getCurrentUserBrews = function () {
+        BrewService.queryForUser(IdentityService.getCurrentUserId()).then(function (response) {
+            $scope.brews = response.data;
+        });
+    };
 
     $scope.sortOptions = [
         { value: 'name', text: 'Sort by Name' },
@@ -9,4 +11,5 @@
     ];
 
     $scope.sortOrder = $scope.sortOptions[0].value;
+    $scope.getCurrentUserBrews();
 });

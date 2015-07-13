@@ -16,7 +16,7 @@
                 'public/app/services/brews/*.js',
 
                 'server/config/*.js',
-                'server/controllers/users.js',
+                'server/controllers/*.js',
                 'server/models/*.js',
                 'server/utilities/*.js'
             ]
@@ -56,7 +56,7 @@
                     'public/app/*.js',
                     'public/app/account/*.js',
                     'public/app/common/*.js',
-
+                    'public/app/services/account/*.js',
                     'public/app/controllers/brews/*.js',
                     'public/app/services/brews/*.js'
                 ]

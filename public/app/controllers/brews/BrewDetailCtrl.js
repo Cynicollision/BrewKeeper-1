@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('BrewDetailCtrl', function ($scope, $routeParams, BrewService, mvIdentity) {
+﻿angular.module('app').controller('BrewDetailCtrl', function ($scope, $routeParams, BrewService, IdentityService) {
     var onGetCurrentUserBrews = function (response) {
         response.data.forEach(function (brew) {
             if (brew._id === $routeParams.id) {
@@ -9,7 +9,7 @@
     
     // TODO: implement BrewService.queryById(brewId), don't retrieve all again
     $scope.getCurrentUserBrews = function () {
-        BrewService.queryForUser(mvIdentity.getCurrentUserId()).then(onGetCurrentUserBrews);
+        BrewService.queryForUser(IdentityService.getCurrentUserId()).then(onGetCurrentUserBrews);
     };
     
     $scope.setCurrentBrew = function (brew) {

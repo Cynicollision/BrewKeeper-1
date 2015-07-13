@@ -10,27 +10,27 @@
 };
 
 describe('BrewDetailCtrl', function () {
-    var brewDetailScope, succeedPromise, BrewServiceMock, mvIdentityMock;
+    var brewDetailScope, succeedPromise, BrewServiceMock, IdentityServiceMock;
     
     beforeEach(function () {
         module('app');
         BrewServiceMock = jasmine.createSpyObj('BrewService', ['queryForUser']);
-        mvIdentityMock = jasmine.createSpyObj('mvIdentityMock', ['getCurrentUserId']);
+        IdentityServiceMock = jasmine.createSpyObj('IdentityServiceMock', ['getCurrentUserId']);
         
-        inject(function ($rootScope, $controller, $q) {
+        inject(function ($rootScope, $controller, $q, BrewService) {
             brewDetailScope = $rootScope.$new();
+            BrewServiceMock = BrewService;
             
-            BrewServiceMock.queryForUser.and.callFake(function () {
+            spyOn(BrewServiceMock, "queryForUser").and.callFake(function () {
                 if (succeedPromise) {
-                    return $q.when({});
-                } else {
-                    return $q.reject('Something went wrong');
+                    return $q.when(dummyResponse);
+                }
+                else {
+                    return $q.reject("Error in queryForUser.");
                 }
             });
-
-
             
-            mvIdentityMock.getCurrentUserId.and.callFake(function () {
+            IdentityServiceMock.getCurrentUserId.and.callFake(function () {
                 return 82589;
             });
             
@@ -40,7 +40,7 @@ describe('BrewDetailCtrl', function () {
                     id: 123
                 },
                 BrewService: BrewServiceMock,
-                mvIdentity: mvIdentityMock
+                IdentityService: IdentityServiceMock
             });
         });
     });
@@ -50,7 +50,6 @@ describe('BrewDetailCtrl', function () {
         succeedPromise = true;
         brewDetailScope.$digest();
         expect(BrewServiceMock.queryForUser).toHaveBeenCalledWith(82589);
-        //expect(brewDetailScope.brew).toBeDefined();
     });
 
     it('Can set the current brew', function () {

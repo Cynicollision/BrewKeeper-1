@@ -1,4 +1,4 @@
-﻿angular.module('app').factory('mvAuth', function ($http, $q, mvIdentity, mvUser, mvDefaultRequest) {
+﻿angular.module('app').factory('mvAuth', function ($http, $q, IdentityService, mvUser, mvDefaultRequest) {
     return {
         authenticateUser: function (username, password) {
             var dfd = $q.defer();
@@ -15,7 +15,7 @@
                 if (response.data.success) {
                     var user = new mvUser();
                     angular.extend(user, response.data.user);
-                    mvIdentity.currentUser = user;
+                    IdentityService.currentUser = user;
                     dfd.resolve(true);
                 } else {
                     dfd.resolve(false);
@@ -36,7 +36,7 @@
                 transformRequest: mvDefaultRequest.transform,
                 headers: mvDefaultRequest.headers
             }).then(function () {
-                mvIdentity.currentUser = newUser;
+                IdentityService.currentUser = newUser;
                 dfd.resolve();
             }, function (response) {
                 dfd.reject(response.data.reason);
@@ -48,7 +48,7 @@
         updateCurrentUser: function (newUserData) {
             var dfd = $q.defer();
 
-            var clone = angular.copy(mvIdentity.currentUser);
+            var clone = angular.copy(IdentityService.currentUser);
             angular.extend(clone, newUserData);
             
             $http({
@@ -58,7 +58,7 @@
                 transformRequest: mvDefaultRequest.transform,
                 headers: mvDefaultRequest.headers
             }).then(function () {
-                mvIdentity.currentUser = clone;
+                IdentityService.currentUser = clone;
                 dfd.resolve();
             }, function (response) {
                 dfd.reject(response.data.reason);
@@ -78,7 +78,7 @@
                 transformRequest: mvDefaultRequest.transform,
                 headers: mvDefaultRequest.headers
             }).then(function () {
-                mvIdentity.currentUser = undefined;
+                IdentityService.currentUser = undefined;
                 dfd.resolve();
             });
 
@@ -86,7 +86,7 @@
         },
 
         authorizeCurrentUserForRoute: function (role) {
-            if (mvIdentity.isAuthorized(role)) {
+            if (IdentityService.isAuthorized(role)) {
                 return true;
             } else {
                 return $q.reject('not authorized');
@@ -94,7 +94,7 @@
         },
 
         authorizeAuthenticatedUserForRoute: function () {
-            if (mvIdentity.isAuthenticated()) {
+            if (IdentityService.isAuthenticated()) {
                 return true;
             } else {
                 return $q.reject('not authorized');
