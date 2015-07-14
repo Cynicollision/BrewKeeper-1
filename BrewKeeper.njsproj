@@ -51,7 +51,7 @@
     <Compile Include="public\app\controllers\brews\BrewDetailCtrl_test.js" />
     <Compile Include="public\app\controllers\brews\BrewListCtrl.js" />
     <Compile Include="public\app\common\mvDefaultRequest.js" />
-    <Compile Include="public\app\common\mvNotifier.js" />
+    <Compile Include="public\app\services\Notifier.js" />
     <Compile Include="public\app\main\mvMainCtrl.js" />
     <Compile Include="public\app\recipes\mvCachedRecipes.js" />
     <Compile Include="public\app\recipes\mvRecipe.js" />

@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('AddBrewCtrl', function ($scope, $location, Brew, Identity, mvNotifier) {
+﻿angular.module('app').controller('AddBrewCtrl', function ($scope, $location, Brew, Identity, Notifier) {
     $scope.saveBrew = function () {
         var newBrewData = {
             name: $scope.name,
@@ -8,13 +8,13 @@
         
         Brew.save(newBrewData).then(function (err) {
             if (!err) {
-                mvNotifier.notify('Brew saved!');
+                Notifier.notify('Brew saved!');
                 $location.path('/brews');
             } else {
-                mvNotifier.error('ERROR: '+ err.reason);
+                Notifier.error('ERROR: '+ err.reason);
             }
         }, function (reason) {
-            mvNotifier.error(reason);
+            Notifier.error(reason);
         });
     };
 });
