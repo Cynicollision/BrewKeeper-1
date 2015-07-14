@@ -4,19 +4,26 @@
 
         jshint: {
             all: [  
-                'server.js', 
+                
                 'public/app/*.js',
+                'public/app/main/*.js',
+           
+                'public/app/services/BrewKeeperApi.js',
+                'public/app/services/BrewKeeperApi_test.js',
+
+                'public/app/services/brews/*.js',
+                'public/app/controllers/brews/*.js',
+
+                // TODO these will move: 
                 'public/app/account/*.js',
                 'public/app/admin/*.js',
                 'public/app/recipes/*.js',
                 'public/app/common/*.js',
-                'public/app/main/*.js',
+                // END TODO
 
-                'public/app/controllers/brews/*.js',
-                'public/app/services/brews/*.js',
-
-                'server/config/*.js',
+                'server.js', 
                 'server/controllers/*.js',
+                'server/config/*.js',
                 'server/models/*.js',
                 'server/utilities/*.js'
             ]
@@ -54,11 +61,16 @@
                     'public/vendor/jquery/dist/jquery.js',
                     'public/vendor/toastr/toastr.js',
                     'public/app/*.js',
+
+                    // TODO: these will move
                     'public/app/account/*.js',
                     'public/app/common/*.js',
+                    // END TODO
+
+                    'public/app/services/*.js',
                     'public/app/services/account/*.js',
-                    'public/app/controllers/brews/*.js',
-                    'public/app/services/brews/*.js'
+                    'public/app/services/brews/*.js',
+                    'public/app/controllers/brews/*.js'
                 ]
             }
         }

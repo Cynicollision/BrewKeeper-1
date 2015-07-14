@@ -21,7 +21,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartWebBrowser>True</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -33,7 +33,10 @@
   <ItemGroup>
     <Compile Include="Gruntfile.js" />
     <Compile Include="public\app\account\mvAuth.js" />
-    <Compile Include="public\app\account\mvIdentity.js" />
+    <Compile Include="public\app\BrewKeeperApi.js" />
+    <Compile Include="public\app\BrewKeeperApi_test.js" />
+    <Compile Include="public\app\services\BrewKeeperApi.js" />
+    <Compile Include="public\app\services\account\Identity.js" />
     <Compile Include="public\app\account\mvNavBarLoginCtrl.js" />
     <Compile Include="public\app\account\mvProfileCtrl.js" />
     <Compile Include="public\app\account\mvSignupCtrl.js" />
@@ -43,7 +46,8 @@
     <Compile Include="public\app\controllers\brews\AddBrewCtrl_test.js" />
     <Compile Include="public\app\controllers\brews\AddBrewCtrl.js" />
     <Compile Include="public\app\controllers\brews\BrewListCtrl_test.js" />
-    <Compile Include="public\app\services\brews\BrewService.js" />
+    <Compile Include="public\app\services\account\Identity_test.js" />
+    <Compile Include="public\app\services\brews\Brew.js" />
     <Compile Include="public\app\controllers\brews\BrewDetailCtrl.js" />
     <Compile Include="public\app\controllers\brews\BrewDetailCtrl_test.js" />
     <Compile Include="public\app\controllers\brews\BrewListCtrl.js" />
@@ -68,7 +72,7 @@
     <Compile Include="server\models\Recipe.js" />
     <Compile Include="server\models\User.js" />
     <Compile Include="server\utilities\encryption.js" />
-    <Compile Include="public\app\services\brews\BrewServiceTest.js" />
+    <Compile Include="public\app\services\brews\Brew_test.js" />
     <Content Include="package.json" />
     <Content Include="public\app\views\account\navbar-login.jade" />
     <Content Include="public\app\views\account\profile.jade" />
@@ -98,6 +102,7 @@
     <Folder Include="public\app\controllers\" />
     <Folder Include="public\app\services\" />
     <Folder Include="public\app\services\brews\" />
+    <Folder Include="public\app\services\account\" />
     <Folder Include="public\app\views\" />
     <Folder Include="public\app\recipes\" />
     <Folder Include="public\app\views\main\" />

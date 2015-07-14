@@ -1,4 +1,5 @@
 ﻿angular.module('app').factory('BrewKeeperApi', function ($http, $q) {
+    var dfd;
     return {
         send: function (word, url, data) {
             var transform = function (obj) {
@@ -12,7 +13,7 @@
                 case 'GET':
                     {
                         if (!!word && !!url) {
-                            var dfd = $q.defer();
+                            dfd = $q.defer();
                             
                             $http({
                                 method: word,
@@ -33,9 +34,11 @@
                             throw 'Malformed request';
                         }
                     }
+                    break;
+
                 case 'POST':
                     {
-                        var dfd = $q.defer();
+                        dfd = $q.defer();
                         
                         $http({
                             method: 'POST',
@@ -54,6 +57,7 @@
                         
                         return dfd.promise;
                     }
+                    break;
             }
         }
     };
