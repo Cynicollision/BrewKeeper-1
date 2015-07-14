@@ -1,20 +1,19 @@
 ﻿angular.module('app').factory('Brew', function ($resource, $http, $q, BrewKeeperApi) {
     return {
-        // TODO: consolidate getter names: query -> get, getForUser/getByUserId, getById
-        query: function () {
-            return BrewKeeperApi.send('GET', '/api/brews');
+        getAll: function () {
+            return BrewKeeperApi.get('/api/brews/');
         },
         
-        queryForUser: function (userId) {
-            return BrewKeeperApi.send('GET', '/api/brews/user/' + userId);
+        getByUserId: function (userId) {
+            return BrewKeeperApi.get('/api/brews/user/' + userId);
         },
         
-        getById: function (brewId) {
-            return BrewKeeperApi.send('GET', '/api/brews/' + brewId);
+        getByBrewId: function (brewId) {
+            return BrewKeeperApi.get('/api/brews/' + brewId);
         },
         
         save: function (newBrewData) {
-            return BrewKeeperApi.send('POST', '/api/brews', newBrewData);
+            return BrewKeeperApi.post('/api/brews/', newBrewData);
         }
     };
 });

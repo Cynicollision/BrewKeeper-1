@@ -8,8 +8,7 @@
                 'public/app/*.js',
                 'public/app/main/*.js',
            
-                'public/app/services/BrewKeeperApi.js',
-                'public/app/services/BrewKeeperApi_test.js',
+                'public/app/services/*.js',
 
                 'public/app/services/brews/*.js',
                 'public/app/controllers/brews/*.js',

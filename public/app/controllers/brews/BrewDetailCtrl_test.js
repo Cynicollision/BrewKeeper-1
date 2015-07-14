@@ -11,18 +11,18 @@ describe('BrewDetailCtrl', function () {
     
     beforeEach(function () {
         module('app');
-        BrewMock = jasmine.createSpyObj('Brew', ['getById']);
+        BrewMock = jasmine.createSpyObj('Brew', ['getByBrewId']);
      
         inject(function ($rootScope, $controller, $q, Brew) {
             brewDetailScope = $rootScope.$new();
             BrewMock = Brew;
             
-            spyOn(BrewMock, 'getById').and.callFake(function () {
+            spyOn(BrewMock, 'getByBrewId').and.callFake(function () {
                 if (succeedPromise) {
                     return $q.when(dummyResponse);
                 }
                 else {
-                    return $q.reject('Error in getById.');
+                    return $q.reject('Error in getByBrewId.');
                 }
             });
 
@@ -37,7 +37,7 @@ describe('BrewDetailCtrl', function () {
     });
 
     it('Retrieves a single brew by the id specified in the route.', function () {
-        expect(BrewMock.getById).toHaveBeenCalledWith(123);
+        expect(BrewMock.getByBrewId).toHaveBeenCalledWith(123);
     });
 
     it('Can set the current brew.', function () {

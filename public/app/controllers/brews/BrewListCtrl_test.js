@@ -14,14 +14,14 @@ describe('BrewListCtrl', function () {
     
     beforeEach(function () {
         module('app');
-        BrewMock = jasmine.createSpyObj('Brew', ['queryForUser']);
+        BrewMock = jasmine.createSpyObj('Brew', ['getByUserId']);
         IdentityMock = jasmine.createSpyObj('IdentityMock', ['getCurrentUserId']);
         
         inject(function ($rootScope, $controller, $q, Brew) {
             brewListScope = $rootScope.$new();
             BrewMock = Brew;
             
-            spyOn(BrewMock, 'queryForUser').and.callFake(function () {
+            spyOn(BrewMock, 'getByUserId').and.callFake(function () {
                 if (succeedPromise) {
                     return $q.when(dummyResponse);
                 }
@@ -48,7 +48,7 @@ describe('BrewListCtrl', function () {
     it('Queries all brews for the given user', function () {
         succeedPromise = true;
         brewListScope.$digest();
-        expect(BrewMock.queryForUser).toHaveBeenCalledWith(82589);
+        expect(BrewMock.getByUserId).toHaveBeenCalledWith(82589);
     });
 
     it('Sets a default sort order', function () {
