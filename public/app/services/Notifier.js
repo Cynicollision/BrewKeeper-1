@@ -1,15 +1,13 @@
-﻿angular.module('app').value('mvToastr', toastr);
+﻿angular.module('app').value('Toastr', toastr);
 
-angular.module('app').factory('Notifier', function (mvToastr) {
-    return {
-        notify: function (msg) {
-            mvToastr.success(msg);
-            console.log(msg);
-        },
+angular.module('app').service('Notifier', function (Toastr) {
+    this.notify = function (msg) {
+        Toastr.success(msg);
+        console.log(msg);
+    };
 
-        error: function (msg) {
-            mvToastr.error(msg);
-            console.log(msg);
-        }
+    this.error = function (msg) {
+        Toastr.error(msg);
+        console.log(msg);
     };
 });
