@@ -1,47 +1,33 @@
-﻿var dummyResponse = {
-    data: [
-        {
-            _id: 123
-        }
-    ]
-};
-
-describe('BrewDetailCtrl', function () {
-    var brewDetailScope, succeedPromise, BrewMock;
+﻿describe('BrewDetailCtrl', function () {
+    var $scope, Brew, 
+        mockBrewId = 123;
     
     beforeEach(function () {
         module('app');
-        BrewMock = jasmine.createSpyObj('Brew', ['getByBrewId']);
+        Brew = jasmine.createSpyObj('Brew', ['getByBrewId']);
      
-        inject(function ($rootScope, $controller, $q, Brew) {
-            brewDetailScope = $rootScope.$new();
-            BrewMock = Brew;
+        inject(function ($rootScope, $controller, _Brew_) {
+            $scope = $rootScope.$new();
+            Brew = _Brew_;
             
-            spyOn(BrewMock, 'getByBrewId').and.callFake(function () {
-                if (succeedPromise) {
-                    return $q.when(dummyResponse);
-                }
-                else {
-                    return $q.reject('Error in getByBrewId.');
-                }
-            });
+            spyOn(Brew, 'getByBrewId').and.callThrough();
 
             $controller('BrewDetailCtrl', {
-                $scope: brewDetailScope,
+                $scope: $scope,
                 $routeParams : {
-                    id: 123
+                    id: mockBrewId
                 },
-                Brew: BrewMock
+                Brew: Brew
             });
         });
     });
 
     it('Retrieves a single brew by the id specified in the route.', function () {
-        expect(BrewMock.getByBrewId).toHaveBeenCalledWith(123);
+        expect(Brew.getByBrewId).toHaveBeenCalledWith(mockBrewId);
     });
 
     it('Can set the current brew.', function () {
-        brewDetailScope.setCurrentBrew({});
-        expect(brewDetailScope.brew).toBeDefined();
+        $scope.setCurrentBrew({});
+        expect($scope.brew).toBeDefined();
     });
 });

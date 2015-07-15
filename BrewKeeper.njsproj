@@ -57,6 +57,7 @@
     <Compile Include="public\app\recipes\mvRecipe.js" />
     <Compile Include="public\app\recipes\mvRecipeDetailCtrl.js" />
     <Compile Include="public\app\recipes\mvRecipeListCtrl.js" />
+    <Compile Include="public\app\services\Notifier_test.js" />
     <Compile Include="server.js" />
     <Compile Include="server\config\auth.js" />
     <Compile Include="server\config\config.js" />

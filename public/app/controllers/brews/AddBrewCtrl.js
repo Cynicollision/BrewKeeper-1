@@ -1,10 +1,14 @@
 ﻿angular.module('app').controller('AddBrewCtrl', function ($scope, $location, Brew, Identity, Notifier) {
-    $scope.saveBrew = function () {
-        var newBrewData = {
+    $scope.getNewBrewData = function () {
+        return {
             name: $scope.name,
             brewedOn: $scope.brewedOn,
             brewedBy: Identity.getCurrentUserId()
         };
+    };
+
+    $scope.saveBrew = function () {
+        var newBrewData = $scope.getNewBrewData();
         
         Brew.save(newBrewData).then(function (err) {
             if (!err) {
