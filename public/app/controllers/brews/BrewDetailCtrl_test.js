@@ -10,7 +10,6 @@
             $scope = $rootScope.$new();
             Brew = _Brew_;
             
-            spyOn(Brew, 'getByBrewId').and.callThrough();
 
             $controller('BrewDetailCtrl', {
                 $scope: $scope,
@@ -23,6 +22,8 @@
     });
 
     it('Retrieves a single brew by the id specified in the route.', function () {
+        spyOn(Brew, 'getByBrewId').and.callThrough();
+        $scope.getBrew(mockBrewId);
         expect(Brew.getByBrewId).toHaveBeenCalledWith(mockBrewId);
     });
 
