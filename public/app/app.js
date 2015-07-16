@@ -3,14 +3,14 @@
 angular.module('app').config(function ($routeProvider, $locationProvider) {
     var routeRoleChecks = {
         admin: {
-            auth: function (mvAuth) {
-                return mvAuth.authorizeCurrentUserForRoute('admin');
+            auth: function (Auth) {
+                return Auth.authorizeCurrentUserForRoute('admin');
             }
         },
 
         user: {
-            auth: function (mvAuth) {
-                return mvAuth.authorizeAuthenticatedUserForRoute();
+            auth: function (Auth) {
+                return Auth.authorizeAuthenticatedUserForRoute();
             }
 
         }

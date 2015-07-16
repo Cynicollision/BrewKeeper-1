@@ -32,14 +32,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Gruntfile.js" />
-    <Compile Include="public\app\account\mvAuth.js" />
+    <Compile Include="public\app\services\account\Auth.js" />
     <Compile Include="public\app\services\BrewKeeperApi_test.js" />
     <Compile Include="public\app\services\BrewKeeperApi.js" />
     <Compile Include="public\app\services\account\Identity.js" />
     <Compile Include="public\app\account\mvNavBarLoginCtrl.js" />
     <Compile Include="public\app\account\mvProfileCtrl.js" />
     <Compile Include="public\app\account\mvSignupCtrl.js" />
-    <Compile Include="public\app\account\mvUser.js" />
+    <Compile Include="public\app\services\account\User.js" />
     <Compile Include="public\app\admin\mvUserListCtrl.js" />
     <Compile Include="public\app\app.js" />
     <Compile Include="public\app\controllers\brews\AddBrewCtrl_test.js" />

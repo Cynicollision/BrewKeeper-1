@@ -1,4 +1,4 @@
-﻿angular.module('app').factory('mvAuth', function ($http, $q, Identity, mvUser, mvDefaultRequest) {
+﻿angular.module('app').factory('Auth', function ($http, $q, Identity, mvUser, mvDefaultRequest) {
     return {
         authenticateUser: function (username, password) {
             var dfd = $q.defer();

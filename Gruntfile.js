@@ -9,7 +9,7 @@
                 'public/app/main/*.js',
            
                 'public/app/services/*.js',
-
+                'public/app/services/account/*.js',
                 'public/app/services/brews/*.js',
                 'public/app/controllers/brews/*.js',
 
