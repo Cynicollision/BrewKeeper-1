@@ -7,8 +7,7 @@
         .row
             .col-md-6
                 span
-                    a(href="/brews/edit/{{brew._id}}") Edit
-
+                    a(href="/brews/edit/{{brew._id}}" ng-show="isBrewOwner()") Edit
             .col-md-6
                 .panel.panel-primary
                     .panel-heading Tags
