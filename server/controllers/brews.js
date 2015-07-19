@@ -24,7 +24,24 @@ exports.saveBrew = function (req, res) {
 
         res.send(200);
     });
+};
+
+exports.updateBrew = function (req, res) {
+    var brewUpdates = req.body,
+        query = { _id: brewUpdates.id },
+        update = {
+            name: brewUpdates.name,
+            brewedOn: brewUpdates.brewedOn
+        },
+        options = { multi: false };
     
+    Brew.update(query, update, options, function (err) {
+        if (err) {
+            res.send({ reason: err.toString() });
+        }
+        
+        res.send(200);
+    });
 };
 
 exports.getBrewById = function (req, res) {

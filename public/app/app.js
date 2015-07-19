@@ -67,6 +67,11 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
         controller: 'BrewDetailCtrl'
     })
 
+    .when('/brews/edit/:id', {
+        templateUrl: '/partials/views/brews/edit-brew', 
+        controller: 'EditBrewCtrl'
+    })
+
     // recipes
     // TODO: won't need this?
     .when('/recipes', {

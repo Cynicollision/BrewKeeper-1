@@ -46,6 +46,27 @@
             });
             
             return dfd.promise;
+        },
+
+        put: function (url, data) {
+            dfd = $q.defer();
+            
+            $http({
+                method: 'PUT',
+                isArray: false,
+                url: url,
+                data: data,
+                transformRequest: transform,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function () {
+                dfd.resolve();
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+            
+            return dfd.promise;
         }
     };
 });

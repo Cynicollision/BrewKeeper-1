@@ -12,10 +12,10 @@
         
         Brew.save(newBrewData).then(function (err) {
             if (!err) {
-                Notifier.notify('Brew saved!');
+                Notifier.notify('Brew added!');
                 $location.path('/brews');
             } else {
-                Notifier.error('ERROR: '+ err.reason);
+                Notifier.error(err.reason);
             }
         }, function (reason) {
             Notifier.error(reason);

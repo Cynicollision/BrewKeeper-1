@@ -26,7 +26,7 @@
     });
     
     // TODO: still need to determine all fields that will be required for a new brew e.g. batch size
-    it('Returns a brew object with its initial values and the user ID that created it.', function () {
+    it('Sets initial values for the brew from the form and the user ID that created it.', function () {
         $scope.name = 'test';
         $scope.brewedOn = '7/7/2015';
         
@@ -37,7 +37,6 @@
         expect(newBrew.brewedBy).toEqual(IdentityMock.getCurrentUserId());
     });
 
-    // TODO: this isn't right
     it('Saves a new brew using Brew', function () {
         $scope.saveBrew();
         expect(BrewMock.save).toHaveBeenCalled();

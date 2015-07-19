@@ -1,0 +1,19 @@
+﻿.container
+    .well
+        form.form-horizontal(name="brewForm")
+            fieldset
+                legend Edit Brew
+                .form-group
+                    label.col-md-2.control-label(for="name") Name
+                    .col-md-10
+                        input.form-control(name="name", type="text", placeholder="Brew name", ng-model="name", required)
+                .form-group
+                    label.col-md-2.control-label(for="brewedOn") Brewed On
+                    .col-md-10
+                        input.form-control(name="brewedOn", type="text", placeholder="Brewed on", ng-model="brewedOn", required)
+                .form-group
+                    .col-md-10.col-md-offset-2
+                        .pull-right
+                            button.btn.btn-primary(ng-click="update()", ng-disabled="editBrewForm.$invalid") Submit
+                            | &nbsp;
+                            a.btn.btn-default(href="/") Cancel

@@ -14,6 +14,10 @@
         
         save: function (newBrewData) {
             return BrewKeeperApi.post('/api/brews/', newBrewData);
+        },
+
+        update: function (updatedBrewData) {
+            return BrewKeeperApi.put('/api/brews/', updatedBrewData);
         }
     };
 });
