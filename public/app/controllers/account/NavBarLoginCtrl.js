@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('mvNavBarLoginCtrl', function ($scope, $http, $location, Identity, Notifier, Auth) {
+﻿angular.module('app').controller('NavBarLoginCtrl', function ($scope, $http, $location, Auth, Identity, Notifier) {
     $scope.identity = Identity;
 
     $scope.signin = function (username, password) {

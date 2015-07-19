@@ -1,5 +1,5 @@
-﻿angular.module('app').controller('mvRecipeListCtrl', function ($scope, mvCachedRecipes) {
-    $scope.recipes = mvCachedRecipes.query();
+﻿angular.module('app').controller('RecipeListCtrl', function ($scope, CachedRecipes) {
+    $scope.recipes = CachedRecipes.query();
     $scope.sortOptions = [
         { value: 'name', text: 'Sort by Name' },
         { value: 'type', text: 'Sort by Type' }

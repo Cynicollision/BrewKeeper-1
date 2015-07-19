@@ -1,10 +1,10 @@
-﻿angular.module('app').factory('mvCachedRecipes', function (mvRecipe) {
+﻿angular.module('app').factory('CachedRecipes', function (Recipe) {
     var recipeList;
     
     return {
         query: function () {
             if (!recipeList) {
-                recipeList = mvRecipe.query();
+                recipeList = Recipe.query();
             }
             
             return recipeList;

@@ -24,10 +24,10 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     $routeProvider
     .when('/', {
         templateUrl: '/partials/views/main/main', 
-        controller: 'mvMainCtrl'
+        controller: 'MainCtrl'
     })
 
-    // user stuff
+    // account
     .when('/admin/users', {
         templateUrl: '/partials/views/admin/user-list', 
         controller: 'UserListCtrl',
@@ -36,30 +36,24 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     
     .when('/signup', {
         templateUrl: '/partials/views/account/signup', 
-        controller: 'mvSignupCtrl'
+        controller: 'SignupCtrl'
     })
 
     .when('/profile', {
         templateUrl: '/partials/views/account/profile', 
-        controller: 'mvProfileCtrl',
+        controller: 'EditProfileCtrl',
         resolve: routeRoleChecks.user
     })
 
     // brews
-    // TODO: won't need this?
     .when('/brews', {
         templateUrl: '/partials/views/brews/brew-list', 
-        controller: 'mvBrewListCtrl'
+        controller: 'BrewListCtrl'
     })
 
     .when('/brews/add', {
         templateUrl: '/partials/views/brews/add-brew', 
         controller: 'AddBrewCtrl'
-    })
-
-    .when('/brews/', {
-        templateUrl: '/partials/views/brews/brew-list', 
-        controller: 'BrewListCtrl'
     })
 
     .when('/brews/:id', {
@@ -73,15 +67,14 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     })
 
     // recipes
-    // TODO: won't need this?
     .when('/recipes', {
         templateUrl: '/partials/views/recipes/recipe-list', 
-        controller: 'mvRecipeListCtrl'
+        controller: 'RecipeListCtrl'
     })
 
     .when('/recipes/view/:id', {
         templateUrl: '/partials/views/recipes/recipe-details', 
-        controller: 'mvRecipeDetailCtrl'
+        controller: 'RecipeDetailCtrl'
     });
 });
 

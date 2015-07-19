@@ -21,7 +21,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartWebBrowser>True</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -38,11 +38,11 @@
     <Compile Include="public\app\services\common\BrewKeeperApi_test.js" />
     <Compile Include="public\app\services\common\BrewKeeperApi.js" />
     <Compile Include="public\app\services\account\Identity.js" />
-    <Compile Include="public\app\account\mvNavBarLoginCtrl.js" />
-    <Compile Include="public\app\account\mvProfileCtrl.js" />
-    <Compile Include="public\app\account\mvSignupCtrl.js" />
+    <Compile Include="public\app\controllers\account\NavBarLoginCtrl.js" />
+    <Compile Include="public\app\controllers\account\EditProfileCtrl.js" />
+    <Compile Include="public\app\controllers\account\SignupCtrl.js" />
     <Compile Include="public\app\services\account\User.js" />
-    <Compile Include="public\app\admin\mvUserListCtrl.js" />
+    <Compile Include="public\app\controllers\admin\UserListCtrl.js" />
     <Compile Include="public\app\app.js" />
     <Compile Include="public\app\controllers\brews\AddBrewCtrl_test.js" />
     <Compile Include="public\app\controllers\brews\AddBrewCtrl.js" />
@@ -53,11 +53,11 @@
     <Compile Include="public\app\controllers\brews\BrewDetailCtrl_test.js" />
     <Compile Include="public\app\controllers\brews\BrewListCtrl.js" />
     <Compile Include="public\app\services\common\Notifier.js" />
-    <Compile Include="public\app\main\mvMainCtrl.js" />
-    <Compile Include="public\app\recipes\mvCachedRecipes.js" />
-    <Compile Include="public\app\recipes\mvRecipe.js" />
-    <Compile Include="public\app\recipes\mvRecipeDetailCtrl.js" />
-    <Compile Include="public\app\recipes\mvRecipeListCtrl.js" />
+    <Compile Include="public\app\controllers\main\MainCtrl.js" />
+    <Compile Include="public\app\services\recipes\CachedRecipes.js" />
+    <Compile Include="public\app\services\recipes\Recipe.js" />
+    <Compile Include="public\app\controllers\recipes\RecipeDetailCtrl.js" />
+    <Compile Include="public\app\controllers\recipes\RecipeListCtrl.js" />
     <Compile Include="public\app\services\common\Notifier_test.js" />
     <Compile Include="server.js" />
     <Compile Include="server\config\auth.js" />
@@ -96,17 +96,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\" />
-    <Folder Include="public\app\account\" />
     <Folder Include="public\app\controllers\brews\" />
-    <Folder Include="public\app\main\" />
-    <Folder Include="public\app\admin\" />
+    <Folder Include="public\app\controllers\account\" />
+    <Folder Include="public\app\controllers\main\" />
+    <Folder Include="public\app\controllers\admin\" />
     <Folder Include="public\app\controllers\" />
+    <Folder Include="public\app\controllers\recipes\" />
     <Folder Include="public\app\services\" />
     <Folder Include="public\app\services\brews\" />
     <Folder Include="public\app\services\account\" />
     <Folder Include="public\app\services\common\" />
+    <Folder Include="public\app\services\recipes\" />
     <Folder Include="public\app\views\" />
-    <Folder Include="public\app\recipes\" />
     <Folder Include="public\app\views\main\" />
     <Folder Include="public\app\views\brews\" />
     <Folder Include="public\app\views\account\" />

@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('mvProfileCtrl', function ($scope, Auth, Identity, Notifier) {
+﻿angular.module('app').controller('EditProfileCtrl', function ($scope, Auth, Identity, Notifier) {
     $scope.email = Identity.currentUser.username;
     $scope.fname = Identity.currentUser.firstName;
     $scope.lname = Identity.currentUser.lastName;
