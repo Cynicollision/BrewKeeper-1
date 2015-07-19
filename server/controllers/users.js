@@ -36,6 +36,7 @@ exports.updateUser = function (req, res) {
 
     if (req.user.username != userUpdates.username && !req.user.hasRole('admin')) {
         res.status(403);
+        res.send('Unauthorized!! Are you trying to change your username?');
         return res.end();
     }
 

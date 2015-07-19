@@ -4,7 +4,6 @@
     
     beforeEach(function () {
         module('app');
-        Brew = jasmine.createSpyObj('Brew', ['getByBrewId', 'update']);
 
         inject(function ($rootScope, $controller, _Brew_) {
             $scope = $rootScope.$new();

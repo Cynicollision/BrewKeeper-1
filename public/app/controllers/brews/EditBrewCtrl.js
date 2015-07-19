@@ -20,11 +20,12 @@
     };
     
     $scope.update = function () {
-        var newBrewData = $scope.getBrewUpdateData();
+        var newBrewData = $scope.getBrewUpdateData(),
+            url = '/brews/' + $scope.brewId;
         
         Brew.update(newBrewData).then(function () {
             Notifier.notify('Brew updated.');
-            $location.path('/brews');
+            $location.path(url);
         }, function (reason) {
             Notifier.error(reason);
         });

@@ -1,23 +1,33 @@
 ﻿angular.module('app').controller('EditProfileCtrl', function ($scope, Auth, Identity, Notifier) {
-    $scope.email = Identity.currentUser.username;
-    $scope.fname = Identity.currentUser.firstName;
-    $scope.lname = Identity.currentUser.lastName;
-
-    $scope.update = function () {
-        var newUserData = {
+    
+    $scope.setScopeInitialUserData = function (user) {
+        $scope.email = user.username;
+        $scope.fname = user.firstName;
+        $scope.lname = user.lastName;
+    };
+    
+    $scope.getScopeUpdatedUserData = function () {
+        return {
             username: $scope.email,
             firstName: $scope.fname,
             lastName: $scope.lname
         };
-        
+    };
+
+    $scope.update = function () {
+        var updatedUserData = $scope.getScopeUpdatedUserData();
+            
         if ($scope.password && $scope.password.length > 0) {
-            newUserData.password = $scope.password;
+            updatedUserData.password = $scope.password;
         }
-        
-        Auth.updateCurrentUser(newUserData).then(function () {
+
+        Auth.updateCurrentUser(updatedUserData).then(function () {
             Notifier.notify('Your user account has been updated.');
         }, function (reason) {
             Notifier.error(reason);
         });
     };
+
+    // initialize
+    $scope.setScopeInitialUserData(Identity.currentUser);
 });
