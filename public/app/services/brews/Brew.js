@@ -26,9 +26,10 @@
         },
         
         getByBrewId: function (brewId) {
-            var dfd = $q.defer();
+            var dfd = $q.defer(),
+                url = '/api/brews/' + brewId;
 
-            BrewKeeperApi.get('/api/brews/' + brewId).then(function (response) {
+            BrewKeeperApi.get(url).then(function (response) {
                 dfd.resolve(response);
             }, function (response) {
                 dfd.reject(response.data.reason);

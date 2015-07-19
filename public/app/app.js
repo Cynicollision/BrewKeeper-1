@@ -30,7 +30,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     // user stuff
     .when('/admin/users', {
         templateUrl: '/partials/views/admin/user-list', 
-        controller: 'mvUserListCtrl',
+        controller: 'UserListCtrl',
         resolve: routeRoleChecks.admin
     })
     

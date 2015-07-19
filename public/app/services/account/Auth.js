@@ -1,14 +1,15 @@
-﻿angular.module('app').factory('Auth', function ($q, BrewKeeperApi, Identity, mvUser) {
+﻿angular.module('app').factory('Auth', function ($q, BrewKeeperApi, Identity, User) {
     return {
         authenticateUser: function (username, password) {
-            var dfd = $q.defer();
+            var dfd = $q.defer(),
+                credentials = {
+                    username: username,
+                    password: password
+                };
 
-            BrewKeeperApi.post('/login', {
-                username: username,
-                password: password
-            }).then(function (response) {
+            BrewKeeperApi.post('/login', credentials).then(function (response) {
                 if (response.data.success) {
-                    var user = new mvUser();
+                    var user = new User();
                     angular.extend(user, response.data.user);
                     Identity.currentUser = user;
                     dfd.resolve(true);
@@ -22,7 +23,7 @@
         
         createUser: function (newUserData) {
             var dfd = $q.defer(),
-                newUser = new mvUser(newUserData);
+                newUser = new User(newUserData);
             
             BrewKeeperApi.post('/api/users/', newUserData).then(function () {
                 Identity.currentUser = newUser;
@@ -56,7 +57,7 @@
                 logout: true
             }).then(function (response) {
                 if (response.data.success) {
-                    var user = new mvUser();
+                    var user = new User();
                     angular.extend(user, response.data.user);
                     Identity.currentUser = user;
                     dfd.resolve(true);

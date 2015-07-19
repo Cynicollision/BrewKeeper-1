@@ -1,3 +1,3 @@
-﻿angular.module('app').controller('mvUserListCtrl', function ($scope, mvUser) {
-    $scope.users = mvUser.query();
+﻿angular.module('app').controller('UserListCtrl', function ($scope, User) {
+    $scope.users = User.query();
 });

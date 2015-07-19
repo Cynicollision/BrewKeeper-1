@@ -1,8 +1,8 @@
-﻿angular.module('app').service('Identity', function ($window, mvUser) {
+﻿angular.module('app').service('Identity', function ($window, User) {
     this.currentUser = null;
     this.bootstrapCurrentUserFromWindow = function () {
         if (!!$window.bkCurrentUser) {
-            this.currentUser = new mvUser();
+            this.currentUser = new User();
             angular.extend(this.currentUser, $window.bkCurrentUser);
         }
     };
