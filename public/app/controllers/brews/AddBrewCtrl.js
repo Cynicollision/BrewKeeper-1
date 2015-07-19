@@ -9,13 +9,13 @@
 
     $scope.saveBrew = function () {
         var newBrewData = $scope.getNewBrewData();
-        
-        Brew.save(newBrewData).then(function (err) {
-            if (!err) {
+
+        Brew.save(newBrewData).then(function (response) {
+            if (!response.data.reason) {
                 Notifier.notify('Brew added!');
                 $location.path('/brews');
             } else {
-                Notifier.error(err.reason);
+                Notifier.error(response.data.reason);
             }
         }, function (reason) {
             Notifier.error(reason);

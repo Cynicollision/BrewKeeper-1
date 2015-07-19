@@ -1,16 +1,11 @@
-﻿angular.module('app').factory('Auth', function ($http, $q, Identity, mvUser, mvDefaultRequest) {
+﻿angular.module('app').factory('Auth', function ($q, BrewKeeperApi, Identity, mvUser) {
     return {
         authenticateUser: function (username, password) {
             var dfd = $q.defer();
-            $http({
-                method: 'POST',
-                url: '/login',
-                data: {
-                    username: username,
-                    password: password
-                },
-                transformRequest: mvDefaultRequest.transform,
-                headers: mvDefaultRequest.headers
+
+            BrewKeeperApi.post('/login', {
+                username: username,
+                password: password
             }).then(function (response) {
                 if (response.data.success) {
                     var user = new mvUser();
@@ -26,39 +21,26 @@
         },
         
         createUser: function (newUserData) {
-            var newUser = new mvUser(newUserData);
-            var dfd = $q.defer();
+            var dfd = $q.defer(),
+                newUser = new mvUser(newUserData);
             
-            $http({
-                method: 'POST',
-                url: '/api/users',
-                data: newUserData,
-                transformRequest: mvDefaultRequest.transform,
-                headers: mvDefaultRequest.headers
-            }).then(function () {
+            BrewKeeperApi.post('/api/users/', newUserData).then(function () {
                 Identity.currentUser = newUser;
                 dfd.resolve();
             }, function (response) {
                 dfd.reject(response.data.reason);
             });
-
+            
             return dfd.promise;
         },
         
-        updateCurrentUser: function (newUserData) {
-            var dfd = $q.defer();
+        updateCurrentUser: function (updatedUserData) {
+            var dfd = $q.defer(),
+                updatedUser = angular.copy(Identity.currentUser);
 
-            var clone = angular.copy(Identity.currentUser);
-            angular.extend(clone, newUserData);
-            
-            $http({
-                method: 'PUT',
-                url: '/api/users',
-                data: newUserData,
-                transformRequest: mvDefaultRequest.transform,
-                headers: mvDefaultRequest.headers
-            }).then(function () {
-                Identity.currentUser = clone;
+            angular.extend(updatedUser, updatedUserData);
+            BrewKeeperApi.put('/api/users/', updatedUserData).then(function () {
+                Identity.currentUser = updatedUser;
                 dfd.resolve();
             }, function (response) {
                 dfd.reject(response.data.reason);
@@ -69,19 +51,21 @@
 
         logoutUser: function () {
             var dfd = $q.defer();
-            $http({
-                method: 'POST',
-                url: '/logout',
-                data: {
-                    logout: true
-                },
-                transformRequest: mvDefaultRequest.transform,
-                headers: mvDefaultRequest.headers
-            }).then(function () {
-                Identity.currentUser = undefined;
-                dfd.resolve();
+            
+            BrewKeeperApi.post('/logout', {
+                logout: true
+            }).then(function (response) {
+                if (response.data.success) {
+                    var user = new mvUser();
+                    angular.extend(user, response.data.user);
+                    Identity.currentUser = user;
+                    dfd.resolve(true);
+                } else {
+                    Identity.currentUser = undefined;
+                    dfd.resolve(false);
+                }
             });
-
+            
             return dfd.promise;
         },
 

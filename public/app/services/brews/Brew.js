@@ -1,23 +1,64 @@
-﻿angular.module('app').factory('Brew', function ($resource, $http, $q, BrewKeeperApi) {
+﻿angular.module('app').factory('Brew', function ($resource, $q, BrewKeeperApi) {
     return {
         getAll: function () {
-            return BrewKeeperApi.get('/api/brews/');
+            var dfd = $q.defer();
+
+            BrewKeeperApi.get('/api/brews/').then(function (response) {
+                dfd.resolve(response);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+
+            return dfd.promise;
         },
         
         getByUserId: function (userId) {
-            return BrewKeeperApi.get('/api/brews/user/' + userId);
+            var dfd = $q.defer(),
+                url = '/api/brews/user/' + userId;
+
+            BrewKeeperApi.get(url).then(function (response) {
+                dfd.resolve(response);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+
+            return dfd.promise;
         },
         
         getByBrewId: function (brewId) {
-            return BrewKeeperApi.get('/api/brews/' + brewId);
+            var dfd = $q.defer();
+
+            BrewKeeperApi.get('/api/brews/' + brewId).then(function (response) {
+                dfd.resolve(response);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+            
+            return dfd.promise;
         },
         
         save: function (newBrewData) {
-            return BrewKeeperApi.post('/api/brews/', newBrewData);
+            var dfd = $q.defer();
+            
+            BrewKeeperApi.post('/api/brews/', newBrewData).then(function (response) {
+                dfd.resolve(response);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+
+            return dfd.promise;
         },
 
         update: function (updatedBrewData) {
-            return BrewKeeperApi.put('/api/brews/', updatedBrewData);
+            var dfd = $q.defer();
+
+            BrewKeeperApi.put('/api/brews/', updatedBrewData).then(function (response) {
+                dfd.resolve(response);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+
+            return dfd.promise;
         }
     };
 });
