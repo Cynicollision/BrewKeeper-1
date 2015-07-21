@@ -3,7 +3,7 @@
         mockBrewId = 123;
     
     beforeEach(function () {
-        module('app');
+        module('BrewKeeper');
         IdentityMock = jasmine.createSpyObj('IdentityMock', ['getCurrentUserId']);
      
         inject(function ($rootScope, $controller, _Brew_) {

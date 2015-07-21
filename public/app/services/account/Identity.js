@@ -1,4 +1,4 @@
-﻿angular.module('app').service('Identity', function ($window, User) {
+﻿angular.module('BrewKeeper').service('Identity', function ($window, User) {
     this.currentUser = null;
     this.bootstrapCurrentUserFromWindow = function () {
         if (!!$window.bkCurrentUser) {

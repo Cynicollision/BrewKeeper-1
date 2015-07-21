@@ -13,7 +13,7 @@ describe('BrewListCtrl', function () {
     var brewListScope, BrewMock, succeedPromise, IdentityMock;
     
     beforeEach(function () {
-        module('app');
+        module('BrewKeeper');
         BrewMock = jasmine.createSpyObj('Brew', ['getByUserId']);
         IdentityMock = jasmine.createSpyObj('IdentityMock', ['getCurrentUserId']);
         

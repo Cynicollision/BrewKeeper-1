@@ -2,7 +2,7 @@
     var $scope, ctrl, $timeout, Auth, IdentityMock, setMockScopeUserData;
     
     beforeEach(function () {
-        module('app');
+        module('BrewKeeper');
         IdentityMock = {
             currentUser: {
                 username: 'mockington825',

@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('EditBrewCtrl', function ($scope, $filter, $routeParams, $location, Brew, Notifier) {
+﻿angular.module('BrewKeeper').controller('EditBrewCtrl', function ($scope, $filter, $routeParams, $location, Brew, Notifier) {
     $scope.getBrew = function (brewId) {
         Brew.getByBrewId(brewId).then(function (response) {
             $scope.setCurrentBrew(response.data);

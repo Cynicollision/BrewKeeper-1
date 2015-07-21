@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('SignupCtrl', function ($scope, $location, User, Auth, Notifier) {
+﻿angular.module('BrewKeeper').controller('SignupCtrl', function ($scope, $location, User, Auth, Notifier) {
     $scope.signup = function () {
         var newUserData = {
             username: $scope.username,

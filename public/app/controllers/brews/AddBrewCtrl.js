@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('AddBrewCtrl', function ($scope, $location, Brew, Identity, Notifier) {
+﻿angular.module('BrewKeeper').controller('AddBrewCtrl', function ($scope, $location, Brew, Identity, Notifier) {
     $scope.getNewBrewData = function () {
         return {
             name: $scope.name,

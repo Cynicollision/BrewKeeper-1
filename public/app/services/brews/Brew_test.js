@@ -2,7 +2,7 @@
     var Brew, BrewKeeperApi, httpBackend, successResponse;
 
     beforeEach(function () {
-        module('app');
+        module('BrewKeeper');
         inject(function ($injector, _Brew_, _BrewKeeperApi_) {
             httpBackend = $injector.get('$httpBackend');
 

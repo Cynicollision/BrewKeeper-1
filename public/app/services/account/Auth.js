@@ -1,4 +1,4 @@
-﻿angular.module('app').factory('Auth', function ($q, BrewKeeperApi, Identity, User) {
+﻿angular.module('BrewKeeper').factory('Auth', function ($q, BrewKeeperApi, Identity, User) {
     return {
         authenticateUser: function (username, password) {
             var dfd = $q.defer(),

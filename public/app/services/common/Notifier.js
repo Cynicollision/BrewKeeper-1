@@ -1,6 +1,6 @@
-﻿angular.module('app').value('Toastr', toastr);
+﻿angular.module('BrewKeeper').value('Toastr', toastr);
 
-angular.module('app').service('Notifier', function (Toastr) {
+angular.module('BrewKeeper').service('Notifier', function (Toastr) {
     this.notify = function (msg) {
         Toastr.success(msg);
         console.log(msg);

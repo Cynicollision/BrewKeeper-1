@@ -2,7 +2,7 @@
     var Toastr, Notifier;
 
     beforeEach(function () {
-        module('app');
+        module('BrewKeeper');
 
         inject(function (_Notifier_, _Toastr_) {
             Notifier = _Notifier_;

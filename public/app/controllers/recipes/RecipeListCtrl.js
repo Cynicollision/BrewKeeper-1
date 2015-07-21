@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('RecipeListCtrl', function ($scope, CachedRecipes) {
+﻿angular.module('BrewKeeper').controller('RecipeListCtrl', function ($scope, CachedRecipes) {
     $scope.recipes = CachedRecipes.query();
     $scope.sortOptions = [
         { value: 'name', text: 'Sort by Name' },

@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('EditProfileCtrl', function ($scope, Auth, Identity, Notifier) {
+﻿angular.module('BrewKeeper').controller('EditProfileCtrl', function ($scope, Auth, Identity, Notifier) {
     
     $scope.setScopeInitialUserData = function (user) {
         $scope.email = user.username;

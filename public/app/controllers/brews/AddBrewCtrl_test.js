@@ -2,7 +2,7 @@
     var $scope, dfd, ctrl, $timeout, BrewMock, IdentityMock;
 
     beforeEach(function () {
-        module('app');
+        module('BrewKeeper');
         BrewMock = jasmine.createSpyObj('Brew', ['save']);
         IdentityMock = jasmine.createSpyObj('Identity', ['getCurrentUserId']);
 

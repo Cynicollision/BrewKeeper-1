@@ -1,3 +1,3 @@
-﻿angular.module('app').controller('UserListCtrl', function ($scope, User) {
+﻿angular.module('BrewKeeper').controller('UserListCtrl', function ($scope, User) {
     $scope.users = User.query();
 });

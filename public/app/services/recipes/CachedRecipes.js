@@ -1,4 +1,4 @@
-﻿angular.module('app').factory('CachedRecipes', function (Recipe) {
+﻿angular.module('BrewKeeper').factory('CachedRecipes', function (Recipe) {
     var recipeList;
     
     return {

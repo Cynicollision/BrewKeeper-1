@@ -1,6 +1,6 @@
-﻿angular.module('app', ['ngResource', 'ngRoute']);
+﻿angular.module('BrewKeeper', ['ngResource', 'ngRoute']);
 
-angular.module('app').config(function ($routeProvider, $locationProvider) {
+angular.module('BrewKeeper').config(function ($routeProvider, $locationProvider) {
     var routeRoleChecks = {
         admin: {
             auth: function (Auth) {
@@ -78,7 +78,7 @@ angular.module('app').config(function ($routeProvider, $locationProvider) {
     });
 });
 
-angular.module('app').run(function ($rootScope, $location) {
+angular.module('BrewKeeper').run(function ($rootScope, $location) {
     $rootScope.$on('$routeChangeError', function (evt, current, previous, rejection) {
         if (rejection === 'not authorized') {
             $location.path('/');

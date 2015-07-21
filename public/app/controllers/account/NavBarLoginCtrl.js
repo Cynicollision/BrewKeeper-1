@@ -1,4 +1,4 @@
-﻿angular.module('app').controller('NavBarLoginCtrl', function ($scope, $http, $location, Auth, Identity, Notifier) {
+﻿angular.module('BrewKeeper').controller('NavBarLoginCtrl', function ($scope, $http, $location, Auth, Identity, Notifier) {
     $scope.identity = Identity;
 
     $scope.signin = function (username, password) {
@@ -13,10 +13,14 @@
 
     $scope.signout = function () {
         Auth.logoutUser().then(function () {
-            $scope.username = "";
-            $scope.password = "";
+            $scope.clearCurrentUser();
             Notifier.notify('You have successfully logged out');
             $location.path('/');
         });
+    };
+
+    $scope.clearCurrentUser = function () {
+        $scope.username = "";
+        $scope.password = "";
     };
 });

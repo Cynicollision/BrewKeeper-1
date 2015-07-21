@@ -3,7 +3,7 @@
         mockBrewId = 825;
     
     beforeEach(function () {
-        module('app');
+        module('BrewKeeper');
 
         inject(function ($rootScope, $controller, _Brew_) {
             $scope = $rootScope.$new();

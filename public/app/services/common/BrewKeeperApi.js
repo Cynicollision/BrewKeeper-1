@@ -1,4 +1,4 @@
-﻿angular.module('app').factory('BrewKeeperApi', function ($http) {
+﻿angular.module('BrewKeeper').factory('BrewKeeperApi', function ($http) {
     var transform = function (obj) {
         var str = [];
         for (var p in obj)

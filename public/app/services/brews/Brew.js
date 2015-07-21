@@ -1,4 +1,4 @@
-﻿angular.module('app').factory('Brew', function ($resource, $q, BrewKeeperApi) {
+﻿angular.module('BrewKeeper').factory('Brew', function ($resource, $q, BrewKeeperApi) {
     return {
         getAll: function () {
             var dfd = $q.defer();
