@@ -1,4 +1,4 @@
-﻿angular.module('BrewKeeper').controller('NavBarLoginCtrl', function ($scope, $http, $location, Auth, Identity, Notifier) {
+﻿angular.module('BrewKeeper').controller('NavBarLoginCtrl', function ($scope, $location, Auth, Identity, Notifier) {
     $scope.identity = Identity;
 
     $scope.signin = function (username, password) {
