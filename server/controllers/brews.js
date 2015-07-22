@@ -14,6 +14,13 @@ exports.getBrewsByUserId = function (req, res) {
     });
 };
 
+exports.getBrewById = function (req, res) {
+    Brew.findOne({ _id: req.params.id }).exec(function (err, brew) {
+        res.send(brew);
+    });
+};
+
+
 exports.saveBrew = function (req, res) {
     var brewData = req.body;
     
@@ -27,7 +34,8 @@ exports.saveBrew = function (req, res) {
 };
 
 exports.updateBrew = function (req, res) {
-    var brewUpdates = req.body,
+    var currentUserId, ownsBrew = false,
+        brewUpdates = req.body,
         query = { _id: brewUpdates.id },
         update = {
             name: brewUpdates.name,
@@ -35,17 +43,23 @@ exports.updateBrew = function (req, res) {
         },
         options = { multi: false };
     
-    Brew.update(query, update, options, function (err) {
-        if (err) {
-            res.send({ reason: err.toString() });
+    // verify the current user owns this brew
+    if (!!req.user) {
+        currentUserId = req.user._id.toString();
+    }
+    
+    Brew.findOne({ _id: brewUpdates.id }).exec(function (err, brew) {
+        if (!!brew && brew.brewedBy === currentUserId) {
+            Brew.update(query, update, options, function (err) {
+                if (err) {
+                    res.send({ reason: err.toString() });
+                }
+                
+                res.send(200);
+            });
+        } else {
+            res.send(403, "Not authorized");
         }
-        
-        res.send(200);
     });
 };
 
-exports.getBrewById = function (req, res) {
-    Brew.findOne({ _id: req.params.id }).exec(function (err, brew) {
-        res.send(brew);
-    });
-};
