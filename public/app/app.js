@@ -12,7 +12,6 @@ angular.module('BrewKeeper').config(function ($routeProvider, $locationProvider)
             auth: function (Auth) {
                 return Auth.authorizeAuthenticatedUserForRoute();
             }
-
         }
     };
 
@@ -64,6 +63,11 @@ angular.module('BrewKeeper').config(function ($routeProvider, $locationProvider)
     .when('/brews/edit/:id', {
         templateUrl: '/partials/views/brews/edit-brew', 
         controller: 'EditBrewCtrl'
+    })
+
+    .when('/brews/delete/:id', {
+        templateUrl: '/partials/views/brews/delete-brew', 
+        controller: 'DeleteBrewCtrl'
     })
 
     // recipes

@@ -43,6 +43,18 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             });
+        },
+
+        delete: function (url) {
+            return $http({
+                method: 'DELETE',
+                isArray: false,
+                url: url,
+                transformRequest: transform,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
         }
     };
 });

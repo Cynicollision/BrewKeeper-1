@@ -60,6 +60,19 @@
             });
 
             return dfd.promise;
+        },
+
+        delete: function (brewId) {
+            var dfd = $q.defer(),
+                url = '/api/brews/' + brewId;
+            
+            BrewKeeperApi.delete(url).then(function (response) {
+                dfd.resolve(response);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+
+            return dfd.promise;
         }
     };
 });

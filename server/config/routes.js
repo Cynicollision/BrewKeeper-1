@@ -15,11 +15,12 @@ module.exports = function (app) {
     });
     
     // brews
-    app.get('/api/brews', brews.getBrews);
-    app.post('/api/brews', brews.saveBrew);
-    app.put('/api/brews', brews.updateBrew);
+    app.get('/api/brews', brews.getAllBrews);
     app.get('/api/brews/:id', brews.getBrewById);
     app.get('/api/brews/user/:id', brews.getBrewsByUserId);
+    app.post('/api/brews', brews.saveBrew);
+    app.put('/api/brews', brews.updateBrew);
+    app.delete('/api/brews/:id', brews.deleteBrew);
     
     // recipes
     app.get('/api/recipes', recipes.getRecipes);

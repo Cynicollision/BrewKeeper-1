@@ -14,6 +14,8 @@
 
         spyOn(BrewKeeperApi, 'get').and.callThrough();
         spyOn(BrewKeeperApi, 'post').and.callThrough();
+        spyOn(BrewKeeperApi, 'put').and.callThrough();
+        spyOn(BrewKeeperApi, 'delete').and.callThrough();
     });
     
     afterEach(function () {
@@ -38,7 +40,6 @@
     it('Can retrieve brews for a single user by user ID.', function () {
         var result, url = '/api/brews/user/', mockUserId = 6724;
         
-        spyOn(Brew, 'getByUserId').and.callThrough();
         httpBackend.expectGET(url + mockUserId).respond(successResponse);
 
         Brew.getByUserId(mockUserId).then(function (response) {
@@ -52,8 +53,7 @@
 
     it('Can retrieve a single brew by brew ID', function () {
         var result, url = '/api/brews/', mockBrewId = 98783;
-        
-        spyOn(Brew, 'getByBrewId').and.callThrough();
+
         httpBackend.expectGET(url + mockBrewId).respond(successResponse);
         
         Brew.getByBrewId(mockBrewId).then(function (response) {
@@ -73,7 +73,6 @@
             name: 'MockBrew'
         };
         
-        spyOn(Brew, 'save').and.callThrough();
         httpBackend.expectPOST(url).respond(200);
 
         Brew.save(mockNewBrewData).then(function () {
@@ -83,5 +82,38 @@
         
         expect(BrewKeeperApi.post).toHaveBeenCalledWith(url, mockNewBrewData);
         expect(success).toBeTruthy();
+    });
+
+    it('Can update a brew.', function () {
+        var result, url = '/api/brews/', mockBrewId = 45343, mockUpdatedBrewData;
+        
+        mockUpdatedBrewData = {
+            id: mockBrewId,
+            name: 'updatedBrewName'
+        };
+        
+        httpBackend.expectPUT(url).respond(successResponse);
+        
+        Brew.update(mockUpdatedBrewData).then(function (response) {
+            result = response.data;
+        });
+        httpBackend.flush();
+        
+        expect(BrewKeeperApi.put).toHaveBeenCalledWith(url, mockUpdatedBrewData);
+        expect(result).toEqual(successResponse);
+    });
+
+    it('Can delete a brew by ID.', function () {
+        var result, url = '/api/brews/', mockBrewId = 45343;
+
+        httpBackend.expectDELETE(url + mockBrewId).respond(successResponse);
+        
+        Brew.delete(mockBrewId).then(function (response) {
+            result = response.data;
+        });
+        httpBackend.flush();
+        
+        expect(BrewKeeperApi.delete).toHaveBeenCalledWith(url + mockBrewId);
+        expect(result).toEqual(successResponse);
     });
 });

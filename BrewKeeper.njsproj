@@ -84,6 +84,7 @@
     <Content Include="public\app\views\brews\add-brew.jade" />
     <Content Include="public\app\views\brews\brew-details.jade" />
     <Content Include="public\app\views\brews\brew-list.jade" />
+    <Content Include="public\app\views\brews\delete-brew.jade" />
     <Content Include="public\app\views\brews\edit-brew.jade" />
     <Content Include="public\app\views\main\featured-brews.jade" />
     <Content Include="public\app\views\main\main.jade" />

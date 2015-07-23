@@ -1,6 +1,6 @@
 ﻿var Brew = require('mongoose').model('Brew');
 
-exports.getBrews = function (req, res) {
+exports.getAllBrews = function (req, res) {
     Brew.find({}).exec(function (err, collection) {
         res.send(collection);
     });
@@ -63,3 +63,13 @@ exports.updateBrew = function (req, res) {
     });
 };
 
+exports.deleteBrew = function (req, res) {
+    var currentUserId, ownsBrew = false;
+    if (!!req.user) {
+        currentUserId = req.user._id.toString();
+    }
+    
+    // TODO
+
+    res.send(200);
+};
