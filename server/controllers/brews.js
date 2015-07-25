@@ -34,7 +34,7 @@ exports.saveBrew = function (req, res) {
 };
 
 exports.updateBrew = function (req, res) {
-    var currentUserId, ownsBrew = false,
+    var currentUserId,
         brewUpdates = req.body,
         query = { _id: brewUpdates.id },
         update = {
@@ -64,12 +64,25 @@ exports.updateBrew = function (req, res) {
 };
 
 exports.deleteBrew = function (req, res) {
-    var currentUserId, ownsBrew = false;
+    var currentUserId, 
+        deleteBrewId = req.params.id;
+    
+
     if (!!req.user) {
         currentUserId = req.user._id.toString();
     }
     
-    // TODO
+    Brew.findOne({ _id: deleteBrewId }).exec(function (err, brew) {
+        if (!!brew && brew.brewedBy === currentUserId) {
+            Brew.remove({ _id: deleteBrewId }, function (err) {
+                if (err) {
+                    res.send({ reason: err.toString() });
+                }
+            });
+        } else {
+            res.send(403, "Not authorized");
+        }
+    });
 
     res.send(200);
 };
