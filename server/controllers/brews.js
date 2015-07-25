@@ -52,10 +52,10 @@ exports.updateBrew = function (req, res) {
         if (!!brew && brew.brewedBy === currentUserId) {
             Brew.update(query, update, options, function (err) {
                 if (err) {
-                    res.send({ reason: err.toString() });
+                    res.send(500, { reason: err.toString() });
+                } else {
+                    res.send(200);
                 }
-                
-                res.send(200);
             });
         } else {
             res.send(403, "Not authorized");
@@ -67,7 +67,6 @@ exports.deleteBrew = function (req, res) {
     var currentUserId, 
         deleteBrewId = req.params.id;
     
-
     if (!!req.user) {
         currentUserId = req.user._id.toString();
     }
@@ -78,11 +77,12 @@ exports.deleteBrew = function (req, res) {
                 if (err) {
                     res.send({ reason: err.toString() });
                 }
+
+                res.send(200);
             });
         } else {
             res.send(403, "Not authorized");
         }
     });
 
-    res.send(200);
 };
