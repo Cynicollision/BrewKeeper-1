@@ -1,30 +1,8 @@
-﻿navbar-login.jade
-
-.navbar-right(ng-controller="NavBarLoginCtrl")
-    form.navbar-form(ng-show="identity.isAuthenticated()")
-        ul.nav.navbar-nav
-            li
-                a(href="/brews") My Brews
-            li
-                a(href="/recipes") My Recipes
-    form.navbar-form(ng-hide="identity.isAuthenticated()")
-        ul.nav.navbar-nav
-            li
-                a(href="/signup") Sign Up
-        .form-group
-            input.form-control(placeholder="Email", ng-model="username")
-        .form-group
-            input.form-control(type="password", placeholder="Password", ng-model="password")
-        button.btn.btn-primary(ng-click="signin(username, password)") Sign in
+﻿.navbar-right(ng-controller="NavBarLoginCtrl")
     ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
-        li.dropdown
-            a.dropdown-toggle(href="", data-toggle="dropdown")
-                | {{ identity.currentUser.firstName + " " + identity.currentUser.lastName }} 
-                b.caret
-            ul.dropdown-menu
-                li(ng-show="identity.currentUser.isAdmin()")
-                    a(href="/admin/users") User Admin
-                li
-                    a(href="/profile") Profile
-                li
-                    a(href="", ng-click="signout()") Sign Out
+        li(ng-show="identity.currentUser.isAdmin()")
+            a(href="/admin/users") User Admin
+        li
+            a(href="/profile") Profile
+        li
+            a(href="", ng-click="signout()") Sign Out

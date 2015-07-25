@@ -1,16 +1,18 @@
 ﻿extends ../includes/layout
 
 block main-content
-    .navbar.navbar-inverse.navbar-fixed-top
+    .navbar.navbar-inverse.navbar-static-top
         .container
             .navbar-header
+                .button.navbar-toggle(data-toggle="collapse" data-target="#navBar")
+                    .span.icon-bar
+                    .span.icon-bar
+                    .span.icon-bar
                 a.navbar-brand(href="/") BrewKeeper
-                    h6 Brew journal
-            .navbar-collapse.collapse
-                ul.nav.navbar-nav
-                    li
-                        a(href="/") Home
+
+            .navbar-collapse.collapse(id="navBar")
                 div(ng-include="'/partials/views/account/navbar-login'")
+                
 
     section.content
         div(ng-view)

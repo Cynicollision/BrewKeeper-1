@@ -1,27 +1,35 @@
 ﻿body {
-    padding-top: 69px;
+    font-size: 2em;
+}
+
+a {
+    color: #009999;
 }
 
 .navbar {
-    background-color: #23A98f;
+    background-color: #006666;
 }
 
 .navbar-inverse .navbar-nav li a {
     color: #ddd;
 }
 
-
 .navbar-header a.navbar-brand {
-    margin-top: -15px;
-    margin-bottom: -20px;
     color: #eee;
+    font-size: 2em;
 }
 
 .navbar-header a {
     color: #fff;
 }
-.navbar-header a.navbar-brand h6 {
-    color: #ccc;
+
+.panel {
+    border-color: #006666;
+}
+
+.panel .panel-heading {
+    border-color: #006666;
+    background-color: #006666;
 }
 
 footer {

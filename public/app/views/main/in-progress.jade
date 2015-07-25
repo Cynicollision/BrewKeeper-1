@@ -1,6 +1,6 @@
 ﻿.panel.panel-primary
-    .panel-heading.text-center New Brews
-    .panel-body 
+    .panel-heading.text-center In Progress
+    .panel-body (brews and their states)
         .row(ng-repeat="brew in brews | orderBy:'brewedOn':true | limitTo:3")
             .col-md-3 {{brew.brewedOn | date:"MMM d" }}
             .col-md-9 

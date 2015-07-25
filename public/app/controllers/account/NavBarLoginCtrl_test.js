@@ -29,11 +29,6 @@
         });
     });
     
-    it('Uses the Auth service to attempt to sign in the user with the given username and password.', function () {
-        $scope.signin('mockUser', 'mockPassword');
-        expect(Auth.authenticateUser).toHaveBeenCalledWith('mockUser', 'mockPassword');
-    });
-
     it('Uses the Auth service to log out the current user.', function () {
         $scope.username = 'fwqkqrkewasd';
         $scope.signout();

@@ -1,4 +1,17 @@
-﻿.container
-    .jumbotron
-        h1 BrewKeeper
-        p The keeper of the brew.
+﻿.container(ng-show="!identity.isAuthenticated()")
+    .row
+        .col-md-3
+        .col-md-6(style="margin: 0 auto")
+            div(ng-include="'/partials/views/main/welcome-login'")
+        .col-md-3
+
+.container(ng-show="identity.isAuthenticated()")
+    .row
+        .col-md-9
+            div(ng-include="'/partials/views/main/in-progress'")
+        .col-md-3
+            div(ng-include="'/partials/views/main/quick-links'")
+        .col-md-9
+            .well
+                div Another one? More links?
+
