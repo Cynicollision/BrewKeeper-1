@@ -8,8 +8,6 @@
 
         inject(function ($rootScope, $location, $controller, $q) {
             $scope = $rootScope.$new();
-            //$timeout = _$timeout_;
- 
             ctrl = $controller('AddBrewCtrl', {
                 $scope: $scope,
                 Brew: BrewMock,
@@ -17,6 +15,7 @@
             });
 
             IdentityMock.getCurrentUserId.and.returnValue(82589);
+
             BrewMock.save.and.callFake(function () {
                 dfd = $q.defer();
                 dfd.resolve({ success: true });

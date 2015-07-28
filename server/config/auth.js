@@ -16,13 +16,19 @@ exports.authenticate = function (req, res, next) {
                 return next(err);
             }
             
-            // TODO: do not send hashed_pwd and salt with user to UI... probably only need name + username
-            res.send({ success: true, user: user });
+            var clientUser = {
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName
+            };
+
+            res.send( { success: true, user: clientUser });
         });
     });
     
     auth(req, res, next);
 };
+
 
 exports.requiresApiLogin = function (req, res, next) {
     if (!req.isAuthenticated()) {
