@@ -1,6 +1,6 @@
-﻿angular.module('BrewKeeper').controller('RecipeListCtrl', function ($scope, Recipe) {
+﻿angular.module('BrewKeeper').controller('RecipeListCtrl', function ($scope, Identity, Recipe) {
     $scope.getCurrentUserRecipes = function () {
-        Recipe.getAll().then(function (response) {
+        Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
             $scope.recipes = response.data;
         });
     };

@@ -24,8 +24,8 @@ module.exports = function (app) {
     
     // recipes
     app.get('/api/recipes', recipes.getRecipes); // TODO: maybe require admin role for "all" retrieval?
-    app.get('/api/recipes/:id', recipes.getRecipesByUserId);
-    app.get('/api/recipes/view/:id', recipes.getRecipeById);
+    app.get('/api/recipes/:id', recipes.getRecipeById);
+    app.get('/api/recipes/user/:id', recipes.getRecipesByUserId);
     app.post('/api/recipes', recipes.saveNewRecipe);
     
     // views

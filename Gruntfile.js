@@ -2,7 +2,7 @@
     var angularFiles, vendorFiles, serverFiles;
     
     angularFiles = [
-        'public/app/*.js',
+        'public/app/app.js',
         'public/app/controllers/account/*.js',
         'public/app/controllers/admin/*.js',
         'public/app/controllers/brews/*.js',

@@ -24,6 +24,8 @@ exports.saveNewRecipe = function (req, res) {
     var recipeData = req.body;
     
     // TODO: verify sent ownerId === req.user._id.toString()
+    // DEBUG ONLY
+    recipeData.ownerId = req.user._id.toString();
     
     Recipe.create(recipeData, function (err) {
         if (err) {

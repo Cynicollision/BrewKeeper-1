@@ -23,6 +23,19 @@
             });
             
             return dfd.promise;
+        },
+
+        getByRecipeId: function (recipeId) {
+            var dfd = $q.defer(),
+                url = '/api/recipes/' + recipeId;
+            
+            BrewKeeperApi.get(url).then(function (response) {
+                dfd.resolve(response);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+            
+            return dfd.promise;
         }
-    }
+    };
 });

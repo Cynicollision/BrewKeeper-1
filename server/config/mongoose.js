@@ -11,6 +11,4 @@ module.exports = function (config) {
     });
 
     userModel.createDefaultUsers();
-    brewModel.createDefaultBrews();
-    recipeModel.createDefaultRecipes();
 };
