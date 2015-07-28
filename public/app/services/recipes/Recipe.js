@@ -1,7 +1,28 @@
-﻿angular.module('BrewKeeper').factory('Recipe', function ($resource) {
-    var RecipeResource = $resource('/api/recipes/:_id', { _id: "@id" }, {
-        update: { method: 'PUT', isArray: false }
-    });
-    
-    return RecipeResource;
+﻿angular.module('BrewKeeper').factory('Recipe', function ($q, BrewKeeperApi) {
+    return {
+        getAll: function () {
+            var dfd = $q.defer();
+            
+            BrewKeeperApi.get('/api/recipes/').then(function (response) {
+                dfd.resolve(response);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+            
+            return dfd.promise;
+        },
+
+        getByUserId: function (userId) {
+            var dfd = $q.defer(),
+                url = '/api/recipes/user/' + userId;
+            
+            BrewKeeperApi.get(url).then(function (response) {
+                dfd.resolve(response);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+            
+            return dfd.promise;
+        }
+    }
 });

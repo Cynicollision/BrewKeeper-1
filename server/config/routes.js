@@ -15,7 +15,7 @@ module.exports = function (app) {
     });
     
     // brews
-    app.get('/api/brews', brews.getAllBrews);
+    app.get('/api/brews', brews.getAllBrews); // TODO: maybe require admin role "all" retrieval?
     app.get('/api/brews/:id', brews.getBrewById);
     app.get('/api/brews/user/:id', brews.getBrewsByUserId);
     app.post('/api/brews', brews.saveBrew);
@@ -23,8 +23,10 @@ module.exports = function (app) {
     app.delete('/api/brews/:id', brews.deleteBrew);
     
     // recipes
-    app.get('/api/recipes', recipes.getRecipes);
+    app.get('/api/recipes', recipes.getRecipes); // TODO: maybe require admin role for "all" retrieval?
+    app.get('/api/recipes/:id', recipes.getRecipesByUserId);
     app.get('/api/recipes/view/:id', recipes.getRecipeById);
+    app.post('/api/recipes', recipes.saveNewRecipe);
     
     // views
     app.get('/partials/*', function (req, res) {

@@ -1,4 +1,6 @@
-﻿angular.module('BrewKeeper', ['ngResource', 'ngRoute']);
+﻿$("[name='my-checkbox']").bootstrapSwitch();
+
+angular.module('BrewKeeper', ['ngResource', 'ngRoute']);
 
 angular.module('BrewKeeper').config(function ($routeProvider, $locationProvider) {
     var routeRoleChecks = {

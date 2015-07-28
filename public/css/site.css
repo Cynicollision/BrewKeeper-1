@@ -1,13 +1,19 @@
 ﻿body {
     font-size: 2em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
     color: #009999;
 }
 
+select {
+    color: #000;
+}
+
 .navbar {
     background-color: #006666;
+    padding: 0.1em;
 }
 
 .navbar-inverse .navbar-nav li a {

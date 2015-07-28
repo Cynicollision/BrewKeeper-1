@@ -20,9 +20,11 @@ exports.getBrewById = function (req, res) {
     });
 };
 
-
 exports.saveBrew = function (req, res) {
     var brewData = req.body;
+    
+    // TODO: verify sent ownerId === req.user._id.toString()
+    // rename to saveNewBrew
     
     Brew.create(brewData, function (err) {
         if (err) {

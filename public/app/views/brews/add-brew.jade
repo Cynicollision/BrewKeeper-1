@@ -1,19 +1,33 @@
 ﻿.container
-    .well
+    .col-md-2
+    .well.col-md-8
         form.form-horizontal(name="addBrewForm")
             fieldset
                 legend New Brew Information
                 .form-group
-                    label.col-md-2.control-label(for="name") Name
-                    .col-md-10
-                        input.form-control(name="name", type="text", placeholder="Name", ng-model="name", required)
+                    label.col-md-4.control-label(for="selectedRecipe") Recipe
+                    .col-md-6
+                        select.form-control(name="selectedRecipe", ng-model="selectedRecipe", ng-options="recipe.name for recipe in recipes")
+
                 .form-group
-                    label.col-md-2.control-label(for="brewedOn") Date Brewed
-                    .col-md-10
-                        input.form-control(id="brewedOn" name="brewedOn", type="text", placeholder="Date Brewed", ng-model="brewedOn", required)
+                    label.col-md-4.control-label(for="batchSizeGallons") Batch size
+                    .col-md-4
+                        input.form-control(name="batchSizeGallons", type="number", min=1, max=999, maxlength=3 placeholder="# gallons", ng-model="batchSizeGallons", required)
+
                 .form-group
-                    .col-md-10.col-md-offset-2
-                        .pull-right
-                            button.btn.btn-primary(ng-click="saveBrew()", ng-disabled="signupForm.$invalid") Save
-                            | &nbsp;
-                            a.btn.btn-default(href="/") Cancel
+                    label.col-md-4.control-label(for="name") Description
+                    .col-md-6
+                        input.form-control(name="name", type="text", placeholder="Name", ng-model="name")
+
+                .form-group
+                    label.col-md-4.control-label(for="selectedRecipe") Status
+                    .col-md-6
+                        select.form-control(name="status", ng-model="status", ng-options="status.name for status in statuses")
+
+                .form-group
+                    .div(style="text-align:center")
+                        button.btn.btn-primary(ng-click="saveBrew()", ng-disabled="signupForm.$invalid") Create
+                        | &nbsp;
+                        a.btn.btn-default(href="/") Cancel
+                            
+  

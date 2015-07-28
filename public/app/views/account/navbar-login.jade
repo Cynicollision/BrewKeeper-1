@@ -3,6 +3,14 @@
         li(ng-show="identity.currentUser.isAdmin()")
             a(href="/admin/users") User Admin
         li
+            a(href="/brews") Brews
+        li
+            a(href="/recipes") Recipes
+        li
             a(href="/profile") Profile
         li
             a(href="", ng-click="signout()") Sign Out
+
+    ul.nav.navbar-nav.navbar-right(ng-show="!identity.isAuthenticated()")
+        li
+            a(href="/signup/") Sign Up

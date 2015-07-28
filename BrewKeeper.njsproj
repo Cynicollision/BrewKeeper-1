@@ -38,6 +38,7 @@
     <Compile Include="public\app\controllers\brews\DeleteBrewCtrl_test.js" />
     <Compile Include="public\app\controllers\brews\EditBrewCtrl.js" />
     <Compile Include="public\app\controllers\brews\EditBrewCtrl_test.js" />
+    <Compile Include="public\app\controllers\main\MainCtrl_test.js" />
     <Compile Include="public\app\services\account\Auth.js" />
     <Compile Include="public\app\services\common\BrewKeeperApi_test.js" />
     <Compile Include="public\app\services\common\BrewKeeperApi.js" />
@@ -88,9 +89,8 @@
     <Content Include="public\app\views\brews\brew-list.jade" />
     <Content Include="public\app\views\brews\delete-brew.jade" />
     <Content Include="public\app\views\brews\edit-brew.jade" />
-    <Content Include="public\app\views\main\quick-links.jade" />
     <Content Include="public\app\views\main\main.jade" />
-    <Content Include="public\app\views\main\in-progress.jade" />
+    <Content Include="public\app\views\main\overview.jade" />
     <Content Include="public\app\views\main\welcome-login.jade" />
     <Content Include="public\app\views\recipes\recipe-details.jade" />
     <Content Include="public\app\views\recipes\recipe-list.jade" />

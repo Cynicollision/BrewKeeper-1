@@ -11,3 +11,25 @@ exports.getRecipeById = function (req, res) {
         res.send(recipe);
     });
 };
+
+exports.getRecipesByUserId = function (req, res) {
+    var userId = req.params.id;
+    
+    Recipe.find({ ownerId: userId }).exec(function (err, collection) {
+        res.send(collection);
+    });
+};
+
+exports.saveNewRecipe = function (req, res) {
+    var recipeData = req.body;
+    
+    // TODO: verify sent ownerId === req.user._id.toString()
+    
+    Recipe.create(recipeData, function (err) {
+        if (err) {
+            res.send({ reason: err.toString() });
+        }
+        
+        res.send(200);
+    });
+};

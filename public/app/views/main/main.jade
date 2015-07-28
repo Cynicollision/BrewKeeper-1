@@ -7,11 +7,6 @@
 
 .container(ng-show="identity.isAuthenticated()")
     .row
-        .col-md-9
-            div(ng-include="'/partials/views/main/in-progress'")
-        .col-md-3
-            div(ng-include="'/partials/views/main/quick-links'")
-        .col-md-9
-            .well
-                div Another one? More links?
+        .col-md-12
+            div(ng-include="'/partials/views/main/overview'")
 
