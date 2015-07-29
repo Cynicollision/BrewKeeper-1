@@ -17,6 +17,7 @@ exports.authenticate = function (req, res, next) {
             }
             
             var clientUser = {
+                _id: user._id,
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName
