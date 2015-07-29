@@ -24,16 +24,18 @@
         });
     });
     
-    // TODO: still need to determine all fields that will be required for a new brew e.g. batch size
     it('Sets initial values for the brew from the form and the user ID that created it.', function () {
-        $scope.name = 'test';
-        $scope.brewedOn = '7/7/2015';
+        $scope.brewStatusCde = { id: 2 };
+        $scope.brewDescription = 'an expiriment';
+        $scope.brewBatchSize = 5;
+        $scope.brewRecipeId = '6d63a4g2';
         
         var newBrew = $scope.getNewBrewData();
-        expect(newBrew.name).toEqual($scope.name);
-        expect(newBrew.brewedOn).toEqual($scope.brewedOn);
-        expect(newBrew.brewedBy).toBeDefined();
-        expect(newBrew.brewedBy).toEqual(IdentityMock.getCurrentUserId());
+        expect(newBrew.statusCde).toEqual($scope.brewStatusCde.id);
+        expect(newBrew.description).toEqual($scope.brewDescription);
+        expect(newBrew.batchSize).toEqual($scope.brewBatchSize);
+        expect(newBrew.recipeId).toEqual($scope.brewRecipeId);
+        expect(newBrew.ownerId).toEqual(IdentityMock.getCurrentUserId());
     });
 
     it('Saves a new brew using Brew', function () {

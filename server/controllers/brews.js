@@ -9,7 +9,7 @@ exports.getAllBrews = function (req, res) {
 exports.getBrewsByUserId = function (req, res) {
     var userId = req.params.id;
 
-    Brew.find({brewedBy: userId}).exec(function (err, collection) {
+    Brew.find({ownerId: userId}).exec(function (err, collection) {
         res.send(collection);
     });
 };
@@ -20,9 +20,11 @@ exports.getBrewById = function (req, res) {
     });
 };
 
-exports.saveBrew = function (req, res) {
+exports.saveNewBrew = function (req, res) {
     var brewData = req.body;
     
+    brewData.createdDate = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+
     // TODO: verify sent ownerId === req.user._id.toString()
     // rename to saveNewBrew
     

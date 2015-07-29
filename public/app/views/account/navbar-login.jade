@@ -3,11 +3,15 @@
         li(ng-show="identity.currentUser.isAdmin()")
             a(href="/admin/users") User Admin
         li
+            a(href="/") Overview
+        li
             a(href="/brews") Brews
         li
             a(href="/recipes") Recipes
         li
             a(href="/profile") Profile
+        li
+            span &nbsp;&nbsp;
         li
             a(href="", ng-click="signout()") Sign Out
 

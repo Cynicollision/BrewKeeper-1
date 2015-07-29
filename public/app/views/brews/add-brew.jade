@@ -5,24 +5,24 @@
             fieldset
                 legend New Brew Information
                 .form-group
-                    label.col-md-4.control-label(for="selectedRecipe") Recipe
+                    label.col-md-4.control-label(for="brewRecipeId") Recipe
                     .col-md-6
-                        select.form-control(name="selectedRecipe", ng-model="selectedRecipe", ng-options="recipe.name for recipe in recipes")
+                        select.form-control(name="brewRecipeId", ng-model="brewRecipeId", ng-options="recipe.name for recipe in recipes")
 
                 .form-group
-                    label.col-md-4.control-label(for="batchSizeGallons") Batch size
+                    label.col-md-4.control-label(for="brewBatchSize") Batch size
                     .col-md-4
-                        input.form-control(name="batchSizeGallons", type="number", min=1, max=999, maxlength=3 placeholder="# gallons", ng-model="batchSizeGallons", required)
+                        input.form-control(name="brewBatchSize", type="number", min=1, max=999, maxlength=3 placeholder="# gallons", ng-model="brewBatchSize", required)
 
                 .form-group
-                    label.col-md-4.control-label(for="name") Description
+                    label.col-md-4.control-label(for="brewDescription") Description
                     .col-md-6
-                        input.form-control(name="name", type="text", placeholder="Name", ng-model="name")
+                        input.form-control(name="brewDescription", type="text", placeholder="Name", ng-model="brewDescription")
 
                 .form-group
-                    label.col-md-4.control-label(for="selectedRecipe") Status
+                    label.col-md-4.control-label(for="brewStatusCde") Status
                     .col-md-6
-                        select.form-control(name="status", ng-model="status", ng-options="status.name for status in statuses")
+                        select.form-control(name="brewStatusCde", ng-model="brewStatusCde", ng-options="status.name for status in statuses")
 
                 .form-group
                     .div(style="text-align:center")

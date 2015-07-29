@@ -6,8 +6,8 @@
     };
 
     $scope.sortOptions = [
-        { value: 'name', text: 'Sort by Name' },
-        { value: 'brewedOn', text: 'Sort by Brew Date' }
+        { value: 'status', text: 'Sort by Status' },
+        { value: 'createdDate', text: 'Sort by Created Date' }
     ];
 
     $scope.sortOrder = $scope.sortOptions[0].value;

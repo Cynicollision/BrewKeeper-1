@@ -1,4 +1,5 @@
 ﻿angular.module('BrewKeeper').controller('AddBrewCtrl', function ($scope, $location, Brew, Identity, Notifier, Recipe) {
+    // todo: BrewStatus service and get from there
     $scope.statuses = [
         { id: 1, name: "Not started yet" },
         { id: 2, name: "Fermenting" },
@@ -8,16 +9,16 @@
 
     $scope.getNewBrewData = function () {
         return {
-            name: $scope.name,
-            brewedOn: $scope.brewedOn,
-            brewedBy: Identity.getCurrentUserId()
+            batchSize: $scope.brewBatchSize,
+            description: $scope.brewDescription,
+            ownerId: Identity.getCurrentUserId(),
+            recipeId: $scope.brewRecipeId,
+            statusCde: (!!$scope.brewStatusCde) ? $scope.brewStatusCde.id : -1
         };
     };
-    
 
     $scope.saveBrew = function () {
         var newBrewData = $scope.getNewBrewData();
-
         Brew.save(newBrewData).then(function (response) {
             if (!response.data.reason) {
                 Notifier.notify('Brew added!');

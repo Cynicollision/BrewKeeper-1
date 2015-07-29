@@ -18,7 +18,7 @@ module.exports = function (app) {
     app.get('/api/brews', brews.getAllBrews); // TODO: maybe require admin role "all" retrieval?
     app.get('/api/brews/:id', brews.getBrewById);
     app.get('/api/brews/user/:id', brews.getBrewsByUserId);
-    app.post('/api/brews', brews.saveBrew);
+    app.post('/api/brews', brews.saveNewBrew);
     app.put('/api/brews', brews.updateBrew);
     app.delete('/api/brews/:id', brews.deleteBrew);
     

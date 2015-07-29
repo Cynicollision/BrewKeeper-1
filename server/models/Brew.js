@@ -1,11 +1,16 @@
-﻿var mongoose = require('mongoose');
+﻿var mongoose = require('mongoose'),
+    errRequired = '{PATH} is required!';
 
 var brewSchema = mongoose.Schema({
-    name: { type: String, required: '{PATH} is required!' },
-    brewedBy: { type: String, required: '{PATH} is required!'},
-    featured: { type: Boolean },
-    brewedOn: { type: Date, required: '{PATH} is required!' },
-    tags: [String]
+    batchSize: { type: Number, required: errRequired },
+    createdDate: { type: Date, required: errRequired },
+    ownerId: { type: String, required: errRequired },
+    statusCde: { type: Number, required: errRequired },
+    description: String,
+    brewDate: Date,
+    bottleDate: Date,
+    chillDate: Date,
+    recipeId: String
 });
 
 var Brew = mongoose.model('Brew', brewSchema);
