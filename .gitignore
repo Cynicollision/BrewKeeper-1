@@ -1,6 +1,7 @@
 node_modules
 *.suo
 *.tmp
+.grunt
 
 # will need to include this when deploying
 public/vendor
