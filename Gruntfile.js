@@ -44,13 +44,20 @@
             'angular-tests': {
                 src: vendorFiles.concat(angularFiles)
             }
-        }
-    });
-    
+		},
+
+		exec: {
+			mongod_local: 'mongod --dbpath C:\\mongodata'
+		}
+	});
+	
+
+	grunt.loadNpmTasks('grunt-exec');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     
-    grunt.registerTask('test', [ 'jshint', 'jasmine']);
+	grunt.registerTask('test', ['jshint', 'jasmine']);
+	grunt.registerTask('mongod', 'exec');
 	grunt.registerTask('default', function () {
         grunt.log.write('So vast!').ok();
     });
