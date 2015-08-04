@@ -1,16 +1,27 @@
 ﻿.container
-    h1 {{brew.name}}
+    h1 Brew Details
         .row
-            .col-md-6
-                h3(ng-show="brew.featured") Featured
-                h3 Brewed on {{ brew.brewedOn | date }}
+            .col-md-8
+                h3 Recipe: {{ brew.recipeId }}
+    div
         .row
-            .col-md-6
+            .col-md-8
                 span
                     a(href="/brews/edit/{{brew._id}}" ng-show="isBrewOwner()") Edit
                     a(href="/brews/delete/{{brew._id}}" ng-show="isBrewOwner()") Delete
-            .col-md-6
-                .panel.panel-primary
-                    .panel-heading Tags
-                    .panel-body
-                        div(ng-repeat="tag in brew.tags") {{ tag }}
+    div Brew Timeline:
+        .row
+            .col-md-2
+            .col-md-8
+                    table.table.table-hover.table-striped.table-condensed
+                        tbody
+                            tr
+                                td Brewed
+                                td {{ brew.brewDate }}
+                            tr
+                                td Bottled
+                                td {{ brew.bottleDate }}
+                            tr
+                                td Chilled
+                                td {{ brew.chillDate }}
+                

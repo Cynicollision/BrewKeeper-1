@@ -1,5 +1,14 @@
 ﻿angular.module('BrewKeeper').controller('AddBrewCtrl', function ($scope, $location, Brew, Identity, Notifier, Recipe) {
-    // todo: BrewStatus service and get from there
+    $scope.getCurrentUserRecipes = function () {
+        Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+            $scope.recipes = response.data;
+            if (!!$scope.recipes && $scope.recipes.length > 0) {
+                $scope.brewRecipeId = $scope.recipes[0];
+            }
+        });
+    };
+    
+    // TODO: BrewStatus service and get from there
     $scope.statuses = [
         { id: 1, name: "Not started yet" },
         { id: 2, name: "Fermenting" },
@@ -12,7 +21,7 @@
             batchSize: $scope.brewBatchSize,
             description: $scope.brewDescription,
             ownerId: Identity.getCurrentUserId(),
-            recipeId: $scope.brewRecipeId,
+            recipeId: $scope.brewRecipeId._id,
             statusCde: (!!$scope.brewStatusCde) ? $scope.brewStatusCde.id : -1
         };
     };
@@ -31,11 +40,13 @@
         });
     };
     
-    $scope.setDefaultStatus = function () {
+    $scope.setDefaultControlValues = function () {
         if (!!$scope.statuses) {
-            $scope.status = $scope.statuses[0];
+            $scope.brewStatusCde = $scope.statuses[0];
         }
     };
-
-    $scope.setDefaultStatus();
+    
+    // initialze
+    $scope.getCurrentUserRecipes();
+    $scope.setDefaultControlValues();
 });
