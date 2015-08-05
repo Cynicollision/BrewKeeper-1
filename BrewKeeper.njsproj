@@ -40,6 +40,7 @@
     <Compile Include="public\app\controllers\brews\EditBrewCtrl_test.js" />
     <Compile Include="public\app\controllers\main\MainCtrl_test.js" />
     <Compile Include="public\app\services\account\Auth.js" />
+    <Compile Include="public\app\services\brews\BrewStatus.js" />
     <Compile Include="public\app\services\common\BrewKeeperApi_test.js" />
     <Compile Include="public\app\services\common\BrewKeeperApi.js" />
     <Compile Include="public\app\services\account\Identity.js" />

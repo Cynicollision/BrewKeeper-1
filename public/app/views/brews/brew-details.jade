@@ -12,7 +12,7 @@
                         td {{ brew.recipeId }}
                     tr
                         td Current status
-                        td {{ brew.statusCde }}
+                        td {{ statusLookup.getDisplay(brew.statusCde) }}
                     tr
                         td Brew date
                         td {{ brew.brewDate }}
@@ -25,5 +25,5 @@
                 
         .col-md-4
             .btn-group
-                .btn.btn-default(href="/brews/edit/{{brew._id}}" ng-show="isBrewOwner()") Edit
-                .btn.btn-danger(href="/brews/delete/{{brew._id}}" ng-show="isBrewOwner()") Delete  
+                .btn.btn-default(ng-click="doEdit()" ng-show="isBrewOwner()") Edit
+                .btn.btn-danger(ng-click="doDelete()" ng-show="isBrewOwner()") Delete  

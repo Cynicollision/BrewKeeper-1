@@ -18,8 +18,9 @@
         });
     };
     
+    // TODO: should be in Brew service
     $scope.isBrewOwner = function (brew) {
-        return (!!brew && Identity.getCurrentUserId() === brew.brewedBy);
+        return (!!brew && Identity.getCurrentUserId() === brew.ownerId);
     };
 
     $scope.getBrew($routeParams.id);

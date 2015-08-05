@@ -39,11 +39,11 @@
     it('Determines if the current user is the owner (brewedBy) of the brew.', function () {
         expect($scope.isBrewOwner()).toBeFalsy();
         $scope.setCurrentBrew({
-            brewedBy: 82589
+            ownerId: 82589
         });
         expect($scope.isBrewOwner()).toBeTruthy();
         $scope.setCurrentBrew({
-            brewedBy: 12345
+            ownerId: 12345
         });
         expect($scope.isBrewOwner()).toBeFalsy();
     });

@@ -1,4 +1,4 @@
-﻿angular.module('BrewKeeper').controller('AddBrewCtrl', function ($scope, $location, Brew, Identity, Notifier, Recipe) {
+﻿angular.module('BrewKeeper').controller('AddBrewCtrl', function ($scope, $location, Brew, BrewStatus, Identity, Notifier, Recipe) {
     $scope.getCurrentUserRecipes = function () {
         Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
             $scope.recipes = response.data;
@@ -8,14 +8,6 @@
         });
     };
     
-    // TODO: BrewStatus service and get from there
-    $scope.statuses = [
-        { id: 1, name: "Not started yet" },
-        { id: 2, name: "Fermenting" },
-        { id: 3, name: "Bottled" },
-        { id: 4, name: "Chilling" }
-    ];
-
     $scope.getNewBrewData = function () {
         return {
             batchSize: $scope.brewBatchSize,
@@ -47,6 +39,7 @@
     };
     
     // initialze
+    $scope.statuses = BrewStatus.getStatuses();
     $scope.getCurrentUserRecipes();
     $scope.setDefaultControlValues();
 });
