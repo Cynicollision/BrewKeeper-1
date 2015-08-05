@@ -3,7 +3,7 @@
         Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
             $scope.recipes = response.data;
             if (!!$scope.recipes && $scope.recipes.length > 0) {
-                $scope.brewRecipeId = $scope.recipes[0];
+                $scope.brewRecipe = $scope.recipes[0];
             }
         });
     };
@@ -21,7 +21,7 @@
             batchSize: $scope.brewBatchSize,
             description: $scope.brewDescription,
             ownerId: Identity.getCurrentUserId(),
-            recipeId: $scope.brewRecipeId._id,
+            recipeId: $scope.brewRecipe._id,
             statusCde: (!!$scope.brewStatusCde) ? $scope.brewStatusCde.id : -1
         };
     };

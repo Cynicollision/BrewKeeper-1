@@ -28,17 +28,21 @@
         $scope.brewStatusCde = { id: 2 };
         $scope.brewDescription = 'an expiriment';
         $scope.brewBatchSize = 5;
-        $scope.brewRecipeId = '6d63a4g2';
+        $scope.brewRecipe = {
+            _id: '6d63a4g2'
+        };
         
         var newBrew = $scope.getNewBrewData();
         expect(newBrew.statusCde).toEqual($scope.brewStatusCde.id);
         expect(newBrew.description).toEqual($scope.brewDescription);
         expect(newBrew.batchSize).toEqual($scope.brewBatchSize);
-        expect(newBrew.recipeId).toEqual($scope.brewRecipeId);
+        expect(newBrew.recipeId).toEqual($scope.brewRecipe._id);
         expect(newBrew.ownerId).toEqual(IdentityMock.getCurrentUserId());
     });
 
     it('Saves a new brew using Brew', function () {
+        $scope.brewRecipe = {};
+
         $scope.saveBrew();
         expect(BrewMock.save).toHaveBeenCalled();
     });

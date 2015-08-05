@@ -5,9 +5,9 @@
             fieldset
                 legend New Brew Information
                 .form-group
-                    label.col-md-4.control-label(for="brewRecipeId") Recipe
+                    label.col-md-4.control-label(for="brewRecipe") Recipe
                     .col-md-6
-                        select.form-control(name="brewRecipeId", ng-model="brewRecipeId", ng-options="recipe.name for recipe in recipes")
+                        select.form-control(name="brewRecipe", ng-model="brewRecipe", ng-options="recipe.name for recipe in recipes")
 
                 .form-group
                     label.col-md-4.control-label(for="brewBatchSize") Batch size

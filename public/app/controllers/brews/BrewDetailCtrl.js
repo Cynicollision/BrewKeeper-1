@@ -9,8 +9,8 @@
         $scope.brew = brew;
     };
     
-    $scope.isBrewOwner = function () {
-        return (!!$scope.brew && Identity.getCurrentUserId() === $scope.brew.brewedBy);
+    $scope.isBrewOwner = function () { 
+        return (!!$scope.brew && Identity.getCurrentUserId() === $scope.brew.ownerId);
     };
 
     $scope.getBrew($routeParams.id);
