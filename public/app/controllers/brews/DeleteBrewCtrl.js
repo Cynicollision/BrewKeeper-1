@@ -3,7 +3,7 @@
 
     $scope.getBrew = function (brewId) {
         Brew.getByBrewId(brewId).then(function (response) {
-            if ($scope.isBrewOwner(response.data)) {
+            if (Brew.isBrewOwnedByCurrentUser(response.data)) {
                 $scope.brew = response.data;
             } else {
                 $location.path('/');
@@ -16,11 +16,6 @@
             Notifier.notify('Brew deleted');
             $location.path('/brews');
         });
-    };
-    
-    // TODO: should be in Brew service
-    $scope.isBrewOwner = function (brew) {
-        return (!!brew && Identity.getCurrentUserId() === brew.ownerId);
     };
 
     $scope.getBrew($routeParams.id);

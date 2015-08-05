@@ -35,16 +35,4 @@
         $scope.setCurrentBrew({});
         expect($scope.brew).toBeDefined();
     });
-
-    it('Determines if the current user is the owner (brewedBy) of the brew.', function () {
-        expect($scope.isBrewOwner()).toBeFalsy();
-        $scope.setCurrentBrew({
-            ownerId: 82589
-        });
-        expect($scope.isBrewOwner()).toBeTruthy();
-        $scope.setCurrentBrew({
-            ownerId: 12345
-        });
-        expect($scope.isBrewOwner()).toBeFalsy();
-    });
 });

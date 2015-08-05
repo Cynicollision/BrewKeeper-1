@@ -3,11 +3,14 @@
 
     beforeEach(function () {
         module('BrewKeeper');
-        inject(function ($injector, _Brew_, _BrewKeeperApi_) {
+
+
+        inject(function ($injector, _Brew_, _BrewKeeperApi_, _Identity_) {
             httpBackend = $injector.get('$httpBackend');
 
             Brew = _Brew_;
             BrewKeeperApi = _BrewKeeperApi_;
+            Identity = _Identity_;
         });
 
         successResponse = { success: true };
@@ -23,6 +26,18 @@
         httpBackend.verifyNoOutstandingRequest();
     });
     
+    it('Can determine if the currently logged in user owns a brew.', function () {
+        Identity.currentUser = { _id: 82589 };
+        expect(Brew.isBrewOwnedByCurrentUser({
+            ownerId: 82589
+        })).toBeTruthy();
+
+        Identity.currentUser = { _id: 564198 };
+        expect(Brew.isBrewOwnedByCurrentUser({
+            ownerId: 82589
+        })).toBeFalsy();
+    });
+
     it('Can retrieve all brews.', function () {
         var result, url = '/api/brews/';
 

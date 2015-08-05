@@ -1,5 +1,6 @@
-﻿angular.module('BrewKeeper').controller('BrewDetailCtrl', function ($scope, $routeParams, $timeout, $window, Brew, BrewStatus, Identity) {
+﻿angular.module('BrewKeeper').controller('BrewDetailCtrl', function ($scope, $routeParams, $timeout, $window, Brew, BrewStatus) {
     $scope.statusLookup = BrewStatus;
+    $scope.brewSvc = Brew;
 
     $scope.getBrew = function (brewId) {
         Brew.getByBrewId(brewId).then(function (response) {
@@ -9,11 +10,6 @@
     
     $scope.setCurrentBrew = function (brew) {
         $scope.brew = brew;
-    };
-    
-    // TODO: should be in Brew service
-    $scope.isBrewOwner = function () { 
-        return (!!$scope.brew && Identity.getCurrentUserId() === $scope.brew.ownerId);
     };
     
     $scope.doEdit = function () {

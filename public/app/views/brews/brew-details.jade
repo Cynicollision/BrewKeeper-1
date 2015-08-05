@@ -25,5 +25,5 @@
                 
         .col-md-4
             .btn-group
-                .btn.btn-default(ng-click="doEdit()" ng-show="isBrewOwner()") Edit
-                .btn.btn-danger(ng-click="doDelete()" ng-show="isBrewOwner()") Delete  
+                .btn.btn-default(ng-click="doEdit()" ng-show="brewSvc.isBrewOwnedByCurrentUser(brew)") Edit
+                .btn.btn-danger(ng-click="doDelete()" ng-show="brewSvc.isBrewOwnedByCurrentUser(brew)") Delete  
