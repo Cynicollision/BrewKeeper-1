@@ -3,7 +3,8 @@
         { id: 0, name: "Not started yet" },
         { id: 1, name: "Fermenting" },
         { id: 2, name: "Bottled" },
-        { id: 3, name: "Chilling" }
+        { id: 3, name: "Chilling" },
+        { id: 4, name: "Gone" }
     ];
 
     return {

@@ -2,24 +2,27 @@
     $scope.getCurrentUserRecipes = function () {
         Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
             $scope.recipes = response.data;
-            if (!!$scope.recipes && $scope.recipes.length > 0) {
+            if (!!$scope.recipes && $scope.recipes.length) {
                 $scope.brewRecipe = $scope.recipes[0];
             }
         });
     };
     
-    $scope.getNewBrewData = function () {
+    $scope.getFormBrewData = function () {
         return {
             batchSize: $scope.brewBatchSize,
             description: $scope.brewDescription,
             ownerId: Identity.getCurrentUserId(),
             recipeId: $scope.brewRecipe._id,
-            statusCde: (!!$scope.brewStatusCde) ? $scope.brewStatusCde.id : -1
+            statusCde: (!!$scope.brewStatusCde) ? $scope.brewStatusCde.id : -1,
+            brewDate: $scope.brewBrewDate,
+            bottleDate: $scope.brewBottleDate,
+            chillDate: $scope.brewChillDate
         };
     };
 
     $scope.saveBrew = function () {
-        var newBrewData = $scope.getNewBrewData();
+        var newBrewData = $scope.getFormBrewData();
         Brew.save(newBrewData).then(function (response) {
             if (!response.data.reason) {
                 Notifier.notify('Brew added!');

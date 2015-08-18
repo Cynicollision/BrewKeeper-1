@@ -1,8 +1,11 @@
 ﻿angular.module('BrewKeeper').factory('Brew', function ($q, BrewKeeperApi, Identity) {
     return {
         isBrewOwnedByCurrentUser: function (brew) {
-            console.log(Identity.getCurrentUserId());
-            return (Identity.getCurrentUserId() === brew.ownerId);
+            if (brew) {
+                return (Identity.getCurrentUserId() === brew.ownerId);
+            }
+            
+            return false;
         },
 
         getAll: function () {

@@ -61,7 +61,7 @@ angular.module('BrewKeeper').config(function ($routeProvider, $locationProvider)
     })
 
     .when('/brews/edit/:id', {
-        templateUrl: '/partials/views/brews/edit-brew', 
+        templateUrl: '/partials/views/brews/add-brew', 
         controller: 'EditBrewCtrl'
     })
 

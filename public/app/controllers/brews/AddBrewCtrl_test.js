@@ -32,7 +32,7 @@
             _id: '6d63a4g2'
         };
         
-        var newBrew = $scope.getNewBrewData();
+        var newBrew = $scope.getFormBrewData();
         expect(newBrew.statusCde).toEqual($scope.brewStatusCde.id);
         expect(newBrew.description).toEqual($scope.brewDescription);
         expect(newBrew.batchSize).toEqual($scope.brewBatchSize);

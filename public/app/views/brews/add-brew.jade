@@ -3,31 +3,37 @@
     .well.col-md-8
         form.form-horizontal(name="addBrewForm")
             fieldset
-                legend New Brew Information
+                legend Brew Information
                 .form-group
                     label.col-md-4.control-label(for="brewRecipe") Recipe
                     .col-md-6
                         select.form-control(name="brewRecipe", ng-model="brewRecipe", ng-options="recipe.name for recipe in recipes")
-
                 .form-group
                     label.col-md-4.control-label(for="brewBatchSize") Batch size
                     .col-md-4
                         input.form-control(name="brewBatchSize", type="number", min=1, max=999, maxlength=3 placeholder="# gallons", ng-model="brewBatchSize", required)
-
                 .form-group
                     label.col-md-4.control-label(for="brewDescription") Description
                     .col-md-6
-                        input.form-control(name="brewDescription", type="text", placeholder="Name", ng-model="brewDescription")
-
+                        input.form-control(name="brewDescription", type="text", placeholder="Brew details", ng-model="brewDescription")
                 .form-group
                     label.col-md-4.control-label(for="brewStatusCde") Status
                     .col-md-6
                         select.form-control(name="brewStatusCde", ng-model="brewStatusCde", ng-options="status.name for status in statuses")
-
+                .form-group
+                    label.col-md-4.control-label(for="brewBrewDate") Brew date
+                    .col-md-6
+                        input.form-control(name="brewBrewDate", type="text", placeholder="In the jug", ng-model="brewBrewDate")
+                .form-group
+                    label.col-md-4.control-label(for="brewBottleDate") Bottle date
+                    .col-md-6
+                        input.form-control(name="brewBottleDate", type="text", placeholder="In the bottles", ng-model="brewBottleDate")
+                .form-group
+                    label.col-md-4.control-label(for="brewChillDate") Chill date
+                    .col-md-6
+                        input.form-control(name="brewChillDate", type="text", placeholder="In the fridge", ng-model="brewChillDate")
                 .form-group
                     .div(style="text-align:center")
-                        button.btn.btn-primary(ng-click="saveBrew()", ng-disabled="signupForm.$invalid") Create
+                        button.btn.btn-primary(ng-click="saveBrew()", ng-disabled="signupForm.$invalid") Save
                         | &nbsp;
                         a.btn.btn-default(href="/brews/") Cancel
-                            
-  
