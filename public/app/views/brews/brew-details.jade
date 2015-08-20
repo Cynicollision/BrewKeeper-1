@@ -11,6 +11,12 @@
                         td Recipe
                         td {{ brew.recipeId }}
                     tr
+                        td Description
+                        td {{ brew.description }}
+                    tr
+                        td Batch size
+                        td {{ brew.batchSize }} gallon(s)
+                    tr
                         td Current status
                         td {{ statusLookup.getDisplay(brew.statusCde) }}
                     tr

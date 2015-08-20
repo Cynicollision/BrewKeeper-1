@@ -34,6 +34,6 @@
                         input.form-control(name="brewChillDate", type="text", placeholder="In the fridge", ng-model="brewChillDate")
                 .form-group
                     .div(style="text-align:center")
-                        button.btn.btn-primary(ng-click="saveBrew()", ng-disabled="signupForm.$invalid") Save
+                        button.btn.btn-primary(ng-click="submitBrew()", ng-disabled="signupForm.$invalid") Save
                         | &nbsp;
                         a.btn.btn-default(href="/brews/") Cancel

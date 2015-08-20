@@ -34,17 +34,23 @@
             }
         }
     };
-    
-    $scope.getBrewUpdateData = function () {
+
+    $scope.getFormBrewData = function () {
         return {
             id: $scope.brewId,
-            name: $scope.name,
-            brewedOn: $scope.brewedOn
+            batchSize: $scope.brewBatchSize,
+            description: $scope.brewDescription,
+            ownerId: Identity.getCurrentUserId(),
+            recipeId: $scope.brewRecipe._id,
+            statusCde: (!!$scope.brewStatusCde) ? $scope.brewStatusCde.id : -1,
+            brewDate: $scope.brewBrewDate,
+            bottleDate: $scope.brewBottleDate,
+            chillDate: $scope.brewChillDate
         };
     };
     
-    $scope.update = function () {
-        var newBrewData = $scope.getBrewUpdateData(),
+    $scope.submitBrew = function () {
+        var newBrewData = $scope.getFormBrewData(),
             url = '/brews/' + $scope.brewId;
         
         Brew.update(newBrewData).then(function () {

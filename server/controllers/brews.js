@@ -42,8 +42,13 @@ exports.updateBrew = function (req, res) {
         brewUpdates = req.body,
         query = { _id: brewUpdates.id },
         update = {
-            name: brewUpdates.name,
-            brewedOn: brewUpdates.brewedOn
+            batchSize: brewUpdates.batchSize,
+            brewDate: brewUpdates.brewDate,
+            bottleDate: brewUpdates.bottleDate,
+            chillDate: brewUpdates.chillDate,
+            description: brewUpdates.description,
+            recipeId: brewUpdates.recipeId,
+            statusCde: brewUpdates.statusCde
         },
         options = { multi: false };
     
@@ -53,7 +58,7 @@ exports.updateBrew = function (req, res) {
     }
     
     Brew.findOne({ _id: brewUpdates.id }).exec(function (err, brew) {
-        if (!!brew && brew.brewedBy === currentUserId) {
+        if (!!brew && brew.ownerId === currentUserId) {
             Brew.update(query, update, options, function (err) {
                 if (err) {
                     res.send(500, { reason: err.toString() });
@@ -76,7 +81,7 @@ exports.deleteBrew = function (req, res) {
     }
     
     Brew.findOne({ _id: deleteBrewId }).exec(function (err, brew) {
-        if (!!brew && brew.brewedBy === currentUserId) {
+        if (!!brew && brew.ownerId === currentUserId) {
             Brew.remove({ _id: deleteBrewId }, function (err) {
                 if (err) {
                     res.send({ reason: err.toString() });

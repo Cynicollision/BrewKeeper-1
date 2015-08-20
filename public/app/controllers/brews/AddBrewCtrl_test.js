@@ -43,7 +43,7 @@
     it('Saves a new brew using Brew', function () {
         $scope.brewRecipe = {};
 
-        $scope.saveBrew();
+        $scope.submitBrew();
         expect(BrewMock.save).toHaveBeenCalled();
     });
 });
