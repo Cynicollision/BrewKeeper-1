@@ -3,17 +3,14 @@
     
     angularFiles = [
         'public/app/app.js',
-        'public/app/controllers/account/*.js',
-        'public/app/controllers/admin/*.js',
-        'public/app/controllers/brews/*.js',
-        'public/app/controllers/main/*.js',
-        'public/app/controllers/recipes/*.js',
-           
-        'public/app/services/*.js',
-        'public/app/services/account/*.js',
-        'public/app/services/brews/*.js',
-        'public/app/services/common/*.js',
-        'public/app/services/recipes/*.js'
+        'public/app/account/controllers/*.js',
+        'public/app/account/services/*.js',
+        'public/app/brew/controllers/*.js',
+        'public/app/brew/services/*.js',
+        'public/app/common/services/*.js',
+        'public/app/main/controllers/*.js',
+        'public/app/recipe/services/*.js',
+        'public/app/recipe/controllers/*.js'
     ];
     
     vendorFiles = [

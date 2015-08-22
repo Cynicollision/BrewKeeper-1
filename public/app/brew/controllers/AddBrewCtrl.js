@@ -26,7 +26,7 @@
         Brew.save(newBrewData).then(function (response) {
             if (!response.data.reason) {
                 Notifier.notify('Brew added!');
-                $location.path('/brews');
+                $location.path('/brew');
             } else {
                 Notifier.error(response.data.reason);
             }

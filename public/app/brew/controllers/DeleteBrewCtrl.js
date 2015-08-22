@@ -14,7 +14,7 @@
     $scope.onConfirmDelete = function () {
         Brew.delete($routeParams.id).then(function (response) {
             Notifier.notify('Brew deleted');
-            $location.path('/brews');
+            $location.path('/brew');
         });
     };
 

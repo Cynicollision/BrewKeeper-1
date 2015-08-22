@@ -1,5 +1,5 @@
 ﻿.container.top-padding-med
-    a(href="/brews/add") Add brew
+    a(href="/brew/add") Add brew
     .pull-right
         form.form-inline
             .form-group
@@ -16,6 +16,6 @@
             tr(ng-repeat="brew in brews | orderBy:statusCde")
                 td {{brew.statusCde}}
                 td 
-                    a(href="/brews/{{brew._id}}") {{brew.description}}
+                    a(href="/brew/{{brew._id}}") {{brew.description}}
                 td {{brew.createdDate | date:'M/dd/yyyy'}}
                 

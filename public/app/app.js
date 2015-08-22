@@ -22,62 +22,56 @@ angular.module('BrewKeeper').config(function ($routeProvider, $locationProvider)
 
     $routeProvider
     .when('/', {
-        templateUrl: '/partials/views/main/main', 
+        templateUrl: '/partials/main/views/main', 
         controller: 'MainCtrl'
     })
 
     // account
-    .when('/admin/users', {
-        templateUrl: '/partials/views/admin/user-list', 
-        controller: 'UserListCtrl',
-        resolve: routeRoleChecks.admin
-    })
-    
     .when('/signup', {
-        templateUrl: '/partials/views/account/signup', 
+        templateUrl: '/partials/account/views/signup', 
         controller: 'SignupCtrl'
     })
 
     .when('/profile', {
-        templateUrl: '/partials/views/account/profile', 
+        templateUrl: '/partials/account/views/profile', 
         controller: 'EditProfileCtrl',
         resolve: routeRoleChecks.user
     })
 
-    // brews
-    .when('/brews', {
-        templateUrl: '/partials/views/brews/brew-list', 
+    // brew
+    .when('/brew', {
+        templateUrl: '/partials/brew/views/brew-list', 
         controller: 'BrewListCtrl'
     })
 
-    .when('/brews/add', {
-        templateUrl: '/partials/views/brews/add-brew', 
+    .when('/brew/add', {
+        templateUrl: '/partials/brew/views/add-brew', 
         controller: 'AddBrewCtrl'
     })
 
-    .when('/brews/:id', {
-        templateUrl: '/partials/views/brews/brew-details', 
-        controller: 'BrewDetailCtrl'
+    .when('/brew/:id', {
+        templateUrl: '/partials/brew/views/view-brew', 
+        controller: 'ViewBrewCtrl'
     })
 
-    .when('/brews/edit/:id', {
-        templateUrl: '/partials/views/brews/add-brew', 
+    .when('/brew/edit/:id', {
+        templateUrl: '/partials/brew/views/add-brew', 
         controller: 'EditBrewCtrl'
     })
 
-    .when('/brews/delete/:id', {
-        templateUrl: '/partials/views/brews/delete-brew', 
+    .when('/brew/delete/:id', {
+        templateUrl: '/partials/brew/views/delete-brew', 
         controller: 'DeleteBrewCtrl'
     })
 
     // recipes
-    .when('/recipes', {
-        templateUrl: '/partials/views/recipes/recipe-list', 
+    .when('/recipe', {
+        templateUrl: '/partials/recipe/views/recipe-list', 
         controller: 'RecipeListCtrl'
     })
 
-    .when('/recipes/view/:id', {
-        templateUrl: '/partials/views/recipes/recipe-details', 
+    .when('/recipe/view/:id', {
+        templateUrl: '/partials/recipe/views/recipe-details', 
         controller: 'RecipeDetailCtrl'
     });
 });

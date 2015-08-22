@@ -1,4 +1,4 @@
-﻿describe('BrewDetailCtrl', function () {
+﻿describe('ViewBrewCtrl', function () {
     var $scope, Brew, 
         mockBrewId = 123;
     
@@ -14,7 +14,7 @@
                 return 82589;
             });
 
-            $controller('BrewDetailCtrl', {
+            $controller('ViewBrewCtrl', {
                 $scope: $scope,
                 $routeParams : {
                     id: mockBrewId

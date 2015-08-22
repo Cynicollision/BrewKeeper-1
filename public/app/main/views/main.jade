@@ -2,11 +2,11 @@
     .row
         .col-md-3
         .col-md-6(style="margin: 0 auto")
-            div(ng-include="'/partials/views/main/welcome-login'")
+            div(ng-include="'/partials/main/views/welcome-login'")
         .col-md-3
 
 .container(ng-show="identity.isAuthenticated()")
     .row
         .col-md-12
-            div(ng-include="'/partials/views/main/overview'")
+            div(ng-include="'/partials/main/views/overview'")
 
