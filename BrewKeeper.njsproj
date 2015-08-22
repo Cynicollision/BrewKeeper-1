@@ -34,6 +34,7 @@
     <Compile Include="Gruntfile.js" />
     <Compile Include="public\app\account\controllers\EditProfileCtrl_test.js" />
     <Compile Include="public\app\account\controllers\NavBarLoginCtrl_test.js" />
+    <Compile Include="public\app\account\controllers\SignupCtrl_test.js" />
     <Compile Include="public\app\brew\controllers\DeleteBrewCtrl.js" />
     <Compile Include="public\app\brew\controllers\DeleteBrewCtrl_test.js" />
     <Compile Include="public\app\brew\controllers\EditBrewCtrl.js" />
