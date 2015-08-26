@@ -6,7 +6,7 @@
         BrewMock = jasmine.createSpyObj('Brew', ['save']);
         IdentityMock = jasmine.createSpyObj('Identity', ['getCurrentUserId']);
 
-        inject(function ($rootScope, $location, $controller, $q) {
+        inject(function ($rootScope, $controller, $q) {
             $scope = $rootScope.$new();
             ctrl = $controller('AddBrewCtrl', {
                 $scope: $scope,
@@ -24,7 +24,7 @@
         });
     });
     
-    it('Sets initial values for the brew from the form and the user ID that created it.', function () {
+    it('Gets values for the new brew from the form including user ID that created it.', function () {
         $scope.brewStatusCde = { id: 2 };
         $scope.brewDescription = 'an expiriment';
         $scope.brewBatchSize = 5;
@@ -40,7 +40,7 @@
         expect(newBrew.ownerId).toEqual(IdentityMock.getCurrentUserId());
     });
 
-    it('Saves a new brew using Brew', function () {
+    it('Saves a new brew using the Brew service.', function () {
         $scope.brewRecipe = {};
 
         $scope.submitBrew();

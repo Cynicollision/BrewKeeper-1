@@ -2,7 +2,7 @@
     'use strict';
 
     describe('NavBarLoginCtrl', function () {
-        var $scope, ctrl, $timeout, Auth;
+        var $scope, ctrl, Auth;
         
         beforeEach(function () {
             module('BrewKeeper');
