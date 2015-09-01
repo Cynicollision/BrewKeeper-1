@@ -1,5 +1,7 @@
-﻿describe('ViewBrewCtrl', function () {
-    var $scope, Brew, 
+﻿describe('brew/ViewBrewCtrl', function () {
+    'use strict';
+
+    var $scope, Brew, IdentityMock,
         mockBrewId = 123;
     
     beforeEach(function () {

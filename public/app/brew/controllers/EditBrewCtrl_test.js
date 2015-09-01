@@ -1,4 +1,6 @@
-﻿describe('EditBrewCtrl', function () {
+﻿describe('brew/EditBrewCtrl', function () {
+    'use strict';
+
     var $scope, Brew, 
         mockBrewId = 825;
     

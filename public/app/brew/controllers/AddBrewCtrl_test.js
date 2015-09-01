@@ -1,4 +1,6 @@
-﻿describe('AddBrewCtrl', function () {
+﻿describe('brew/AddBrewCtrl', function () {
+    'use strict';
+
     var $scope, dfd, ctrl, $timeout, BrewMock, IdentityMock;
 
     beforeEach(function () {

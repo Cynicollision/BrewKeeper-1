@@ -1,5 +1,5 @@
 ﻿(function () {
-    describe('Identity', function () {
+    describe('account/Identity', function () {
         var Identity, mockUser;
         
         beforeEach(function () {

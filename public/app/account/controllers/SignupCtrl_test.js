@@ -1,19 +1,21 @@
 ﻿(function () {
     'use strict';
 
-    describe('SignupCtrl', function () {
-        var $scope, ctrl, Auth, Notifier;
+    describe('account/SignupCtrl', function () {
+        var $scope, ctrl, location, Auth, Notifier;
         
         beforeEach(function () {
             module('BrewKeeper');
             
-            inject(function ($rootScope, $q, $controller, _Auth_, _Notifier_) {
+            inject(function ($rootScope, $q, $controller, $location, _Auth_, _Notifier_) {
                 $scope = $rootScope.$new();
                 Auth = _Auth_;
                 Notifier = _Notifier_;
+                location = $location;
                 
                 ctrl = $controller('SignupCtrl', {
                     $scope: $scope,
+                    $location: $location,
                     Auth: Auth,
                     Notifier: Notifier
                 });
@@ -24,9 +26,7 @@
                     return dfd.promise;
                 });
 
-                spyOn(Notifier, 'notify').and.callFake(function () {
-                    
-                });
+                spyOn(Notifier, 'notify').and.callFake(function () { });
             });
         });
         
@@ -48,9 +48,11 @@
             expect(Auth.createUser).toHaveBeenCalled();
         });
 
-        it('Shows a success message after creating an account.', function () {
+        it('Shows a success message and redirects to index after creating an account.', function () {
+            location.path('/signup');
             $scope.successRedirect();
             expect(Notifier.notify).toHaveBeenCalled();
+            expect(location.path()).toBe('/');
         });
     });
 })();

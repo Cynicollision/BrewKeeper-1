@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    describe('NavBarLoginCtrl', function () {
+    describe('account/NavBarLoginCtrl', function () {
         var $scope, ctrl, Auth;
         
         beforeEach(function () {

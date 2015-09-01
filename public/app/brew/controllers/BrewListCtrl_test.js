@@ -1,16 +1,17 @@
-﻿var dummyResponse = {
-    data: [
-        {
-            _id: 123
-        },
-        {
-            _id: 456
-        }
-    ]
-};
+﻿describe('brew/BrewListCtrl', function () {
+    'use strict';
 
-describe('BrewListCtrl', function () {
-    var brewListScope, BrewMock, succeedPromise, IdentityMock;
+    var brewListScope, BrewMock, succeedPromise, IdentityMock, 
+        dummyResponse = {
+        data: [
+            {
+                _id: 123
+            },
+            {
+                _id: 456
+            }
+        ]
+    };
     
     beforeEach(function () {
         module('BrewKeeper');

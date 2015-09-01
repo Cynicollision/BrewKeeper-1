@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    describe('EditBrewCtrl', function () {
+    describe('account/EditProfileCtrl', function () {
         var $scope, ctrl, $timeout, Auth, IdentityMock, setMockScopeUserData;
         
         beforeEach(function () {

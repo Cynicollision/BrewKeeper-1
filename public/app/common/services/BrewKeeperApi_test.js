@@ -49,4 +49,8 @@
         
         expect(success).toBeTruthy();
     });
+
+    it('Can send a PUT request to /api/brews/.', function () {
+
+    });
 });
