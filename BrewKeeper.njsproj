@@ -35,6 +35,8 @@
     <Compile Include="public\app\account\controllers\EditProfileCtrl_test.js" />
     <Compile Include="public\app\account\controllers\NavBarLoginCtrl_test.js" />
     <Compile Include="public\app\account\controllers\SignupCtrl_test.js" />
+    <Compile Include="public\app\account\services\Auth_test.js" />
+    <Compile Include="public\app\account\services\User_test.js" />
     <Compile Include="public\app\brew\controllers\DeleteBrewCtrl.js" />
     <Compile Include="public\app\brew\controllers\DeleteBrewCtrl_test.js" />
     <Compile Include="public\app\brew\controllers\EditBrewCtrl.js" />
@@ -61,9 +63,17 @@
     <Compile Include="public\app\brew\controllers\BrewListCtrl.js" />
     <Compile Include="public\app\common\services\Notifier.js" />
     <Compile Include="public\app\main\controllers\MainCtrl.js" />
+    <Compile Include="public\app\recipe\controllers\AddRecipeCtrl.js" />
+    <Compile Include="public\app\recipe\controllers\AddRecipeCtrl_test.js" />
+    <Compile Include="public\app\recipe\controllers\DeleteRecipeCtrl.js" />
+    <Compile Include="public\app\recipe\controllers\DeleteRecipeCtrl_test.js" />
+    <Compile Include="public\app\recipe\controllers\EditRecipeCtrl.js" />
+    <Compile Include="public\app\recipe\controllers\EditRecipeCtrl_test.js" />
+    <Compile Include="public\app\recipe\controllers\RecipeListCtrl_test.js" />
+    <Compile Include="public\app\recipe\controllers\ViewRecipeCtrl_test.js" />
     <Compile Include="public\app\recipe\services\CachedRecipes.js" />
     <Compile Include="public\app\recipe\services\Recipe.js" />
-    <Compile Include="public\app\recipe\controllers\RecipeDetailCtrl.js" />
+    <Compile Include="public\app\recipe\controllers\ViewRecipeCtrl.js" />
     <Compile Include="public\app\recipe\controllers\RecipeListCtrl.js" />
     <Compile Include="public\app\common\services\Notifier_test.js" />
     <Compile Include="server.js" />

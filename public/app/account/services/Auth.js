@@ -15,7 +15,7 @@
                         var user = new User();
                         angular.extend(user, response.data.user);
                         Identity.currentUser = user;
-                        dfd.resolve(true);
+                        dfd.resolve(response.data);
                     } else {
                         dfd.resolve(false);
                     }
@@ -30,7 +30,7 @@
                 
                 BrewKeeperApi.post('/api/users/', newUserData).then(function () {
                     Identity.currentUser = newUser;
-                    dfd.resolve();
+                    dfd.resolve(true);
                 }, function (response) {
                     dfd.reject(response.data.reason);
                 });

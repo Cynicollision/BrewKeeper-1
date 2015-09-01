@@ -1,4 +1,4 @@
-﻿describe('BrewKeeperApi', function () {
+﻿describe('common/BrewKeeperApi', function () {
     var BrewKeeperApi, httpBackend, successResponse;
     
     beforeEach(function () {

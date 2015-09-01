@@ -1,4 +1,4 @@
-﻿describe('MainCtrl', function () {
+﻿describe('common/MainCtrl', function () {
     var $scope, Auth, ctrl;
     
     beforeEach(function () {

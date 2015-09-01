@@ -1,6 +1,8 @@
 ﻿(function () {
+    'use strict';
+
     describe('account/Identity', function () {
-        var Identity, mockUser;
+        var Identity, mockUser, $window;
         
         beforeEach(function () {
             module('BrewKeeper');

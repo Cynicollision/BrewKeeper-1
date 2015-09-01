@@ -1,5 +1,5 @@
-﻿describe('BrewStatus', function () {
-    it('Needs tests!!!', function () {
+﻿describe('brew/BrewStatus', function () {
+    it('needs tests!!!', function () {
 
     });
 });

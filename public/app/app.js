@@ -72,7 +72,7 @@ angular.module('BrewKeeper').config(function ($routeProvider, $locationProvider)
 
     .when('/recipe/view/:id', {
         templateUrl: '/partials/recipe/views/recipe-details', 
-        controller: 'RecipeDetailCtrl'
+        controller: 'ViewRecipeCtrl'
     });
 });
 

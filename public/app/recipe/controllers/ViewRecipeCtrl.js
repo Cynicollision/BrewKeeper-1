@@ -1,4 +1,4 @@
-﻿angular.module('BrewKeeper').controller('RecipeDetailCtrl', function ($scope, $routeParams, Recipe) {
+﻿angular.module('BrewKeeper').controller('ViewRecipeCtrl', function ($scope, $routeParams, Recipe) {
     $scope.getRecipe = function (recipeId) {
         Recipe.getByRecipeId(recipeId).then(function (response) {
             $scope.setCurrentRecipe(response.data);

@@ -1,4 +1,4 @@
-﻿describe('Notifier', function () {
+﻿describe('common/Notifier', function () {
     var Toastr, Notifier;
 
     beforeEach(function () {
