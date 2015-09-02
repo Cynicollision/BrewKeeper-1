@@ -45,7 +45,7 @@
                 angular.extend(updatedUser, updatedUserData);
                 BrewKeeperApi.put('/api/users/', updatedUserData).then(function () {
                     Identity.currentUser = updatedUser;
-                    dfd.resolve();
+                    dfd.resolve(true);
                 }, function (response) {
                     dfd.reject(response.data.reason);
                 });
@@ -59,15 +59,8 @@
                 BrewKeeperApi.post('/logout', {
                     logout: true
                 }).then(function (response) {
-                    if (response.data.success) {
-                        var user = new User();
-                        angular.extend(user, response.data.user);
-                        Identity.currentUser = user;
-                        dfd.resolve(true);
-                    } else {
-                        Identity.currentUser = undefined;
-                        dfd.resolve(false);
-                    }
+                    Identity.currentUser = undefined;
+                    dfd.resolve(true);
                 });
                 
                 return dfd.promise;
