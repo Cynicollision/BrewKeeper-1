@@ -1,7 +1,7 @@
 ﻿describe('brew/BrewListCtrl', function () {
     'use strict';
 
-    var brewListScope, BrewMock, succeedPromise, IdentityMock, 
+    var $scope, BrewMock, succeedPromise, IdentityMock, 
         dummyResponse = {
         data: [
             {
@@ -19,7 +19,7 @@
         IdentityMock = jasmine.createSpyObj('IdentityMock', ['getCurrentUserId']);
         
         inject(function ($rootScope, $controller, $q, Brew) {
-            brewListScope = $rootScope.$new();
+            $scope = $rootScope.$new();
             BrewMock = Brew;
             
             spyOn(BrewMock, 'getByUserId').and.callFake(function () {
@@ -36,7 +36,7 @@
             });
             
             $controller('BrewListCtrl', {
-                $scope: brewListScope,
+                $scope: $scope,
                 $routeParams : {
                     id: 123
                 },
@@ -48,11 +48,15 @@
     
     it('Queries all brews for the given user', function () {
         succeedPromise = true;
-        brewListScope.$digest();
+        $scope.$digest();
         expect(BrewMock.getByUserId).toHaveBeenCalledWith(82589);
+    });
+    
+    it('Defines sort options.', function () {
+        expect($scope.sortOptions).toBeDefined();
     });
 
     it('Sets a default sort order', function () {
-        expect(brewListScope.sortOrder).toBeDefined();
+        expect($scope.sortOrder).toBeDefined();
     });
 });
