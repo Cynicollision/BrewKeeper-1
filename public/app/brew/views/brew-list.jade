@@ -16,6 +16,6 @@
             tr(ng-repeat="brew in brews | orderBy:statusCde")
                 td {{brew.statusCde}}
                 td 
-                    a(href="/brew/{{brew._id}}") {{brew.description}}
+                    a(href="/brew/view/{{brew._id}}") {{brew.description}}
                 td {{brew.createdDate | date:'M/dd/yyyy'}}
                 

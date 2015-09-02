@@ -45,17 +45,17 @@ angular.module('BrewKeeper').config(function ($routeProvider, $locationProvider)
     })
 
     .when('/brew/add', {
-        templateUrl: '/partials/brew/views/add-brew', 
+        templateUrl: '/partials/brew/views/edit-brew', 
         controller: 'AddBrewCtrl'
     })
 
-    .when('/brew/:id', {
+    .when('/brew/view/:id', {
         templateUrl: '/partials/brew/views/view-brew', 
         controller: 'ViewBrewCtrl'
     })
 
     .when('/brew/edit/:id', {
-        templateUrl: '/partials/brew/views/add-brew', 
+        templateUrl: '/partials/brew/views/edit-brew', 
         controller: 'EditBrewCtrl'
     })
 
@@ -71,8 +71,23 @@ angular.module('BrewKeeper').config(function ($routeProvider, $locationProvider)
     })
 
     .when('/recipe/view/:id', {
-        templateUrl: '/partials/recipe/views/recipe-details', 
+        templateUrl: '/partials/recipe/views/view-recipe', 
         controller: 'ViewRecipeCtrl'
+    })
+
+    .when('/recipe/add', {
+        templateUrl: '/partials/recipe/views/edit-recipe', 
+        controller: 'AddRecipeCtrl'
+    })
+
+    .when('/recipe/edit/:id', {
+        templateUrl: '/partials/recipe/views/edit-recipe', 
+        controller: 'EditRecipeCtrl'
+    })
+
+    .when('/recipe/delete/:id', {
+        templateUrl: '/partials/recipe/views/delete-recipe', 
+        controller: 'DeleteRecipeCtrl'
     });
 });
 

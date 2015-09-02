@@ -51,7 +51,7 @@
     
     $scope.submitBrew = function () {
         var newBrewData = $scope.getFormBrewData(),
-            url = '/brew/' + $scope.brewId;
+            url = '/brew/view/' + $scope.brewId;
         
         Brew.update(newBrewData).then(function () {
             Notifier.notify('Brew updated.');

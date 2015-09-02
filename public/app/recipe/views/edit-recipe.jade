@@ -1,0 +1,27 @@
+﻿.container
+    .col-md-2
+    .well.col-md-8
+        form.form-horizontal(name="addRecipeForm")
+            fieldset
+                legend Recipe Information
+                .form-group
+                    label.col-md-4.control-label(for="recipeName") Name
+                    .col-md-6
+                        input.form-control(name="recipeName", type="text", placeholder="Recipe name", ng-model="recipeName", required)
+                .form-group
+                    label.col-md-4.control-label(for="recipeSource") Source
+                    .col-md-6
+                        input.form-control(name="recipeSource", type="text", placeholder="Recipe source", ng-model="recipeSource")
+                .form-group
+                    label.col-md-4.control-label(for="recipeSourceUrl") Source URL
+                    .col-md-6
+                        input.form-control(name="recipeSourceUrl", type="text", placeholder="Recipe source URL", ng-model="recipeSourceUrl")
+                .form-group
+                    label.col-md-4.control-label(for="recipeDescription") Description
+                    .col-md-6
+                        input.form-control(name="recipeDescription", type="text", placeholder="Description", ng-model="recipeDescription")
+                .form-group
+                    .div(style="text-align:center")
+                        button.btn.btn-primary(ng-click="submitRecipe()", ng-disabled="signupForm.$invalid") Save
+                        | &nbsp;
+                        a.btn.btn-default(href="/recipe/") Cancel
