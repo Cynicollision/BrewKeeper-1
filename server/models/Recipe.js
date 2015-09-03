@@ -1,11 +1,10 @@
-﻿var mongoose = require('mongoose');
+﻿var mongoose = require('mongoose'),
+    errRequired = '{PATH} is required!';
 
-var recipeSchema = mongoose.Schema( {
+mongoose.model('Recipe', mongoose.Schema({
     ownerId: { type: String, required: '{PATH} is required!' },
     name: { type: String, required: '{PATH} is required!' },
     sourceName: String,
     sourceUrl: String,
-    tags: [String]
-});
-
-var Recipe = mongoose.model('Recipe', recipeSchema);
+    description: String
+}));

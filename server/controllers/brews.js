@@ -21,20 +21,30 @@ exports.getBrewById = function (req, res) {
 };
 
 exports.saveNewBrew = function (req, res) {
-    var brewData = req.body;
+    var currentUserId,
+        brewData = req.body;
     
-    brewData.createdDate = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-
-    // TODO: verify sent ownerId === req.user._id.toString()
-    // rename to saveNewBrew
+    // verify user is logged in as who they say they are
+    if (!!req.user) {
+        currentUserId = req.user._id.toString();
+    }
     
-    Brew.create(brewData, function (err) {
-        if (err) {
-            res.send({ reason: err.toString() });
-        }
+    if (currentUserId === brewData.ownerId) {
+        // TODO: is created date necessary?
+        brewData.createdDate = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+        
+        Brew.create(brewData, function (err) {
+            if (err) {
+                res.send({ reason: err.toString() });
+            }
+            
+            res.send(200);
+        });
+    } else {
+        res.send(403, 'Not authorized');
+    }
 
-        res.send(200);
-    });
+    
 };
 
 exports.updateBrew = function (req, res) {
@@ -67,7 +77,7 @@ exports.updateBrew = function (req, res) {
                 }
             });
         } else {
-            res.send(403, "Not authorized");
+            res.send(403, 'Not authorized');
         }
     });
 };
@@ -90,8 +100,7 @@ exports.deleteBrew = function (req, res) {
                 res.send(200);
             });
         } else {
-            res.send(403, "Not authorized");
+            res.send(403, 'Not authorized');
         }
     });
-
 };

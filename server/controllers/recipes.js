@@ -21,17 +21,23 @@ exports.getRecipesByUserId = function (req, res) {
 };
 
 exports.saveNewRecipe = function (req, res) {
-    var recipeData = req.body;
+    var currentUserId,
+        recipeData = req.body;
     
-    // TODO: verify sent ownerId === req.user._id.toString()
-    // DEBUG ONLY
-    recipeData.ownerId = req.user._id.toString();
+    // verify user is logged in as who they say they are
+    if (!!req.user) {
+        currentUserId = req.user._id.toString();
+    }
     
-    Recipe.create(recipeData, function (err) {
-        if (err) {
-            res.send({ reason: err.toString() });
-        }
-        
-        res.send(200);
-    });
+    if (currentUserId === recipeData.ownerId) {
+        Recipe.create(recipeData, function (err) {
+            if (err) {
+                res.send({ reason: err.toString() });
+            }
+            
+            res.send(200, { success: true });
+        });
+    } else {
+        res.send(403, 'Not authorized');
+    }
 };

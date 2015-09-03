@@ -2,6 +2,6 @@
     h1 {{recipe.name}}
         .row
             .col-md-12
-                h3 Type: {{ recipe.type }}
+                h3 Type: {{ recipe.description }}
                 h4 Source: 
-                    a(href="{{ recipe.sourceUrl }} ") {{ recipe.source }}
+                    a(href="{{ recipe.sourceUrl }} ") {{ recipe.sourceName }}
