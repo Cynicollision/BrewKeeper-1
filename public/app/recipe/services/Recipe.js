@@ -9,7 +9,7 @@
         getAll: function () {
             var dfd = $q.defer();
             
-            BrewKeeperApi.get('/api/recipes/').then(function (response) {
+            BrewKeeperApi.get('/api/recipe/').then(function (response) {
                 dfd.resolve(response);
             }, function (response) {
                 dfd.reject(response.data.reason);
@@ -20,7 +20,7 @@
 
         getByUserId: function (userId) {
             var dfd = $q.defer(),
-                url = '/api/recipes/user/' + userId;
+                url = '/api/recipe/user/' + userId;
             
             BrewKeeperApi.get(url).then(function (response) {
                 dfd.resolve(response);
@@ -33,7 +33,7 @@
 
         getByRecipeId: function (recipeId) {
             var dfd = $q.defer(),
-                url = '/api/recipes/' + recipeId;
+                url = '/api/recipe/' + recipeId;
             
             BrewKeeperApi.get(url).then(function (response) {
                 dfd.resolve(response);
@@ -47,7 +47,7 @@
         save: function (newRecipeData) {
             var dfd = $q.defer();
             
-            BrewKeeperApi.post('/api/recipes/', newRecipeData).then(function (response) {
+            BrewKeeperApi.post('/api/recipe/', newRecipeData).then(function (response) {
                 dfd.resolve(response);
             }, function (response) {
                 dfd.reject(response.data.reason);
@@ -59,7 +59,7 @@
         update: function (updatedRecipeData) {
             var dfd = $q.defer();
 
-            BrewKeeperApi.put('/api/recipes/', updatedRecipeData).then(function (response) {
+            BrewKeeperApi.put('/api/recipe/', updatedRecipeData).then(function (response) {
                 dfd.resolve(response);
             }, function (response) {
                 dfd.reject(response.data.reason);

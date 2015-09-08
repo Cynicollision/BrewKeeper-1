@@ -42,13 +42,13 @@
         it('Can retrieve all brews.', function () {
             var result;
             
-            httpBackend.expectGET('/api/brews/').respond(successResponse);
+            httpBackend.expectGET('/api/brew/').respond(successResponse);
             Brew.getAll().then(function (response) {
                 result = response.data;
             });
             httpBackend.flush();
             
-            expect(BrewKeeperApi.get).toHaveBeenCalledWith('/api/brews/');
+            expect(BrewKeeperApi.get).toHaveBeenCalledWith('/api/brew/');
             expect(result).toEqual(successResponse);
         });
         
@@ -56,14 +56,14 @@
             var result, 
                 mockUserId = 6724;
             
-            httpBackend.expectGET('/api/brews/user/' + mockUserId).respond(successResponse);
+            httpBackend.expectGET('/api/brew/user/' + mockUserId).respond(successResponse);
 
             Brew.getByUserId(mockUserId).then(function (response) {
                 result = response.data;
             });
             httpBackend.flush();
             
-            expect(BrewKeeperApi.get).toHaveBeenCalledWith('/api/brews/user/' + mockUserId);
+            expect(BrewKeeperApi.get).toHaveBeenCalledWith('/api/brew/user/' + mockUserId);
             expect(result).toEqual(successResponse);
         });
         
@@ -71,14 +71,14 @@
             var result, 
                 mockBrewId = 98783;
             
-            httpBackend.expectGET('/api/brews/' + mockBrewId).respond(successResponse);
+            httpBackend.expectGET('/api/brew/' + mockBrewId).respond(successResponse);
             
             Brew.getByBrewId(mockBrewId).then(function (response) {
                 result = response.data;
             });
             httpBackend.flush();
             
-            expect(BrewKeeperApi.get).toHaveBeenCalledWith('/api/brews/' + mockBrewId);
+            expect(BrewKeeperApi.get).toHaveBeenCalledWith('/api/brew/' + mockBrewId);
             expect(result).toEqual(successResponse);
         });
         
@@ -90,13 +90,13 @@
                 name: 'MockBrew'
             };
             
-            httpBackend.expectPOST('/api/brews/').respond(200);
+            httpBackend.expectPOST('/api/brew/').respond(200);
             Brew.save(mockNewBrewData).then(function () {
                 success = true;
             });
             httpBackend.flush();
             
-            expect(BrewKeeperApi.post).toHaveBeenCalledWith('/api/brews/', mockNewBrewData);
+            expect(BrewKeeperApi.post).toHaveBeenCalledWith('/api/brew/', mockNewBrewData);
             expect(success).toBeTruthy();
         });
         
@@ -109,13 +109,13 @@
                 name: 'updatedBrewName'
             };
             
-            httpBackend.expectPUT('/api/brews/').respond(successResponse);
+            httpBackend.expectPUT('/api/brew/').respond(successResponse);
             Brew.update(mockUpdatedBrewData).then(function (response) {
                 result = response.data;
             });
             httpBackend.flush();
             
-            expect(BrewKeeperApi.put).toHaveBeenCalledWith('/api/brews/', mockUpdatedBrewData);
+            expect(BrewKeeperApi.put).toHaveBeenCalledWith('/api/brew/', mockUpdatedBrewData);
             expect(result).toEqual(successResponse);
         });
         
@@ -123,13 +123,13 @@
             var result, 
                 mockBrewId = 45343;
             
-            httpBackend.expectDELETE('/api/brews/' + mockBrewId).respond(successResponse);
+            httpBackend.expectDELETE('/api/brew/' + mockBrewId).respond(successResponse);
             Brew.delete(mockBrewId).then(function (response) {
                 result = response.data;
             });
             httpBackend.flush();
             
-            expect(BrewKeeperApi.delete).toHaveBeenCalledWith('/api/brews/' + mockBrewId);
+            expect(BrewKeeperApi.delete).toHaveBeenCalledWith('/api/brew/' + mockBrewId);
             expect(result).toEqual(successResponse);
         });
     });

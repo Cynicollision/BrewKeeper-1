@@ -1,7 +1,7 @@
 ﻿var auth = require('./auth'),
     users = require('../controllers/users'),
-    brews = require('../controllers/brews'),
-    recipes = require('../controllers/recipes');
+    brew = require('../controllers/brews'),
+    recipe = require('../controllers/recipes');
 
 module.exports = function (app) {
     // user stuff
@@ -15,19 +15,19 @@ module.exports = function (app) {
     });
     
     // brews
-    app.get('/api/brews', brews.getAllBrews); // TODO: maybe require admin role "all" retrieval?
-    app.get('/api/brews/:id', brews.getBrewById);
-    app.get('/api/brews/user/:id', brews.getBrewsByUserId);
-    app.post('/api/brews', brews.saveNewBrew);
-    app.put('/api/brews', brews.updateBrew);
-    app.delete('/api/brews/:id', brews.deleteBrew);
+    app.get('/api/brew', brew.getAllBrews); // TODO: maybe require admin role "all" retrieval?
+    app.get('/api/brew/:id', brew.getBrewById);
+    app.get('/api/brew/user/:id', brew.getBrewsByUserId);
+    app.post('/api/brew', brew.saveNewBrew);
+    app.put('/api/brew', brew.updateBrew);
+    app.delete('/api/brew/:id', brew.deleteBrew);
     
     // recipes
-    app.get('/api/recipes', recipes.getRecipes); // TODO: maybe require admin role for "all" retrieval?
-    app.get('/api/recipes/:id', recipes.getRecipeById);
-    app.get('/api/recipes/user/:id', recipes.getRecipesByUserId);
-    app.post('/api/recipes', recipes.saveNewRecipe);
-    app.put('/api/recipes', recipes.updateRecipe);
+    app.get('/api/recipe', recipe.getRecipes); // TODO: maybe require admin role for "all" retrieval?
+    app.get('/api/recipe/:id', recipe.getRecipeById);
+    app.get('/api/recipe/user/:id', recipe.getRecipesByUserId);
+    app.post('/api/recipe', recipe.saveNewRecipe);
+    app.put('/api/recipe', recipe.updateRecipe);
     
     // views
     app.get('/partials/*', function (req, res) {

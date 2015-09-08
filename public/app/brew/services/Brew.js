@@ -14,7 +14,7 @@
             getAll: function () {
                 var dfd = $q.defer();
                 
-                BrewKeeperApi.get('/api/brews/').then(function (response) {
+                BrewKeeperApi.get('/api/brew/').then(function (response) {
                     dfd.resolve(response);
                 }, function (response) {
                     dfd.reject(response.data.reason);
@@ -25,7 +25,7 @@
             
             getByUserId: function (userId) {
                 var dfd = $q.defer(),
-                    url = '/api/brews/user/' + userId;
+                    url = '/api/brew/user/' + userId;
                 
                 BrewKeeperApi.get(url).then(function (response) {
                     dfd.resolve(response);
@@ -38,7 +38,7 @@
             
             getByBrewId: function (brewId) {
                 var dfd = $q.defer(),
-                    url = '/api/brews/' + brewId;
+                    url = '/api/brew/' + brewId;
                 
                 BrewKeeperApi.get(url).then(function (response) {
                     dfd.resolve(response);
@@ -52,7 +52,7 @@
             save: function (newBrewData) {
                 var dfd = $q.defer();
                 
-                BrewKeeperApi.post('/api/brews/', newBrewData).then(function (response) {
+                BrewKeeperApi.post('/api/brew/', newBrewData).then(function (response) {
                     dfd.resolve(response);
                 }, function (response) {
                     dfd.reject(response.data.reason);
@@ -64,7 +64,7 @@
             update: function (updatedBrewData) {
                 var dfd = $q.defer();
                 
-                BrewKeeperApi.put('/api/brews/', updatedBrewData).then(function (response) {
+                BrewKeeperApi.put('/api/brew/', updatedBrewData).then(function (response) {
                     dfd.resolve(response);
                 }, function (response) {
                     dfd.reject(response.data.reason);
@@ -75,7 +75,7 @@
             
             delete: function (brewId) {
                 var dfd = $q.defer(),
-                    url = '/api/brews/' + brewId;
+                    url = '/api/brew/' + brewId;
                 
                 BrewKeeperApi.delete(url).then(function (response) {
                     dfd.resolve(response);
