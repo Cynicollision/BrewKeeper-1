@@ -11,7 +11,11 @@
     
     exports.getRecipeById = function (req, res) {
         Recipe.findOne({ _id: req.params.id }).exec(function (err, recipe) {
-            res.send(recipe);
+            if (recipe) {
+                res.send(recipe);
+            } else {
+                res.send(404, { reason: 'Invalid recipe ID given.' });
+            }
         });
     };
     
@@ -24,7 +28,7 @@
     };
     
     exports.saveNewRecipe = function (req, res) {
-        var currentUserId,
+        var currentUserId, queryForExisting,
             recipeData = req.body;
         
         // verify user is logged in as who they say they are
@@ -32,17 +36,29 @@
             currentUserId = req.user._id.toString();
         }
         
-        if (currentUserId === recipeData.ownerId) {
-            Recipe.create(recipeData, function (err) {
-                if (err) {
-                    res.send({ reason: err.toString() });
+        // verify this user doesn't have a recipe with the given name already
+        queryForExisting = {
+            ownerId: recipeData.ownerId,
+            name: recipeData.name
+        };
+        
+        Recipe.find(queryForExisting).exec(function (err, collection) {
+            if (collection && collection.length === 0) {
+                if (currentUserId === recipeData.ownerId) {
+                    Recipe.create(recipeData, function (err) {
+                        if (err) {
+                            res.send({ reason: err.toString() });
+                        }
+                        
+                        res.send(200);
+                    });
+                } else {
+                    res.send(403, { reason: 'Not authorized' });
                 }
-                
-                res.send(200, { success: true });
-            });
-        } else {
-            res.send(403, 'Not authorized');
-        }
+            } else {
+                res.send(500, { reason: 'A recipe with that name already exists!' });
+            }
+        });
     };
     
     exports.updateRecipe = function (req, res) {

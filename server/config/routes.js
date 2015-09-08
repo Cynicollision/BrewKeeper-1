@@ -1,7 +1,7 @@
 ﻿var auth = require('./auth'),
-    users = require('../controllers/users'),
-    brew = require('../controllers/brews'),
-    recipe = require('../controllers/recipes');
+    users = require('../controllers/user'),
+    brew = require('../controllers/brew'),
+    recipe = require('../controllers/recipe');
 
 module.exports = function (app) {
     // user stuff

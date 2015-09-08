@@ -83,9 +83,9 @@
     <Compile Include="server\config\mongoose.js" />
     <Compile Include="server\config\passport.js" />
     <Compile Include="server\config\routes.js" />
-    <Compile Include="server\controllers\brews.js" />
-    <Compile Include="server\controllers\recipes.js" />
-    <Compile Include="server\controllers\users.js" />
+    <Compile Include="server\controllers\brew.js" />
+    <Compile Include="server\controllers\recipe.js" />
+    <Compile Include="server\controllers\user.js" />
     <Compile Include="server\models\Brew.js" />
     <Compile Include="server\models\Recipe.js" />
     <Compile Include="server\models\User.js" />

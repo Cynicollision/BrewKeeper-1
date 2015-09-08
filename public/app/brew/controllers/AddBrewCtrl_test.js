@@ -2,17 +2,20 @@
     'use strict';
     
     describe('brew/AddBrewCtrl', function () {
-        var $scope, BrewMock, IdentityMock;
+        var $scope, BrewMock, IdentityMock, location;
         
         beforeEach(function () {
             module('BrewKeeper');
             BrewMock = jasmine.createSpyObj('Brew', ['save']);
             IdentityMock = jasmine.createSpyObj('Identity', ['getCurrentUserId']);
             
-            inject(function ($rootScope, $controller, $q) {
+            inject(function ($rootScope, $controller, $location, $q) {
                 $scope = $rootScope.$new();
+                location = $location;
+
                 $controller('AddBrewCtrl', {
                     $scope: $scope,
+                    $location: $location,
                     Brew: BrewMock,
                     Identity: IdentityMock
                 });
@@ -57,6 +60,11 @@
                 { id: 2, label: 'complete' }];
             $scope.setDefaultControlValues();
             expect($scope.brewStatusCde).toEqual($scope.statuses[0]);
+        });
+
+        it('Redirects to /brew after saving a new brew.', function () {
+            $scope.successRedirect();
+            expect(location.path()).toEqual('/brew');
         });
     });
 })();

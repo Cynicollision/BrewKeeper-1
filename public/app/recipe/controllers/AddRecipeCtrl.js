@@ -15,11 +15,7 @@
         $scope.submitRecipe = function () {
             var newRecipeData = $scope.getFormRecipeData();
             Recipe.save(newRecipeData).then(function (response) {
-                if (response.data.success) {
-                    $scope.successRedirect();
-                } else {
-                    Notifier.error(response.data.reason);
-                }
+                $scope.successRedirect();
             }, function (reason) {
                 Notifier.error(reason);
             });

@@ -27,12 +27,7 @@
         $scope.submitBrew = function () {
             var newBrewData = $scope.getFormBrewData();
             Brew.save(newBrewData).then(function (response) {
-                if (!response.data.reason) {
-                    Notifier.notify('Brew added!');
-                    $location.path('/brew');
-                } else {
-                    Notifier.error(response.data.reason);
-                }
+                $scope.successRedirect();
             }, function (reason) {
                 Notifier.error(reason);
             });
@@ -42,6 +37,11 @@
             if (!!$scope.statuses) {
                 $scope.brewStatusCde = $scope.statuses[0];
             }
+        };
+        
+        $scope.successRedirect = function () {
+            Notifier.notify('Brew added!');
+            $location.path('/brew');
         };
         
         // initialze

@@ -3,7 +3,6 @@
 
 mongoose.model('Brew', mongoose.Schema({
     batchSize: { type: Number, required: errRequired },
-    createdDate: { type: Date, required: errRequired },
     ownerId: { type: String, required: errRequired },
     statusCde: { type: Number, required: errRequired },
     description: String,

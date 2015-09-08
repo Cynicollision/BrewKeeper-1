@@ -1,13 +1,16 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('BrewKeeper').controller('ViewBrewCtrl', function ($scope, $routeParams, $timeout, $window, Brew, BrewStatus) {
+    angular.module('BrewKeeper').controller('ViewBrewCtrl', function ($scope, $routeParams, $location, $window, Brew, BrewStatus, Notifier) {
         $scope.statusLookup = BrewStatus;
         $scope.brewSvc = Brew;
         
         $scope.getBrew = function (brewId) {
             Brew.getByBrewId(brewId).then(function (response) {
                 $scope.setCurrentBrew(response.data);
+            }, function (response) {
+                Notifier.error(response);
+                $location.path('/brew');
             });
         };
         

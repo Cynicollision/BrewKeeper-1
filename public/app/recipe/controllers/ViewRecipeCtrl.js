@@ -1,9 +1,12 @@
-﻿angular.module('BrewKeeper').controller('ViewRecipeCtrl', function ($scope, $routeParams, $window, Recipe) {
+﻿angular.module('BrewKeeper').controller('ViewRecipeCtrl', function ($scope, $routeParams, $location, $window, Recipe, Notifier) {
     $scope.recipeSvc = Recipe;
 
     $scope.getRecipe = function (recipeId) {
         Recipe.getByRecipeId(recipeId).then(function (response) {
             $scope.setCurrentRecipe(response.data);
+        }, function (reason) {
+            Notifier.error(reason);
+            $location.path('/recipe');
         });
     };
     
