@@ -27,6 +27,7 @@ module.exports = function (app) {
     app.get('/api/recipes/:id', recipes.getRecipeById);
     app.get('/api/recipes/user/:id', recipes.getRecipesByUserId);
     app.post('/api/recipes', recipes.saveNewRecipe);
+    app.put('/api/recipes', recipes.updateRecipe);
     
     // views
     app.get('/partials/*', function (req, res) {

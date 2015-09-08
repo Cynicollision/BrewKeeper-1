@@ -1,7 +1,21 @@
 ﻿.container
-    h1 {{recipe.name}}
-        .row
-            .col-md-12
-                h3 Type: {{ recipe.description }}
-                h4 Source: 
-                    a(href="{{ recipe.sourceUrl }} ") {{ recipe.sourceName }}
+    h1 Recipe Details
+    .row
+        .col-md-8  
+            table.table.table-bordered
+                tbody
+                    tr
+                        td Name
+                        td {{ recipe.name }}
+                    tr
+                        td Source
+                        td 
+                            a(href="{{ recipe.sourceUrl }} ") {{ recipe.sourceName }}
+                    tr
+                        td Description
+                        td {{ recipe.description }}
+                
+        .col-md-4
+            .btn-group
+                .btn.btn-default(ng-click="doEdit()" ng-show="recipeSvc.isRecipeOwnedByCurrentUser(recipe)") Edit
+                .btn.btn-danger(ng-click="doDelete()" ng-show="recipeSvc.isRecipeOwnedByCurrentUser(recipe)") Delete  

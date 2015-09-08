@@ -1,5 +1,11 @@
-﻿angular.module('BrewKeeper').factory('Recipe', function ($q, BrewKeeperApi) {
+﻿angular.module('BrewKeeper').factory('Recipe', function ($q, BrewKeeperApi, Identity) {
     return {
+        isRecipeOwnedByCurrentUser: function (recipe) {
+            if (recipe) {
+                return (Identity.getCurrentUserId() === recipe.ownerId);
+            }
+        },
+
         getAll: function () {
             var dfd = $q.defer();
             
@@ -49,5 +55,17 @@
             
             return dfd.promise;
         },
+
+        update: function (updatedRecipeData) {
+            var dfd = $q.defer();
+
+            BrewKeeperApi.put('/api/recipes/', updatedRecipeData).then(function (response) {
+                dfd.resolve(response);
+            }, function (response) {
+                dfd.reject(response.data.reason);
+            });
+
+            return dfd.promise;
+        }
     };
 });

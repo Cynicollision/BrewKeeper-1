@@ -67,7 +67,7 @@ exports.updateBrew = function (req, res) {
         currentUserId = req.user._id.toString();
     }
     
-    Brew.findOne({ _id: brewUpdates.id }).exec(function (err, brew) {
+    Brew.findOne(query).exec(function (err, brew) {
         if (!!brew && brew.ownerId === currentUserId) {
             Brew.update(query, update, options, function (err) {
                 if (err) {

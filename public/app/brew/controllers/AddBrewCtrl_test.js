@@ -2,7 +2,7 @@
     'use strict';
     
     describe('brew/AddBrewCtrl', function () {
-        var $scope, dfd, ctrl, $timeout, BrewMock, IdentityMock;
+        var $scope, BrewMock, IdentityMock;
         
         beforeEach(function () {
             module('BrewKeeper');
@@ -11,7 +11,7 @@
             
             inject(function ($rootScope, $controller, $q) {
                 $scope = $rootScope.$new();
-                ctrl = $controller('AddBrewCtrl', {
+                $controller('AddBrewCtrl', {
                     $scope: $scope,
                     Brew: BrewMock,
                     Identity: IdentityMock
@@ -20,7 +20,7 @@
                 IdentityMock.getCurrentUserId.and.returnValue(82589);
                 
                 BrewMock.save.and.callFake(function () {
-                    dfd = $q.defer();
+                    var dfd = $q.defer();
                     dfd.resolve({ success: true });
                     return dfd.promise;
                 });

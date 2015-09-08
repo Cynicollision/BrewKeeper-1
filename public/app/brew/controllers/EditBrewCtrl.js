@@ -53,10 +53,10 @@
         };
         
         $scope.submitBrew = function () {
-            var newBrewData = $scope.getFormBrewData(),
+            var updatedBrewData = $scope.getFormBrewData(),
                 url = '/brew/view/' + $scope.brewId;
             
-            Brew.update(newBrewData).then(function () {
+            Brew.update(updatedBrewData).then(function () {
                 Notifier.notify('Brew updated.');
                 $location.path(url);
             }, function (reason) {

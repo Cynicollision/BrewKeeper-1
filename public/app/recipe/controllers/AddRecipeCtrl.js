@@ -7,7 +7,7 @@
                 ownerId: Identity.getCurrentUserId(),
                 name: $scope.recipeName,
                 description: $scope.recipeDescription,
-                sourceName: $scope.recipeSource,
+                sourceName: $scope.recipeSourceName,
                 sourceUrl: $scope.recipeSourceUrl
             };
         };
@@ -16,14 +16,18 @@
             var newRecipeData = $scope.getFormRecipeData();
             Recipe.save(newRecipeData).then(function (response) {
                 if (response.data.success) {
-                    Notifier.notify('Recipe added!');
-                    $location.path('/recipe');
+                    $scope.successRedirect();
                 } else {
                     Notifier.error(response.data.reason);
                 }
             }, function (reason) {
                 Notifier.error(reason);
             });
+        };
+
+        $scope.successRedirect = function () {
+            Notifier.notify('Recipe added!');
+            $location.path('/recipe');
         };
     });
 })();

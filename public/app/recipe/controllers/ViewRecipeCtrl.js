@@ -1,4 +1,6 @@
-﻿angular.module('BrewKeeper').controller('ViewRecipeCtrl', function ($scope, $routeParams, Recipe) {
+﻿angular.module('BrewKeeper').controller('ViewRecipeCtrl', function ($scope, $routeParams, $window, Recipe) {
+    $scope.recipeSvc = Recipe;
+
     $scope.getRecipe = function (recipeId) {
         Recipe.getByRecipeId(recipeId).then(function (response) {
             $scope.setCurrentRecipe(response.data);
@@ -9,8 +11,12 @@
         $scope.recipe = recipe;
     };
 
-    $scope.isRecipeOwner = function () {
-        return (!!$scope.recipe && Identity.getCurrentUserId() === $scope.recipe.ownerId);
+    $scope.doEdit = function () {
+        $window.location = '/recipe/edit/' + $scope.recipe._id;
+    };
+    
+    $scope.doDelete = function () {
+        $window.location = '/recipe/delete/' + $scope.recipe._id;
     };
 
     // initialize
