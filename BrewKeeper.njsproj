@@ -71,7 +71,6 @@
     <Compile Include="public\app\recipe\controllers\EditRecipeCtrl_test.js" />
     <Compile Include="public\app\recipe\controllers\RecipeListCtrl_test.js" />
     <Compile Include="public\app\recipe\controllers\ViewRecipeCtrl_test.js" />
-    <Compile Include="public\app\recipe\services\CachedRecipes.js" />
     <Compile Include="public\app\recipe\services\Recipe.js" />
     <Compile Include="public\app\recipe\controllers\ViewRecipeCtrl.js" />
     <Compile Include="public\app\recipe\controllers\RecipeListCtrl.js" />
@@ -102,6 +101,7 @@
     <Content Include="public\app\main\views\main.jade" />
     <Content Include="public\app\main\views\overview.jade" />
     <Content Include="public\app\main\views\welcome-login.jade" />
+    <Content Include="public\app\recipe\views\delete-recipe.jade" />
     <Content Include="public\app\recipe\views\edit-recipe.jade" />
     <Content Include="public\app\recipe\views\view-recipe.jade" />
     <Content Include="public\app\recipe\views\recipe-list.jade" />

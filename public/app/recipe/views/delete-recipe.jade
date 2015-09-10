@@ -1,0 +1,12 @@
+﻿.container
+    .col-md-3
+    .col-md-6
+        .panel.panel-primary
+            .panel-heading.text-center Confirm Delete: {{ recipe.name }}
+            .panel-body.text-center
+                .row Are you sure you want to delete this recipe?
+                .row &nbsp;
+                .row 
+                    .btn.btn-danger(ng-click="onConfirmDelete()") Delete  
+                    &nbsp;
+                    .btn.btn-default(ng-click="onCancelDelete()") Cancel

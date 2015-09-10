@@ -66,6 +66,19 @@
             });
 
             return dfd.promise;
+        },
+
+        delete: function (recipeId) {
+            var dfd = $q.defer(),
+                url = '/api/recipe/' + recipeId;
+
+            BrewKeeperApi.delete(url).then(function (response) {
+                dfd.resolve(response);
+            }, function (reason) {
+                dfd.reject(reason);
+            });
+
+            return dfd.promise;
         }
     };
 });

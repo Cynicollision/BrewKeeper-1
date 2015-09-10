@@ -31,7 +31,7 @@
         var currentUserId, queryForExisting,
             recipeData = req.body;
         
-        // verify user is logged in as who they say they are
+        // verify user is logged in as the recipe's owner
         if (!!req.user) {
             currentUserId = req.user._id.toString();
         }
@@ -91,5 +91,10 @@
                 res.send(403, 'Not authorized');
             }
         });
+    };
+
+    exports.deleteRecipe = function (req, res) {
+        // TODO!
+        
     };
 })();

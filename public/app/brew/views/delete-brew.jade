@@ -2,11 +2,6 @@
     h1 {{brew.name}}
         .row
             .col-md-6
-                span
+                p
                     Are you sure you wanna delete this brew?
                     a(href="" ng-click="onConfirmDelete()") Delete It!
-            .col-md-6
-                .panel.panel-primary
-                    .panel-heading Tags
-                    .panel-body
-                        div(ng-repeat="tag in brew.tags") {{ tag }}
