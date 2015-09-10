@@ -94,7 +94,26 @@
     };
 
     exports.deleteRecipe = function (req, res) {
-        // TODO!
-        
+        var currentUserId,
+            deleteRecipeId = req.params.id,
+            query = { _id: deleteRecipeId };
+
+        if (!!req.user) {
+            currentUserId = req.user._id.toString();
+        }
+
+        Recipe.findOne(query).exec(function (err, recipe) {
+            if (!!recipe && recipe.ownerId === currentUserId) {
+                Recipe.remove(query, function (err) {
+                    if (err) {
+                        res.send({ reason: err.toString() });
+                    }
+
+                    res.send(200);
+                });
+            } else {
+                res.send(403, 'Not authorized');
+            }
+        });
     };
 })();

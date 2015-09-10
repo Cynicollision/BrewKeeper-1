@@ -86,15 +86,16 @@
     
     exports.deleteBrew = function (req, res) {
         var currentUserId, 
-            deleteBrewId = req.params.id;
+            deleteBrewId = req.params.id,
+            query = { _id: deleteBrewId };
         
         if (!!req.user) {
             currentUserId = req.user._id.toString();
         }
         
-        Brew.findOne({ _id: deleteBrewId }).exec(function (err, brew) {
+        Brew.findOne(query).exec(function (err, brew) {
             if (!!brew && brew.ownerId === currentUserId) {
-                Brew.remove({ _id: deleteBrewId }, function (err) {
+                Brew.remove(query, function (err) {
                     if (err) {
                         res.send({ reason: err.toString() });
                     }
