@@ -9,13 +9,15 @@
     table.table.table-hover.table-striped.table-condensed
         thead
             tr
-                th Status
-                th Description
-                th Created
+                th.col-md-3 Recipe
+                th.col-md-3 Status
+                th.col-md-4 Description
+                th.col-md-2 Created
         tbody
             tr(ng-repeat="brew in brews | orderBy:statusCde")
-                td {{brew.statusCde}}
                 td 
-                    a(href="/brew/view/{{brew._id}}") {{brew.description}}
+                    a(href="/brew/view/{{brew._id}}") {{recipeNames[brew.recipeId]}}
+                td {{brew.statusCde}}
+                td {{brew.description}}
                 td {{brew.createdDate | date:'M/dd/yyyy'}}
                 

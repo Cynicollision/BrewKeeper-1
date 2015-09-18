@@ -11,7 +11,6 @@
     
     exports.getBrewsByUserId = function (req, res) {
         var userId = req.params.id;
-        
         Brew.find({ ownerId: userId }).exec(function (err, collection) {
             res.send(collection);
         });
@@ -27,6 +26,22 @@
         });
     };
     
+    // doing it wrong: why do these undefined values come in as strings?
+    function sanitizeUndefinedBrewValues(brew) {
+        if (brew.brewDate === 'undefined') {
+            brew.brewDate = undefined;
+        }
+        if (brew.bottleDate === 'undefined') {
+            brew.bottleDate = undefined;
+        }
+        if (brew.chillDate === 'undefined') {
+            brew.chillDate = undefined;
+        }
+        if (brew.description === 'undefined') {
+            brew.description = '';
+        }
+    }
+    
     exports.saveNewBrew = function (req, res) {
         var currentUserId,
             brewData = req.body;
@@ -36,13 +51,15 @@
             currentUserId = req.user._id.toString();
         }
         
+        sanitizeUndefinedBrewValues(brewData);
+
         if (currentUserId === brewData.ownerId) {
             Brew.create(brewData, function (err) {
                 if (err) {
-                    res.send({ reason: err.toString() });
+                    res.send(500, { reason: err.toString() });
+                } else {
+                    res.send(200);
                 }
-                
-                res.send(200);
             });
         } else {
             res.send(403, { reason: 'Not authorized' });

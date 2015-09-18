@@ -37,6 +37,8 @@
             if (!!$scope.statuses) {
                 $scope.brewStatusCde = $scope.statuses[0];
             }
+
+            $scope.brewBatchSize = 1;
         };
         
         $scope.successRedirect = function () {
