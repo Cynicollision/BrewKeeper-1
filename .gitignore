@@ -4,6 +4,5 @@ node_modules
 .grunt
 
 # will need to include this when deploying
-public/vendor
 .ntvs_analysis.dat
 .vs/config/applicationhost.config
