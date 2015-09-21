@@ -11,11 +11,11 @@
                 .form-group
                     label.col-md-4.control-label(for="brewBatchSize") Batch size (gallons)
                     .col-md-4
-                        input.form-control(name="brewBatchSize", type="number", min=1, max=999, maxlength=3, ng-model="brewBatchSize", required)
+                        input.form-control(type="number", name="brewBatchSize", ng-model="brewBatchSize", min=1, max=999, maxlength=3, required)
                 .form-group
                     label.col-md-4.control-label(for="brewDescription") Description
                     .col-md-6
-                        input.form-control(name="brewDescription", type="text", placeholder="Brew details", ng-model="brewDescription")
+                        input.form-control(type="text", name="brewDescription", ng-model="brewDescription", placeholder="Brew details")
                 .form-group
                     label.col-md-4.control-label(for="brewStatusCde") Status
                     .col-md-6
@@ -23,15 +23,15 @@
                 .form-group
                     label.col-md-4.control-label(for="brewBrewDate") Brew date
                     .col-md-6
-                        input.form-control(name="brewBrewDate", type="text", placeholder="In the jug", ng-model="brewBrewDate")
+                        input.datepicker.add-on.form-control(type='text', name="brewBrewDate", ng-model="brewBrewDate", placeholder="In the jug")
                 .form-group
                     label.col-md-4.control-label(for="brewBottleDate") Bottle date
                     .col-md-6
-                        input.form-control(name="brewBottleDate", type="text", placeholder="In the bottles", ng-model="brewBottleDate")
+                        input.datepicker.add-on.form-control(type="text", name="brewBottleDate", ng-model="brewBottleDate", placeholder="In the bottles")
                 .form-group
                     label.col-md-4.control-label(for="brewChillDate") Chill date
                     .col-md-6
-                        input.form-control(name="brewChillDate", type="text", placeholder="In the fridge", ng-model="brewChillDate")
+                        input.datepicker.add-on.form-control(type="text", name="brewChillDate", ng-model="brewChillDate", placeholder="In the fridge")
                 .form-group
                     .div(style="text-align:center")
                         button.btn.btn-primary(ng-click="submitBrew()", ng-disabled="signupForm.$invalid") Save

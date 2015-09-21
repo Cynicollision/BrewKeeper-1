@@ -50,5 +50,10 @@
         $scope.statuses = BrewStatus.getStatuses();
         $scope.getCurrentUserRecipes();
         $scope.setDefaultControlValues();
+
+        $('.datepicker').datepicker({
+            format: "mm/dd/yyyy",
+            autoclose: true
+        });
     });
 })();
