@@ -44,8 +44,19 @@
         });
 
         it('Uses the Auth service to create a user', function () {
+            $scope.username = 'testUsername';
+            $scope.password = 'five';
+            $scope.firstName = 'firstie';
+            $scope.lastName = 'zzzz';
+
             $scope.signup();
-            expect(Auth.createUser).toHaveBeenCalled();
+            console.log('TODO here');
+            expect(Auth.createUser).toHaveBeenCalledWith({
+                username: 'testUsername',
+                password: 'five',
+                firstName: 'firstie',
+                lastName: 'zzzz'
+            });
         });
 
         it('Shows a success message and redirects to index after creating an account.', function () {

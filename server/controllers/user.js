@@ -29,7 +29,8 @@
                 if (err) {
                     return next(err);
                 }
-                res.send(user);
+                var newUserId = user._id.toString();
+                res.send(200);
             });
         });
     };

@@ -30,7 +30,7 @@
                 
                 BrewKeeperApi.post('/api/users/', newUserData).then(function () {
                     Identity.currentUser = newUser;
-                    dfd.resolve(true);
+                    dfd.resolve(newUser);
                 }, function (response) {
                     dfd.reject(response.data.reason);
                 });

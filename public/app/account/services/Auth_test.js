@@ -55,6 +55,7 @@
 
         it('Creates a new user account with the given user data.', function () {
             var result,
+                mockUserResourceInstance,
                 mockSignupData = {
                     username: 'yoozer',
                     password: 'letmein',
@@ -67,10 +68,11 @@
                 result = response;
             });
             httpBackend.flush();
+            mockUserResourceInstance = new User(mockSignupData);
 
             expect(BrewKeeperApi.post).toHaveBeenCalledWith('/api/users/', mockSignupData);
-            expect(Identity.currentUser).toEqual(new User(mockSignupData));
-            expect(result).toEqual(true);
+            expect(Identity.currentUser).toEqual(mockUserResourceInstance);
+            expect(result).toEqual(mockUserResourceInstance);
         });
         
         it('Can update the current user.', function () {

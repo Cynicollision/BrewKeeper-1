@@ -14,7 +14,11 @@
         $scope.signup = function () {
             var newUserData = $scope.getNewUserData();
             Auth.createUser(newUserData).then(function () {
-                $scope.successRedirect();
+                Auth.authenticateUser(newUserData.username, newUserData.password).then(function () {
+                    $scope.successRedirect();
+                }, function (reason) {
+                    Notifier.error(reason);
+                });
             }, function (reason) {
                 Notifier.error(reason);
             });
