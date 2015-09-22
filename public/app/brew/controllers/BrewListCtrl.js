@@ -1,8 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('BrewKeeper').controller('BrewListCtrl', function ($scope, Brew, Recipe, Identity) {
-        var recipeId;
+    angular.module('BrewKeeper').controller('BrewListCtrl', function ($scope, Brew, BrewStatus, Recipe, Identity) {
+        var recipeId, brewStatuses;
+
         $scope.getCurrentUserBrews = function () {
             var userID = Identity.getCurrentUserId();
             Brew.getByUserId(userID).then(function (response) {
@@ -43,6 +44,7 @@
         
         $scope.brews = null;
         $scope.sortOrder = $scope.sortOptions[0].value;
+        $scope.getStatusDisplay = BrewStatus.getDisplay;
         $scope.getCurrentUserBrews();
     });
 })();

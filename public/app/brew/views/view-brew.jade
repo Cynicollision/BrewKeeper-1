@@ -5,8 +5,8 @@
             table.table.table-bordered
                 tbody
                     tr
-                        td.col-md-4 Batch number
-                        td [brew.batchNum]
+                        td.col-md-4 Batch name
+                        td {{ brew.name }}
                     tr
                         td Recipe
                         td {{ brew.recipeId }}
@@ -21,13 +21,13 @@
                         td {{ statusLookup.getDisplay(brew.statusCde) }}
                     tr
                         td Brew date
-                        td {{ brew.brewDate }}
+                        td {{ brew.brewDate | date:'M/d/yyyy' }}
                     tr
                         td Bottle date
-                        td {{ brew.bottleDate }}
+                        td {{ brew.bottleDate | date:'M/d/yyyy' }}
                     tr
                         td Chill date
-                        td {{ brew.chillDate }}
+                        td {{ brew.chillDate | date:'M/d/yyyy' }}
                 
         .col-md-4
             .btn-group

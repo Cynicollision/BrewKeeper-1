@@ -50,7 +50,6 @@
             $scope.lastName = 'zzzz';
 
             $scope.signup();
-            console.log('TODO here');
             expect(Auth.createUser).toHaveBeenCalledWith({
                 username: 'testUsername',
                 password: 'five',

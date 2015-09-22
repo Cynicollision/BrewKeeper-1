@@ -2,6 +2,16 @@
     'use strict';
 
     angular.module('BrewKeeper').controller('AddBrewCtrl', function ($scope, $location, Brew, BrewStatus, Identity, Notifier, Recipe) {
+        $scope.initDatepicker = function () {
+            if ($('.datepicker').datepicker) {
+                $('.datepicker').datepicker({
+                    format: "m/d/yyyy",
+                    autoclose: true,
+                    forceParse: false
+                });
+            }
+        };
+
         $scope.getCurrentUserRecipes = function () {
             Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
                 $scope.recipes = response.data;
@@ -13,6 +23,7 @@
         
         $scope.getFormBrewData = function () {
             return {
+                name: $scope.brewName,
                 batchSize: $scope.brewBatchSize,
                 description: $scope.brewDescription,
                 ownerId: Identity.getCurrentUserId(),
@@ -50,10 +61,6 @@
         $scope.statuses = BrewStatus.getStatuses();
         $scope.getCurrentUserRecipes();
         $scope.setDefaultControlValues();
-
-        $('.datepicker').datepicker({
-            format: "mm/dd/yyyy",
-            autoclose: true
-        });
+        $scope.initDatepicker();
     });
 })();

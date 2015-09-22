@@ -26,7 +26,7 @@
         });
     };
     
-    // doing it wrong: why do these undefined values come in as strings?
+    // TODO... doing it wrong: why do these undefined values come in as strings?
     function sanitizeUndefinedBrewValues(brew) {
         if (brew.brewDate === 'undefined') {
             brew.brewDate = undefined;
@@ -71,6 +71,7 @@
             brewUpdates = req.body,
             query = { _id: brewUpdates.id },
             update = {
+                brewName: brewUpdates.name,
                 batchSize: brewUpdates.batchSize,
                 brewDate: brewUpdates.brewDate,
                 bottleDate: brewUpdates.bottleDate,

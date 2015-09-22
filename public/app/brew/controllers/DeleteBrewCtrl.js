@@ -16,6 +16,10 @@
             });
         };
         
+        $scope.onCancelDelete = function () {
+            $location.path('/brew/view/' + $routeParams.id);
+        };
+        
         $scope.successRedirect = function () {
             Notifier.notify('Brew deleted');
             $location.path('/brew');
