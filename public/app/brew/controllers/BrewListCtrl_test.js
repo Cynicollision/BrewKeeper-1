@@ -54,29 +54,5 @@
         it('Sets a default sort order', function () {
             expect($scope.sortOrder).toBeDefined();
         });
-        
-        it('Can use the Recipe service to retrieve recipe data by recipe ID', function () {
-            var mockRecipeId = 'a8sd7';
-    
-            $scope.getRecipeName(mockRecipeId);
-            expect(RecipeMock.getByRecipeId).toHaveBeenCalledWith(mockRecipeId);
-        });
-
-        it('Can store the name of a recipe', function () {
-            var mockRecipeId = 46342,
-                mockRecipeName = 'wutRecipe';
-            
-            expect($scope.getRecipeName(mockRecipeId)).not.toBeDefined();
-            $scope.setRecipeName(mockRecipeId, mockRecipeName);
-            expect($scope.recipeNames[mockRecipeId]).toEqual(mockRecipeName);
-        });
-
-        it('Can determine if a name has already been retrieved for a recipe by ID', function () {
-            var mockRecipeId = '2f4wrw';
-            expect($scope.hasRecipe(mockRecipeId)).toBeFalsy();
-            
-            $scope.recipeNames[mockRecipeId] = 'test recipe';
-            expect($scope.hasRecipe(mockRecipeId)).toBeTruthy();
-        });
     });
 })();

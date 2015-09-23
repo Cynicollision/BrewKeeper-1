@@ -20,6 +20,10 @@ select {
     font-size: 2em;
 }
 
+.nav a {
+    font-size: 1.2em;
+}
+
 .panel {
     border-color: #006666;
 }
