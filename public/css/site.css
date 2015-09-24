@@ -67,10 +67,11 @@ footer p {
 
 .navbar-collapse {
     overflow-x: hidden;
+    overflow-y: hidden;
 
     /* TODO: hack from Stack Overflow... better but not right (horizontal scrollbar appears when navbar links are clicked (not mobile)) */
-    -webkit-transition: height 0.01s;
-    -moz-transition: height 0.01s;
-    -o-transition: height 0.01s;
-    transition: height 0.01s;
+    -webkit-transition: height 0.02s;
+    -moz-transition: height 0.02s;
+    -o-transition: height 0.02s;
+    transition: height 0.02s;
 }
