@@ -1,7 +1,10 @@
 ﻿(function () {
     'use strict';
+    
+    var mongoose = require('mongoose');
 
-    var Recipe = require('mongoose').model('Recipe');
+    var Recipe = mongoose.model('Recipe'),
+        Brew = mongoose.model('Brew');
     
     exports.getRecipes = function (req, res) {
         Recipe.find({}).exec(function (err, collection) {
@@ -116,4 +119,17 @@
             }
         });
     };
+
+    exports.getRecipeCountById = function (req, res) {
+        var findRecipeId = req.params.id;
+        Brew.count({ recipeId: findRecipeId }).exec(function (err, count) {
+            if (err) {
+                res.send(500, { reason: err.toString() });
+            }
+
+            res.send({
+                count: count
+            });
+        });
+    }
 })();

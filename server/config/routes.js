@@ -32,6 +32,7 @@
         app.post('/api/recipe', recipe.saveNewRecipe);
         app.put('/api/recipe', recipe.updateRecipe);
         app.delete('/api/recipe/:id', recipe.deleteRecipe);
+        app.get('/api/recipe/count/:id', recipe.getRecipeCountById);
         
         // views
         app.get('/partials/*', function (req, res) {
