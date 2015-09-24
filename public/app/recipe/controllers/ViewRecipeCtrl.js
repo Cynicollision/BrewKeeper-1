@@ -15,6 +15,9 @@
         
         $scope.setCurrentRecipe = function (recipe) {
             $scope.recipe = recipe;
+            Recipe.getCount(recipe._id).then(function (response) {
+                $scope.recipe.timesBrewed = response.data.count;
+            });
         };
         
         $scope.doEdit = function () {
