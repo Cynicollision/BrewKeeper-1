@@ -7,7 +7,7 @@
                 .form-group
                     label.col-md-4.control-label(for="brewRecipe") Recipe
                     .col-md-6
-                        select.form-control(name="brewRecipe", ng-model="brewRecipe", ng-options="recipe.name for recipe in recipes")
+                        select.form-control(name="brewRecipe", ng-model="brewRecipe", ng-options="recipe.name for recipe in recipes", ng-change="updateName()", required)
                 .form-group
                     label.col-md-4.control-label(for="brewName") Name
                     .col-md-6

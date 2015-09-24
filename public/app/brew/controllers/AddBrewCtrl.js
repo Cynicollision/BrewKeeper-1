@@ -7,6 +7,7 @@
                 $scope.recipes = response.data;
                 if (!!$scope.recipes && $scope.recipes.length) {
                     $scope.brewRecipe = $scope.recipes[0];
+                    $scope.updateName();
                 }
             });
         };
@@ -45,6 +46,18 @@
         $scope.successRedirect = function () {
             Notifier.notify('Brew added!');
             $location.path('/brew');
+        };
+        
+        $scope.updateName = function () {
+            var recipeId = $scope.brewRecipe._id,
+                recipeName = $scope.brewRecipe.name;
+            
+            Recipe.getCount(recipeId).then(function (response) {
+                $scope.brewName = recipeName + ' #' + (response.data.count + 1);
+                
+            }, function (reason) {
+                Notifier.error(reason);
+            });
         };
         
         // initialze

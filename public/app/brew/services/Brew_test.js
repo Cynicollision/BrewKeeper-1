@@ -124,7 +124,7 @@
                 mockBrewId = 45343;
             
             httpBackend.expectDELETE('/api/brew/' + mockBrewId).respond(successResponse);
-            Brew.delete(mockBrewId).then(function (response) {
+            Brew.remove(mockBrewId).then(function (response) {
                 result = response.data;
             });
             httpBackend.flush();

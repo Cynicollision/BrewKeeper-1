@@ -126,10 +126,10 @@
             if (err) {
                 res.send(500, { reason: err.toString() });
             }
-
+            
             res.send({
                 count: count
             });
         });
-    }
+    };
 })();

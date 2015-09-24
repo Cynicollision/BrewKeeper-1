@@ -25,9 +25,9 @@
         });
         
         it('Calls the Brew service to delete the brew and redirects to /brew.', function () {
-            spyOn(Brew, 'delete').and.callThrough();
+            spyOn(Brew, 'remove').and.callThrough();
             $scope.onConfirmDelete();
-            expect(Brew.delete).toHaveBeenCalled();
+            expect(Brew.remove).toHaveBeenCalled();
         });
         
         it('Redirects to /brew after deleting a brew.', function () {

@@ -73,7 +73,7 @@
                 return dfd.promise;
             },
             
-            delete: function (brewId) {
+            remove: function (brewId) {
                 var dfd = $q.defer(),
                     url = '/api/brew/' + brewId;
                 

@@ -13,7 +13,7 @@
         };
         
         $scope.onConfirmDelete = function () {
-            Recipe.delete($routeParams.id).then(function (response) {
+            Recipe.remove($routeParams.id).then(function (response) {
                 $scope.successRedirect();
             });
         };

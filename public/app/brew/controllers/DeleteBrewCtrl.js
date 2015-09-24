@@ -11,7 +11,7 @@
         };
         
         $scope.onConfirmDelete = function () {
-            Brew.delete($routeParams.id).then(function (response) {
+            Brew.remove($routeParams.id).then(function (response) {
                 $scope.successRedirect();
             });
         };
