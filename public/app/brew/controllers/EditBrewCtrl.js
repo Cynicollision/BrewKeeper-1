@@ -1,17 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('BrewKeeper').controller('EditBrewCtrl', function ($scope, $filter, $routeParams, $location, Brew, BrewStatus, Identity, Notifier, Recipe) {
-        $scope.initDatepicker = function () {
-            if ($('.datepicker').datepicker) {
-                $('.datepicker').datepicker({
-                    format: "m/d/yyyy",
-                    autoclose: true,
-                    forceParse: false
-                });
-            }
-        };
-
+    angular.module('BrewKeeper').controller('EditBrewCtrl', function ($scope, $filter, $routeParams, $location, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
         $scope.getBrew = function (brewId) {
             Brew.getByBrewId(brewId).then(function (response) {
                 $scope.setCurrentBrew(response.data);
@@ -81,6 +71,5 @@
         $scope.statuses = BrewStatus.getStatuses();
         $scope.getBrew($routeParams.id);
         $scope.getCurrentUserRecipes();
-        $scope.initDatepicker();
     });
 })();

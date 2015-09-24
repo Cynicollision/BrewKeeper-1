@@ -41,6 +41,7 @@
     <Compile Include="public\app\brew\controllers\DeleteBrewCtrl_test.js" />
     <Compile Include="public\app\brew\controllers\EditBrewCtrl.js" />
     <Compile Include="public\app\brew\controllers\EditBrewCtrl_test.js" />
+    <Compile Include="public\app\common\services\DatePicker.js" />
     <Compile Include="public\app\main\controllers\MainCtrl_test.js" />
     <Compile Include="public\app\account\services\Auth.js" />
     <Compile Include="public\app\brew\services\BrewStatus.js" />
