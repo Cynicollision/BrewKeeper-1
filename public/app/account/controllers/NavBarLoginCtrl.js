@@ -7,7 +7,7 @@
         $scope.signout = function () {
             Auth.logoutUser().then(function () {
                 $scope.clearCurrentUser();
-                Notifier.notify('You have successfully logged out');
+                Notifier.notify('Logged out');
                 $location.path('/');
             });
         };

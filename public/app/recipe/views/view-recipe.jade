@@ -1,24 +1,28 @@
 ﻿.container
-    h1 Recipe Details
-    .row
-        .col-md-8  
-            table.table.table-bordered
-                tbody
-                    tr
-                        td Name
-                        td {{ recipe.name }}
-                    tr
-                        td Source
-                        td 
-                            a(href="{{ recipe.sourceUrl }} ") {{ recipe.sourceName }}
-                    tr
-                        td Times Brewed
-                        td {{ recipe.timesBrewed }}
-                    tr
-                        td Description
-                        td {{ recipe.description }}
+    .col-md-8.col-md-offset-2
+         h1 Recipe Details
+    .col-md-8.col-md-offset-2
+        table.table.table-bordered
+            tbody
+                tr
+                    td Name
+                    td {{ recipe.name }}
+                tr
+                    td Source
+                    td 
+                        a(href="{{ recipe.sourceUrl }} ") {{ recipe.sourceName }}
+                tr
+                    td Times Brewed
+                    td {{ recipe.timesBrewed }}
+                tr
+                    td Description
+                    td {{ recipe.description }}
                 
-        .col-md-4
-            .btn-group
-                .btn.btn-default(ng-click="doEdit()" ng-show="recipeSvc.isRecipeOwnedByCurrentUser(recipe)") Edit
-                .btn.btn-danger(ng-click="doDelete()" ng-show="recipeSvc.isRecipeOwnedByCurrentUser(recipe)") Delete  
+    .col-md-8.col-md-offset-2
+        .btn.btn-danger(ng-click="doDelete()", ng-show="recipeSvc.isRecipeOwnedByCurrentUser(recipe)")  
+            .pull-right &nbsp;Delete
+            span.glyphicon.glyphicon-remove 
+        .pull-right
+            .btn.btn-default(ng-click="doEdit()", ng-show="recipeSvc.isRecipeOwnedByCurrentUser(recipe)") 
+                .pull-right &nbsp;Modify
+                span.glyphicon.glyphicon-pencil  

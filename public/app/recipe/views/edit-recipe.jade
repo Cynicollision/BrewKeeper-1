@@ -11,17 +11,17 @@
                 .form-group
                     label.col-md-4.control-label(for="recipeSourceName") Source
                     .col-md-6
-                        input.form-control(name="recipeSourceName", type="text", placeholder="Recipe source", ng-model="recipeSourceName")
+                        input.form-control(name="recipeSourceName", type="text", placeholder="Recipe source", ng-model="recipeSourceName", required)
                 .form-group
                     label.col-md-4.control-label(for="recipeSourceUrl") Source URL
                     .col-md-6
-                        input.form-control(name="recipeSourceUrl", type="text", placeholder="Recipe source URL", ng-model="recipeSourceUrl")
+                        input.form-control(name="recipeSourceUrl", type="text", placeholder="Recipe source URL", ng-model="recipeSourceUrl", required)
                 .form-group
                     label.col-md-4.control-label(for="recipeDescription") Description
                     .col-md-6
-                        input.form-control(name="recipeDescription", type="text", placeholder="Description", ng-model="recipeDescription")
+                        input.form-control(name="recipeDescription", type="text", placeholder="Description", ng-model="recipeDescription", required)
                 .form-group
                     .div(style="text-align:center")
-                        button.btn.btn-primary(ng-click="submitRecipe()", ng-disabled="signupForm.$invalid") Save
+                        button.btn.btn-primary(ng-click="submitRecipe()", ng-disabled="addRecipeForm.$invalid") Save
                         | &nbsp;
                         a.btn.btn-default(href="/recipe/") Cancel

@@ -3,9 +3,7 @@
 
     $scope.signin = function (username, password) {
         Auth.authenticateUser(username, password).then(function (success) {
-            if (success) {
-                Notifier.notify('Sign in successful!');
-            } else {
+            if (!success) {
                 Notifier.error('Username/password incorrect.');
             }
         });
