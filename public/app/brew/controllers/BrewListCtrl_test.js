@@ -47,12 +47,9 @@
             expect(BrewMock.getByUserId).toHaveBeenCalledWith(82589);
         });
         
-        it('Defines sort options.', function () {
-            expect($scope.sortOptions).toBeDefined();
-        });
-        
-        it('Sets a default sort order', function () {
-            expect($scope.sortOrder).toBeDefined();
+        it('Sets the default sort order to be brew date in reverse chronological order', function () {
+            expect($scope.predicate).toEqual('brewDate');
+            expect($scope.reverse).toEqual(true);
         });
     });
 })();
