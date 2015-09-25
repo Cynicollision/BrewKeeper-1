@@ -1,20 +1,19 @@
 ﻿.container.top-padding-med
     .btn.btn-default(ng-click="doAdd()")
         span.glyphicon.glyphicon-plus  
-    .pull-right
-        form.form-inline
-            .form-group.margin-left-med
-                select.form-control(ng-model="sortOrder", ng-options="item.value as item.text for item in sortOptions")
     div
         &nbsp;
     table.table.table-hover.table-striped.table-condensed
         thead
             tr
-                th.col-md-4 Batch name
-                th.col-md-3 Status
-                th.col-md-3 Brew date
+                th.col-md-4 
+                    a(href="" ng-click="order('name')") Batch name
+                th.col-md-3 
+                    a(href="" ng-click="order('statusCde')") Status
+                th.col-md-3 
+                    a(href="" ng-click="order('brewDate')") Brew date
         tbody
-            tr(ng-repeat="brew in brews | orderBy:statusCde")
+            tr(ng-repeat="brew in brews | orderBy:predicate:reverse")
                 td
                     a(href="/brew/view/{{brew._id}}") {{ brew.name }}
                 td {{ getStatusDisplay(brew.statusCde) }}

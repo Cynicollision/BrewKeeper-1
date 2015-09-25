@@ -11,17 +11,19 @@
             });
         };
         
-        $scope.sortOptions = [
-            { value: 'name', text: 'Sort by Name' },
-            { value: 'brewDate', text: 'Sort by Created Date' }
-        ];
-        
         $scope.doAdd = function () {
             $location.path('/brew/add');
         };
         
+        $scope.order = function (predicate) {
+            $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+            $scope.predicate = predicate;
+        };
+        
+        // initialize
         $scope.brews = null;
-        $scope.sortOrder = $scope.sortOptions[0].value;
+        $scope.predicate = 'brewDate';
+        $scope.reverse = true;
         $scope.getStatusDisplay = BrewStatus.getDisplay;
         $scope.getCurrentUserBrews();
     });
