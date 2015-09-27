@@ -5,16 +5,16 @@
         });
     };
     
-    $scope.sortOptions = [
-        { value: 'name', text: 'Sort by Name' },
-        { value: 'type', text: 'Sort by Type' }
-    ];
-    
     $scope.doAdd = function () {
         $location.path('/recipe/add');
     };
     
+    $scope.order = function (predicate) {
+        $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+        $scope.predicate = predicate;
+    };
+    
     // initialize
-    $scope.sortOrder = $scope.sortOptions[0].value;
+    $scope.predicate = 'name';
     $scope.getCurrentUserRecipes();
 });

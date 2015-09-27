@@ -61,6 +61,7 @@
         };
         
         // initialze
+        $scope.brewUrl = '/brew/';
         $scope.statuses = BrewStatus.getStatuses();
         $scope.getCurrentUserRecipes();
         $scope.setDefaultControlValues();
