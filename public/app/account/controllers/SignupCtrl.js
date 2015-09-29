@@ -22,6 +22,8 @@
             }, function (reason) {
                 Notifier.error(reason);
             });
+
+            $('.navbar-collapse').collapse('hide');
         };
 
         $scope.successRedirect = function () {

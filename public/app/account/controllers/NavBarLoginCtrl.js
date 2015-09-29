@@ -7,6 +7,7 @@
         $scope.signout = function () {
             Auth.logoutUser().then(function () {
                 $scope.clearCurrentUser();
+                $('.navbar-collapse').collapse('hide');
                 Notifier.notify('Logged out');
                 $location.path('/');
             });

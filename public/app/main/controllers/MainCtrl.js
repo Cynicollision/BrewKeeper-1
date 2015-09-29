@@ -7,5 +7,7 @@
                 Notifier.error('Username/password incorrect.');
             }
         });
+
+        $('.navbar-collapse').collapse('hide');
     };
 });
