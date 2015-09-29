@@ -7,35 +7,39 @@
                 .form-group
                     label.col-md-4.control-label(for="brewRecipe") Recipe
                     .col-md-6
-                        select.form-control(name="brewRecipe", ng-model="brewRecipe", ng-options="recipe.name for recipe in recipes", ng-change="updateName()", required)
+                        .div(ng-show="!hasRecipes")
+                            span You need to create a 
+                                a(href="/recipe/add/") recipe
+                                span&nbsp;first!
+                        select.form-control(name="brewRecipe", ng-show="hasRecipes", ng-model="brewRecipe", ng-options="recipe.name for recipe in recipes", ng-change="updateName()", required)
                 .form-group
                     label.col-md-4.control-label(for="brewName") Name
                     .col-md-6
-                        input.form-control(type="text", name="brewName", ng-model="brewName", required)
+                        input.form-control(type="text", name="brewName", ng-model="brewName", ng-disabled="!hasRecipes", required)
                 .form-group
                     label.col-md-4.control-label(for="brewBatchSize") Batch size (gallons)
                     .col-md-4
-                        input.form-control(type="number", name="brewBatchSize", ng-model="brewBatchSize", min=1, max=999, maxlength=3, required)
+                        input.form-control(type="number", name="brewBatchSize", ng-model="brewBatchSize", min=1, max=999, maxlength=3, ng-disabled="!hasRecipes", required)
                 .form-group
                     label.col-md-4.control-label(for="brewDescription") Description
                     .col-md-6
-                        input.form-control(type="text", name="brewDescription", ng-model="brewDescription", placeholder="Brew details")
+                        input.form-control(type="text", name="brewDescription", ng-model="brewDescription", placeholder="Brew details", ng-disabled="!hasRecipes")
                 .form-group
                     label.col-md-4.control-label(for="brewStatusCde") Status
                     .col-md-6
-                        select.form-control(name="brewStatusCde", ng-model="brewStatusCde", ng-options="status.name for status in statuses")
+                        select.form-control(name="brewStatusCde", ng-model="brewStatusCde", ng-options="status.name for status in statuses", ng-disabled="!hasRecipes")
                 .form-group
                     label.col-md-4.control-label(for="brewBrewDate") Brew date
                     .col-md-6
-                        input.datepicker.add-on.form-control(type='text', name="brewBrewDate", ng-model="brewBrewDate", placeholder="In the jug", required)
+                        input.datepicker.add-on.form-control(type='text', name="brewBrewDate", ng-model="brewBrewDate", placeholder="In the jug", ng-disabled="!hasRecipes", required)
                 .form-group
                     label.col-md-4.control-label(for="brewBottleDate") Bottle date
                     .col-md-6
-                        input.datepicker.add-on.form-control(type="text", name="brewBottleDate", ng-model="brewBottleDate", placeholder="In the bottles", required)
+                        input.datepicker.add-on.form-control(type="text", name="brewBottleDate", ng-model="brewBottleDate", placeholder="In the bottles", ng-disabled="!hasRecipes", required)
                 .form-group
                     label.col-md-4.control-label(for="brewChillDate") Chill date
                     .col-md-6
-                        input.datepicker.add-on.form-control(type="text", name="brewChillDate", ng-model="brewChillDate", placeholder="In the fridge", required)
+                        input.datepicker.add-on.form-control(type="text", name="brewChillDate", ng-model="brewChillDate", placeholder="In the fridge", ng-disabled="!hasRecipes", required)
                 .form-group
                     .div(style="text-align:center")
                         button.btn.btn-primary(ng-click="submitBrew()", ng-disabled="addBrewForm.$invalid") Save

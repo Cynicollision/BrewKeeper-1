@@ -43,11 +43,28 @@
             $scope.brewBatchSize = 1;
         };
         
+        $scope.checkRecipeCount = function () {
+            Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                var recipeCount = 0;
+                
+                if (response && response.data) {
+                    recipeCount = response.data.length;
+                }
+                
+                $scope.hasRecipes = !!recipeCount;
+
+            }, function (reason) {
+                Notifier.error(reason);
+            });
+        };
+        
+        // TODO: BaseCtrl?
         $scope.successRedirect = function () {
             Notifier.notify('Brew added!');
             $location.path('/brew');
         };
         
+        // updates the name to "<recipe> #<timesBrewed>"
         $scope.updateName = function () {
             var recipeId = $scope.brewRecipe._id,
                 recipeName = $scope.brewRecipe.name;
@@ -64,6 +81,7 @@
         $scope.brewUrl = '/brew/';
         $scope.statuses = BrewStatus.getStatuses();
         $scope.getCurrentUserRecipes();
+        $scope.checkRecipeCount();
         $scope.setDefaultControlValues();
     });
 })();
