@@ -6,7 +6,7 @@
         
         beforeEach(function () {
             module('BrewKeeper');
-            BrewMock = jasmine.createSpyObj('Brew', ['getByUserId']);
+            BrewMock = jasmine.createSpyObj('Brew', ['getByUserId', 'getCountByUserId']);
             IdentityMock = jasmine.createSpyObj('Identity', ['getCurrentUserId']);
             RecipeMock = jasmine.createSpyObj('Recipe', ['getByRecipeId']);
                       
@@ -20,6 +20,14 @@
                     return dfd.promise;
                 });
                 
+                BrewMock.getCountByUserId.and.callFake(function () {
+                    var dfd = $q.defer();
+                    dfd.resolve({
+                        count: 0
+                    });
+                    return dfd.promise;
+                });
+                
                 RecipeMock.getByRecipeId.and.callFake(function () {
                     var dfd = $q.defer();
                     dfd.resolve();
@@ -29,6 +37,7 @@
                 IdentityMock.getCurrentUserId.and.callFake(function () {
                     return 82589;
                 });
+
                 
                 $controller('BrewListCtrl', {
                     $scope: $scope,
@@ -43,7 +52,7 @@
         });
         
         it('Queries all brews for the given user', function () {
-            $scope.getCurrentUserBrews();
+            $scope.getAllCurrentUserBrews();
             expect(BrewMock.getByUserId).toHaveBeenCalledWith(82589);
         });
         

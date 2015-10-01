@@ -23,9 +23,15 @@
                 return dfd.promise;
             },
             
-            getByUserId: function (userId) {
+            getByUserId: function (userId, limit) {
                 var dfd = $q.defer(),
-                    url = '/api/brew/user/' + userId;
+                    url;
+
+                if (!limit) {
+                    limit = -1;
+                }
+                
+                url = '/api/brew/user/' + userId + '/' + limit;
                 
                 BrewKeeperApi.get(url).then(function (response) {
                     dfd.resolve(response);
@@ -33,6 +39,19 @@
                     dfd.reject(response.data.reason);
                 });
                 
+                return dfd.promise;
+            },
+            
+            getCountByUserId: function (userId) {
+                var dfd = $q.defer(),
+                    url = '/api/brew/user/count/' + userId;
+
+                BrewKeeperApi.get(url).then(function (response) {
+                    dfd.resolve(response);
+                }, function (reason) {
+                    dfd.reject(reason);
+                });
+
                 return dfd.promise;
             },
             

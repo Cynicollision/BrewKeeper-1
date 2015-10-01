@@ -52,18 +52,54 @@
             expect(result).toEqual(successResponse);
         });
         
-        it('Can retrieve brews for a single user by user ID.', function () {
+        it('Can retrieve how many brews a user has by user ID.', function () {
+            var mockUserId = 2134,
+                result,
+                getUrl = '/api/brew/user/count/' + mockUserId;
+
+            httpBackend.expectGET(getUrl).respond({
+                count: 15
+            });
+
+            Brew.getCountByUserId(mockUserId).then(function (response) {
+                result = response.data;
+            });
+            httpBackend.flush();
+
+            expect(BrewKeeperApi.get).toHaveBeenCalledWith(getUrl);
+            expect(result.count).toEqual(15);
+        });
+        
+        it('Can retrieve all brews for a single user by user ID.', function () {
             var result, 
-                mockUserId = 6724;
+                mockUserId = 6724,
+                getUrl = '/api/brew/user/' + mockUserId + '/-1';
             
-            httpBackend.expectGET('/api/brew/user/' + mockUserId).respond(successResponse);
+            httpBackend.expectGET(getUrl).respond(successResponse);
 
             Brew.getByUserId(mockUserId).then(function (response) {
                 result = response.data;
             });
             httpBackend.flush();
             
-            expect(BrewKeeperApi.get).toHaveBeenCalledWith('/api/brew/user/' + mockUserId);
+            expect(BrewKeeperApi.get).toHaveBeenCalledWith(getUrl);
+            expect(result).toEqual(successResponse);
+        });
+        
+        it('Can retrieve a specific number of brews for a single user by user ID.', function () {
+            var result, 
+                mockUserId = 6724,
+                limit = 6,
+                getUrl = '/api/brew/user/' + mockUserId + '/' + limit;
+            
+            httpBackend.expectGET(getUrl).respond(successResponse);
+            
+            Brew.getByUserId(mockUserId, limit).then(function (response) {
+                result = response.data;
+            });
+            httpBackend.flush();
+            
+            expect(BrewKeeperApi.get).toHaveBeenCalledWith(getUrl);
             expect(result).toEqual(successResponse);
         });
         

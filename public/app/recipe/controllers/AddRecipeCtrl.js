@@ -20,7 +20,8 @@
                 Notifier.error(reason);
             });
         };
-
+        
+        // TODO: BaseCtrl.successRedirect(msg, path)
         $scope.successRedirect = function () {
             Notifier.notify('Recipe added!');
             $location.path('/recipe');

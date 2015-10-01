@@ -22,6 +22,7 @@
             $location.path('/recipe/view/' + $routeParams.id);
         };
         
+        // TODO: BaseCtrl.successRedirect(msg, path)
         $scope.successRedirect = function () {
             Notifier.notify('Recipe delete');
             $location.path('/recipe');

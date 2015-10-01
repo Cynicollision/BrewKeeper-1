@@ -15,11 +15,24 @@
         
         // set a default limit if one is not specified
         if (!limit || limit <= 0) {
-            limit = 99;
+            Brew.find({ ownerId: userId }).sort({ brewDate: -1 }).exec(function (err, collection) {
+                res.send(collection);
+            });
+
+        } else {
+            Brew.find({ ownerId: userId }).sort({ brewDate: -1 }).limit(limit).exec(function (err, collection) {
+                res.send(collection);
+            });
         }
-            
-        Brew.find({ ownerId: userId }).sort({ brewDate: -1 }).limit(limit).exec(function (err, collection) {
-            res.send(collection);
+    };
+    
+    exports.getBrewCountByUserId = function (req, res) {
+        var userId = req.params.id;
+
+        Brew.count({ ownerId: userId }).exec(function (err, count) {
+            res.send({
+                count: count
+            });
         });
     };
     

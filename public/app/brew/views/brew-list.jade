@@ -2,7 +2,9 @@
     .btn.btn-default(ng-click="doAdd()")
             span.glyphicon.glyphicon-plus  
     .pull-right.h4 My Brews
-    table.table.table-hover.table-striped.table-condensed
+    .col-md-12.text-center(ng-show="showNoBrews") You have no brews! You should
+        a(href="/brew/add")&nbsp;add one.
+    table.table.table-hover.table-striped.table-condensed(ng-show="!showNoBrews")
         thead
             tr
                 th.col-md-4 
@@ -17,4 +19,6 @@
                     a(href="/brew/view/{{brew._id}}") {{ brew.name }}
                 td {{ getStatusDisplay(brew.statusCde) }}
                 td {{ brew.brewDate | date:'M/d/yyyy' }}
-                
+    .col-md-12.text-center 
+        .div(ng-show="limitResults") Showing {{ listLimit }} latest brews. 
+            a(href="", ng-click="getAllCurrentUserBrews()") Show All.
