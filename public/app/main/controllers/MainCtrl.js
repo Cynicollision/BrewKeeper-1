@@ -8,6 +8,9 @@
             }
         });
 
-        $('.navbar-collapse').collapse('hide');
+        // TODO: BaseCtrl.shutNavBar()
+        if ($('.navbar-collapse') && $('.navbar-collapse').collapse) {
+            $('.navbar-collapse').collapse('hide');
+        }
     };
 });

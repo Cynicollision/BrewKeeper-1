@@ -22,10 +22,14 @@
             }, function (reason) {
                 Notifier.error(reason);
             });
-
-            $('.navbar-collapse').collapse('hide');
+            
+            // TODO: BaseCtrl.shutNavBar()
+            if ($('.navbar-collapse') && $('.navbar-collapse').collapse) {
+                $('.navbar-collapse').collapse('hide');
+            }
         };
-
+        
+        // TODO: BaseCtrl.successRedirect(msg, path)
         $scope.successRedirect = function () {
             Notifier.notify('User account created!');
             $location.path('/');
