@@ -10,8 +10,15 @@
     };
     
     exports.getBrewsByUserId = function (req, res) {
-        var userId = req.params.id;
-        Brew.find({ ownerId: userId }).exec(function (err, collection) {
+        var userId = req.params.id,
+            limit = req.params.limit;
+        
+        // set a default limit if one is not specified
+        if (!limit || limit <= 0) {
+            limit = 99;
+        }
+            
+        Brew.find({ ownerId: userId }).sort({ brewDate: -1 }).limit(limit).exec(function (err, collection) {
             res.send(collection);
         });
     };
