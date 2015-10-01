@@ -40,6 +40,21 @@
             }
         };
         
+        $scope.checkRecipeCount = function () {
+            Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                var recipeCount = 0;
+                
+                if (response && response.data) {
+                    recipeCount = response.data.length;
+                }
+                
+                $scope.hasRecipes = !!recipeCount;
+
+            }, function (reason) {
+                Notifier.error(reason);
+            });
+        };
+        
         $scope.getFormBrewData = function () {
             return {
                 id: $scope.brewId,
@@ -70,6 +85,7 @@
         // initialize
         $scope.statuses = BrewStatus.getStatuses();
         $scope.getBrew($routeParams.id);
+        $scope.checkRecipeCount();
         $scope.getCurrentUserRecipes();
     });
 })();

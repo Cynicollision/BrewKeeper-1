@@ -58,7 +58,7 @@
             });
         };
         
-        // TODO: BaseCtrl?
+        // TODO: BaseCtrl.successRedirect(msg, path)
         $scope.successRedirect = function () {
             Notifier.notify('Brew added!');
             $location.path('/brew');
