@@ -37,6 +37,8 @@
     <Compile Include="public\app\account\controllers\SignupCtrl_test.js" />
     <Compile Include="public\app\account\services\Auth_test.js" />
     <Compile Include="public\app\account\services\User_test.js" />
+    <Compile Include="public\app\brew\controllers\BaseAddEditBrewCtrl.js" />
+    <Compile Include="public\app\brew\controllers\BaseAddEditBrewCtrl_test.js" />
     <Compile Include="public\app\brew\controllers\DeleteBrewCtrl.js" />
     <Compile Include="public\app\brew\controllers\DeleteBrewCtrl_test.js" />
     <Compile Include="public\app\brew\controllers\EditBrewCtrl.js" />

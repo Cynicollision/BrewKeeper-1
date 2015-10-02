@@ -30,22 +30,6 @@
             });
         });
         
-        it('Gets values for the new brew from the form including user ID that created it.', function () {
-            $scope.brewStatusCde = { id: 2 };
-            $scope.brewDescription = 'an expiriment';
-            $scope.brewBatchSize = 5;
-            $scope.brewRecipe = {
-                _id: '6d63a4g2'
-            };
-            
-            var newBrew = $scope.getFormBrewData();
-            expect(newBrew.statusCde).toEqual($scope.brewStatusCde.id);
-            expect(newBrew.description).toEqual($scope.brewDescription);
-            expect(newBrew.batchSize).toEqual($scope.brewBatchSize);
-            expect(newBrew.recipeId).toEqual($scope.brewRecipe._id);
-            expect(newBrew.ownerId).toEqual(IdentityMock.getCurrentUserId());
-        });
-        
         it('Saves a new brew using the Brew service.', function () {
             $scope.brewRecipe = {};
             
@@ -60,11 +44,6 @@
                 { id: 2, label: 'complete' }];
             $scope.setDefaultControlValues();
             expect($scope.brewStatusCde).toEqual($scope.statuses[0]);
-        });
-
-        it('Redirects to /brew after saving a new brew.', function () {
-            $scope.successRedirect();
-            expect(location.path()).toEqual('/brew');
         });
     });
 })();
