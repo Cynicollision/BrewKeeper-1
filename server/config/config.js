@@ -11,7 +11,7 @@
             port: 3030
         },
         production: {
-            db: 'mongodb://brewkeeper:keeperbrew@ds061268.mongolab.com:61268/heroku_app37114486',
+            db: ' mongodb://brewkeeper:keeperbrew@ds051833.mongolab.com:51833/heroku_lm132nw3',
             rootPath: rootPath,
             port: process.env.PORT || 80
         }
