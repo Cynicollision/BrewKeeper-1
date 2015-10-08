@@ -15,9 +15,23 @@
         
         $scope.setCurrentRecipe = function (recipe) {
             $scope.recipe = recipe;
+            $scope.recipe.sourceUrl = $scope.getRecipeUrl(recipe);
             Recipe.getCount(recipe._id).then(function (response) {
-                $scope.recipe.timesBrewed = response.data.count;
+                $scope.setRecipeTimesBrewed(response.data.count);
             });
+        };
+        
+        $scope.setRecipeTimesBrewed = function (times) {
+            $scope.recipe.timesBrewed = times;
+        };
+        
+        $scope.getRecipeUrl = function (recipe) {
+            var wut = recipe.sourceUrl.indexOf('http://');
+            if (recipe.sourceUrl.indexOf('http://') !== 0) {
+                recipe.sourceUrl = 'http://' + recipe.sourceUrl;
+            }
+
+            return recipe.sourceUrl;
         };
         
         $scope.doEdit = function () {

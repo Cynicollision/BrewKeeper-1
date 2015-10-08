@@ -7,6 +7,7 @@
             mockBrewId = 123;
         
         beforeEach(function () {
+            // TODO: replace _Brew_ with a mock
             module('BrewKeeper');
             IdentityMock = jasmine.createSpyObj('IdentityMock', ['getCurrentUserId']);
             
