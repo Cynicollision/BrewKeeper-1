@@ -2,30 +2,67 @@
     'use strict';
     
     describe('brew/EditBrewCtrl', function () {
-        var $scope, Brew, 
-            mockBrewId = 825;
+        var $scope, BrewMock, RecipeMock, mockBrew, mockRecipeCollection;
+        
+        mockBrew = {
+            _id: 825
+        };
+        
+        mockRecipeCollection = [
+            {
+                _id: 654,
+                name: 'tasty recipe of goodness'
+            }
+        ];
         
         beforeEach(function () {
             module('BrewKeeper');
+            BrewMock = jasmine.createSpyObj('BrewMock', ['getByBrewId', 'update']);
+            RecipeMock = jasmine.createSpyObj('RecipeMock', ['getByUserId']);
             
-            inject(function ($rootScope, $controller, _Brew_) {
+            inject(function ($rootScope, $controller, $q) {
                 $scope = $rootScope.$new();
-                Brew = _Brew_;
+                
+                BrewMock.getByBrewId.and.callFake(function () {
+                    var dfd = $q.defer();
+                    dfd.resolve({
+                        data: mockBrew
+                    });
+                    return dfd.promise;
+                });
+                
+                BrewMock.update.and.callFake(function () {
+                    var dfd = $q.defer();
+                    dfd.resolve({
+                        success: true
+                    });
+                    return dfd.promise;
+                });
+                
+                RecipeMock.getByUserId.and.callFake(function () {
+                    var dfd = $q.defer();
+                    dfd.resolve({
+                        data: mockRecipeCollection
+                    });
+                    return dfd.promise;
+                });
                 
                 $controller('EditBrewCtrl', {
                     $scope: $scope,
                     $routeParams : {
-                        id: mockBrewId
+                        id: mockBrew._id
                     },
-                    Brew: Brew
+                    Brew: BrewMock,
+                    Recipe: RecipeMock
                 });
             });
         });
         
         it('Retrieves a single brew by the id specified in the route.', function () {
-            spyOn(Brew, 'getByBrewId').and.callThrough();
-            $scope.getBrew(mockBrewId);
-            expect(Brew.getByBrewId).toHaveBeenCalledWith(mockBrewId);
+            $scope.getBrew(mockBrew._id);
+            expect(BrewMock.getByBrewId).toHaveBeenCalledWith(mockBrew._id);
+            $scope.$apply();
+            expect($scope.brewId).toEqual(mockBrew._id);
         });
         
         it('Can initialize the controller with current brew data.', function () {
@@ -80,10 +117,8 @@
             $scope.brewRecipe = {
                 id: 0
             };
-            
-            spyOn(Brew, 'update').and.callThrough();
             $scope.submitBrew();
-            expect(Brew.update).toHaveBeenCalled();
+            expect(BrewMock.update).toHaveBeenCalled();
         });
     });
 })();
