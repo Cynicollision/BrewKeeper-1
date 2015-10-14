@@ -6,28 +6,24 @@
         
         $scope.getRecipe = function (recipeId) {
             Recipe.getByRecipeId(recipeId).then(function (response) {
-                $scope.setCurrentRecipe(response.data);
+                var recipe = response.data;
+                $scope.recipe = recipe;
+                $scope.recipe.sourceUrl = $scope.getRecipeUrl(recipe);
             }, function (reason) {
                 Notifier.error(reason);
                 $location.path('/recipe');
             });
         };
-        
-        $scope.setCurrentRecipe = function (recipe) {
-            $scope.recipe = recipe;
-            $scope.recipe.sourceUrl = $scope.getRecipeUrl(recipe);
-            Recipe.getCount(recipe._id).then(function (response) {
-                $scope.setRecipeTimesBrewed(response.data.count);
+
+        $scope.getRecipeBrewCount = function (recipeId) {
+            Recipe.getCount(recipeId).then(function (response) {
+                var timesBrewed = response.data.count;
+                $scope.recipe.timesBrewed = timesBrewed;
             });
         };
         
-        $scope.setRecipeTimesBrewed = function (times) {
-            $scope.recipe.timesBrewed = times;
-        };
-        
         $scope.getRecipeUrl = function (recipe) {
-            var wut = recipe.sourceUrl.indexOf('http://');
-            if (recipe.sourceUrl.indexOf('http://') !== 0) {
+            if (recipe.sourceUrl && recipe.sourceUrl.indexOf('http://') !== 0) {
                 recipe.sourceUrl = 'http://' + recipe.sourceUrl;
             }
 
@@ -44,5 +40,6 @@
         
         // initialize
         $scope.getRecipe($routeParams.id);
+        $scope.getRecipeBrewCount($routeParams.id);
     });
 })();
