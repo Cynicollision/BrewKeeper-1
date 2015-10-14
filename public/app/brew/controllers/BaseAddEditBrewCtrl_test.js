@@ -53,9 +53,5 @@
             expect(location.path()).toEqual('/somepath/');
             expect(Notifier.notify).toHaveBeenCalled();
         });
-
-        it('Can get the number of recipes the user has.', function () {
-            
-        });
     });
 })();
