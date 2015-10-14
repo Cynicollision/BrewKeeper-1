@@ -14,6 +14,7 @@
         $scope.getCurrentUserRecipes = function (currentBrew) {
             Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
                 $scope.recipes = response.data;
+                $scope.hasRecipes = ($scope.recipes.length > 0);
 
                 $scope.brewRecipe = $scope.recipes.filter(function (recipe) {
                     return (currentBrew && recipe._id === currentBrew.recipeId);
@@ -52,7 +53,6 @@
         // initialize
         $scope.statuses = BrewStatus.getStatuses();
         $scope.getBrew($routeParams.id);
-        $scope.getRecipeCount();
         $scope.getCurrentUserRecipes();
     });
 })();

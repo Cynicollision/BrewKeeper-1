@@ -7,6 +7,7 @@
         $scope.getCurrentUserRecipes = function () {
             Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
                 $scope.recipes = response.data;
+                $scope.hasRecipes = !!$scope.recipes.length;
 
                 if (!!$scope.recipes && $scope.recipes.length) {
                     $scope.brewRecipe = $scope.recipes[0];
@@ -14,7 +15,7 @@
                 }
             });
         };
-        
+
         $scope.submitBrew = function () {
             var newBrewData = $scope.getFormBrewData();
             Brew.save(newBrewData).then(function (response) {
@@ -49,7 +50,6 @@
         $scope.brewUrl = '/brew/';
         $scope.statuses = BrewStatus.getStatuses();
         $scope.setDefaultControlValues();
-        $scope.getRecipeCount();
         $scope.getCurrentUserRecipes();
     });
 })();
