@@ -27,16 +27,16 @@
             httpBackend.verifyNoOutstandingRequest();
         });
         
-        it('Can determine if the currently logged in user owns a brew.', function () {
-            Identity.currentUser = { _id: 82589 };
-            expect(Brew.isBrewOwnedByCurrentUser({
+        it('Can determine if a given user ID matches the brew\'s owner ID.', function () {
+            var mockBrew = {
                 ownerId: 82589
-            })).toBeTruthy();
+            };
+
+            Identity.currentUser = { _id: 82589 };
+            expect(Brew.isBrewOwnedByUser(mockBrew, Identity.currentUser._id)).toBeTruthy();
             
             Identity.currentUser = { _id: 564198 };
-            expect(Brew.isBrewOwnedByCurrentUser({
-                ownerId: 82589
-            })).toBeFalsy();
+            expect(Brew.isBrewOwnedByUser(mockBrew, Identity.currentUser._id)).toBeFalsy();
         });
         
         it('Can retrieve all brews.', function () {

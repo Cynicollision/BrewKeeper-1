@@ -30,10 +30,10 @@
                     td Chill date
                     td {{ brew.chillDate | date:'M/d/yyyy' }}
     .col-md-8.col-md-offset-2
-        .btn.btn-danger(ng-click="doDelete()", ng-show="brewSvc.isBrewOwnedByCurrentUser(brew)")  
+        .btn.btn-danger(ng-click="doDelete()", ng-show="isBrewOwnedByCurrentUser()")  
             .pull-right &nbsp;Delete
             span.glyphicon.glyphicon-remove 
         .pull-right
-            .btn.btn-default(ng-click="doEdit()", ng-show="brewSvc.isBrewOwnedByCurrentUser(brew)") 
+            .btn.btn-default(ng-click="doEdit()", ng-show="isBrewOwnedByCurrentUser()") 
                 .pull-right &nbsp;Modify
                 span.glyphicon.glyphicon-pencil  

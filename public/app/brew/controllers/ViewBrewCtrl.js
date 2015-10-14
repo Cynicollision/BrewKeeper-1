@@ -1,18 +1,24 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('BrewKeeper').controller('ViewBrewCtrl', function ($scope, $routeParams, $location, $window, Brew, BrewStatus, Notifier, Recipe) {
+    angular.module('BrewKeeper').controller('ViewBrewCtrl', function ($scope, $routeParams, $location, $window, Brew, BrewStatus, Identity, Notifier, Recipe) {
         $scope.statusLookup = BrewStatus;
         $scope.brewSvc = Brew;
         
         $scope.getBrew = function (brewId) {
             Brew.getByBrewId(brewId).then(function (response) {
-                $scope.setCurrentBrew(response.data);
-                $scope.getRecipeName(response.data.recipeId);
+                $scope.brew = response.data;
+                $scope.getRecipeName($scope.brew.recipeId);
             }, function (response) {
                 Notifier.error(response);
                 $location.path('/brew');
             });
+        };
+        
+        $scope.isBrewOwnedByCurrentUser = function () {
+            if ($scope.brew) {
+                return Brew.isBrewOwnedByUser($scope.brew, Identity.getCurrentUserId());
+            }
         };
         
         $scope.getRecipeName = function (recipeId) {
@@ -21,10 +27,6 @@
             }, function (response) {
                 Notifier.error(response);
             });
-        };
-        
-        $scope.setCurrentBrew = function (brew) {
-            $scope.brew = brew;
         };
         
         $scope.doEdit = function () {
