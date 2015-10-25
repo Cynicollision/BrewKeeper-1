@@ -30,6 +30,16 @@
         });
     };
     
+    exports.getRecipeCountByUserId = function (req, res) {
+        var userId = req.params.id;
+        
+        Recipe.count({ ownerId: userId }).exec(function (err, count) {
+            res.send({
+                count: count
+            });
+        });
+    };
+    
     exports.saveNewRecipe = function (req, res) {
         var currentUserId, queryForExisting,
             recipeData = req.body;
@@ -120,7 +130,7 @@
         });
     };
 
-    exports.getRecipeCountById = function (req, res) {
+    exports.getRecipeBrewCountById = function (req, res) {
         var findRecipeId = req.params.id;
         Brew.count({ recipeId: findRecipeId }).exec(function (err, count) {
             if (err) {

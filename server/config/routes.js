@@ -31,10 +31,11 @@
         app.get('/api/recipe', recipe.getRecipes); // TODO: maybe require admin role for "all" retrieval?
         app.get('/api/recipe/:id', recipe.getRecipeById);
         app.get('/api/recipe/user/:id', recipe.getRecipesByUserId);
+        app.get('/api/recipe/user/count/:id', recipe.getRecipeCountByUserId);
         app.post('/api/recipe', recipe.saveNewRecipe);
         app.put('/api/recipe', recipe.updateRecipe);
         app.delete('/api/recipe/:id', recipe.deleteRecipe);
-        app.get('/api/recipe/count/:id', recipe.getRecipeCountById);
+        app.get('/api/recipe/count/:id', recipe.getRecipeBrewCountById);
         
         // views
         app.get('/partials/*', function (req, res) {

@@ -36,6 +36,19 @@
                 return dfd.promise;
             },
             
+            getCountByUserId: function (userId) {
+                var dfd = $q.defer(),
+                    url = '/api/recipe/user/count/' + userId;
+                
+                BrewKeeperApi.get(url).then(function (response) {
+                    dfd.resolve(response);
+                }, function (reason) {
+                    dfd.reject(reason);
+                });
+                
+                return dfd.promise;
+            },
+            
             getByRecipeId: function (recipeId) {
                 var dfd = $q.defer(),
                     url = '/api/recipe/' + recipeId;
@@ -86,7 +99,7 @@
                 return dfd.promise;
             },
             
-            getCount: function (recipeId) {
+            getBrewCount: function (recipeId) {
                 var dfd = $q.defer(),
                     url = '/api/recipe/count/' + recipeId;
                 
