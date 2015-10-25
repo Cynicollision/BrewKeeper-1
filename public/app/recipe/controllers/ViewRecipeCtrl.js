@@ -1,9 +1,8 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('BrewKeeper').controller('ViewRecipeCtrl', function ($scope, $routeParams, $location, Recipe, Notifier) {
-        $scope.recipeSvc = Recipe;
-        
+    angular.module('BrewKeeper').controller('ViewRecipeCtrl', function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
+
         $scope.getRecipe = function (recipeId) {
             Recipe.getByRecipeId(recipeId).then(function (response) {
                 var recipe = response.data;
@@ -13,6 +12,12 @@
                 Notifier.error(reason);
                 $location.path('/recipe');
             });
+        };
+        
+        $scope.isRecipeOwnedByCurrentUser = function () {
+            if ($scope.recipe) {
+                return Recipe.isRecipeOwnedByUser($scope.recipe, Identity.getCurrentUserId());
+            }
         };
 
         $scope.getRecipeBrewCount = function (recipeId) {

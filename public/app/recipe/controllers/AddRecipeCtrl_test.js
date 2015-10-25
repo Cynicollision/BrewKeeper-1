@@ -1,14 +1,30 @@
 ﻿(function () {
     'use strict';
     describe('recipe/AddRecipeCtrl', function () {
-        var $scope, location, RecipeMock, IdentityMock;
-
+        var mockOwnerId = 82589, mockRecipe,
+            $scope, location, RecipeMock, IdentityMock;
+        
+        mockRecipe = {
+            ownerId: mockOwnerId,
+            name: 'mock recipe name',
+            description: 'some mock description',
+            sourceName: 'stn',
+            sourceUrl: 'seannormoyle.net'
+        };
+        
+        function setScopeNewRecipe(scope) {
+            scope.recipeName = mockRecipe.name;
+            scope.recipeDescription = mockRecipe.description;
+            scope.recipeSourceName = mockRecipe.sourceName;
+            scope.recipeSourceUrl = mockRecipe.sourceUrl;
+        }
+        
         beforeEach(function () {
             module('BrewKeeper');
 
             RecipeMock = jasmine.createSpyObj('Recipe', ['save']);
             IdentityMock = jasmine.createSpyObj('Identity', ['getCurrentUserId']);
-            
+
             inject(function ($rootScope, $controller, $location, $q) {
                 $scope = $rootScope.$new();
                 location = $location;
@@ -19,8 +35,12 @@
                     Recipe: RecipeMock,
                     Identity: IdentityMock
                 });
-
-                IdentityMock.getCurrentUserId.and.returnValue(82589);
+                
+                // set a recipe to be saved on the $scope
+                setScopeNewRecipe($scope);
+                
+                // mock services
+                IdentityMock.getCurrentUserId.and.returnValue(mockOwnerId);
 
                 RecipeMock.save.and.callFake(function () {
                     var dfd = $q.defer();
@@ -32,12 +52,8 @@
         });
 
         it('Gets the new recipe data from the form including user ID that created it..', function () {
-            $scope.recipeName = 'mock recipe name';
-            $scope.recipeDescription = 'some mock description';
-            $scope.recipeSource = 'seannormoyle.net';
-            $scope.recipeUrl = 'stn';
-
             var newRecipeData = $scope.getFormRecipeData();
+
             expect(newRecipeData.ownerId).toEqual(IdentityMock.getCurrentUserId());
             expect(newRecipeData.name).toEqual($scope.recipeName);
             expect(newRecipeData.description).toEqual($scope.recipeDescription);
@@ -45,14 +61,11 @@
             expect(newRecipeData.sourceUrl).toEqual($scope.recipeSourceUrl);
         });
 
-        it('Saves a new recipe using the Recipe service.', function () {
+        it('Saves a new recipe using the Recipe service, then redirects back to recipe list.', function () {
             $scope.submitRecipe();
-            expect(RecipeMock.save).toHaveBeenCalled();
-        });
-
-        it('Redirects to the recipe list on success.', function () {
-            $scope.successRedirect();
-            expect(location.path()).toBe('/recipe');
+            expect(RecipeMock.save).toHaveBeenCalledWith(mockRecipe);
+            $scope.$apply();
+            expect(location.url()).toEqual('/recipe');
         });
     });
 })();

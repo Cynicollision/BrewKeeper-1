@@ -3,8 +3,7 @@
 
     angular.module('BrewKeeper').controller('ViewBrewCtrl', function ($scope, $routeParams, $location, $window, Brew, BrewStatus, Identity, Notifier, Recipe) {
         $scope.statusLookup = BrewStatus;
-        $scope.brewSvc = Brew;
-        
+
         $scope.getBrew = function (brewId) {
             Brew.getByBrewId(brewId).then(function (response) {
                 $scope.brew = response.data;

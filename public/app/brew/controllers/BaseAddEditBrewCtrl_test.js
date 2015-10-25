@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    describe('BaseAddEditBrewCtrl', function () {
+    describe('brew/BaseAddEditBrewCtrl', function () {
         var $scope, Notifier, location;
         
         beforeEach(function () {

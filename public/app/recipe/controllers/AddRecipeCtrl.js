@@ -15,16 +15,11 @@
         $scope.submitRecipe = function () {
             var newRecipeData = $scope.getFormRecipeData();
             Recipe.save(newRecipeData).then(function (response) {
-                $scope.successRedirect();
+                Notifier.notify('Recipe added!');
+                $location.path('/recipe');
             }, function (reason) {
                 Notifier.error(reason);
             });
-        };
-        
-        // TODO: BaseCtrl.successRedirect(msg, path)
-        $scope.successRedirect = function () {
-            Notifier.notify('Recipe added!');
-            $location.path('/recipe');
         };
     });
 })();

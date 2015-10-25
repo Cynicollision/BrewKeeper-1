@@ -1,10 +1,10 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('BrewKeeper').controller('DeleteRecipeCtrl', function ($scope, $routeParams, $location, Recipe, Notifier) {
+    angular.module('BrewKeeper').controller('DeleteRecipeCtrl', function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
         $scope.getRecipe = function (recipeId) {
             Recipe.getByRecipeId(recipeId).then(function (response) {
-                if (Recipe.isRecipeOwnedByCurrentUser(response.data)) {
+                if (Recipe.isRecipeOwnedByUser(response.data), Identity.getCurrentUserId()) {
                     $scope.recipe = response.data;
                 } else {
                     $location.path('/');
@@ -14,18 +14,13 @@
         
         $scope.onConfirmDelete = function () {
             Recipe.remove($routeParams.id).then(function (response) {
-                $scope.successRedirect();
+                Notifier.notify('Recipe deleted');
+                $location.path('/recipe');
             });
         };
         
         $scope.onCancelDelete = function () {
             $location.path('/recipe/view/' + $routeParams.id);
-        };
-        
-        // TODO: BaseCtrl.successRedirect(msg, path)
-        $scope.successRedirect = function () {
-            Notifier.notify('Recipe delete');
-            $location.path('/recipe');
         };
 
         // initialize

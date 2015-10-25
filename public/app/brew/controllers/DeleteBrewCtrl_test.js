@@ -54,7 +54,7 @@
         });
         
         it('Retrieves the specified brew and saves it if the current user owns it.', function () {
-            $scope.getBrew(mockBrew._id);
+            expect(BrewMock.getByBrewId).toHaveBeenCalledWith(mockBrew._id);
             $scope.$apply();
             expect($scope.brew).toEqual(mockBrew);
         });

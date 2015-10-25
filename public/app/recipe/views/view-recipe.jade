@@ -19,10 +19,10 @@
                     td {{ recipe.description }}
                 
     .col-md-8.col-md-offset-2
-        .btn.btn-danger(ng-click="doDelete()", ng-show="recipeSvc.isRecipeOwnedByCurrentUser(recipe)")  
+        .btn.btn-danger(ng-click="doDelete()", ng-show="isRecipeOwnedByCurrentUser()")
             .pull-right &nbsp;Delete
             span.glyphicon.glyphicon-remove 
         .pull-right
-            .btn.btn-default(ng-click="doEdit()", ng-show="recipeSvc.isRecipeOwnedByCurrentUser(recipe)") 
+            .btn.btn-default(ng-click="doEdit()", ng-show="isRecipeOwnedByCurrentUser()") 
                 .pull-right &nbsp;Modify
                 span.glyphicon.glyphicon-pencil  
