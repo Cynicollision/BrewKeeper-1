@@ -21,7 +21,7 @@
         };
 
         $scope.getRecipeBrewCount = function (recipeId) {
-            Recipe.getCount(recipeId).then(function (response) {
+            Recipe.getBrewCount(recipeId).then(function (response) {
                 var timesBrewed = response.data.count;
                 $scope.recipe.timesBrewed = timesBrewed;
             });

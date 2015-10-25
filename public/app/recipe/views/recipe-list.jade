@@ -1,8 +1,10 @@
 ﻿.container.top-padding-med
     .btn.btn-default(ng-click="doAdd()")
         span.glyphicon.glyphicon-plus  
-    .pull-right.h3 My Recipes
-    table.table.table-hover.table-striped.table-condensed
+    .pull-right.h4 My Recipes
+    .col-md-12.text-center(ng-show="showNoRecipes") You have no recipes! You should
+        a(href="/recipe/add")&nbsp;add one.
+    table.table.table-hover.table-striped.table-condensed(ng-show="!showNoRecipes")
         thead
             tr
                 th.col-md-6

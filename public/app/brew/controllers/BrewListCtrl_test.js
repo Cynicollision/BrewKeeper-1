@@ -3,23 +3,23 @@
 
     describe('brew/BrewListCtrl', function () {
         var mockUserId = 82589,
-            $scope, BrewMock, IdentityMock, RecipeMock, mockBrews;
-        
-        mockBrews = [
-            { _id: 1, name: 'brew1' },
-            { _id: 2, name: 'brew2' },
-            { _id: 3, name: 'brew3' },
-            { _id: 4, name: 'brew4' },
-            { _id: 5, name: 'brew5' },
-            { _id: 6, name: 'brew6' }
-        ];
+            $scope, BrewMock, IdentityMock, mockBrews;
         
         beforeEach(function () {
             module('BrewKeeper');
+
             BrewMock = jasmine.createSpyObj('Brew', ['getByUserId', 'getCountByUserId']);
             IdentityMock = jasmine.createSpyObj('Identity', ['getCurrentUserId']);
-            RecipeMock = jasmine.createSpyObj('Recipe', ['getByRecipeId']);
-                      
+            
+            mockBrews = [
+                { _id: 1, name: 'brew1' },
+                { _id: 2, name: 'brew2' },
+                { _id: 3, name: 'brew3' },
+                { _id: 4, name: 'brew4' },
+                { _id: 5, name: 'brew5' },
+                { _id: 6, name: 'brew6' }
+            ];
+
             inject(function ($rootScope, $controller, $q) {
                 $scope = $rootScope.$new();
                 $scope.recipeNames = [];
@@ -45,7 +45,6 @@
                 IdentityMock.getCurrentUserId.and.callFake(function () {
                     return mockUserId;
                 });
-
                 
                 $controller('BrewListCtrl', {
                     $scope: $scope,

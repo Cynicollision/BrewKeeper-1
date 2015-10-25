@@ -1,10 +1,14 @@
 ﻿angular.module('BrewKeeper').controller('RecipeListCtrl', function ($scope, $location, Identity, Recipe) {
+    
     $scope.getCurrentUserRecipes = function () {
         Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
             $scope.recipes = response.data;
+            
+            console.log($scope.recipes.length);
+            $scope.showNoRecipes = ($scope.recipes.length === 0); 
         });
     };
-    
+
     $scope.doAdd = function () {
         $location.path('/recipe/add');
     };
@@ -16,5 +20,6 @@
     
     // initialize
     $scope.predicate = 'name';
+    $scope.showNoRecipes = false;
     $scope.getCurrentUserRecipes();
 });

@@ -18,7 +18,7 @@
 
             BrewMock = jasmine.createSpyObj('BrewMock', ['save']);
             IdentityMock = jasmine.createSpyObj('IdentityMock', ['getCurrentUserId']);
-            RecipeMock = jasmine.createSpyObj('RecipeMock', ['getByUserId', 'getCount']);
+            RecipeMock = jasmine.createSpyObj('RecipeMock', ['getByUserId', 'getBrewCount']);
             
             inject(function ($rootScope, $controller, $location, $q) {
                 $scope = $rootScope.$new();
@@ -40,7 +40,7 @@
                     return dfd.promise;
                 });
                 
-                RecipeMock.getCount.and.callFake(function () {
+                RecipeMock.getBrewCount.and.callFake(function () {
                     var dfd = $q.defer();
                     dfd.resolve({
                         data: {
@@ -87,7 +87,7 @@
             $scope.brewRecipe = mockRecipeCollection[0];
             $scope.updateName();
             $scope.$apply();
-            expect(RecipeMock.getCount).toHaveBeenCalledWith($scope.brewRecipe._id);
+            expect(RecipeMock.getBrewCount).toHaveBeenCalledWith($scope.brewRecipe._id);
             expect($scope.brewName).toEqual($scope.brewRecipe.name + ' #' + (mockRecipeBrewCount + 1));
         });
     });

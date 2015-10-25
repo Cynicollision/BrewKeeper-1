@@ -38,7 +38,7 @@
             var recipeId = $scope.brewRecipe._id,
                 recipeName = $scope.brewRecipe.name;
             
-            Recipe.getCount(recipeId).then(function (response) {
+            Recipe.getBrewCount(recipeId).then(function (response) {
                 $scope.brewName = recipeName + ' #' + (response.data.count + 1);
                 
             }, function (reason) {
