@@ -4,13 +4,12 @@
     angular.module('BrewKeeper').controller('BrewListCtrl', function ($scope, $location, Brew, BrewStatus, Identity) {
         var recipeId, brewStatuses;
             
-
         $scope.getTopCurrentUserBrews = function () {
             var userId = Identity.getCurrentUserId();
             
             Brew.getCountByUserId(userId).then(function (response) {
                 var brewCount = response.data.count;
-                
+
                 if (brewCount === 0) {
                     $scope.showNoBrews = true;
                 }
@@ -25,8 +24,6 @@
                     $scope.getAllCurrentUserBrews();
                 }
             });
-
-
         };
         
         $scope.getAllCurrentUserBrews = function () {
