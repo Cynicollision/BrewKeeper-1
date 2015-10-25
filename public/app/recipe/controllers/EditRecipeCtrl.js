@@ -1,19 +1,17 @@
 ﻿(function () {
     'use strict';
     
-    angular.module('BrewKeeper').controller('EditRecipeCtrl', function ($scope, $routeParams, $location, Recipe, Identity, Notifier) {
+    angular.module('BrewKeeper').controller('EditRecipeCtrl', function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
         $scope.getRecipe = function (recipeId) {
             Recipe.getByRecipeId(recipeId).then(function (response) {
-                $scope.setCurrentRecipe(response.data);
-            });
-        };
+                var recipe = response.data;
 
-        $scope.setCurrentRecipe = function (recipe) {
-            $scope.recipeId = recipe._id;
-            $scope.recipeName = recipe.name;
-            $scope.recipeDescription = recipe.description;
-            $scope.recipeSourceName = recipe.sourceName;
-            $scope.recipeSourceUrl = recipe.sourceUrl;
+                $scope.recipeId = recipe._id;
+                $scope.recipeName = recipe.name;
+                $scope.recipeDescription = recipe.description;
+                $scope.recipeSourceName = recipe.sourceName;
+                $scope.recipeSourceUrl = recipe.sourceUrl;
+            });
         };
 
         $scope.getFormRecipeData = function () {

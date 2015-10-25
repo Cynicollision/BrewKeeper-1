@@ -3,8 +3,6 @@
     $scope.getCurrentUserRecipes = function () {
         Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
             $scope.recipes = response.data;
-            
-            console.log($scope.recipes.length);
             $scope.showNoRecipes = ($scope.recipes.length === 0); 
         });
     };

@@ -17,6 +17,7 @@
         
         beforeEach(function () {
             module('BrewKeeper');
+
             BrewMock = jasmine.createSpyObj('BrewMock', ['getByBrewId', 'update']);
             RecipeMock = jasmine.createSpyObj('RecipeMock', ['getByUserId']);
             
@@ -87,7 +88,7 @@
             expect($scope.brewChillDate).toEqual('5/13/2013');
         });
         
-        it('Can retrieve the updated brew data bound to the scope.', function () {
+        it('Can retrieve the updated brew data from the $scope.', function () {
             $scope.brewId = 986;
             $scope.brewBatchSize = 6;
             $scope.brewDescription = 'brew test';
@@ -113,7 +114,7 @@
             expect(updatedData.chillDate).toEqual('4/15/2015');
         });
         
-        it('Calls the Brew service with the updated brew data.', function () {
+        it('Submits the updated brew data to the Brew service.', function () {
             $scope.brewRecipe = {
                 id: 0
             };
