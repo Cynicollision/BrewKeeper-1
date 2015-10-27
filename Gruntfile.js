@@ -1,61 +1,129 @@
-﻿module.exports = function (grunt) {
-    var angularFiles, vendorFiles, serverFiles;
-    
-    angularFiles = [
-        'public/app/app.js',
-        'public/app/account/controllers/*.js',
-        'public/app/account/services/*.js',
-        'public/app/brew/controllers/*.js',
-        'public/app/brew/services/*.js',
-        'public/app/common/services/*.js',
-        'public/app/main/controllers/*.js',
-        'public/app/recipe/services/*.js',
-        'public/app/recipe/controllers/*.js'
-    ];
-    
-    vendorFiles = [
-        'public/vendor/angular/angular.js',
-        'public/vendor/angular-resource/angular-resource.js',
-        'public/vendor/angular-route/angular-route.js',
-        'public/vendor/angular-mocks/angular-mocks.js',
-        'public/vendor/jquery/dist/jquery.js',
-        'public/vendor/toastr/toastr.js'
-    ];
-    
-    serverFiles = [
-        'server.js', 
-        'server/controllers/*.js',
-        'server/config/*.js',
-        'server/models/*.js',
-        'server/utilities/*.js'
-    ];
+﻿(function () {
+    'use strict';
 
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+    module.exports = function (grunt) {
 
-        jshint: {
-            all: serverFiles.concat(angularFiles)
-        },
+        // load tasks
+        grunt.loadNpmTasks('grunt-exec');
+        grunt.loadNpmTasks('grunt-contrib-clean');
+        grunt.loadNpmTasks('grunt-contrib-jasmine');
+        grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-contrib-uglify');
+        //grunt.loadNpmTasks('grunt-contrib-concat');
 
-        jasmine: {
-            'angular-tests': {
-                src: vendorFiles.concat(angularFiles)
-            }
-		},
+        
+        var fileLists = getFileLists(),
+            allProdFiles = fileLists.vendorMinFiles.concat(fileLists.appProdFiles);
 
-		exec: {
-			mongod_local: 'mongod --dbpath C:\\mongodata'
-		}
-	});
-	
+        console.log('Production app files (incl. vendor): ' + allProdFiles.length);
+        
+        grunt.initConfig({
+            pkg: grunt.file.readJSON('package.json'),
+            
+            exec: {
+                mongod_local: 'mongod --dbpath C:\\mongodata'
+            },
+            
+            jshint: {
+                all: fileLists.serverFiles.concat(fileLists.appFilesWithTests)
+            },
+            
+            jasmine: {
+                'angular-tests': {
+                    src: fileLists.vendorDebugFiles.concat(fileLists.appFilesWithTests)
+                }
+            },
+            
+            clean: {
+                'public/brewkeeper.min.js': [ 'public/brewkeeper.min.js' ]
+            },
+            
+            uglify: {
+                all: {
+                    files: {
+                        'public/brewkeeper.min.js': [
+                            fileLists.appProdFiles
+                        ]
+                    }
+                }
+            },
+        });
 
-	grunt.loadNpmTasks('grunt-exec');
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    
-	grunt.registerTask('test', ['jshint', 'jasmine']);
-	grunt.registerTask('mongod', 'exec');
-	grunt.registerTask('default', function () {
-        grunt.log.write('So vast!').ok();
-    });
-};
+        grunt.registerTask('test', ['jshint', 'jasmine']);
+        grunt.registerTask('mongod', 'exec');
+        grunt.registerTask('build', ['clean', 'uglify']);
+        
+        grunt.registerTask('default', function () {
+            grunt.log.write('So vast!').ok();
+        });
+    };
+
+    function getFileLists() {
+        return {
+            appFilesWithTests: [
+                'public/app/app.js',
+                'public/app/account/controllers/*.js',
+                'public/app/account/services/*.js',
+                'public/app/brew/controllers/*.js',
+                'public/app/brew/services/*.js',
+                'public/app/common/services/*.js',
+                'public/app/main/controllers/*.js',
+                'public/app/recipe/services/*.js',
+                'public/app/recipe/controllers/*.js'
+            ],
+            
+            vendorDebugFiles: [
+                'public/vendor/angular/angular.js',
+                'public/vendor/angular-resource/angular-resource.js',
+                'public/vendor/angular-route/angular-route.js',
+                'public/vendor/angular-mocks/angular-mocks.js',
+                'public/vendor/jquery/dist/jquery.js',
+                'public/vendor/toastr/toastr.js'
+            ],
+            
+            vendorMinFiles: [
+                'public/vendor/angular/angular.min.js',
+                'public/vendor/angular-resource/angular-resource.min.js',
+                'public/vendor/angular-route/angular-route.min.js',
+                'public/vendor/jquery/dist/jquery.min.js',
+                'public/vendor/toastr/toastr.min.js'
+            ],
+            
+            serverFiles: [
+                'server.js', 
+                'server/controllers/*.js',
+                'server/config/*.js',
+                'server/models/*.js',
+                'server/utilities/*.js'
+            ],
+            
+            appProdFiles: [
+                'public/app/app.js',
+                'public/app/account/controllers/EditProfileCtrl.js',
+                'public/app/account/controllers/NavBarLoginCtrl.js',
+                'public/app/account/controllers/SignupCtrl.js',
+                'public/app/account/services/Auth.js',
+                'public/app/account/services/Identity.js',
+                'public/app/account/services/User.js',
+                'public/app/brew/controllers/AddBrewCtrl.js',
+                'public/app/brew/controllers/BaseAddEditBrewCtrl.js',
+                'public/app/brew/controllers/BrewListCtrl.js',
+                'public/app/brew/controllers/DeleteBrewCtrl.js',
+                'public/app/brew/controllers/EditBrewCtrl.js',
+                'public/app/brew/controllers/ViewBrewCtrl.js',
+                'public/app/brew/services/Brew.js',
+                'public/app/brew/services/BrewStatus.js',
+                'public/app/common/services/BrewKeeperApi.js',
+                'public/app/common/services/DatePicker.js',
+                'public/app/common/services/Notifier.js',
+                'public/app/main/controllers/MainCtrl.js',
+                'public/app/recipe/controllers/AddRecipeCtrl.js',
+                'public/app/recipe/controllers/DeleteRecipeCtrl.js',
+                'public/app/recipe/controllers/EditRecipeCtrl.js',
+                'public/app/recipe/controllers/RecipeListCtrl.js',
+                'public/app/recipe/controllers/ViewRecipeCtrl.js',
+                'public/app/recipe/services/Recipe.js'
+            ],
+        }
+    }
+})();

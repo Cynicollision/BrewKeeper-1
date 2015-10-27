@@ -13,7 +13,9 @@
         production: {
             db: 'mongodb://brewkeeper:keeperbrew@ds051833.mongolab.com:51833/heroku_lm132nw3',
             rootPath: rootPath,
-            port: process.env.PORT || 80
+            port: 3030
+            // TODO: UNDO THIS!
+            //port: process.env.PORT || 80
         }
     };
 })();
