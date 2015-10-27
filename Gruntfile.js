@@ -9,9 +9,8 @@
         grunt.loadNpmTasks('grunt-contrib-jasmine');
         grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-contrib-uglify');
-        //grunt.loadNpmTasks('grunt-contrib-concat');
+        grunt.loadNpmTasks('grunt-contrib-concat');
 
-        
         var fileLists = getFileLists(),
             allProdFiles = fileLists.vendorMinFiles.concat(fileLists.appProdFiles);
 
@@ -47,11 +46,18 @@
                     }
                 }
             },
+
+            concat: {
+                dist: {
+                    src: fileLists.vendorMinFiles.concat(['public/brewkeeper.min.js']),
+                    dest: 'public/application.js',
+                },
+            }
         });
 
         grunt.registerTask('test', ['jshint', 'jasmine']);
         grunt.registerTask('mongod', 'exec');
-        grunt.registerTask('build', ['clean', 'uglify']);
+        grunt.registerTask('build', ['clean', 'uglify', 'concat']);
         
         grunt.registerTask('default', function () {
             grunt.log.write('So vast!').ok();
@@ -86,6 +92,8 @@
                 'public/vendor/angular-resource/angular-resource.min.js',
                 'public/vendor/angular-route/angular-route.min.js',
                 'public/vendor/jquery/dist/jquery.min.js',
+                'vendor/bootstrap/dist/js/bootstrap.min.js',
+                'vendor/datepicker/js/bootstrap-datepicker.js',
                 'public/vendor/toastr/toastr.min.js'
             ],
             
