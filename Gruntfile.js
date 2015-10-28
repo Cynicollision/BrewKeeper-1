@@ -34,7 +34,12 @@
             },
             
             clean: {
-                'public/brewkeeper.min.js': [ 'public/brewkeeper.min.js' ]
+                'public/brewkeeper.min.js': [ 
+                    'public/application.js',
+                    'public/application-debug.js',
+                    'public/application-debug.min.js',
+                    'public/brewkeeper.min.js',
+                ]
             },
             
             uglify: {
@@ -52,7 +57,18 @@
                     src: fileLists.vendorMinFiles.concat(['public/brewkeeper.min.js']),
                     dest: 'public/application.js',
                 },
-            }
+                
+                debug: {
+                    src: fileLists.vendorDebugFiles.concat(fileLists.appProdFiles),
+                    dest: 'public/application-debug.js',
+                },
+                
+                // TODO: working, but is this needed? not-minified vendorcode w/ minified app code?
+                debugMin: {
+                    src: fileLists.vendorDebugFiles.concat(['public/brewkeeper.min.js']),
+                    dest: 'public/application-debug.min.js',
+                }
+            },
         });
 
         grunt.registerTask('test', ['jshint', 'jasmine']);
@@ -79,21 +95,23 @@
             ],
             
             vendorDebugFiles: [
+                'public/vendor/jquery/dist/jquery.js',
                 'public/vendor/angular/angular.js',
                 'public/vendor/angular-resource/angular-resource.js',
                 'public/vendor/angular-route/angular-route.js',
                 'public/vendor/angular-mocks/angular-mocks.js',
-                'public/vendor/jquery/dist/jquery.js',
+                'public/vendor/bootstrap/dist/js/bootstrap.js',
+                'public/vendor/datepicker/js/bootstrap-datepicker.js',
                 'public/vendor/toastr/toastr.js'
             ],
             
             vendorMinFiles: [
+                'public/vendor/jquery/dist/jquery.min.js',
                 'public/vendor/angular/angular.min.js',
                 'public/vendor/angular-resource/angular-resource.min.js',
                 'public/vendor/angular-route/angular-route.min.js',
-                'public/vendor/jquery/dist/jquery.min.js',
-                'vendor/bootstrap/dist/js/bootstrap.min.js',
-                'vendor/datepicker/js/bootstrap-datepicker.js',
+                'public/vendor/bootstrap/dist/js/bootstrap.min.js',
+                'public/vendor/datepicker/js/bootstrap-datepicker.js',
                 'public/vendor/toastr/toastr.min.js'
             ],
             
