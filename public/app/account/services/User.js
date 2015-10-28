@@ -1,13 +1,16 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('BrewKeeper').factory('User', function ($resource) {
-        var UserResource = $resource('/api/users/:id', { _id: "@id" });
+    var bk = angular.module('BrewKeeper');
+    bk.factory('User', ['$resource', 
+        function ($resource) {
+            var UserResource = $resource('/api/users/:id', { _id: "@id" });
         
-        UserResource.prototype.isAdmin = function () {
-            return this.roles && this.roles.indexOf('admin') > -1;
-        };
+            UserResource.prototype.isAdmin = function () {
+                return this.roles && this.roles.indexOf('admin') > -1;
+            };
         
-        return UserResource;
-    });
+            return UserResource;
+        }
+    ]);
 })();

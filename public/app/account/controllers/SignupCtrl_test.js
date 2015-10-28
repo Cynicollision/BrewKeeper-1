@@ -57,12 +57,5 @@
                 lastName: 'zzzz'
             });
         });
-
-        it('Shows a success message and redirects to index after creating an account.', function () {
-            location.path('/signup');
-            $scope.successRedirect();
-            expect(Notifier.notify).toHaveBeenCalled();
-            expect(location.path()).toBe('/');
-        });
     });
 })();
