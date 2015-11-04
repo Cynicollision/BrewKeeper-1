@@ -2203,4 +2203,1219 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
 
 }));
 !function(e){e(["jquery"],function(e){return function(){function t(e,t,n){return f({type:O.error,iconClass:g().iconClasses.error,message:e,optionsOverride:n,title:t})}function n(t,n){return t||(t=g()),v=e("#"+t.containerId),v.length?v:(n&&(v=c(t)),v)}function i(e,t,n){return f({type:O.info,iconClass:g().iconClasses.info,message:e,optionsOverride:n,title:t})}function o(e){w=e}function s(e,t,n){return f({type:O.success,iconClass:g().iconClasses.success,message:e,optionsOverride:n,title:t})}function a(e,t,n){return f({type:O.warning,iconClass:g().iconClasses.warning,message:e,optionsOverride:n,title:t})}function r(e){var t=g();v||n(t),l(e,t)||u(t)}function d(t){var i=g();return v||n(i),t&&0===e(":focus",t).length?void h(t):void(v.children().length&&v.remove())}function u(t){for(var n=v.children(),i=n.length-1;i>=0;i--)l(e(n[i]),t)}function l(t,n){return t&&0===e(":focus",t).length?(t[n.hideMethod]({duration:n.hideDuration,easing:n.hideEasing,complete:function(){h(t)}}),!0):!1}function c(t){return v=e("<div/>").attr("id",t.containerId).addClass(t.positionClass).attr("aria-live","polite").attr("role","alert"),v.appendTo(e(t.target)),v}function p(){return{tapToDismiss:!0,toastClass:"toast",containerId:"toast-container",debug:!1,showMethod:"fadeIn",showDuration:300,showEasing:"swing",onShown:void 0,hideMethod:"fadeOut",hideDuration:1e3,hideEasing:"swing",onHidden:void 0,extendedTimeOut:1e3,iconClasses:{error:"toast-error",info:"toast-info",success:"toast-success",warning:"toast-warning"},iconClass:"toast-info",positionClass:"toast-top-right",timeOut:5e3,titleClass:"toast-title",messageClass:"toast-message",target:"body",closeHtml:'<button type="button">&times;</button>',newestOnTop:!0,preventDuplicates:!1,progressBar:!1}}function m(e){w&&w(e)}function f(t){function i(t){return!e(":focus",l).length||t?(clearTimeout(O.intervalId),l[r.hideMethod]({duration:r.hideDuration,easing:r.hideEasing,complete:function(){h(l),r.onHidden&&"hidden"!==b.state&&r.onHidden(),b.state="hidden",b.endTime=new Date,m(b)}})):void 0}function o(){(r.timeOut>0||r.extendedTimeOut>0)&&(u=setTimeout(i,r.extendedTimeOut),O.maxHideTime=parseFloat(r.extendedTimeOut),O.hideEta=(new Date).getTime()+O.maxHideTime)}function s(){clearTimeout(u),O.hideEta=0,l.stop(!0,!0)[r.showMethod]({duration:r.showDuration,easing:r.showEasing})}function a(){var e=(O.hideEta-(new Date).getTime())/O.maxHideTime*100;f.width(e+"%")}var r=g(),d=t.iconClass||r.iconClass;if("undefined"!=typeof t.optionsOverride&&(r=e.extend(r,t.optionsOverride),d=t.optionsOverride.iconClass||d),r.preventDuplicates){if(t.message===C)return;C=t.message}T++,v=n(r,!0);var u=null,l=e("<div/>"),c=e("<div/>"),p=e("<div/>"),f=e("<div/>"),w=e(r.closeHtml),O={intervalId:null,hideEta:null,maxHideTime:null},b={toastId:T,state:"visible",startTime:new Date,options:r,map:t};return t.iconClass&&l.addClass(r.toastClass).addClass(d),t.title&&(c.append(t.title).addClass(r.titleClass),l.append(c)),t.message&&(p.append(t.message).addClass(r.messageClass),l.append(p)),r.closeButton&&(w.addClass("toast-close-button").attr("role","button"),l.prepend(w)),r.progressBar&&(f.addClass("toast-progress"),l.prepend(f)),l.hide(),r.newestOnTop?v.prepend(l):v.append(l),l[r.showMethod]({duration:r.showDuration,easing:r.showEasing,complete:r.onShown}),r.timeOut>0&&(u=setTimeout(i,r.timeOut),O.maxHideTime=parseFloat(r.timeOut),O.hideEta=(new Date).getTime()+O.maxHideTime,r.progressBar&&(O.intervalId=setInterval(a,10))),l.hover(s,o),!r.onclick&&r.tapToDismiss&&l.click(i),r.closeButton&&w&&w.click(function(e){e.stopPropagation?e.stopPropagation():void 0!==e.cancelBubble&&e.cancelBubble!==!0&&(e.cancelBubble=!0),i(!0)}),r.onclick&&l.click(function(){r.onclick(),i()}),m(b),r.debug&&console&&console.log(b),l}function g(){return e.extend({},p(),b.options)}function h(e){v||(v=n()),e.is(":visible")||(e.remove(),e=null,0===v.children().length&&(v.remove(),C=void 0))}var v,w,C,T=0,O={error:"error",info:"info",success:"success",warning:"warning"},b={clear:r,remove:d,error:t,getContainer:n,info:i,options:{},subscribe:o,success:s,version:"2.1.0",warning:a};return b}()})}("function"==typeof define&&define.amd?define:function(e,t){"undefined"!=typeof module&&module.exports?module.exports=t(require("jquery")):window.toastr=t(window.jQuery)});
-!function(){"use strict";var a=angular.module("BrewKeeper",["ngResource","ngRoute"]);a.config(["$routeProvider","$locationProvider",function(a,b){var c={admin:{auth:function(a){return a.authorizeCurrentUserForRoute("admin")}},user:{auth:function(a){return a.authorizeAuthenticatedUserForRoute()}}};b.html5Mode({enabled:!0,requireBase:!1}),a.when("/",{templateUrl:"/partials/main/views/main",controller:"MainCtrl"}).when("/signup",{templateUrl:"/partials/account/views/signup",controller:"SignupCtrl"}).when("/profile",{templateUrl:"/partials/account/views/profile",controller:"EditProfileCtrl",resolve:c.user}).when("/brew",{templateUrl:"/partials/brew/views/brew-list",controller:"BrewListCtrl"}).when("/brew/add",{templateUrl:"/partials/brew/views/edit-brew",controller:"AddBrewCtrl"}).when("/brew/view/:id",{templateUrl:"/partials/brew/views/view-brew",controller:"ViewBrewCtrl"}).when("/brew/edit/:id",{templateUrl:"/partials/brew/views/edit-brew",controller:"EditBrewCtrl"}).when("/brew/delete/:id",{templateUrl:"/partials/brew/views/delete-brew",controller:"DeleteBrewCtrl"}).when("/recipe",{templateUrl:"/partials/recipe/views/recipe-list",controller:"RecipeListCtrl"}).when("/recipe/view/:id",{templateUrl:"/partials/recipe/views/view-recipe",controller:"ViewRecipeCtrl"}).when("/recipe/add",{templateUrl:"/partials/recipe/views/edit-recipe",controller:"AddRecipeCtrl"}).when("/recipe/edit/:id",{templateUrl:"/partials/recipe/views/edit-recipe",controller:"EditRecipeCtrl"}).when("/recipe/delete/:id",{templateUrl:"/partials/recipe/views/delete-recipe",controller:"DeleteRecipeCtrl"})}]),angular.module("BrewKeeper").run(["$rootScope","$location",function(a,b){a.$on("$routeChangeError",function(a,c,d,e){"not authorized"===e&&b.path("/")})}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("EditProfileCtrl",["$scope","Auth","Identity","Notifier",function(a,b,c,d){a.setScopeInitialUserData=function(b){a.email=b.username,a.fname=b.firstName,a.lname=b.lastName},a.getScopeUpdatedUserData=function(){return{username:a.email,firstName:a.fname,lastName:a.lname}},a.update=function(){var c=a.getScopeUpdatedUserData();a.password&&a.password.length>0&&(c.password=a.password),b.updateCurrentUser(c).then(function(){d.notify("Your user account has been updated.")},function(a){d.error(a)})},a.setScopeInitialUserData(c.currentUser)}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("NavBarLoginCtrl",["$scope","$location","Auth","Identity","Notifier",function(a,b,c,d,e){a.identity=d,a.signout=function(){c.logoutUser().then(function(){a.clearCurrentUser(),$(".navbar-collapse").collapse("hide"),e.notify("Logged out"),b.path("/")})},a.clearCurrentUser=function(){a.username="",a.password=""}}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("SignupCtrl",["$scope","$location","Auth","Notifier",function(a,b,c,d){a.getNewUserData=function(){return{username:a.username,password:a.password,firstName:a.firstName,lastName:a.lastName}},a.signup=function(){var e=a.getNewUserData();c.createUser(e).then(function(){c.authenticateUser(e.username,e.password).then(function(){d.notify("User account created!"),b.path("/")},function(a){d.error(a)})},function(a){d.error(a)}),$(".navbar-collapse")&&$(".navbar-collapse").collapse&&$(".navbar-collapse").collapse("hide")}}])}(),function(){"use strict";angular.module("BrewKeeper").factory("Auth",["$q","BrewKeeperApi","Identity","User",function(a,b,c,d){return{authenticateUser:function(e,f){var g=a.defer(),h={username:e,password:f};return b.post("/login",h).then(function(a){if(a.data.success){var b=new d;angular.extend(b,a.data.user),c.currentUser=b,g.resolve(a.data)}else g.resolve(!1)}),g.promise},createUser:function(e){var f=a.defer(),g=new d(e);return b.post("/api/users/",e).then(function(){c.currentUser=g,f.resolve(g)},function(a){f.reject(a.data.reason)}),f.promise},updateCurrentUser:function(d){var e=a.defer(),f=angular.copy(c.currentUser);return angular.extend(f,d),b.put("/api/users/",d).then(function(){c.currentUser=f,e.resolve(!0)},function(a){e.reject(a.data.reason)}),e.promise},logoutUser:function(){var d=a.defer();return b.post("/logout",{logout:!0}).then(function(a){c.currentUser=void 0,d.resolve(!0)}),d.promise},authorizeCurrentUserForRoute:function(b){return c.isAuthorized(b)?!0:a.reject("not authorized")},authorizeAuthenticatedUserForRoute:function(){return c.isAuthenticated()?!0:a.reject("not authorized")}}}])}(),function(){"use strict";angular.module("BrewKeeper").service("Identity",["$window","User",function(a,b){this.currentUser=null,this.bootstrapCurrentUserFromWindow=function(){a.bkCurrentUser&&(this.currentUser=new b,angular.extend(this.currentUser,a.bkCurrentUser))},this.getCurrentUserId=function(){return this.currentUser?this.currentUser._id:-1},this.isAuthenticated=function(){return!!this.currentUser},this.isAuthorized=function(a){return!!this.currentUser&&this.currentUser.roles.indexOf(a)>-1},this.bootstrapCurrentUserFromWindow()}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.factory("User",["$resource",function(a){var b=a("/api/users/:id",{_id:"@id"});return b.prototype.isAdmin=function(){return this.roles&&this.roles.indexOf("admin")>-1},b}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("AddBrewCtrl",["$scope","$controller","Brew","BrewStatus","DatePicker","Identity","Notifier","Recipe",function(a,b,c,d,e,f,g,h){b("BaseAddEditBrewCtrl",{$scope:a}),a.getCurrentUserRecipes=function(){h.getByUserId(f.getCurrentUserId()).then(function(b){a.recipes=b.data,a.hasRecipes=!!a.recipes.length,a.recipes&&a.recipes.length&&(a.brewRecipe=a.recipes[0],a.updateName())})},a.submitBrew=function(){var b=a.getFormBrewData();c.save(b).then(function(b){a.successRedirect("Brew added","/brew/")},function(a){g.error(a)})},a.setDefaultControlValues=function(){a.statuses&&(a.brewStatusCde=a.statuses[0]),a.brewBatchSize=1},a.updateName=function(){var b=a.brewRecipe._id,c=a.brewRecipe.name;h.getBrewCount(b).then(function(b){a.brewName=c+" #"+(b.data.count+1)},function(a){g.error(a)})},a.brewUrl="/brew/",a.statuses=d.getStatuses(),a.setDefaultControlValues(),a.getCurrentUserRecipes()}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("BaseAddEditBrewCtrl",["$scope","$location","Identity","Notifier",function(a,b,c,d){a.getFormBrewData=function(){return{id:a.brewId,name:a.brewName,batchSize:a.brewBatchSize,description:a.brewDescription,ownerId:c.getCurrentUserId(),recipeId:a.brewRecipe._id,statusCde:a.brewStatusCde?a.brewStatusCde.id:-1,brewDate:a.brewBrewDate,bottleDate:a.brewBottleDate,chillDate:a.brewChillDate}},a.successRedirect=function(a,c){d.notify(a),b.path(c)}}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("BrewListCtrl",["$scope","$location","Brew","BrewStatus","Identity",function(a,b,c,d,e){a.getTopCurrentUserBrews=function(){var b=e.getCurrentUserId();c.getCountByUserId(b).then(function(d){var e=d.data.count;a.showNoBrews=0===e,e>a.listLimit?(a.limitResults=!0,c.getByUserId(b,a.listLimit).then(function(b){a.brews=b.data})):a.getAllCurrentUserBrews()})},a.getAllCurrentUserBrews=function(){a.limitResults=!1;var b=e.getCurrentUserId();c.getByUserId(b).then(function(b){a.brews=b.data})},a.doAdd=function(){b.path("/brew/add")},a.order=function(b){a.reverse=a.predicate===b?!a.reverse:!1,a.predicate=b},a.listLimit=10,a.showNoBrews=!1,a.limitResults=!1,a.brews=null,a.predicate="brewDate",a.reverse=!0,a.getStatusDisplay=d.getDisplay,a.getTopCurrentUserBrews()}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("DeleteBrewCtrl",["$scope","$routeParams","$location","Brew","Identity","Notifier",function(a,b,c,d,e,f){a.getBrew=function(b){d.getByBrewId(b).then(function(b){d.isBrewOwnedByUser(b.data,e.getCurrentUserId())?a.brew=b.data:c.path("/")})},a.onConfirmDelete=function(){d.remove(b.id).then(function(a){f.notify("Brew deleted"),c.path("/brew")})},a.onCancelDelete=function(){c.path("/brew/view/"+b.id)},a.brew=null,a.getBrew(b.id)}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("EditBrewCtrl",["$scope","$controller","$filter","$routeParams","Brew","BrewStatus","DatePicker","Identity","Notifier","Recipe",function(a,b,c,d,e,f,g,h,i,j){b("BaseAddEditBrewCtrl",{$scope:a}),a.getBrew=function(b){e.getByBrewId(b).then(function(b){a.setCurrentBrew(b.data),a.getCurrentUserRecipes(b.data)})},a.getCurrentUserRecipes=function(b){j.getByUserId(h.getCurrentUserId()).then(function(c){a.recipes=c.data,a.hasRecipes=a.recipes.length>0,a.brewRecipe=a.recipes.filter(function(a){return b&&a._id===b.recipeId})[0]})},a.setCurrentBrew=function(b){a.brewId=b._id,a.brewName=b.name,a.brewBatchSize=b.batchSize,a.brewDescription=b.description,a.brewRecipe=b.recipeId,a.brewBrewDate=c("date")(b.brewDate,"M/d/yyyy"),a.brewBottleDate=c("date")(b.bottleDate,"M/d/yyyy"),a.brewChillDate=c("date")(b.chillDate,"M/d/yyyy"),a.brewUrl="/brew/view/"+a.brewId,a.brewStatusCde=a.statuses.filter(function(a){return a.id===b.statusCde})[0]},a.submitBrew=function(){var b=a.getFormBrewData(),c="/brew/view/"+a.brewId;e.update(b).then(function(){a.successRedirect("Brew updated",c)},function(a){i.error(a)})},a.statuses=f.getStatuses(),a.getBrew(d.id),a.getCurrentUserRecipes()}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("ViewBrewCtrl",["$scope","$routeParams","$location","$window","Brew","BrewStatus","Identity","Notifier","Recipe",function(a,b,c,d,e,f,g,h,i){a.statusLookup=f,a.getBrew=function(b){e.getByBrewId(b).then(function(b){a.brew=b.data,a.getRecipeName(a.brew.recipeId)},function(a){h.error(a),c.path("/brew")})},a.isBrewOwnedByCurrentUser=function(){return a.brew?e.isBrewOwnedByUser(a.brew,g.getCurrentUserId()):void 0},a.getRecipeName=function(b){i.getByRecipeId(b).then(function(b){a.recipeName=b.data.name},function(a){h.error(a)})},a.doEdit=function(){d.location="/brew/edit/"+a.brew._id},a.doDelete=function(){d.location="/brew/delete/"+a.brew._id},a.getBrew(b.id),a.recipeName=""}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.factory("Brew",["$q","BrewKeeperApi","Identity",function(a,b,c){return{isBrewOwnedByUser:function(a,b){return a?b===a.ownerId:!1},getAll:function(){var c=a.defer();return b.get("/api/brew/").then(function(a){c.resolve(a)},function(a){c.reject(a.data.reason)}),c.promise},getByUserId:function(c,d){var e,f=a.defer();return d||(d=-1),e="/api/brew/user/"+c+"/"+d,b.get(e).then(function(a){f.resolve(a)},function(a){f.reject(a.data.reason)}),f.promise},getCountByUserId:function(c){var d=a.defer(),e="/api/brew/user/count/"+c;return b.get(e).then(function(a){d.resolve(a)},function(a){d.reject(a)}),d.promise},getByBrewId:function(c){var d=a.defer(),e="/api/brew/"+c;return b.get(e).then(function(a){d.resolve(a)},function(a){d.reject(a.data.reason)}),d.promise},save:function(c){var d=a.defer();return b.post("/api/brew/",c).then(function(a){d.resolve(a)},function(a){d.reject(a.data.reason)}),d.promise},update:function(c){var d=a.defer();return b.put("/api/brew/",c).then(function(a){d.resolve(a)},function(a){d.reject(a.data.reason)}),d.promise},remove:function(c){var d=a.defer(),e="/api/brew/"+c;return b["delete"](e).then(function(a){d.resolve(a)},function(a){d.reject(a.data.reason)}),d.promise}}}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.factory("BrewStatus",function(){var a=[{id:0,name:"Not started yet"},{id:1,name:"Fermenting"},{id:2,name:"Bottled"},{id:3,name:"Chilling"},{id:4,name:"Gone"}];return{getDisplay:function(b){return b>=0&&b<a.length?a[b].name:"Invalid brewStatusCde"},getStatuses:function(){return a}}})}(),angular.module("BrewKeeper").factory("BrewKeeperApi",["$http",function(a){var b=function(a){var b=[];for(var c in a)b.push(encodeURIComponent(c)+"="+encodeURIComponent(a[c]));return b.join("&")};return{get:function(c){return a({method:"GET",isArray:!1,url:c,transformRequest:b,headers:{"Content-Type":"application/x-www-form-urlencoded"}})},post:function(c,d){return a({method:"POST",isArray:!1,url:c,data:d,transformRequest:b,headers:{"Content-Type":"application/x-www-form-urlencoded"}})},put:function(c,d){return a({method:"PUT",isArray:!1,url:c,data:d,transformRequest:b,headers:{"Content-Type":"application/x-www-form-urlencoded"}})},"delete":function(c){return a({method:"DELETE",isArray:!1,url:c,transformRequest:b,headers:{"Content-Type":"application/x-www-form-urlencoded"}})}}}]),function(){"use strict";angular.module("BrewKeeper").service("DatePicker",function(){$(".datepicker").datepicker&&$(".datepicker").datepicker({format:"m/d/yyyy",autoclose:!0,forceParse:!1})})}(),function(){"use strict";var a=angular.module("BrewKeeper");a.value("Toastr",toastr),a.service("Notifier",["Toastr",function(a){this.notify=function(b){a.success(b)},this.error=function(b){a.error(b)}}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("MainCtrl",["$scope","Auth","Identity","Notifier",function(a,b,c,d){a.identity=c,a.signin=function(a,c){b.authenticateUser(a,c).then(function(a){a||d.error("Username/password incorrect.")}),$(".navbar-collapse")&&$(".navbar-collapse").collapse&&$(".navbar-collapse").collapse("hide")}}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("AddRecipeCtrl",["$scope","$location","Recipe","Identity","Notifier",function(a,b,c,d,e){a.getFormRecipeData=function(){return{ownerId:d.getCurrentUserId(),name:a.recipeName,description:a.recipeDescription,sourceName:a.recipeSourceName,sourceUrl:a.recipeSourceUrl}},a.submitRecipe=function(){var d=a.getFormRecipeData();c.save(d).then(function(a){e.notify("Recipe added!"),b.path("/recipe")},function(a){e.error(a)})}}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("DeleteRecipeCtrl",["$scope","$routeParams","$location","Identity","Recipe","Notifier",function(a,b,c,d,e,f){a.getRecipe=function(b){e.getByRecipeId(b).then(function(b){e.isRecipeOwnedByUser(b.data),d.getCurrentUserId()?a.recipe=b.data:c.path("/")})},a.onConfirmDelete=function(){e.remove(b.id).then(function(a){f.notify("Recipe deleted"),c.path("/recipe")})},a.onCancelDelete=function(){c.path("/recipe/view/"+b.id)},a.recipe=null,a.getRecipe(b.id)}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("EditRecipeCtrl",["$scope","$routeParams","$location","Identity","Recipe","Notifier",function(a,b,c,d,e,f){a.getRecipe=function(b){e.getByRecipeId(b).then(function(b){var c=b.data;a.recipeId=c._id,a.recipeName=c.name,a.recipeDescription=c.description,a.recipeSourceName=c.sourceName,a.recipeSourceUrl=c.sourceUrl})},a.getFormRecipeData=function(){return{id:a.recipeId,ownerId:d.getCurrentUserId(),name:a.recipeName,description:a.recipeDescription,sourceName:a.recipeSourceName,sourceUrl:a.recipeSourceUrl}},a.submitRecipe=function(){var b=a.getFormRecipeData(),d="/recipe/view/"+a.recipeId;e.update(b).then(function(){f.notify("Recipe updated."),c.path(d)},function(a){f.error(a)})},a.getRecipe(b.id)}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("RecipeListCtrl",["$scope","$location","Identity","Recipe",function(a,b,c,d){a.getCurrentUserRecipes=function(){d.getByUserId(c.getCurrentUserId()).then(function(b){a.recipes=b.data,a.showNoRecipes=0===a.recipes.length})},a.doAdd=function(){b.path("/recipe/add")},a.order=function(b){a.reverse=a.predicate===b?!a.reverse:!1,a.predicate=b},a.predicate="name",a.showNoRecipes=!1,a.getCurrentUserRecipes()}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.controller("ViewRecipeCtrl",["$scope","$routeParams","$location","Identity","Recipe","Notifier",function(a,b,c,d,e,f){a.getRecipe=function(b){e.getByRecipeId(b).then(function(b){var c=b.data;a.recipe=c,a.recipe.sourceUrl=a.getRecipeUrl(c)},function(a){f.error(a),c.path("/recipe")})},a.isRecipeOwnedByCurrentUser=function(){return a.recipe?e.isRecipeOwnedByUser(a.recipe,d.getCurrentUserId()):void 0},a.getRecipeBrewCount=function(b){e.getBrewCount(b).then(function(b){var c=b.data.count;a.recipe.timesBrewed=c})},a.getRecipeUrl=function(a){return a.sourceUrl&&0!==a.sourceUrl.indexOf("http://")&&(a.sourceUrl="http://"+a.sourceUrl),a.sourceUrl},a.doEdit=function(){c.path("/recipe/edit/"+a.recipe._id)},a.doDelete=function(){c.path("/recipe/delete/"+a.recipe._id)},a.getRecipe(b.id),a.getRecipeBrewCount(b.id)}])}(),function(){"use strict";var a=angular.module("BrewKeeper");a.factory("Recipe",["$q","BrewKeeperApi","Identity",function(a,b,c){return{isRecipeOwnedByUser:function(a,b){return a?b===a.ownerId:!1},getAll:function(){var c=a.defer();return b.get("/api/recipe/").then(function(a){c.resolve(a)},function(a){c.reject(a.data.reason)}),c.promise},getByUserId:function(c){var d=a.defer(),e="/api/recipe/user/"+c;return b.get(e).then(function(a){d.resolve(a)},function(a){d.reject(a.data.reason)}),d.promise},getCountByUserId:function(c){var d=a.defer(),e="/api/recipe/user/count/"+c;return b.get(e).then(function(a){d.resolve(a)},function(a){d.reject(a)}),d.promise},getByRecipeId:function(c){var d=a.defer(),e="/api/recipe/"+c;return b.get(e).then(function(a){d.resolve(a)},function(a){d.reject(a.data.reason)}),d.promise},save:function(c){var d=a.defer();return b.post("/api/recipe/",c).then(function(a){d.resolve(a)},function(a){d.reject(a.data.reason)}),d.promise},update:function(c){var d=a.defer();return b.put("/api/recipe/",c).then(function(a){d.resolve(a)},function(a){d.reject(a.data.reason)}),d.promise},remove:function(c){var d=a.defer(),e="/api/recipe/"+c;return b["delete"](e).then(function(a){d.resolve(a)},function(a){d.reject(a)}),d.promise},getBrewCount:function(c){var d=a.defer(),e="/api/recipe/count/"+c;return b.get(e).then(function(a){d.resolve(a)},function(a){d.reject(a)}),d.promise}}}])}();
+(function () {
+    'use strict';
+
+    var bk = angular.module('BrewKeeper', ['ngResource', 'ngRoute']);
+    bk.config(['$routeProvider', '$locationProvider',
+        function ($routeProvider, $locationProvider) {
+            var routeRoleChecks = {
+                admin: {
+                    auth: function (Auth) {
+                        return Auth.authorizeCurrentUserForRoute('admin');
+                    }
+                },
+            
+                user: {
+                    auth: function (Auth) {
+                        return Auth.authorizeAuthenticatedUserForRoute();
+                    }
+                }
+            };
+        
+            $locationProvider.html5Mode({
+                enabled: true,
+                requireBase: false
+            });
+        
+            $routeProvider
+            .when('/', {
+                    templateUrl: '/partials/main/views/main', 
+                    controller: 'MainCtrl'
+                })
+
+            // account
+            .when('/signup', {
+                    templateUrl: '/partials/account/views/signup', 
+                    controller: 'SignupCtrl'
+                })
+
+            .when('/profile', {
+                    templateUrl: '/partials/account/views/profile', 
+                    controller: 'EditProfileCtrl',
+                    resolve: routeRoleChecks.user
+                })
+
+            // brew
+            .when('/brew', {
+                    templateUrl: '/partials/brew/views/brew-list', 
+                    controller: 'BrewListCtrl'
+                })
+
+            .when('/brew/add', {
+                    templateUrl: '/partials/brew/views/edit-brew', 
+                    controller: 'AddBrewCtrl'
+                })
+
+            .when('/brew/view/:id', {
+                    templateUrl: '/partials/brew/views/view-brew', 
+                    controller: 'ViewBrewCtrl'
+                })
+
+            .when('/brew/edit/:id', {
+                    templateUrl: '/partials/brew/views/edit-brew', 
+                    controller: 'EditBrewCtrl'
+                })
+
+            .when('/brew/delete/:id', {
+                    templateUrl: '/partials/brew/views/delete-brew', 
+                    controller: 'DeleteBrewCtrl'
+                })
+
+            // recipes
+            .when('/recipe', {
+                    templateUrl: '/partials/recipe/views/recipe-list', 
+                    controller: 'RecipeListCtrl'
+                })
+
+            .when('/recipe/view/:id', {
+                    templateUrl: '/partials/recipe/views/view-recipe', 
+                    controller: 'ViewRecipeCtrl'
+                })
+
+            .when('/recipe/add', {
+                    templateUrl: '/partials/recipe/views/edit-recipe', 
+                    controller: 'AddRecipeCtrl'
+                })
+
+            .when('/recipe/edit/:id', {
+                    templateUrl: '/partials/recipe/views/edit-recipe', 
+                    controller: 'EditRecipeCtrl'
+                })
+
+            .when('/recipe/delete/:id', {
+                    templateUrl: '/partials/recipe/views/delete-recipe', 
+                    controller: 'DeleteRecipeCtrl'
+                });
+        }
+    ]);
+
+    angular.module('BrewKeeper').run(['$rootScope', '$location',
+        function ($rootScope, $location) {
+            $rootScope.$on('$routeChangeError', function (evt, current, previous, rejection) {
+                if (rejection === 'not authorized') {
+                    $location.path('/');
+                }
+            });
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('EditProfileCtrl', ['$scope', 'Auth', 'Identity', 'Notifier',
+        function ($scope, Auth, Identity, Notifier) {
+        
+            $scope.setScopeInitialUserData = function (user) {
+                $scope.email = user.username;
+                $scope.fname = user.firstName;
+                $scope.lname = user.lastName;
+            };
+        
+            $scope.getScopeUpdatedUserData = function () {
+                return {
+                    username: $scope.email,
+                    firstName: $scope.fname,
+                    lastName: $scope.lname
+                };
+            };
+        
+            $scope.update = function () {
+                var updatedUserData = $scope.getScopeUpdatedUserData();
+            
+                if ($scope.password && $scope.password.length > 0) {
+                    updatedUserData.password = $scope.password;
+                }
+            
+                Auth.updateCurrentUser(updatedUserData).then(function () {
+                    Notifier.notify('Your user account has been updated.');
+                }, function (reason) {
+                    Notifier.error(reason);
+                });
+            };
+        
+            // initialize
+            $scope.setScopeInitialUserData(Identity.currentUser);
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('NavBarLoginCtrl', ['$scope', '$location', 'Auth', 'Identity', 'Notifier',
+        function ($scope, $location, Auth, Identity, Notifier) {
+            $scope.identity = Identity;
+        
+            $scope.signout = function () {
+                Auth.logoutUser().then(function () {
+                    $scope.clearCurrentUser();
+                    $('.navbar-collapse').collapse('hide');
+                    Notifier.notify('Logged out');
+                    $location.path('/');
+                });
+            };
+        
+            $scope.clearCurrentUser = function () {
+                $scope.username = "";
+                $scope.password = "";
+            };
+        }]
+    );
+})();
+    
+(function () {
+    'use strict';
+
+    var bk = angular.module('BrewKeeper');
+    bk.controller('SignupCtrl', ['$scope', '$location', 'Auth', 'Notifier',
+        function ($scope, $location, Auth, Notifier) {
+            $scope.getNewUserData = function () {
+                return {
+                    username: $scope.username,
+                    password: $scope.password,
+                    firstName: $scope.firstName,
+                    lastName: $scope.lastName
+                };
+            };
+        
+            $scope.signup = function () {
+                var newUserData = $scope.getNewUserData();
+                Auth.createUser(newUserData).then(function () {
+                    Auth.authenticateUser(newUserData.username, newUserData.password).then(function () {
+                        Notifier.notify('User account created!');
+                        $location.path('/');
+                    }, function (reason) {
+                        Notifier.error(reason);
+                    });
+                }, function (reason) {
+                    Notifier.error(reason);
+                });
+            
+                // collapse the navbar
+                if ($('.navbar-collapse') && $('.navbar-collapse').collapse) {
+                    $('.navbar-collapse').collapse('hide');
+                }
+            };
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+
+    angular.module('BrewKeeper').factory('Auth', ['$q', 'BrewKeeperApi', 'Identity', 'User',
+        function ($q, BrewKeeperApi, Identity, User) {
+            return {
+                authenticateUser: function (username, password) {
+                    var dfd = $q.defer(),
+                        credentials = {
+                            username: username,
+                            password: password
+                        };
+                
+                    BrewKeeperApi.post('/login', credentials).then(function (response) {
+                        if (response.data.success) {
+                            var user = new User();
+                            angular.extend(user, response.data.user);
+                            Identity.currentUser = user;
+                            dfd.resolve(response.data);
+                        } else {
+                            dfd.resolve(false);
+                        }
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                createUser: function (newUserData) {
+                    var dfd = $q.defer(),
+                        newUser = new User(newUserData);
+                
+                    BrewKeeperApi.post('/api/users/', newUserData).then(function () {
+                        Identity.currentUser = newUser;
+                        dfd.resolve(newUser);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                updateCurrentUser: function (updatedUserData) {
+                    var dfd = $q.defer(),
+                        updatedUser = angular.copy(Identity.currentUser);
+                
+                    angular.extend(updatedUser, updatedUserData);
+                    BrewKeeperApi.put('/api/users/', updatedUserData).then(function () {
+                        Identity.currentUser = updatedUser;
+                        dfd.resolve(true);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                logoutUser: function () {
+                    var dfd = $q.defer();
+                
+                    BrewKeeperApi.post('/logout', {
+                        logout: true
+                    }).then(function (response) {
+                        Identity.currentUser = undefined;
+                        dfd.resolve(true);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                authorizeCurrentUserForRoute: function (role) {
+                    if (Identity.isAuthorized(role)) {
+                        return true;
+                    } else {
+                        return $q.reject('not authorized');
+                    }
+                },
+            
+                authorizeAuthenticatedUserForRoute: function () {
+                    if (Identity.isAuthenticated()) {
+                        return true;
+                    } else {
+                        return $q.reject('not authorized');
+                    }
+                }
+            };
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+
+    angular.module('BrewKeeper').service('Identity', ['$window', 'User',
+        function ($window, User) {
+            this.currentUser = null;
+            this.bootstrapCurrentUserFromWindow = function () {
+                if (!!$window.bkCurrentUser) {
+                    this.currentUser = new User();
+                    angular.extend(this.currentUser, $window.bkCurrentUser);
+                }
+            };
+        
+            this.getCurrentUserId = function () {
+                if (!!this.currentUser) {
+                    return this.currentUser._id;
+                }
+            
+                return -1;
+            };
+        
+            this.isAuthenticated = function () {
+                return !!this.currentUser;
+            };
+        
+            this.isAuthorized = function (role) {
+                return !!this.currentUser && this.currentUser.roles.indexOf(role) > -1;
+            };
+        
+            this.bootstrapCurrentUserFromWindow();
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+
+    var bk = angular.module('BrewKeeper');
+    bk.factory('User', ['$resource', 
+        function ($resource) {
+            var UserResource = $resource('/api/users/:id', { _id: "@id" });
+        
+            UserResource.prototype.isAdmin = function () {
+                return this.roles && this.roles.indexOf('admin') > -1;
+            };
+        
+            return UserResource;
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('AddBrewCtrl', ['$scope', '$controller', 'Brew', 'BrewStatus', 'DatePicker', 'Identity', 'Notifier', 'Recipe', 
+        function ($scope, $controller, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
+            $controller('BaseAddEditBrewCtrl', { $scope: $scope });
+        
+            $scope.getCurrentUserRecipes = function () {
+                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                    $scope.recipes = response.data;
+                    $scope.hasRecipes = !!$scope.recipes.length;
+
+                    if (!!$scope.recipes && $scope.recipes.length) {
+                        $scope.brewRecipe = $scope.recipes[0];
+                        $scope.updateName();
+                    }
+                });
+            };
+
+            $scope.submitBrew = function () {
+                var newBrewData = $scope.getFormBrewData();
+                Brew.save(newBrewData).then(function (response) {
+                    $scope.successRedirect('Brew added', '/brew/');
+                }, function (reason) {
+                    Notifier.error(reason);
+                });
+            };
+        
+            $scope.setDefaultControlValues = function () {
+                if (!!$scope.statuses) {
+                    $scope.brewStatusCde = $scope.statuses[0];
+                }
+
+                $scope.brewBatchSize = 1;
+            };
+        
+            // updates the name to "<recipe> #<timesBrewed>"
+            $scope.updateName = function () {
+                var recipeId = $scope.brewRecipe._id,
+                    recipeName = $scope.brewRecipe.name;
+            
+                Recipe.getBrewCount(recipeId).then(function (response) {
+                    $scope.brewName = recipeName + ' #' + (response.data.count + 1);
+                
+                }, function (reason) {
+                    Notifier.error(reason);
+                });
+            };
+        
+            // initialze
+            $scope.brewUrl = '/brew/';
+            $scope.statuses = BrewStatus.getStatuses();
+            $scope.setDefaultControlValues();
+            $scope.getCurrentUserRecipes();
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('BaseAddEditBrewCtrl', ['$scope', '$location', 'Identity', 'Notifier',
+        function ($scope, $location, Identity, Notifier) {
+            $scope.getFormBrewData = function () {
+                return {
+                    id: $scope.brewId,
+                    name: $scope.brewName,
+                    batchSize: $scope.brewBatchSize,
+                    description: $scope.brewDescription,
+                    ownerId: Identity.getCurrentUserId(),
+                    recipeId: $scope.brewRecipe._id,
+                    statusCde: (!!$scope.brewStatusCde) ? $scope.brewStatusCde.id : -1,
+                    brewDate: $scope.brewBrewDate,
+                    bottleDate: $scope.brewBottleDate,
+                    chillDate: $scope.brewChillDate
+                };
+            };
+
+            $scope.successRedirect = function (msg, path) {
+                Notifier.notify(msg);
+                $location.path(path);
+            };
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('BrewListCtrl', ['$scope', '$location', 'Brew', 'BrewStatus', 'Identity',
+        function ($scope, $location, Brew, BrewStatus, Identity) {
+  
+            $scope.getTopCurrentUserBrews = function () {
+                var userId = Identity.getCurrentUserId();
+            
+                Brew.getCountByUserId(userId).then(function (response) {
+                    var brewCount = response.data.count;
+
+                    $scope.showNoBrews = (brewCount === 0);
+
+                    if (brewCount > $scope.listLimit) {
+                        $scope.limitResults = true;
+                        Brew.getByUserId(userId, $scope.listLimit).then(function (response) {
+                            $scope.brews = response.data;
+                        });
+                    } 
+                    else {
+                        $scope.getAllCurrentUserBrews();
+                    }
+                });
+            };
+        
+            $scope.getAllCurrentUserBrews = function () {
+                $scope.limitResults = false;
+                var userId = Identity.getCurrentUserId();
+                Brew.getByUserId(userId).then(function (response) {
+                    $scope.brews = response.data;
+                });
+            };
+        
+            $scope.doAdd = function () {
+                $location.path('/brew/add');
+            };
+        
+            $scope.order = function (predicate) {
+                $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+                $scope.predicate = predicate;
+            };
+        
+            // initialize
+            $scope.listLimit = 10;
+            $scope.showNoBrews = false;
+            $scope.limitResults = false;
+            $scope.brews = null;
+            $scope.predicate = 'brewDate';
+            $scope.reverse = true;
+            $scope.getStatusDisplay = BrewStatus.getDisplay;
+            $scope.getTopCurrentUserBrews();
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+
+    var bk = angular.module('BrewKeeper');
+    bk.controller('DeleteBrewCtrl', ['$scope', '$routeParams', '$location', 'Brew', 'Identity', 'Notifier', 
+        function ($scope, $routeParams, $location, Brew, Identity, Notifier) {
+            $scope.getBrew = function (brewId) {
+                Brew.getByBrewId(brewId).then(function (response) {
+                    if (Brew.isBrewOwnedByUser(response.data, Identity.getCurrentUserId())) {
+                        $scope.brew = response.data;
+                    } else {
+                        $location.path('/');
+                    }
+                });
+            };
+        
+            $scope.onConfirmDelete = function () {
+                Brew.remove($routeParams.id).then(function (response) {
+                    Notifier.notify('Brew deleted');
+                    $location.path('/brew');
+                });
+            };
+        
+            $scope.onCancelDelete = function () {
+                $location.path('/brew/view/' + $routeParams.id);
+            };
+        
+            // initialize
+            $scope.brew = null;
+            $scope.getBrew($routeParams.id);
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('EditBrewCtrl', ['$scope', '$controller', '$filter', '$routeParams', 'Brew', 'BrewStatus', 'DatePicker', 'Identity', 'Notifier', 'Recipe',
+        function ($scope, $controller, $filter, $routeParams, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
+
+            $controller('BaseAddEditBrewCtrl', { $scope: $scope });
+        
+            $scope.getBrew = function (brewId) {
+                Brew.getByBrewId(brewId).then(function (response) {
+                    $scope.setCurrentBrew(response.data);
+                    $scope.getCurrentUserRecipes(response.data);
+                });
+            };
+        
+            $scope.getCurrentUserRecipes = function (currentBrew) {
+                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                    $scope.recipes = response.data;
+                    $scope.hasRecipes = ($scope.recipes.length > 0);
+
+                    $scope.brewRecipe = $scope.recipes.filter(function (recipe) {
+                        return (currentBrew && recipe._id === currentBrew.recipeId);
+                    })[0];
+                });
+            };
+        
+            $scope.setCurrentBrew = function (brew) {
+                $scope.brewId = brew._id;
+                $scope.brewName = brew.name;
+                $scope.brewBatchSize = brew.batchSize;
+                $scope.brewDescription = brew.description;
+                $scope.brewRecipe = brew.recipeId;
+                $scope.brewBrewDate = $filter('date')(brew.brewDate, 'M/d/yyyy');
+                $scope.brewBottleDate = $filter('date')(brew.bottleDate, 'M/d/yyyy');
+                $scope.brewChillDate = $filter('date')(brew.chillDate, 'M/d/yyyy');
+                $scope.brewUrl = '/brew/view/' + $scope.brewId;
+            
+                $scope.brewStatusCde = $scope.statuses.filter(function (status) {
+                    return (status.id === brew.statusCde);
+                })[0];
+            };
+
+            $scope.submitBrew = function () {
+                var updatedBrewData = $scope.getFormBrewData(),
+                    redirectUrl = '/brew/view/' + $scope.brewId;
+            
+                Brew.update(updatedBrewData).then(function () {
+                    $scope.successRedirect('Brew updated', redirectUrl);
+
+                }, function (reason) {
+                    Notifier.error(reason);
+                });
+            };
+        
+            // initialize
+            $scope.statuses = BrewStatus.getStatuses();
+            $scope.getBrew($routeParams.id);
+            $scope.getCurrentUserRecipes();
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('ViewBrewCtrl', ['$scope', '$routeParams', '$location', '$window', 'Brew', 'BrewStatus', 'Identity', 'Notifier', 'Recipe', 
+        function ($scope, $routeParams, $location, $window, Brew, BrewStatus, Identity, Notifier, Recipe) {
+            $scope.statusLookup = BrewStatus;
+
+            $scope.getBrew = function (brewId) {
+                Brew.getByBrewId(brewId).then(function (response) {
+                    $scope.brew = response.data;
+                    $scope.getRecipeName($scope.brew.recipeId);
+                }, function (response) {
+                    Notifier.error(response);
+                    $location.path('/brew');
+                });
+            };
+        
+            $scope.isBrewOwnedByCurrentUser = function () {
+                if ($scope.brew) {
+                    return Brew.isBrewOwnedByUser($scope.brew, Identity.getCurrentUserId());
+                }
+            };
+        
+            $scope.getRecipeName = function (recipeId) {
+                Recipe.getByRecipeId(recipeId).then(function (response) {
+                    $scope.recipeName = response.data.name;
+                }, function (response) {
+                    Notifier.error(response);
+                });
+            };
+        
+            $scope.doEdit = function () {
+                $window.location = '/brew/edit/' + $scope.brew._id;
+            };
+        
+            $scope.doDelete = function () {
+                $window.location = '/brew/delete/' + $scope.brew._id;
+            };
+        
+            // initialize
+            $scope.getBrew($routeParams.id);
+            $scope.recipeName = '';
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.factory('Brew', ['$q', 'BrewKeeperApi', 'Identity', 
+        function ($q, BrewKeeperApi, Identity) {
+            return {
+                isBrewOwnedByUser: function (brew, userId) {
+                    if (brew) {
+                        return (userId === brew.ownerId);
+                    }
+                
+                    return false;
+                },
+            
+                getAll: function () {
+                    var dfd = $q.defer();
+                
+                    BrewKeeperApi.get('/api/brew/').then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                getByUserId: function (userId, limit) {
+                    var dfd = $q.defer(),
+                        url;
+
+                    if (!limit) {
+                        limit = -1;
+                    }
+                
+                    url = '/api/brew/user/' + userId + '/' + limit;
+                
+                    BrewKeeperApi.get(url).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                getCountByUserId: function (userId) {
+                    var dfd = $q.defer(),
+                        url = '/api/brew/user/count/' + userId;
+
+                    BrewKeeperApi.get(url).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (reason) {
+                        dfd.reject(reason);
+                    });
+
+                    return dfd.promise;
+                },
+            
+                getByBrewId: function (brewId) {
+                    var dfd = $q.defer(),
+                        url = '/api/brew/' + brewId;
+                
+                    BrewKeeperApi.get(url).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                save: function (newBrewData) {
+                    var dfd = $q.defer();
+                
+                    BrewKeeperApi.post('/api/brew/', newBrewData).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                update: function (updatedBrewData) {
+                    var dfd = $q.defer();
+                
+                    BrewKeeperApi.put('/api/brew/', updatedBrewData).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                remove: function (brewId) {
+                    var dfd = $q.defer(),
+                        url = '/api/brew/' + brewId;
+                
+                    BrewKeeperApi.delete(url).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                }
+            };
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.factory('BrewStatus', function () {
+        var statuses = [
+            { id: 0, name: 'Not started yet' },
+            { id: 1, name: 'Fermenting' },
+            { id: 2, name: 'Bottled' },
+            { id: 3, name: 'Chilling' },
+            { id: 4, name: 'Gone' }
+        ];
+        
+        return {
+            getDisplay: function (brewStatusCde) {
+                if (brewStatusCde >= 0 && brewStatusCde < statuses.length) {
+                    return statuses[brewStatusCde].name;
+                }
+                
+                return 'Invalid brewStatusCde';
+            },
+            
+            getStatuses: function () {
+                return statuses;
+            }
+        };
+    });
+})();
+
+angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
+    function ($http) {
+        var transform = function (obj) {
+            var str = [];
+            for (var p in obj)
+                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+            return str.join("&");
+        };
+
+        return {
+            get: function (url) {
+                return $http({
+                    method: 'GET',
+                    isArray: false,
+                    url: url,
+                    transformRequest: transform,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
+            },
+        
+            post: function (url, data) {
+                return $http({
+                    method: 'POST',
+                    isArray: false,
+                    url: url,
+                    data: data,
+                    transformRequest: transform,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
+            },
+
+            put: function (url, data) {
+                return $http({
+                    method: 'PUT',
+                    isArray: false,
+                    url: url,
+                    data: data,
+                    transformRequest: transform,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
+            },
+
+            delete: function (url) {
+                return $http({
+                    method: 'DELETE',
+                    isArray: false,
+                    url: url,
+                    transformRequest: transform,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
+            }
+        };
+    }
+]);
+
+(function () {
+    'use strict';
+    
+    angular.module('BrewKeeper').service('DatePicker', function () {
+        if ($('.datepicker').datepicker) {
+            $('.datepicker').datepicker({
+                format: "m/d/yyyy",
+                autoclose: true,
+                forceParse: false
+            });
+        }
+    });
+})();
+   
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.value('Toastr', toastr);
+    bk.service('Notifier', ['Toastr', 
+        function (Toastr) {
+            this.notify = function (msg) {
+                Toastr.success(msg);
+            };
+            
+            this.error = function (msg) {
+                Toastr.error(msg);
+            };
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+
+    var bk = angular.module('BrewKeeper');
+    bk.controller('MainCtrl', ['$scope', 'Auth', 'Identity', 'Notifier',
+        function ($scope, Auth, Identity, Notifier) {
+            $scope.identity = Identity;
+        
+            $scope.signin = function (username, password) {
+                Auth.authenticateUser(username, password).then(function (success) {
+                    if (!success) {
+                        Notifier.error('Username/password incorrect.');
+                    }
+                });
+            
+                // collapse the navbar
+                if ($('.navbar-collapse') && $('.navbar-collapse').collapse) {
+                    $('.navbar-collapse').collapse('hide');
+                }
+            };
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('AddRecipeCtrl', ['$scope', '$location', 'Recipe', 'Identity', 'Notifier',
+        function ($scope, $location, Recipe, Identity, Notifier) {
+            $scope.getFormRecipeData = function () {
+                return {
+                    ownerId: Identity.getCurrentUserId(),
+                    name: $scope.recipeName,
+                    description: $scope.recipeDescription,
+                    sourceName: $scope.recipeSourceName,
+                    sourceUrl: $scope.recipeSourceUrl
+                };
+            };
+
+            $scope.submitRecipe = function () {
+                var newRecipeData = $scope.getFormRecipeData();
+                Recipe.save(newRecipeData).then(function (response) {
+                    Notifier.notify('Recipe added!');
+                    $location.path('/recipe');
+                }, function (reason) {
+                    Notifier.error(reason);
+                });
+            };
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('DeleteRecipeCtrl', ['$scope', '$routeParams', '$location', 'Identity', 'Recipe', 'Notifier',
+        function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
+            $scope.getRecipe = function (recipeId) {
+                Recipe.getByRecipeId(recipeId).then(function (response) {
+                    if (Recipe.isRecipeOwnedByUser(response.data), Identity.getCurrentUserId()) {
+                        $scope.recipe = response.data;
+                    } 
+                    else {
+                        $location.path('/');
+                    }
+                });
+            };
+        
+            $scope.onConfirmDelete = function () {
+                Recipe.remove($routeParams.id).then(function (response) {
+                    Notifier.notify('Recipe deleted');
+                    $location.path('/recipe');
+                });
+            };
+        
+            $scope.onCancelDelete = function () {
+                $location.path('/recipe/view/' + $routeParams.id);
+            };
+
+            // initialize
+            $scope.recipe = null;
+            $scope.getRecipe($routeParams.id);
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('EditRecipeCtrl', ['$scope', '$routeParams', '$location', 'Identity', 'Recipe', 'Notifier',
+        function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
+            $scope.getRecipe = function (recipeId) {
+                Recipe.getByRecipeId(recipeId).then(function (response) {
+                    var recipe = response.data;
+
+                    $scope.recipeId = recipe._id;
+                    $scope.recipeName = recipe.name;
+                    $scope.recipeDescription = recipe.description;
+                    $scope.recipeSourceName = recipe.sourceName;
+                    $scope.recipeSourceUrl = recipe.sourceUrl;
+                });
+            };
+
+            $scope.getFormRecipeData = function () {
+                return {
+                    id: $scope.recipeId,
+                    ownerId: Identity.getCurrentUserId(),
+                    name: $scope.recipeName,
+                    description: $scope.recipeDescription,
+                    sourceName: $scope.recipeSourceName,
+                    sourceUrl: $scope.recipeSourceUrl
+                };
+            };
+
+            $scope.submitRecipe = function () {
+                var updatedRecipeData = $scope.getFormRecipeData(),
+                    url = '/recipe/view/' + $scope.recipeId;
+
+                Recipe.update(updatedRecipeData).then(function () {
+                    Notifier.notify('Recipe updated.');
+                    $location.path(url);
+                }, function (reason) {
+                    Notifier.error(reason);
+                });
+            };
+
+            // initialize
+            $scope.getRecipe($routeParams.id);
+        }
+     ]);
+})();
+
+(function () {
+    'use strict';
+
+    var bk = angular.module('BrewKeeper');
+    bk.controller('RecipeListCtrl', ['$scope', '$location', 'Identity', 'Recipe',
+        function ($scope, $location, Identity, Recipe) {
+        
+            $scope.getCurrentUserRecipes = function () {
+                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                    $scope.recipes = response.data;
+                    $scope.showNoRecipes = ($scope.recipes.length === 0);
+                });
+            };
+        
+            $scope.doAdd = function () {
+                $location.path('/recipe/add');
+            };
+        
+            $scope.order = function (predicate) {
+                $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+                $scope.predicate = predicate;
+            };
+        
+            // initialize
+            $scope.predicate = 'name';
+            $scope.showNoRecipes = false;
+            $scope.getCurrentUserRecipes();
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.controller('ViewRecipeCtrl', ['$scope', '$routeParams', '$location', 'Identity', 'Recipe', 'Notifier',
+        function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
+
+            $scope.getRecipe = function (recipeId) {
+                Recipe.getByRecipeId(recipeId).then(function (response) {
+                    var recipe = response.data;
+                    $scope.recipe = recipe;
+                    $scope.recipe.sourceUrl = $scope.getRecipeUrl(recipe);
+                }, function (reason) {
+                    Notifier.error(reason);
+                    $location.path('/recipe');
+                });
+            };
+        
+            $scope.isRecipeOwnedByCurrentUser = function () {
+                if ($scope.recipe) {
+                    return Recipe.isRecipeOwnedByUser($scope.recipe, Identity.getCurrentUserId());
+                }
+            };
+
+            $scope.getRecipeBrewCount = function (recipeId) {
+                Recipe.getBrewCount(recipeId).then(function (response) {
+                    var timesBrewed = response.data.count;
+                    $scope.recipe.timesBrewed = timesBrewed;
+                });
+            };
+        
+            $scope.getRecipeUrl = function (recipe) {
+                if (recipe.sourceUrl && recipe.sourceUrl.indexOf('http://') !== 0) {
+                    recipe.sourceUrl = 'http://' + recipe.sourceUrl;
+                }
+
+                return recipe.sourceUrl;
+            };
+        
+            $scope.doEdit = function () {
+                $location.path('/recipe/edit/' + $scope.recipe._id);
+            };
+        
+            $scope.doDelete = function () {
+                $location.path('/recipe/delete/' + $scope.recipe._id);
+            };
+        
+            // initialize
+            $scope.getRecipe($routeParams.id);
+            $scope.getRecipeBrewCount($routeParams.id);
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    var bk = angular.module('BrewKeeper');
+    bk.factory('Recipe', ['$q', 'BrewKeeperApi', 'Identity', 
+        function ($q, BrewKeeperApi, Identity) {
+            return {
+                isRecipeOwnedByUser: function (recipe, userId) {
+                    if (recipe) {
+                        return (userId === recipe.ownerId);
+                    }
+                
+                    return false;
+                },
+            
+                getAll: function () {
+                    var dfd = $q.defer();
+                
+                    BrewKeeperApi.get('/api/recipe/').then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                getByUserId: function (userId) {
+                    var dfd = $q.defer(),
+                        url = '/api/recipe/user/' + userId;
+                
+                    BrewKeeperApi.get(url).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                getCountByUserId: function (userId) {
+                    var dfd = $q.defer(),
+                        url = '/api/recipe/user/count/' + userId;
+                
+                    BrewKeeperApi.get(url).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (reason) {
+                        dfd.reject(reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                getByRecipeId: function (recipeId) {
+                    var dfd = $q.defer(),
+                        url = '/api/recipe/' + recipeId;
+                
+                    BrewKeeperApi.get(url).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                save: function (newRecipeData) {
+                    var dfd = $q.defer();
+                
+                    BrewKeeperApi.post('/api/recipe/', newRecipeData).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                update: function (updatedRecipeData) {
+                    var dfd = $q.defer();
+                
+                    BrewKeeperApi.put('/api/recipe/', updatedRecipeData).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                remove: function (recipeId) {
+                    var dfd = $q.defer(),
+                        url = '/api/recipe/' + recipeId;
+                
+                    BrewKeeperApi.delete(url).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (reason) {
+                        dfd.reject(reason);
+                    });
+                
+                    return dfd.promise;
+                },
+            
+                getBrewCount: function (recipeId) {
+                    var dfd = $q.defer(),
+                        url = '/api/recipe/count/' + recipeId;
+                
+                    BrewKeeperApi.get(url).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (reason) {
+                        dfd.reject(reason);
+                    });
+                
+                    return dfd.promise;
+                }
+            };
+        }
+    ]);
+})();

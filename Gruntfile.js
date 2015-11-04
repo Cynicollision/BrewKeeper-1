@@ -54,19 +54,13 @@
 
             concat: {
                 dist: {
-                    src: fileLists.vendorMinFiles.concat(['public/brewkeeper.min.js']),
+                    src: fileLists.vendorMinFiles.concat(fileLists.appProdFiles),
                     dest: 'public/application.js',
                 },
                 
                 debug: {
                     src: fileLists.vendorDebugFiles.concat(fileLists.appProdFiles),
                     dest: 'public/application-debug.js',
-                },
-                
-                // TODO: working, but is this needed? not-minified vendorcode w/ minified app code?
-                debugMin: {
-                    src: fileLists.vendorDebugFiles.concat(['public/brewkeeper.min.js']),
-                    dest: 'public/application-debug.min.js',
                 }
             },
         });
