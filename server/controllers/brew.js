@@ -87,20 +87,27 @@
     };
     
     exports.updateBrew = function (req, res) {
-        var currentUserId,
-            brewUpdates = req.body,
-            query = { _id: brewUpdates.id },
-            update = {
-                brewName: brewUpdates.name,
-                batchSize: brewUpdates.batchSize,
-                brewDate: brewUpdates.brewDate,
-                bottleDate: brewUpdates.bottleDate,
-                chillDate: brewUpdates.chillDate,
-                description: brewUpdates.description,
-                recipeId: brewUpdates.recipeId,
-                statusCde: brewUpdates.statusCde
-            },
-            options = { multi: false };
+        var brewUpdates = req.body,
+            currentUserId, query, update, options;
+            
+        query = {
+            _id: brewUpdates.id,
+        },
+
+        update = {
+            name: brewUpdates.name,
+            batchSize: brewUpdates.batchSize,
+            brewDate: brewUpdates.brewDate,
+            bottleDate: brewUpdates.bottleDate,
+            chillDate: brewUpdates.chillDate,
+            description: brewUpdates.description,
+            recipeId: brewUpdates.recipeId,
+            statusCde: brewUpdates.statusCde,
+        };
+
+        options = {
+            multi: false,
+        };
         
         // verify the current user owns this brew
         if (!!req.user) {
