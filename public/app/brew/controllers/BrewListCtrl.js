@@ -28,7 +28,6 @@
             }
         
             $scope.getAllCurrentUserBrews = function () {
-
                 $scope.limitResults = false;
                 var userId = Identity.getCurrentUserId();
 

@@ -6,18 +6,6 @@
         ['$scope', '$routeParams', '$location', 'BaseCtrl', 'Identity', 'Recipe', 'Notifier',
         function ($scope, $routeParams, $location, BaseCtrl, Identity, Recipe, Notifier) {
             
-            function getRecipe(recipeId) {
-
-                Recipe.getByRecipeId(recipeId).then(function (response) {
-                    if (Recipe.isRecipeOwnedByUser(response.data), Identity.getCurrentUserId()) {
-                        $scope.recipe = response.data;
-                    } 
-                    else {
-                        $location.path('/');
-                    }
-                });
-            }
-        
             $scope.onConfirmDelete = function () {
                 Recipe.remove($routeParams.id).then(function (response) {
                     Notifier.notify('Recipe "' + $scope.recipe.name +'" deleted');
@@ -29,10 +17,17 @@
                 $location.path('/recipe/view/' + $routeParams.id);
             };
 
-            // initialize
             BaseCtrl.init(function () {
                 $scope.recipe = null;
-                getRecipe($routeParams.id);
+
+                Recipe.getByRecipeId($routeParams.id).then(function (response) {
+                    if (Recipe.isRecipeOwnedByUser(response.data), Identity.getCurrentUserId()) {
+                        $scope.recipe = response.data;
+                    } 
+                    else {
+                        $location.path('/');
+                    }
+                });
             });
         }
     ]);

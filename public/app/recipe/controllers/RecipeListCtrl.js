@@ -1,18 +1,12 @@
 ﻿(function () {
     'use strict';
 
-    var bk = angular.module('BrewKeeper');
-    bk.controller('RecipeListCtrl', ['$scope', '$location', 'Identity', 'Recipe',
-        function ($scope, $location, Identity, Recipe) {
+    angular.module('BrewKeeper').controller('RecipeListCtrl', 
         
-            $scope.getCurrentUserRecipes = function () {
-                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
-                    $scope.recipes = response.data;
-                    $scope.showNoRecipes = ($scope.recipes.length === 0);
-                });
-            };
+        ['$scope', '$location', 'BaseCtrl', 'Identity', 'Recipe',
+        function ($scope, $location, BaseCtrl, Identity, Recipe) {
         
-            $scope.doAdd = function () {
+            $scope.doAddRecipe = function () {
                 $location.path('/recipe/add');
             };
         
@@ -21,10 +15,16 @@
                 $scope.predicate = predicate;
             };
         
-            // initialize
-            $scope.predicate = 'name';
-            $scope.showNoRecipes = false;
-            $scope.getCurrentUserRecipes();
+            BaseCtrl.init(function () {
+                $scope.recipes = [];
+                $scope.predicate = 'name';
+                $scope.showNoRecipes = false;
+                
+                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                    $scope.recipes = response.data;
+                    $scope.showNoRecipes = ($scope.recipes.length === 0);
+                });
+            });
         }
     ]);
 })();

@@ -1,22 +1,11 @@
 ﻿(function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('EditRecipeCtrl', ['$scope', '$routeParams', '$location', 'Identity', 'Recipe', 'Notifier',
-        function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
-            $scope.getRecipe = function (recipeId) {
-                Recipe.getByRecipeId(recipeId).then(function (response) {
-                    var recipe = response.data;
-
-                    $scope.recipeId = recipe._id;
-                    $scope.recipeName = recipe.name;
-                    $scope.recipeDescription = recipe.description;
-                    $scope.recipeSourceName = recipe.sourceName;
-                    $scope.recipeSourceUrl = recipe.sourceUrl;
-
-                    $scope.recipeUrl = '/recipe/view/' + recipe._id;
-                });
-            };
+    angular.module('BrewKeeper').controller('EditRecipeCtrl', 
+        
+        ['$scope', '$routeParams', '$location', 'BaseCtrl', 'Identity', 'Recipe', 'Notifier',
+        function ($scope, $routeParams, $location, BaseCtrl, Identity, Recipe, Notifier) {
+            
 
             $scope.getFormRecipeData = function () {
                 return {
@@ -41,8 +30,20 @@
                 });
             };
 
-            // initialize
-            $scope.getRecipe($routeParams.id);
+            BaseCtrl.init(function () {
+
+                Recipe.getByRecipeId($routeParams.id).then(function (response) {
+                    var recipe = response.data;
+                    
+                    $scope.recipeId = recipe._id;
+                    $scope.recipeName = recipe.name;
+                    $scope.recipeDescription = recipe.description;
+                    $scope.recipeSourceName = recipe.sourceName;
+                    $scope.recipeSourceUrl = recipe.sourceUrl;
+                    
+                    $scope.recipeUrl = '/recipe/view/' + recipe._id;
+                });
+            });
         }
      ]);
 })();
