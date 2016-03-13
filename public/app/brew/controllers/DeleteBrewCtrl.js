@@ -1,9 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    var bk = angular.module('BrewKeeper');
-    bk.controller('DeleteBrewCtrl', ['$scope', '$routeParams', '$location', 'Brew', 'Identity', 'Notifier', 
-        function ($scope, $routeParams, $location, Brew, Identity, Notifier) {
+    angular.module('BrewKeeper').controller('DeleteBrewCtrl', 
+        
+        ['$scope', '$routeParams', '$location', 'BaseCtrl', 'Brew', 'Identity', 'Notifier', 
+        function ($scope, $routeParams, $location, BaseCtrl, Brew, Identity, Notifier) {
+
             $scope.getBrew = function (brewId) {
                 Brew.getByBrewId(brewId).then(function (response) {
                     if (Brew.isBrewOwnedByUser(response.data, Identity.getCurrentUserId())) {
@@ -25,9 +27,10 @@
                 $location.path('/brew/view/' + $routeParams.id);
             };
         
-            // initialize
-            $scope.brew = null;
-            $scope.getBrew($routeParams.id);
+            BaseCtrl.init($scope, function ($scope) {
+                $scope.brew = null;
+                $scope.getBrew($routeParams.id);
+            });
         }
     ]);
 })();

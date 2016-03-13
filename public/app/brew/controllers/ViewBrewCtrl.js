@@ -1,12 +1,15 @@
 ﻿(function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('ViewBrewCtrl', ['$scope', '$routeParams', '$location', '$window', 'Brew', 'BrewStatus', 'Identity', 'Notifier', 'Recipe', 
-        function ($scope, $routeParams, $location, $window, Brew, BrewStatus, Identity, Notifier, Recipe) {
+    var bk = angular.module('BrewKeeper').controller('ViewBrewCtrl', 
+
+        ['$scope', '$routeParams', '$location', '$window', 'BaseCtrl', 'Brew', 'BrewStatus', 'Identity', 'Notifier', 'Recipe', 
+        function ($scope, $routeParams, $location, $window, BaseCtrl, Brew, BrewStatus, Identity, Notifier, Recipe) {
+
             $scope.statusLookup = BrewStatus;
 
             $scope.getBrew = function (brewId) {
+
                 Brew.getByBrewId(brewId).then(function (response) {
                     $scope.brew = response.data;
                     $scope.getRecipeName($scope.brew.recipeId);
@@ -38,9 +41,10 @@
                 $window.location = '/brew/delete/' + $scope.brew._id;
             };
         
-            // initialize
-            $scope.getBrew($routeParams.id);
-            $scope.recipeName = '';
+            BaseCtrl.init($scope, function ($scope) {
+                $scope.getBrew($routeParams.id);
+                $scope.recipeName = '';
+            });
         }
     ]);
 })();

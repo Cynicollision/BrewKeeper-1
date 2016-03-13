@@ -34,6 +34,7 @@
     <Compile Include="Gruntfile.js" />
     <Compile Include="public\application.js" />
     <Compile Include="public\app\account\controllers\EditProfileCtrl_test.js" />
+    <Compile Include="public\app\common\controllers\BaseCtrl.js" />
     <Compile Include="public\app\main\controllers\NavBarLoginCtrl_test.js" />
     <Compile Include="public\app\account\controllers\SignupCtrl_test.js" />
     <Compile Include="public\app\account\services\Auth_test.js" />
@@ -123,6 +124,7 @@
     <Folder Include="public\app\brew\controllers\" />
     <Folder Include="public\app\brew\views\" />
     <Folder Include="public\app\brew\services\" />
+    <Folder Include="public\app\common\controllers\" />
     <Folder Include="public\app\common\services\" />
     <Folder Include="public\app\main\" />
     <Folder Include="public\app\account\" />

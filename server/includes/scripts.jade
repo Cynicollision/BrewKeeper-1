@@ -1,7 +1,7 @@
 ﻿
 if (!dev)
     script(type="text/javascript", src="/application.js") 
-    // for local testing - also comment out application.js:
+    // for local testing, use instead of application.js:
     //script(type="text/javascript", src="/application-debug.js")
     
 else
@@ -15,6 +15,7 @@ else
 
     // common
     script(type="text/javascript", src="/app/app.js")
+    script(type="text/javascript", src="/app/common/controllers/BaseCtrl.js")
     script(type="text/javascript", src="/app/common/services/BrewKeeperApi.js")
     script(type="text/javascript", src="/app/common/services/DatePicker.js")
     script(type="text/javascript", src="/app/common/services/Notifier.js")

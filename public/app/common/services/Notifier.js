@@ -3,8 +3,12 @@
     
     var bk = angular.module('BrewKeeper');
     bk.value('Toastr', toastr);
-    bk.service('Notifier', ['Toastr', 
+
+    bk.service('Notifier', 
+
+        ['Toastr', 
         function (Toastr) {
+
             this.notify = function (msg) {
                 Toastr.success(msg);
             };

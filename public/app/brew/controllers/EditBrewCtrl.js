@@ -1,9 +1,10 @@
 ﻿(function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('EditBrewCtrl', ['$scope', '$controller', '$filter', '$routeParams', 'Brew', 'BrewStatus', 'DatePicker', 'Identity', 'Notifier', 'Recipe',
-        function ($scope, $controller, $filter, $routeParams, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
+    angular.module('BrewKeeper').controller('EditBrewCtrl', 
+        
+        ['$scope', '$controller', '$filter', '$routeParams', 'BaseCtrl', 'Brew', 'BrewStatus', 'DatePicker', 'Identity', 'Notifier', 'Recipe',
+        function ($scope, $controller, $filter, $routeParams, BaseCtrl, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
 
             $controller('BaseAddEditBrewCtrl', { $scope: $scope });
         
@@ -53,10 +54,11 @@
                 });
             };
         
-            // initialize
-            $scope.statuses = BrewStatus.getStatuses();
-            $scope.getBrew($routeParams.id);
-            $scope.getCurrentUserRecipes();
+            BaseCtrl.init($scope, function ($scope) {
+                $scope.statuses = BrewStatus.getStatuses();
+                $scope.getBrew($routeParams.id);
+                $scope.getCurrentUserRecipes();
+            });
         }
     ]);
 })();

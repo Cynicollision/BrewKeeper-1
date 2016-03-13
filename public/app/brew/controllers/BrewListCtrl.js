@@ -1,11 +1,13 @@
 ﻿(function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('BrewListCtrl', ['$scope', '$location', 'Brew', 'BrewStatus', 'Identity',
-        function ($scope, $location, Brew, BrewStatus, Identity) {
+    angular.module('BrewKeeper').controller('BrewListCtrl', 
+
+        ['$scope', '$location', 'BaseCtrl', 'Brew', 'BrewStatus', 'Identity',
+        function ($scope, $location, BaseCtrl, Brew, BrewStatus, Identity) {
   
             $scope.getTopCurrentUserBrews = function () {
+
                 var userId = Identity.getCurrentUserId();
             
                 Brew.getCountByUserId(userId).then(function (response) {
@@ -26,8 +28,10 @@
             };
         
             $scope.getAllCurrentUserBrews = function () {
+
                 $scope.limitResults = false;
                 var userId = Identity.getCurrentUserId();
+
                 Brew.getByUserId(userId).then(function (response) {
                     $scope.brews = response.data;
                 });
@@ -42,15 +46,16 @@
                 $scope.predicate = predicate;
             };
         
-            // initialize
-            $scope.listLimit = 10;
-            $scope.showNoBrews = false;
-            $scope.limitResults = false;
-            $scope.brews = null;
-            $scope.predicate = 'brewDate';
-            $scope.reverse = true;
-            $scope.getStatusDisplay = BrewStatus.getDisplay;
-            $scope.getTopCurrentUserBrews();
+            BaseCtrl.init($scope, function ($scope) {
+                $scope.listLimit = 10;
+                $scope.showNoBrews = false;
+                $scope.limitResults = false;
+                $scope.brews = null;
+                $scope.predicate = 'brewDate';
+                $scope.reverse = true;
+                $scope.getStatusDisplay = BrewStatus.getDisplay;
+                $scope.getTopCurrentUserBrews();
+            });
         }
     ]);
 })();
