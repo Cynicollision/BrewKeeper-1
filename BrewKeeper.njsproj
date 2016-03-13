@@ -21,7 +21,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <StartWebBrowser>True</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -34,7 +34,7 @@
     <Compile Include="Gruntfile.js" />
     <Compile Include="public\application.js" />
     <Compile Include="public\app\account\controllers\EditProfileCtrl_test.js" />
-    <Compile Include="public\app\account\controllers\NavBarLoginCtrl_test.js" />
+    <Compile Include="public\app\main\controllers\NavBarLoginCtrl_test.js" />
     <Compile Include="public\app\account\controllers\SignupCtrl_test.js" />
     <Compile Include="public\app\account\services\Auth_test.js" />
     <Compile Include="public\app\account\services\User_test.js" />
@@ -52,7 +52,7 @@
     <Compile Include="public\app\common\services\BrewKeeperApi_test.js" />
     <Compile Include="public\app\common\services\BrewKeeperApi.js" />
     <Compile Include="public\app\account\services\Identity.js" />
-    <Compile Include="public\app\account\controllers\NavBarLoginCtrl.js" />
+    <Compile Include="public\app\main\controllers\NavBarLoginCtrl.js" />
     <Compile Include="public\app\account\controllers\EditProfileCtrl.js" />
     <Compile Include="public\app\account\controllers\SignupCtrl.js" />
     <Compile Include="public\app\account\services\User.js" />
@@ -95,7 +95,7 @@
     <Compile Include="server\utilities\encryption.js" />
     <Compile Include="public\app\brew\services\Brew_test.js" />
     <Content Include="package.json" />
-    <Content Include="public\app\account\views\navbar-login.jade" />
+    <Content Include="public\app\main\views\navbar-login.jade" />
     <Content Include="public\app\account\views\profile.jade" />
     <Content Include="public\app\account\views\signup.jade" />
     <Content Include="public\app\brew\views\edit-brew.jade" />
@@ -103,7 +103,7 @@
     <Content Include="public\app\brew\views\brew-list.jade" />
     <Content Include="public\app\brew\views\delete-brew.jade" />
     <Content Include="public\app\main\views\main.jade" />
-    <Content Include="public\app\main\views\overview.jade" />
+    <Content Include="public\app\main\views\user-home.jade" />
     <Content Include="public\app\main\views\welcome-login.jade" />
     <Content Include="public\app\recipe\views\delete-recipe.jade" />
     <Content Include="public\app\recipe\views\edit-recipe.jade" />

@@ -120,7 +120,6 @@
             appProdFiles: [
                 'public/app/app.js',
                 'public/app/account/controllers/EditProfileCtrl.js',
-                'public/app/account/controllers/NavBarLoginCtrl.js',
                 'public/app/account/controllers/SignupCtrl.js',
                 'public/app/account/services/Auth.js',
                 'public/app/account/services/Identity.js',
@@ -137,6 +136,7 @@
                 'public/app/common/services/DatePicker.js',
                 'public/app/common/services/Notifier.js',
                 'public/app/main/controllers/MainCtrl.js',
+                'public/app/main/controllers/NavBarLoginCtrl.js',
                 'public/app/recipe/controllers/AddRecipeCtrl.js',
                 'public/app/recipe/controllers/DeleteRecipeCtrl.js',
                 'public/app/recipe/controllers/EditRecipeCtrl.js',

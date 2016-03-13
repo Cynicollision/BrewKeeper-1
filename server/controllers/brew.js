@@ -92,7 +92,7 @@
             
         query = {
             _id: brewUpdates.id,
-        },
+        };
 
         update = {
             name: brewUpdates.name,

@@ -11,13 +11,11 @@ block main-content
                 a.navbar-brand(href="/") BrewKeeper
 
             .navbar-collapse.collapse(id="navBar")
-                div(ng-include="'/partials/account/views/navbar-login'")
-                
+                div(ng-include="'/partials/main/views/navbar-login'")
 
     section.content
         div(ng-view)
 
-    div
-        &nbsp;
+    div &nbsp;
     footer.container.text-center
-        p &copy; 2015 BrewKeeper
+        p &copy; 2016 BrewKeeper
