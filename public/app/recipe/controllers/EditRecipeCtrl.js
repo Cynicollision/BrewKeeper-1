@@ -13,6 +13,8 @@
                     $scope.recipeDescription = recipe.description;
                     $scope.recipeSourceName = recipe.sourceName;
                     $scope.recipeSourceUrl = recipe.sourceUrl;
+
+                    $scope.recipeUrl = '/recipe/view/' + recipe._id;
                 });
             };
 

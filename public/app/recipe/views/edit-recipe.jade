@@ -24,4 +24,4 @@
                     .div(style="text-align:center")
                         button.btn.btn-primary(ng-click="submitRecipe()", ng-disabled="addRecipeForm.$invalid") Save
                         | &nbsp;
-                        a.btn.btn-default(href="/recipe/") Cancel
+                        a.btn.btn-default(href="{{ recipeUrl }}") Cancel

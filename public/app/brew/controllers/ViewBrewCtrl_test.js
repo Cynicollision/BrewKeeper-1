@@ -15,7 +15,8 @@
             mockBrew = {
                 _id: 423531,
                 name: 'Mock recipe',
-                sourceUrl: 'seannormoyle.net'
+                sourceUrl: 'seannormoyle.net',
+                recipeId: 9241,
             };
             
             mockRecipe = {
@@ -63,7 +64,6 @@
         });
         
         it('Retrieves a single brew by the id specified in the route.', function () {
-            $scope.getBrew(mockBrew._id);
             expect(BrewMock.getByBrewId).toHaveBeenCalledWith(mockBrew._id);
             $scope.$apply();
             expect($scope.brew).toEqual(mockBrew);
@@ -76,9 +76,8 @@
         });
         
         it('Retrieves the brew\'s recipe name.', function () {
-            $scope.getRecipeName(mockRecipe._id);
-            expect(RecipeMock.getByRecipeId).toHaveBeenCalledWith(mockRecipe._id);
             $scope.$apply();
+            expect(RecipeMock.getByRecipeId).toHaveBeenCalledWith(mockBrew.recipeId);
             expect($scope.recipeName).toEqual(mockRecipe.name);
         });
     });

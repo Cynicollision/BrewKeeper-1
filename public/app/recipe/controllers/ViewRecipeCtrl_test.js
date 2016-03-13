@@ -61,11 +61,6 @@
             expect($scope.recipe.timesBrewed).toEqual(mockCount.count);
         });
 
-        it('Can append "http://" onto the recipe URL if it\'s not there.', function () {
-            var updatedUrl = $scope.getRecipeUrl(mockRecipe);
-            expect(updatedUrl.indexOf('http://')).toEqual(0);
-        });
-
         it('Can load the "edit recipe" page".', function () {
             $scope.recipe = mockRecipe;
             $scope.doEdit();
