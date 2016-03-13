@@ -1,20 +1,20 @@
 ﻿.container
     .well
-        form.form-horizontal(name="profileFoOrm")
+        form.form-horizontal(name="profileForm")
             fieldset
                 legend User Profile
                 .form-group
                     label.col-md-2.control-label(for="email") Email
                     .col-md-10
-                        input.form-control(name="email", type="text", placeholder="Email", ng-model="email", required)
+                        input.form-control(name="username", type="text", placeholder="Email", ng-model="username", required)
                 .form-group
                     label.col-md-2.control-label(for="fname") First Name
                     .col-md-10
-                        input.form-control(name="fname", type="text", placeholder="First Name", ng-model="fname", required)
+                        input.form-control(name="firstName", type="text", placeholder="First Name", ng-model="firstName", required)
                 .form-group
                     label.col-md-2.control-label(for="lname") Last Name
                     .col-md-10
-                        input.form-control(name="lname", type="text", placeholder="Last Name", ng-model="lname", required)
+                        input.form-control(name="lastName", type="text", placeholder="Last Name", ng-model="lastName", required)
                 .form-group
                     label.col-md-2.control-label(for="password") Password
                     .col-md-10
@@ -22,6 +22,6 @@
                 .form-group
                     .col-md-10.col-md-offset-2
                         .pull-right
-                            button.btn.btn-primary(ng-click="update()", ng-disabled="signupForm.$invalid") Submit
+                            button.btn.btn-primary(ng-click="submit()", ng-disabled="signupForm.$invalid") Submit
                             | &nbsp;
                             a.btn.btn-default(href="/") Cancel

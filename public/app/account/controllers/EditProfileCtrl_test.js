@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
     describe('account/EditProfileCtrl', function () {
-        var $scope, ctrl, $timeout, Auth, IdentityMock, setMockScopeUserData;
+        var $scope, ctrl, $timeout, Auth, IdentityMock, setInitialMockScopeUserData;
         
         beforeEach(function () {
             module('BrewKeeper');
@@ -10,13 +10,13 @@
                     username: 'mockington825',
                     firstName: 'mock',
                     lastName: 'mockington'
-                }
+                },
             };
             
-            setMockScopeUserData = function () {
-                $scope.email = IdentityMock.currentUser.username;
-                $scope.fname = IdentityMock.currentUser.firstName;
-                $scope.lname = IdentityMock.currentUser.lastName;
+            setInitialMockScopeUserData = function () {
+                $scope.username = IdentityMock.currentUser.username;
+                $scope.firstName = IdentityMock.currentUser.firstName;
+                $scope.lastName = IdentityMock.currentUser.lastName;
             };
             
             inject(function ($rootScope, $q, $controller, _Auth_) {
@@ -38,28 +38,27 @@
         });
         
         it('Sets the initial scope data from the given user object.', function () {
-            $scope.setScopeInitialUserData(IdentityMock.currentUser);
             expect($scope.email).toEqual('mockington825');
             expect($scope.fname).toEqual('mock');
             expect($scope.lname).toEqual('mockington');
         });
-        
-        it('Retrieves a user object from the scope\'s updated information.', function () {
-            setMockScopeUserData();
+
+        it('Uses the Auth service to submit updated user profile data.', function () {
+
+            setInitialMockScopeUserData();
             
-            $scope.fname = 'updated_fn';
-            $scope.lname = 'updated_ln';
+            $scope.firstName = 'updated_fn';
+            $scope.lastName = 'updated_ln';
+
+            $scope.submit();
             
-            var updatedUserData = $scope.getScopeUpdatedUserData();
-            expect(updatedUserData.firstName).toEqual('updated_fn');
-            expect(updatedUserData.lastName).toEqual('updated_ln');
-        });
-        
-        it('Uses the Auth service to update the current user.', function () {
-            setMockScopeUserData();
-            
-            $scope.update();
-            expect(Auth.updateCurrentUser).toHaveBeenCalledWith(IdentityMock.currentUser);
+            var updatedUserObj = {
+                username: 'mockington825',
+                firstName: 'updated_fn',
+                lastName: 'updated_ln',
+            };
+
+            expect(Auth.updateCurrentUser).toHaveBeenCalledWith(updatedUserObj);
         });
     });
 })();

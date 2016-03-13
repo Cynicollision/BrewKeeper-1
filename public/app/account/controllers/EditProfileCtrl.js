@@ -1,40 +1,45 @@
 ﻿(function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('EditProfileCtrl', ['$scope', 'Auth', 'Identity', 'Notifier',
-        function ($scope, Auth, Identity, Notifier) {
+    angular.module('BrewKeeper').controller('EditProfileCtrl', 
         
-            $scope.setScopeInitialUserData = function (user) {
-                $scope.email = user.username;
-                $scope.fname = user.firstName;
-                $scope.lname = user.lastName;
-            };
+        ['$scope', '$location', 'BaseCtrl', 'Auth', 'Identity', 'Notifier',
+        function ($scope, $location, BaseCtrl, Auth, Identity, Notifier) {
         
-            $scope.getScopeUpdatedUserData = function () {
+            function setScopeInitialUserData($scope, user) {
+                $scope.username = user.username;
+                $scope.firstName = user.firstName;
+                $scope.lastName = user.lastName;
+            }
+        
+            function getScopeUpdatedUserData() {
                 return {
-                    username: $scope.email,
-                    firstName: $scope.fname,
-                    lastName: $scope.lname
+                    username: $scope.username,
+                    firstName: $scope.firstName,
+                    lastName: $scope.lastName,
                 };
-            };
+            }
         
-            $scope.update = function () {
-                var updatedUserData = $scope.getScopeUpdatedUserData();
+            $scope.submit = function () {
+
+                var updatedUserData = getScopeUpdatedUserData();
             
                 if ($scope.password && $scope.password.length > 0) {
                     updatedUserData.password = $scope.password;
                 }
             
                 Auth.updateCurrentUser(updatedUserData).then(function () {
-                    Notifier.notify('Your user account has been updated.');
+                    Notifier.notify('Your profile has been updated.');
+                    $location.path('/');
                 }, function (reason) {
                     Notifier.error(reason);
                 });
             };
         
             // initialize
-            $scope.setScopeInitialUserData(Identity.currentUser);
+            BaseCtrl.init($scope, function ($scope) {
+                setScopeInitialUserData($scope, Identity.currentUser);
+            });
         }
     ]);
 })();
