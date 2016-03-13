@@ -5,14 +5,18 @@
         var $scope, BrewMock, RecipeMock, mockBrew, mockRecipeCollection;
         
         mockBrew = {
-            _id: 825
+            _id: 825,
+            batchSize: 3,
+            description: 'test brew',
+            recipeId: 654,
+            brewDate: '8/25/1989',
+            bottleDate: '6/20/2008',
+            chillDate: '5/13/2013',
+            statusCde: 0,
         };
         
         mockRecipeCollection = [
-            {
-                _id: 654,
-                name: 'tasty recipe of goodness'
-            }
+            { _id: 654, name: 'tasty recipe of goodness' },
         ];
         
         beforeEach(function () {
@@ -60,28 +64,15 @@
         });
         
         it('Retrieves a single brew by the id specified in the route.', function () {
-            $scope.getBrew(mockBrew._id);
-            expect(BrewMock.getByBrewId).toHaveBeenCalledWith(mockBrew._id);
             $scope.$apply();
             expect($scope.brewId).toEqual(mockBrew._id);
         });
         
         it('Can initialize the controller with current brew data.', function () {
-            $scope.setCurrentBrew({
-                _id: 12345,
-                batchSize: 3,
-                description: 'test brew',
-                recipeId: 9876,
-                brewDate: '8/25/1989',
-                bottleDate: '6/20/2008',
-                chillDate: '5/13/2013',
-                statusCde: 0
-            });
-            
-            expect($scope.brewId).toEqual(12345);
+            $scope.$apply();
             expect($scope.brewBatchSize).toEqual(3);
             expect($scope.brewDescription).toEqual('test brew');
-            expect($scope.brewRecipe).toEqual(9876);
+            expect($scope.brewRecipe._id).toEqual(654);
             expect($scope.brewStatusCde.id).toEqual(0);
             expect($scope.brewBrewDate).toEqual('8/25/1989');
             expect($scope.brewBottleDate).toEqual('6/20/2008');

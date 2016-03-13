@@ -6,16 +6,6 @@
         ['$scope', '$routeParams', '$location', 'BaseCtrl', 'Brew', 'Identity', 'Notifier', 
         function ($scope, $routeParams, $location, BaseCtrl, Brew, Identity, Notifier) {
 
-            $scope.getBrew = function (brewId) {
-                Brew.getByBrewId(brewId).then(function (response) {
-                    if (Brew.isBrewOwnedByUser(response.data, Identity.getCurrentUserId())) {
-                        $scope.brew = response.data;
-                    } else {
-                        $location.path('/');
-                    }
-                });
-            };
-        
             $scope.onConfirmDelete = function () {
                 Brew.remove($routeParams.id).then(function (response) {
                     Notifier.notify('Brew deleted');
@@ -27,9 +17,17 @@
                 $location.path('/brew/view/' + $routeParams.id);
             };
         
-            BaseCtrl.init($scope, function ($scope) {
+            BaseCtrl.init(function () {
                 $scope.brew = null;
-                $scope.getBrew($routeParams.id);
+               
+                Brew.getByBrewId($routeParams.id).then(function (response) {
+
+                    if (Brew.isBrewOwnedByUser(response.data, Identity.getCurrentUserId())) {
+                        $scope.brew = response.data;
+                    } else {
+                        $location.path('/');
+                    }
+                });
             });
         }
     ]);

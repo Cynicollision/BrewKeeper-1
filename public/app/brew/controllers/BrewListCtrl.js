@@ -6,7 +6,7 @@
         ['$scope', '$location', 'BaseCtrl', 'Brew', 'BrewStatus', 'Identity',
         function ($scope, $location, BaseCtrl, Brew, BrewStatus, Identity) {
   
-            $scope.getTopCurrentUserBrews = function () {
+            function getTopCurrentUserBrews() {
 
                 var userId = Identity.getCurrentUserId();
             
@@ -25,7 +25,7 @@
                         $scope.getAllCurrentUserBrews();
                     }
                 });
-            };
+            }
         
             $scope.getAllCurrentUserBrews = function () {
 
@@ -46,7 +46,7 @@
                 $scope.predicate = predicate;
             };
         
-            BaseCtrl.init($scope, function ($scope) {
+            BaseCtrl.init(function () {
                 $scope.listLimit = 10;
                 $scope.showNoBrews = false;
                 $scope.limitResults = false;
@@ -54,7 +54,8 @@
                 $scope.predicate = 'brewDate';
                 $scope.reverse = true;
                 $scope.getStatusDisplay = BrewStatus.getDisplay;
-                $scope.getTopCurrentUserBrews();
+                
+                getTopCurrentUserBrews();
             });
         }
     ]);

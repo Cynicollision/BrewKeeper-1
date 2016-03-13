@@ -48,7 +48,7 @@
                 })
 
             .when('/brew/add', {
-                    templateUrl: '/partials/brew/views/edit-brew', 
+                    templateUrl: '/partials/brew/views/add-edit-brew', 
                     controller: 'AddBrewCtrl'
                 })
 
@@ -58,7 +58,7 @@
                 })
 
             .when('/brew/edit/:id', {
-                    templateUrl: '/partials/brew/views/edit-brew', 
+                    templateUrl: '/partials/brew/views/add-edit-brew', 
                     controller: 'EditBrewCtrl'
                 })
 

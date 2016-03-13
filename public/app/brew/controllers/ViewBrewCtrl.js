@@ -41,7 +41,7 @@
                 $window.location = '/brew/delete/' + $scope.brew._id;
             };
         
-            BaseCtrl.init($scope, function ($scope) {
+            BaseCtrl.init(function () {
                 $scope.getBrew($routeParams.id);
                 $scope.recipeName = '';
             });

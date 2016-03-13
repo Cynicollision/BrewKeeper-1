@@ -62,7 +62,6 @@
         it('Retrieves the specified brew and redirects it if the current user does not own it.', function () {
             location.path('/brew/delete/' + mockBrew._id);
             mockBrew.ownerId = -1;
-            $scope.getBrew(mockBrew._id);
             $scope.$apply();
             expect(location.path()).toEqual('/');
         });

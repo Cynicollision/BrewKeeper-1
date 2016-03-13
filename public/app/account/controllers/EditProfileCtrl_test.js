@@ -38,9 +38,9 @@
         });
         
         it('Sets the initial scope data from the given user object.', function () {
-            expect($scope.email).toEqual('mockington825');
-            expect($scope.fname).toEqual('mock');
-            expect($scope.lname).toEqual('mockington');
+            expect($scope.username).toEqual('mockington825');
+            expect($scope.firstName).toEqual('mock');
+            expect($scope.lastName).toEqual('mockington');
         });
 
         it('Uses the Auth service to submit updated user profile data.', function () {

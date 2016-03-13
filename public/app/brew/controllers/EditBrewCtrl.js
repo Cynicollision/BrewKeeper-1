@@ -3,30 +3,12 @@
     
     angular.module('BrewKeeper').controller('EditBrewCtrl', 
         
-        ['$scope', '$controller', '$filter', '$routeParams', 'BaseCtrl', 'Brew', 'BrewStatus', 'DatePicker', 'Identity', 'Notifier', 'Recipe',
-        function ($scope, $controller, $filter, $routeParams, BaseCtrl, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
+        ['$scope', '$q', '$controller', '$filter', '$routeParams', 'BaseCtrl', 'Brew', 'BrewStatus', 'DatePicker', 'Identity', 'Notifier', 'Recipe',
+        function ($scope, $q, $controller, $filter, $routeParams, BaseCtrl, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
 
             $controller('BaseAddEditBrewCtrl', { $scope: $scope });
         
-            $scope.getBrew = function (brewId) {
-                Brew.getByBrewId(brewId).then(function (response) {
-                    $scope.setCurrentBrew(response.data);
-                    $scope.getCurrentUserRecipes(response.data);
-                });
-            };
-        
-            $scope.getCurrentUserRecipes = function (currentBrew) {
-                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
-                    $scope.recipes = response.data;
-                    $scope.hasRecipes = ($scope.recipes.length > 0);
-
-                    $scope.brewRecipe = $scope.recipes.filter(function (recipe) {
-                        return (currentBrew && recipe._id === currentBrew.recipeId);
-                    })[0];
-                });
-            };
-        
-            $scope.setCurrentBrew = function (brew) {
+            function setCurrentBrew(brew) {
                 $scope.brewId = brew._id;
                 $scope.brewName = brew.name;
                 $scope.brewBatchSize = brew.batchSize;
@@ -40,7 +22,7 @@
                 $scope.brewStatusCde = $scope.statuses.filter(function (status) {
                     return (status.id === brew.statusCde);
                 })[0];
-            };
+            }
 
             $scope.submitBrew = function () {
                 var updatedBrewData = $scope.getFormBrewData(),
@@ -54,10 +36,27 @@
                 });
             };
         
-            BaseCtrl.init($scope, function ($scope) {
+            BaseCtrl.init(function () {
+                $scope.recipes = [];
                 $scope.statuses = BrewStatus.getStatuses();
-                $scope.getBrew($routeParams.id);
-                $scope.getCurrentUserRecipes();
+                
+                $q.all([
+                    Brew.getByBrewId($routeParams.id).then(function (response) {
+                        $scope.brew = response.data;
+                        setCurrentBrew(response.data);
+                    }),
+
+                    Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                        $scope.recipes = response.data;
+                        $scope.hasRecipes = ($scope.recipes.length > 0);
+                    }),
+                ])
+                .then(function () {
+
+                    $scope.brewRecipe = $scope.recipes.filter(function (recipe) {
+                        return ($scope.brew && recipe._id === $scope.brew.recipeId);
+                    })[0];
+                });
             });
         }
     ]);

@@ -25,22 +25,15 @@
                     dfd.resolve({ success: true });
                     return dfd.promise;
                 });
+                
+                spyOn(Auth, 'authenticateUser').and.callFake(function () {
+                    var dfd = $q.defer();
+                    dfd.resolve({ success: true });
+                    return dfd.promise;
+                });
 
                 spyOn(Notifier, 'notify').and.callFake(function () { });
             });
-        });
-        
-        it('Gets values for the new user from the form.', function () {
-            $scope.username = 'youzername';
-            $scope.password = 'pdubs';
-            $scope.firstName = 'firstie';
-            $scope.lastName = 'Normoyle';
-            
-            var newUserData = $scope.getNewUserData();
-            expect(newUserData.username).toEqual('youzername');
-            expect(newUserData.password).toEqual('pdubs');
-            expect(newUserData.firstName).toEqual('firstie');
-            expect(newUserData.lastName).toEqual('Normoyle');
         });
 
         it('Uses the Auth service to create a user', function () {
@@ -50,12 +43,16 @@
             $scope.lastName = 'zzzz';
 
             $scope.signup();
+            $scope.$apply();
+
             expect(Auth.createUser).toHaveBeenCalledWith({
                 username: 'testUsername',
                 password: 'five',
                 firstName: 'firstie',
-                lastName: 'zzzz'
+                lastName: 'zzzz',
             });
+            
+            expect(Auth.authenticateUser).toHaveBeenCalledWith('testUsername', 'five');
         });
     });
 })();

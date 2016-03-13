@@ -47,18 +47,7 @@
                     dfd.resolve({ success: true });
                     return dfd.promise;
                 });
-            });
-            
-        });
-
-        it('Gets the new recipe data from the form including user ID that created it..', function () {
-            var newRecipeData = $scope.getFormRecipeData();
-
-            expect(newRecipeData.ownerId).toEqual(IdentityMock.getCurrentUserId());
-            expect(newRecipeData.name).toEqual($scope.recipeName);
-            expect(newRecipeData.description).toEqual($scope.recipeDescription);
-            expect(newRecipeData.sourceName).toEqual($scope.recipeSourceName);
-            expect(newRecipeData.sourceUrl).toEqual($scope.recipeSourceUrl);
+            }); 
         });
 
         it('Saves a new recipe using the Recipe service, then redirects back to recipe list.', function () {

@@ -57,13 +57,18 @@
             });
         });
         
-        it('Limits the number of initial results to a fixed max amount.', function () {
-            var testBrewListLimit = 3;
-            $scope.listLimit = testBrewListLimit;
-            $scope.getTopCurrentUserBrews();
+        it('Limits the number of initial results to a fixed max amount only if the user has more than the max amount.', function () {
+            $scope.listLimit = 3;
             expect(BrewMock.getCountByUserId).toHaveBeenCalledWith(mockUserId);
             $scope.$apply();
             expect($scope.limitResults).toEqual(true);
+        });
+        
+        it('Doesn\'t limit the number of results when the user has less than the max amount.', function () {
+            $scope.listLimit = 10;
+            expect(BrewMock.getCountByUserId).toHaveBeenCalledWith(mockUserId);
+            $scope.$apply();
+            expect($scope.limitResults).toEqual(false);
         });
         
         it('Queries all brews for the given user', function () {

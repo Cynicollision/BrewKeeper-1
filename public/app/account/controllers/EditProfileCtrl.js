@@ -37,7 +37,7 @@
             };
         
             // initialize
-            BaseCtrl.init($scope, function ($scope) {
+            BaseCtrl.init(function () {
                 setScopeInitialUserData($scope, Identity.currentUser);
             });
         }

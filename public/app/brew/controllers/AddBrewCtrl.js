@@ -8,37 +8,30 @@
 
             $controller('BaseAddEditBrewCtrl', { $scope: $scope });
         
-            $scope.getCurrentUserRecipes = function () {
+            function getCurrentUserRecipes() {
+
                 Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+
                     $scope.recipes = response.data;
                     $scope.hasRecipes = !!$scope.recipes.length;
 
                     if (!!$scope.recipes && $scope.recipes.length) {
                         $scope.brewRecipe = $scope.recipes[0];
-                        $scope.updateName();
+                        updateBrewName();
                     }
                 });
-            };
-
-            $scope.submitBrew = function () {
-                var newBrewData = $scope.getFormBrewData();
-                Brew.save(newBrewData).then(function (response) {
-                    $scope.successRedirect('Brew added', '/brew/');
-                }, function (reason) {
-                    Notifier.error(reason);
-                });
-            };
-        
-            $scope.setDefaultControlValues = function () {
+            }
+            
+            function setDefaultControlValues() {
                 if (!!$scope.statuses) {
                     $scope.brewStatusCde = $scope.statuses[0];
                 }
-
+                
                 $scope.brewBatchSize = 1;
-            };
-        
+            }
+
             // updates the name to "<recipe> #<timesBrewed>"
-            $scope.updateName = function () {
+            function updateBrewName() {
                 var recipeId = $scope.brewRecipe._id,
                     recipeName = $scope.brewRecipe.name;
             
@@ -48,13 +41,25 @@
                 }, function (reason) {
                     Notifier.error(reason);
                 });
+            }
+            
+            $scope.submitBrew = function () {
+                var newBrewData = $scope.getFormBrewData();
+                Brew.save(newBrewData).then(function (response) {
+                    $scope.successRedirect('Brew added', '/brew/');
+                }, function (reason) {
+                    Notifier.error(reason);
+                });
             };
         
-            BaseCtrl.init($scope, function ($scope) {
+            BaseCtrl.init(function () {
+                $scope.recipes = [];
+                $scope.hasRecipes = false;
                 $scope.brewUrl = '/brew/';
                 $scope.statuses = BrewStatus.getStatuses();
-                $scope.setDefaultControlValues();
-                $scope.getCurrentUserRecipes();
+
+                setDefaultControlValues();
+                getCurrentUserRecipes();
             });
         }
     ]);

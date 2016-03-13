@@ -75,20 +75,7 @@
         });
         
         it('Sets the default status to the first option.', function () {
-            $scope.statuses = [
-                { id: 0, label: 'new' }, 
-                { id: 1, label: 'wip' }, 
-                { id: 2, label: 'complete' }];
-            $scope.setDefaultControlValues();
             expect($scope.brewStatusCde).toEqual($scope.statuses[0]);
-        });
-
-        it('Sets the default brew name to the recipe name and the number of times it was brewed.', function () {
-            $scope.brewRecipe = mockRecipeCollection[0];
-            $scope.updateName();
-            $scope.$apply();
-            expect(RecipeMock.getBrewCount).toHaveBeenCalledWith($scope.brewRecipe._id);
-            expect($scope.brewName).toEqual($scope.brewRecipe.name + ' #' + (mockRecipeBrewCount + 1));
         });
     });
 })();

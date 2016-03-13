@@ -54,15 +54,14 @@
         });
 
         it('Retrieves the current recipe by the ID specified in the route, redirects if user does not own recipe.', function () {
-            // redirect if NOT the recipe owner
             mockCurrentUserId = -1;
             expect(RecipeMock.getByRecipeId).toHaveBeenCalledWith(mockRecipe._id);
             $scope.$apply();
             expect(location.url()).toEqual('/');
-
-            // store the recipe if the recipe owner
+        });
+        
+        it('Retrieves the current recipe by the ID specified in the route and stores it if the user owns the recipe.', function () {
             mockCurrentUserId = mockRecipe.ownerId;
-            $scope.getRecipe(mockRecipe._id);
             expect(RecipeMock.getByRecipeId).toHaveBeenCalledWith(mockRecipe._id);
             $scope.$apply();
             expect($scope.recipe).toEqual(mockRecipe);

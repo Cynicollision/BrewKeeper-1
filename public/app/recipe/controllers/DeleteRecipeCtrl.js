@@ -1,10 +1,13 @@
 ﻿(function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('DeleteRecipeCtrl', ['$scope', '$routeParams', '$location', 'Identity', 'Recipe', 'Notifier',
-        function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
-            $scope.getRecipe = function (recipeId) {
+    angular.module('BrewKeeper').controller('DeleteRecipeCtrl', 
+        
+        ['$scope', '$routeParams', '$location', 'BaseCtrl', 'Identity', 'Recipe', 'Notifier',
+        function ($scope, $routeParams, $location, BaseCtrl, Identity, Recipe, Notifier) {
+            
+            function getRecipe(recipeId) {
+
                 Recipe.getByRecipeId(recipeId).then(function (response) {
                     if (Recipe.isRecipeOwnedByUser(response.data), Identity.getCurrentUserId()) {
                         $scope.recipe = response.data;
@@ -13,11 +16,11 @@
                         $location.path('/');
                     }
                 });
-            };
+            }
         
             $scope.onConfirmDelete = function () {
                 Recipe.remove($routeParams.id).then(function (response) {
-                    Notifier.notify('Recipe deleted');
+                    Notifier.notify('Recipe "' + $scope.recipe.name +'" deleted');
                     $location.path('/recipe');
                 });
             };
@@ -27,8 +30,10 @@
             };
 
             // initialize
-            $scope.recipe = null;
-            $scope.getRecipe($routeParams.id);
+            BaseCtrl.init(function () {
+                $scope.recipe = null;
+                getRecipe($routeParams.id);
+            });
         }
     ]);
 })();

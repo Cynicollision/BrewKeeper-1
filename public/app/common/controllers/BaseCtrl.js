@@ -15,12 +15,12 @@
             }
             
             return {
-                init: function ($scope, scopeInitFn) {
+                init: function (scopeInitFn) {
                     
                     redirectIfNotLoggedIn();
 
                     if (scopeInitFn) {
-                        scopeInitFn($scope);
+                        scopeInitFn();
                     }
                 },
             };
