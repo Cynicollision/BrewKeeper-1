@@ -1,33 +1,28 @@
 ﻿(function () {
     'use strict';
 
-    describe('account/NavBarLoginCtrl', function () {
-        var $scope, ctrl, Auth;
+    describe('main/NavBarLoginCtrl', function () {
+
+        var $scope, AuthMock;
         
         beforeEach(function () {
             module('BrewKeeper');
             
-            inject(function ($rootScope, $q, $controller, _Auth_) {
+            AuthMock = jasmine.createSpyObj('AuthMock', ['logoutUser']);
+            
+            inject(function ($rootScope, $q, $controller) {
+
                 $scope = $rootScope.$new();
-                Auth = _Auth_;
                 
-                ctrl = $controller('NavBarLoginCtrl', {
-                    $scope: $scope,
-                    Auth: Auth
-                });
-                
-                spyOn(Auth, 'authenticateUser').and.callFake(function () {
-                    dfd = $q.defer();
-                    dfd.resolve({ success: true });
-                    return dfd.promise;
-                });
-                
-                spyOn(Auth, 'logoutUser').and.callFake(function () {
-                    $scope.clearCurrentUser();
-                    
+                AuthMock.logoutUser.and.callFake(function () {
                     var dfd = $q.defer();
                     dfd.resolve({ success: true });
                     return dfd.promise;
+                });
+
+                $controller('NavBarLoginCtrl', {
+                    $scope: $scope,
+                    Auth: AuthMock,
                 });
             });
         });
@@ -35,16 +30,9 @@
         it('Uses the Auth service to log out the current user.', function () {
             $scope.username = 'fwqkqrkewasd';
             $scope.signout();
-            expect(Auth.logoutUser).toHaveBeenCalled();
+            $scope.$apply();
+            expect(AuthMock.logoutUser).toHaveBeenCalled();
             expect($scope.username).toEqual('');
-        });
-        
-        it('Can clear the currently logged-in user.', function () {
-            $scope.username = 'mckUsr';
-            $scope.password = 'pssWrd';
-            $scope.clearCurrentUser();
-            expect($scope.username).toEqual('');
-            expect($scope.password).toEqual('');
         });
     });
 

@@ -1,29 +1,34 @@
-﻿describe('common/MainCtrl', function () {
-    var $scope, Auth, ctrl;
+﻿(function () {
+    'use strict';
     
-    beforeEach(function () {
-        module('BrewKeeper');
+    describe('main/MainCtrl', function () {
         
-        inject(function ($rootScope, $q, $controller, _Auth_) {
-            $scope = $rootScope.$new();
-            Auth = _Auth_;
+        var $scope, AuthMock;
+        
+        beforeEach(function () {
+            module('BrewKeeper');
             
-            spyOn(Auth, 'authenticateUser').and.callFake(function () {
-                dfd = $q.defer();
-                dfd.resolve({ success: true });
-                return dfd.promise;
-            });
+            AuthMock = jasmine.createSpyObj('AuthMock', ['authenticateUser']);
             
-            ctrl = $controller('MainCtrl', {
-                $scope: $scope,
-                Auth: Auth
+            inject(function ($rootScope, $q, $controller) {
+                $scope = $rootScope.$new();
+                
+                AuthMock.authenticateUser.and.callFake(function () {
+                    var dfd = $q.defer();
+                    dfd.resolve({ success: true });
+                    return dfd.promise;
+                });
+                
+                 $controller('MainCtrl', {
+                    $scope: $scope,
+                    Auth: AuthMock,
+                });
             });
         });
+        
+        it('Uses the Auth service to attempt to sign in the user with the given username and password.', function () {
+            $scope.signin('mockUser', 'mockPassword');
+            expect(AuthMock.authenticateUser).toHaveBeenCalledWith('mockUser', 'mockPassword');
+        });
     });
-
-    it('Uses the Auth service to attempt to sign in the user with the given username and password.', function () {
-        $scope.signin('mockUser', 'mockPassword');
-        expect(Auth.authenticateUser).toHaveBeenCalledWith('mockUser', 'mockPassword');
-    });
-
-});
+})();

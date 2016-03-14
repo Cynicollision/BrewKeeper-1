@@ -2,6 +2,7 @@
     'use strict';
     
     describe('brew/AddBrewCtrl', function () {
+
         var mockUserId = 82589,
             mockRecipeBrewCount = 2,
             $scope, location, mockRecipeCollection, BrewMock, IdentityMock, RecipeMock;
@@ -14,6 +15,7 @@
         ];
         
         beforeEach(function () {
+
             module('BrewKeeper');
 
             BrewMock = jasmine.createSpyObj('BrewMock', ['save']);

@@ -2,6 +2,7 @@
     'use strict';
     
     describe('brew/EditBrewCtrl', function () {
+
         var $scope, BrewMock, RecipeMock, mockBrew, mockRecipeCollection;
         
         mockBrew = {

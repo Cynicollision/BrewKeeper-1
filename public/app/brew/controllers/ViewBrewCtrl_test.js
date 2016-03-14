@@ -8,6 +8,7 @@
         
         beforeEach(function () {
             module('BrewKeeper');
+
             BrewMock = jasmine.createSpyObj('BrewMock', ['getByBrewId', 'isBrewOwnedByUser']);
             IdentityMock = jasmine.createSpyObj('IdentityMock', ['getCurrentUserId']);
             RecipeMock = jasmine.createSpyObj('RecipeMock', ['getCount', 'getByRecipeId']);
@@ -25,6 +26,7 @@
             };
 
             inject(function ($rootScope, $controller, $q) {
+
                 $scope = $rootScope.$new();
                 
                 IdentityMock.getCurrentUserId.and.callFake(function () {

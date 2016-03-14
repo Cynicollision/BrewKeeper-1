@@ -1,8 +1,10 @@
 ﻿(function () {
     'use strict';
+
     describe('recipe/AddRecipeCtrl', function () {
-        var mockOwnerId = 82589, mockRecipe,
-            $scope, location, RecipeMock, IdentityMock;
+
+        var mockOwnerId = 82589, 
+            mockRecipe, $scope, location, RecipeMock, IdentityMock;
         
         mockRecipe = {
             ownerId: mockOwnerId,
@@ -26,16 +28,10 @@
             IdentityMock = jasmine.createSpyObj('Identity', ['getCurrentUserId']);
 
             inject(function ($rootScope, $controller, $location, $q) {
+
                 $scope = $rootScope.$new();
                 location = $location;
 
-                $controller('AddRecipeCtrl', {
-                    $scope: $scope,
-                    $location: $location,
-                    Recipe: RecipeMock,
-                    Identity: IdentityMock
-                });
-                
                 // set a recipe to be saved on the $scope
                 setScopeNewRecipe($scope);
                 
@@ -46,6 +42,13 @@
                     var dfd = $q.defer();
                     dfd.resolve({ success: true });
                     return dfd.promise;
+                });
+
+                $controller('AddRecipeCtrl', {
+                    $scope: $scope,
+                    $location: $location,
+                    Recipe: RecipeMock,
+                    Identity: IdentityMock
                 });
             }); 
         });

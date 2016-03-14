@@ -2,20 +2,25 @@
     'use strict';
 
     describe('brew/BaseAddEditBrewCtrl', function () {
-        var $scope, Notifier, location;
+
+        var $scope, NotifierMock, location;
         
         beforeEach(function () {
             module('BrewKeeper');
+            
+            NotifierMock = jasmine.createSpyObj('NotifierMock', ['notify']);
 
-            inject(function ($rootScope, $controller, $location, _Notifier_) {
+            inject(function ($rootScope, $controller, $location) {
+
                 $scope = $rootScope.$new();
-                Notifier = _Notifier_;
                 location = $location;
+                
+                NotifierMock.notify.and.returnValue();
                 
                 $controller('BaseAddEditBrewCtrl', {
                     $scope: $scope,
                     $location: $location,
-                    Notifier: Notifier
+                    Notifier: NotifierMock,
                 });
             });
         });
@@ -47,11 +52,9 @@
         });
 
         it('Can display a success message and redirect to a given path.', function () {
-            spyOn(Notifier, 'notify');
-
             $scope.successRedirect('hello, brew keeper!', '/somepath/');
             expect(location.path()).toEqual('/somepath/');
-            expect(Notifier.notify).toHaveBeenCalled();
+            expect(NotifierMock.notify).toHaveBeenCalled();
         });
     });
 })();

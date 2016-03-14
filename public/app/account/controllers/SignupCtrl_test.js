@@ -6,7 +6,6 @@
         var $scope, location, AuthMock, NotifierMock;
         
         beforeEach(function () {
-
             module('BrewKeeper');
             
             AuthMock = jasmine.createSpyObj('AuthMock', ['createUser', 'authenticateUser']);

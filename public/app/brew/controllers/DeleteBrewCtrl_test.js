@@ -2,6 +2,7 @@
     'use strict';
 
     describe('brew/DeleteBrewCtrl', function () {
+
         var mockCurrentUserId = 8900,
             $scope, BrewMock, IdentityMock, location, mockBrew;
 
@@ -17,6 +18,7 @@
             };
             
             inject(function ($rootScope, $controller, $location, $q) {
+
                 $scope = $rootScope.$new();
                 location = $location;
                 
@@ -48,7 +50,7 @@
                     $routeParams : {
                         id: mockBrew._id
                     },
-                    Brew: BrewMock
+                    Brew: BrewMock,
                 });
             });
         });

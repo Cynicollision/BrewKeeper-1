@@ -1,12 +1,15 @@
 ﻿(function () {
     'use strict';
 
-    var bk = angular.module('BrewKeeper');
-    bk.controller('MainCtrl', ['$scope', 'Auth', 'Identity', 'Notifier',
+    angular.module('BrewKeeper').controller('MainCtrl', 
+
+        ['$scope', 'Auth', 'Identity', 'Notifier',
         function ($scope, Auth, Identity, Notifier) {
+
             $scope.identity = Identity;
         
             $scope.signin = function (username, password) {
+
                 Auth.authenticateUser(username, password).then(function (success) {
                     if (!success) {
                         Notifier.error('Username/password incorrect.');

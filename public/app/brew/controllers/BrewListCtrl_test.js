@@ -21,8 +21,8 @@
             ];
 
             inject(function ($rootScope, $controller, $q) {
+
                 $scope = $rootScope.$new();
-                $scope.recipeNames = [];
 
                 BrewMock.getByUserId.and.callFake(function () {
                     var dfd = $q.defer();
@@ -52,7 +52,7 @@
                         id: 123
                     },
                     Brew: BrewMock,
-                    Identity: IdentityMock
+                    Identity: IdentityMock,
                 });
             });
         });
