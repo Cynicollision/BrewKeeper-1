@@ -2,9 +2,10 @@
     'use strict';
 
     describe('recipe/ViewRecipeCtrl', function () {
-        var mockRecipe, mockCount, $scope, location, RecipeMock;
 
-        mockRecipe = {
+        var $scope, testRecipe, mockCount, location, RecipeMock;
+
+        testRecipe = {
             _id: 423531,
             name: 'Mock recipe',
             sourceUrl: 'seannormoyle.net'
@@ -16,16 +17,18 @@
 
         beforeEach(function () {
             module('BrewKeeper');
+
             RecipeMock = jasmine.createSpyObj('RecipeMock', ['getBrewCount', 'getByRecipeId']);
 
             inject(function ($rootScope, $controller, $location, $q) {
+
                 $scope = $rootScope.$new();
                 location = $location;
 
                 RecipeMock.getByRecipeId.and.callFake(function () {
                     var dfd = $q.defer();
                     dfd.resolve({
-                        data: mockRecipe
+                        data: testRecipe
                     });
                     return dfd.promise;
                 });
@@ -41,7 +44,7 @@
                 $controller('ViewRecipeCtrl', {
                     $scope: $scope,
                     $routeParams : {
-                        id: mockRecipe._id
+                        id: testRecipe._id
                     },
                     $location: $location,
                     Recipe: RecipeMock
@@ -50,25 +53,25 @@
         });
 
         it('Sets the current recipe by retrieving it by the ID specified in the route.', function () {
-            expect(RecipeMock.getByRecipeId).toHaveBeenCalledWith(mockRecipe._id);
+            expect(RecipeMock.getByRecipeId).toHaveBeenCalledWith(testRecipe._id);
             $scope.$apply();
-            expect($scope.recipe).toEqual(mockRecipe);
+            expect($scope.recipe).toEqual(testRecipe);
         });
         
         it('Sets how many times the recipe was brewed.', function () {
-            expect(RecipeMock.getBrewCount).toHaveBeenCalledWith(mockRecipe._id);
+            expect(RecipeMock.getBrewCount).toHaveBeenCalledWith(testRecipe._id);
             $scope.$apply();
             expect($scope.recipe.timesBrewed).toEqual(mockCount.count);
         });
 
-        it('Can load the "edit recipe" page".', function () {
-            $scope.recipe = mockRecipe;
+        it('Can navigate to the "edit recipe" page".', function () {
+            $scope.recipe = testRecipe;
             $scope.doEdit();
             expect(location.path()).toEqual('/recipe/edit/' + $scope.recipe._id);
         });
 
-        it('Can load the "delete recipe confirmation" page".', function () {
-            $scope.recipe = mockRecipe;
+        it('Can navigate to the "delete recipe confirmation" page.', function () {
+            $scope.recipe = testRecipe;
             $scope.doDelete();
             expect(location.path()).toEqual('/recipe/delete/' + $scope.recipe._id);
         });

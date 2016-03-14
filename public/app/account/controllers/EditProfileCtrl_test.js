@@ -1,10 +1,13 @@
 ﻿(function () {
     'use strict';
     describe('account/EditProfileCtrl', function () {
-        var $scope, ctrl, $timeout, Auth, IdentityMock, setInitialMockScopeUserData;
+        var $scope, $timeout, AuthMock, IdentityMock;
         
         beforeEach(function () {
             module('BrewKeeper');
+            
+            AuthMock = jasmine.createSpyObj('AuthMock', ['updateCurrentUser']);
+            
             IdentityMock = {
                 currentUser: {
                     username: 'mockington825',
@@ -12,27 +15,20 @@
                     lastName: 'mockington'
                 },
             };
-            
-            setInitialMockScopeUserData = function () {
-                $scope.username = IdentityMock.currentUser.username;
-                $scope.firstName = IdentityMock.currentUser.firstName;
-                $scope.lastName = IdentityMock.currentUser.lastName;
-            };
-            
-            inject(function ($rootScope, $q, $controller, _Auth_) {
+
+            inject(function ($rootScope, $q, $controller) {
                 $scope = $rootScope.$new();
-                Auth = _Auth_;
                 
-                ctrl = $controller('EditProfileCtrl', {
-                    $scope: $scope,
-                    Auth: Auth,
-                    Identity: IdentityMock
-                });
-                
-                spyOn(Auth, 'updateCurrentUser').and.callFake(function () {
+                AuthMock.updateCurrentUser.and.callFake(function () {
                     var dfd = $q.defer();
                     dfd.resolve({ success: true });
                     return dfd.promise;
+                });
+                
+                $controller('EditProfileCtrl', {
+                    $scope: $scope,
+                    Auth: AuthMock,
+                    Identity: IdentityMock,
                 });
             });
         });
@@ -58,7 +54,13 @@
                 lastName: 'updated_ln',
             };
 
-            expect(Auth.updateCurrentUser).toHaveBeenCalledWith(updatedUserObj);
+            expect(AuthMock.updateCurrentUser).toHaveBeenCalledWith(updatedUserObj);
         });
+
+        function setInitialMockScopeUserData() {
+            $scope.username = IdentityMock.currentUser.username;
+            $scope.firstName = IdentityMock.currentUser.firstName;
+            $scope.lastName = IdentityMock.currentUser.lastName;
+        }
     });
 })();
