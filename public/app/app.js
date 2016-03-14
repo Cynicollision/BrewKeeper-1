@@ -1,9 +1,10 @@
 ﻿(function () {
     'use strict';
 
-    var bk = angular.module('BrewKeeper', ['ngResource', 'ngRoute']);
-    bk.config(['$routeProvider', '$locationProvider',
+    angular.module('BrewKeeper', ['ngResource', 'ngRoute']).config(['$routeProvider', '$locationProvider',
+
         function ($routeProvider, $locationProvider) {
+
             var routeRoleChecks = {
                 admin: {
                     auth: function (Auth) {
@@ -22,24 +23,31 @@
                 enabled: true,
                 requireBase: false
             });
-        
+            
+            // ROUTES        
             $routeProvider
+
             .when('/', {
-                    templateUrl: '/partials/main/views/main', 
-                    controller: 'MainCtrl'
-                })
+                templateUrl: '/partials/main/views/main', 
+                controller: 'MainCtrl'
+            })
+
+            .when('/home', {
+                templateUrl: '/partials/main/views/user-home',
+                controller: 'UserHomeCtrl',
+            })
 
             // account
             .when('/signup', {
-                    templateUrl: '/partials/account/views/signup', 
-                    controller: 'SignupCtrl'
-                })
+                templateUrl: '/partials/account/views/signup', 
+                controller: 'SignupCtrl'
+            })
 
             .when('/profile', {
-                    templateUrl: '/partials/account/views/profile', 
-                    controller: 'EditProfileCtrl',
-                    resolve: routeRoleChecks.user
-                })
+                templateUrl: '/partials/account/views/profile', 
+                controller: 'EditProfileCtrl',
+                resolve: routeRoleChecks.user
+            })
 
             // brew
             .when('/brew', {

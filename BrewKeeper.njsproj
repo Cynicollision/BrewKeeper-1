@@ -67,6 +67,7 @@
     <Compile Include="public\app\brew\controllers\BrewListCtrl.js" />
     <Compile Include="public\app\common\services\Notifier.js" />
     <Compile Include="public\app\main\controllers\MainCtrl.js" />
+    <Compile Include="public\app\main\controllers\UserHomeCtrl.js" />
     <Compile Include="public\app\recipe\controllers\AddRecipeCtrl.js" />
     <Compile Include="public\app\recipe\controllers\AddRecipeCtrl_test.js" />
     <Compile Include="public\app\recipe\controllers\DeleteRecipeCtrl.js" />

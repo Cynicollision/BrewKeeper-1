@@ -3,15 +3,18 @@
 
     angular.module('BrewKeeper').controller('MainCtrl', 
 
-        ['$scope', 'Auth', 'Identity', 'Notifier',
-        function ($scope, Auth, Identity, Notifier) {
+        ['$scope', '$location', 'Auth', 'Identity', 'Notifier',
+        function ($scope, $location, Auth, Identity, Notifier) {
 
             $scope.identity = Identity;
         
             $scope.signin = function (username, password) {
 
                 Auth.authenticateUser(username, password).then(function (success) {
-                    if (!success) {
+                    if (success) {
+                        $location.path('/home');
+                    }
+                    else {
                         Notifier.error('Username/password incorrect.');
                     }
                 });
@@ -21,6 +24,10 @@
                     $('.navbar-collapse').collapse('hide');
                 }
             };
+
+            if (Identity.isAuthenticated()) {
+                $location.path('/home');
+            }
         }
     ]);
 })();

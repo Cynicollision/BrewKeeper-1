@@ -1,7 +1,9 @@
-﻿.panel.panel-primary
-    .panel-heading.text-center In Progress
-    .panel-body (brews and their states)
-        .row(ng-repeat="brew in brews | orderBy:'brewedOn':true | limitTo:3")
-            .col-md-3 {{brew.brewedOn | date:"MMM d" }}
-            .col-md-9 
-                a(href="/brews/{{brew._id}}") {{brew.name}}
+﻿.container
+    .row
+        .col-md-12
+            .panel.panel-primary
+                .panel-heading.text-center In Progress
+                .panel-body 
+                    .div(ng-show="noActivity") Get brewing! You have no active brews to show.
+                    .div(ng-show="!noActivity") Active brews...
+            
