@@ -29,7 +29,7 @@
                     redirectUrl = '/brew/view/' + $scope.brewId;
             
                 Brew.update(updatedBrewData).then(function () {
-                    $scope.successRedirect('Brew updated', redirectUrl);
+                    BaseCtrl.successRedirect('Brew updated.', redirectUrl);
 
                 }, function (reason) {
                     Notifier.error(reason);

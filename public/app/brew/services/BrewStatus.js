@@ -11,6 +11,7 @@
             { id: 4, name: 'Gone' }
         ];
         
+        
         return {
             getDisplay: function (brewStatusCde) {
                 if (brewStatusCde >= 0 && brewStatusCde < statuses.length) {
@@ -22,7 +23,13 @@
             
             getStatuses: function () {
                 return statuses;
-            }
+            },
+
+            NotStartedYet: 0,
+            Fermenting: 1,
+            Bottled: 2,
+            Chilling: 3,
+            Gone: 4,
         };
     });
 })();

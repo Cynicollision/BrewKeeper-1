@@ -17,7 +17,7 @@
 
                     if (!!$scope.recipes && $scope.recipes.length) {
                         $scope.brewRecipe = $scope.recipes[0];
-                        updateBrewName();
+                        $scope.updateBrewName();
                     }
                 });
             }
@@ -31,22 +31,22 @@
             }
 
             // updates the name to "<recipe> #<timesBrewed>"
-            function updateBrewName() {
+            $scope.updateBrewName = function () {
                 var recipeId = $scope.brewRecipe._id,
                     recipeName = $scope.brewRecipe.name;
-            
-                Recipe.getBrewCount(recipeId).then(function (response) {
-                    $scope.brewName = recipeName + ' #' + (response.data.count + 1);
                 
-                }, function (reason) {
-                    Notifier.error(reason);
+                Recipe.getBrewCount(recipeId).then(function (response) {
+
+                    $scope.brewName = recipeName + ' #' + (response.data.count + 1);
+                }, function (err) {
+                    Notifier.error(err);
                 });
-            }
+            };
             
             $scope.submitBrew = function () {
                 var newBrewData = $scope.getFormBrewData();
                 Brew.save(newBrewData).then(function (response) {
-                    $scope.successRedirect('Brew added', '/brew/');
+                    BaseCtrl.successRedirect('Brew added.', '/brew/');
                 }, function (reason) {
                     Notifier.error(reason);
                 });

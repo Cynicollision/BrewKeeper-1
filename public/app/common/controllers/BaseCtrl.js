@@ -6,23 +6,31 @@
         ['$location', 'Identity', 'Notifier',
         function ($location, Identity, Notifier) {
             
-            function redirectIfNotLoggedIn() {
-
+            function init(scopeInitFn) {
+                
                 if (!Identity.isAuthenticated()) {
-                    Notifier.notify('Please log in.');
-                    $location.path('/');
+                    errorRedirect('Please log in.', '/');
                 }
-            }
-            
-            return {
-                init: function (scopeInitFn) {
-                    
-                    redirectIfNotLoggedIn();
+                
+                if (scopeInitFn) {
+                    scopeInitFn();
+                }
+            } 
 
-                    if (scopeInitFn) {
-                        scopeInitFn();
-                    }
-                },
+            function successRedirect(msg, path) {
+                Notifier.notify(msg);
+                $location.path(path);
+            }
+
+            function errorRedirect(msg, path) {
+                Notifier.notify(msg);
+                $location.path(path);
+            }
+
+            return {
+                init: init,
+                successRedirect: successRedirect,
+                errorRedirect: errorRedirect,
             };
         }
     ]);

@@ -11,7 +11,7 @@
                             span You need to create a 
                                 a(href="/recipe/add/") recipe
                                 span&nbsp;first!
-                        select.form-control(name="brewRecipe", ng-show="hasRecipes", ng-model="brewRecipe", ng-options="recipe.name for recipe in recipes", ng-change="updateName()", required)
+                        select.form-control(name="brewRecipe", ng-show="hasRecipes", ng-model="brewRecipe", ng-options="recipe.name for recipe in recipes", ng-change="updateBrewName()", required)
                 .form-group
                     label.col-md-4.control-label(for="brewName") Name
                     .col-md-6

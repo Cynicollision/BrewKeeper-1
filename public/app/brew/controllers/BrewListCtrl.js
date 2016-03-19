@@ -5,14 +5,14 @@
 
         ['$scope', '$location', 'BaseCtrl', 'Brew', 'BrewStatus', 'Identity',
         function ($scope, $location, BaseCtrl, Brew, BrewStatus, Identity) {
-  
+            
+            var userId = Identity.getCurrentUserId();
+
             function getTopCurrentUserBrews() {
 
-                var userId = Identity.getCurrentUserId();
-            
                 Brew.getCountByUserId(userId).then(function (response) {
-                    var brewCount = response.data.count;
 
+                    var brewCount = response.data.count;
                     $scope.showNoBrews = (brewCount === 0);
 
                     if (brewCount > $scope.listLimit) {
@@ -29,8 +29,6 @@
         
             $scope.getAllCurrentUserBrews = function () {
                 $scope.limitResults = false;
-                var userId = Identity.getCurrentUserId();
-
                 Brew.getByUserId(userId).then(function (response) {
                     $scope.brews = response.data;
                 });

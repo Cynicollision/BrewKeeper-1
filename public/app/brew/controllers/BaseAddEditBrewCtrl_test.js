@@ -3,24 +3,17 @@
 
     describe('brew/BaseAddEditBrewCtrl', function () {
 
-        var $scope, NotifierMock, location;
+        var $scope;
         
         beforeEach(function () {
             module('BrewKeeper');
             
-            NotifierMock = jasmine.createSpyObj('NotifierMock', ['notify']);
-
-            inject(function ($rootScope, $controller, $location) {
+            inject(function ($rootScope, $controller) {
 
                 $scope = $rootScope.$new();
-                location = $location;
-                
-                NotifierMock.notify.and.returnValue();
-                
+
                 $controller('BaseAddEditBrewCtrl', {
                     $scope: $scope,
-                    $location: $location,
-                    Notifier: NotifierMock,
                 });
             });
         });
@@ -49,12 +42,6 @@
             expect(updatedData.brewDate).toEqual('3/14/2015');
             expect(updatedData.bottleDate).toEqual('3/28/2015');
             expect(updatedData.chillDate).toEqual('4/15/2015');
-        });
-
-        it('Can display a success message and redirect to a given path.', function () {
-            $scope.successRedirect('hello, brew keeper!', '/somepath/');
-            expect(location.path()).toEqual('/somepath/');
-            expect(NotifierMock.notify).toHaveBeenCalled();
         });
     });
 })();

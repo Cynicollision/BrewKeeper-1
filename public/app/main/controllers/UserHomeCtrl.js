@@ -3,16 +3,38 @@
     
     angular.module('BrewKeeper').controller('UserHomeCtrl', 
 
-        ['$scope', '$location', 'BaseCtrl',
-        function ($scope, $location, BaseCtrl) {
+        ['$scope', '$location', 'BaseCtrl', 'Brew', 'BrewStatus', 'Identity',
+        function ($scope, $location, BaseCtrl, Brew, BrewStatus, Identity) {
             
-            $scope.noActivity = true;
+            $scope.hasActivity = true;
+            $scope.fermentingBrews = [];
+            $scope.bottledBrews = [];
+            $scope.chillingBrews = [];
 
             BaseCtrl.init(function () {
 
-                // TODO: get active brews (new API call?)
-                // set noActivity accordingly
-                // show brews in "fermenting" and "bottled" states, with "bottle" and "chill" dates respectively (desc by date)
+                Brew.getActiveByUserId(Identity.getCurrentUserId()).then(function (response) {
+
+                    var brews = response.data;
+
+                    $scope.fermentingBrews = brews.filter(function (brew) {
+                        return (brew.statusCde === BrewStatus.Fermenting);
+                    });
+                    
+                    $scope.bottledBrews = brews.filter(function (brew) {
+                        return (brew.statusCde === BrewStatus.Bottled);
+                    });
+
+                    $scope.chillingBrews = brews.filter(function (brew) {
+                        return (brew.statusCde === BrewStatus.Chilling);
+                    });
+
+                    var notYetStartedCount = brews.filter(function (brew) {
+                        return (brew.statusCde == BrewStatus.NotStartedYet);
+                    }).length;
+
+                    $scope.hasActivity = !!brews.length || !notYetStartedCount;
+                });
             });
         }
     ]);

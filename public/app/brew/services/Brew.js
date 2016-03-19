@@ -4,6 +4,28 @@
     var bk = angular.module('BrewKeeper');
     bk.factory('Brew', ['$q', 'BrewKeeperApi', 'Identity', 
         function ($q, BrewKeeperApi, Identity) {
+            
+            function getByUserId(userId, limit, activeOnly) {
+
+                var dfd = $q.defer(),
+                    url = '/api/brew/user/' + userId;
+                
+                limit = limit || 0;
+                url += '?limit=' + limit;
+
+                if (!!activeOnly) {
+                    url += '&active=1';
+                }
+                
+                BrewKeeperApi.get(url).then(function (response) {
+                    dfd.resolve(response);
+                }, function (response) {
+                    dfd.reject(response.data.reason);
+                });
+                
+                return dfd.promise;
+            }
+
             return {
                 isBrewOwnedByUser: function (brew, userId) {
                     if (brew) {
@@ -26,22 +48,11 @@
                 },
             
                 getByUserId: function (userId, limit) {
-                    var dfd = $q.defer(),
-                        url;
-
-                    if (!limit) {
-                        limit = -1;
-                    }
+                    return getByUserId(userId, limit, false);
+                },
                 
-                    url = '/api/brew/user/' + userId + '/' + limit;
-                
-                    BrewKeeperApi.get(url).then(function (response) {
-                        dfd.resolve(response);
-                    }, function (response) {
-                        dfd.reject(response.data.reason);
-                    });
-                
-                    return dfd.promise;
+                getActiveByUserId: function (userId) {
+                    return getByUserId(userId, -1, true);
                 },
             
                 getCountByUserId: function (userId) {

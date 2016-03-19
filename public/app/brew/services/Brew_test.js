@@ -39,19 +39,6 @@
             expect(Brew.isBrewOwnedByUser(mockBrew, Identity.currentUser._id)).toBeFalsy();
         });
         
-        it('Can retrieve all brews.', function () {
-            var result;
-            
-            httpBackend.expectGET('/api/brew/').respond(successResponse);
-            Brew.getAll().then(function (response) {
-                result = response.data;
-            });
-            httpBackend.flush();
-            
-            expect(BrewKeeperApi.get).toHaveBeenCalledWith('/api/brew/');
-            expect(result).toEqual(successResponse);
-        });
-        
         it('Can retrieve how many brews a user has by user ID.', function () {
             var mockUserId = 2134,
                 result,
@@ -73,7 +60,7 @@
         it('Can retrieve all brews for a single user by user ID.', function () {
             var result, 
                 mockUserId = 6724,
-                getUrl = '/api/brew/user/' + mockUserId + '/-1';
+                getUrl = '/api/brew/user/' + mockUserId + '?limit=0';
             
             httpBackend.expectGET(getUrl).respond(successResponse);
 
@@ -90,7 +77,7 @@
             var result, 
                 mockUserId = 6724,
                 limit = 6,
-                getUrl = '/api/brew/user/' + mockUserId + '/' + limit;
+                getUrl = '/api/brew/user/' + mockUserId + '?limit=' + limit;
             
             httpBackend.expectGET(getUrl).respond(successResponse);
             
