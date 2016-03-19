@@ -4,20 +4,31 @@
     var Brew = require('mongoose').model('Brew');
 
     exports.getBrewsByUserId = function (req, res) {
+
         var userId = req.params.id,
-            limit = req.params.limit;
-        
+            limit = req.query.limit;
+
         // set a default limit if one is not specified
         if (!limit || limit <= 0) {
-            Brew.find({ ownerId: userId }).sort({ brewDate: -1 }).exec(function (err, collection) {
-                res.send(collection);
-            });
+            limit = 1000;
+        }
 
-        } else {
-            Brew.find({ ownerId: userId }).sort({ brewDate: -1 }).limit(limit).exec(function (err, collection) {
-                res.send(collection);
+        var query = {
+            $and: [
+                { ownerId: userId },
+            ]
+        };
+        
+        // filter by status code if one is provided
+        if (!!req.query.active) {
+            query.$and.push({
+                statusCde: { $ne: 4 }
             });
         }
+
+        Brew.find(query).sort({ brewDate: -1 }).limit(limit).exec(function (err, collection) {
+            res.send(collection);
+        });
     };
     
     exports.getBrewCountByUserId = function (req, res) {

@@ -23,7 +23,6 @@
         app.get('/api/brew/:id', brew.getBrewById);
         app.get('/api/brew/user/count/:id', brew.getBrewCountByUserId);
         app.get('/api/brew/user/:id', brew.getBrewsByUserId);
-        app.get('/api/brew/user/:id/:limit', brew.getBrewsByUserId);
         app.post('/api/brew', brew.saveNewBrew);
         app.put('/api/brew', brew.updateBrew);
         app.delete('/api/brew/:id', brew.deleteBrew);
