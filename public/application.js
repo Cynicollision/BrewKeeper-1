@@ -2206,9 +2206,10 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
 (function () {
     'use strict';
 
-    var bk = angular.module('BrewKeeper', ['ngResource', 'ngRoute']);
-    bk.config(['$routeProvider', '$locationProvider',
+    angular.module('BrewKeeper', ['ngResource', 'ngRoute']).config(['$routeProvider', '$locationProvider',
+
         function ($routeProvider, $locationProvider) {
+
             var routeRoleChecks = {
                 admin: {
                     auth: function (Auth) {
@@ -2227,24 +2228,31 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                 enabled: true,
                 requireBase: false
             });
-        
+            
+            // ROUTES        
             $routeProvider
+
             .when('/', {
-                    templateUrl: '/partials/main/views/main', 
-                    controller: 'MainCtrl'
-                })
+                templateUrl: '/partials/main/views/main', 
+                controller: 'MainCtrl'
+            })
+
+            .when('/home', {
+                templateUrl: '/partials/main/views/user-home',
+                controller: 'UserHomeCtrl',
+            })
 
             // account
             .when('/signup', {
-                    templateUrl: '/partials/account/views/signup', 
-                    controller: 'SignupCtrl'
-                })
+                templateUrl: '/partials/account/views/signup', 
+                controller: 'SignupCtrl'
+            })
 
             .when('/profile', {
-                    templateUrl: '/partials/account/views/profile', 
-                    controller: 'EditProfileCtrl',
-                    resolve: routeRoleChecks.user
-                })
+                templateUrl: '/partials/account/views/profile', 
+                controller: 'EditProfileCtrl',
+                resolve: routeRoleChecks.user
+            })
 
             // brew
             .when('/brew', {
@@ -2253,7 +2261,7 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                 })
 
             .when('/brew/add', {
-                    templateUrl: '/partials/brew/views/edit-brew', 
+                    templateUrl: '/partials/brew/views/add-edit-brew', 
                     controller: 'AddBrewCtrl'
                 })
 
@@ -2263,7 +2271,7 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                 })
 
             .when('/brew/edit/:id', {
-                    templateUrl: '/partials/brew/views/edit-brew', 
+                    templateUrl: '/partials/brew/views/add-edit-brew', 
                     controller: 'EditBrewCtrl'
                 })
 
@@ -2314,87 +2322,72 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
 (function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('EditProfileCtrl', ['$scope', 'Auth', 'Identity', 'Notifier',
-        function ($scope, Auth, Identity, Notifier) {
+    angular.module('BrewKeeper').controller('EditProfileCtrl', 
         
-            $scope.setScopeInitialUserData = function (user) {
-                $scope.email = user.username;
-                $scope.fname = user.firstName;
-                $scope.lname = user.lastName;
-            };
+        ['$scope', '$location', 'BaseCtrl', 'Auth', 'Identity', 'Notifier',
+        function ($scope, $location, BaseCtrl, Auth, Identity, Notifier) {
         
-            $scope.getScopeUpdatedUserData = function () {
+            function setScopeInitialUserData($scope, user) {
+                $scope.username = user.username;
+                $scope.firstName = user.firstName;
+                $scope.lastName = user.lastName;
+            }
+        
+            function getScopeUpdatedUserData() {
                 return {
-                    username: $scope.email,
-                    firstName: $scope.fname,
-                    lastName: $scope.lname
+                    username: $scope.username,
+                    firstName: $scope.firstName,
+                    lastName: $scope.lastName,
                 };
-            };
+            }
         
-            $scope.update = function () {
-                var updatedUserData = $scope.getScopeUpdatedUserData();
+            $scope.submit = function () {
+
+                var updatedUserData = getScopeUpdatedUserData();
             
                 if ($scope.password && $scope.password.length > 0) {
                     updatedUserData.password = $scope.password;
                 }
             
                 Auth.updateCurrentUser(updatedUserData).then(function () {
-                    Notifier.notify('Your user account has been updated.');
+                    Notifier.notify('Your profile has been updated.');
+                    $location.path('/');
                 }, function (reason) {
                     Notifier.error(reason);
                 });
             };
         
             // initialize
-            $scope.setScopeInitialUserData(Identity.currentUser);
+            BaseCtrl.init(function () {
+                setScopeInitialUserData($scope, Identity.currentUser);
+            });
         }
     ]);
 })();
 
 (function () {
     'use strict';
-    
-    var bk = angular.module('BrewKeeper');
-    bk.controller('NavBarLoginCtrl', ['$scope', '$location', 'Auth', 'Identity', 'Notifier',
-        function ($scope, $location, Auth, Identity, Notifier) {
-            $scope.identity = Identity;
-        
-            $scope.signout = function () {
-                Auth.logoutUser().then(function () {
-                    $scope.clearCurrentUser();
-                    $('.navbar-collapse').collapse('hide');
-                    Notifier.notify('Logged out');
-                    $location.path('/');
-                });
-            };
-        
-            $scope.clearCurrentUser = function () {
-                $scope.username = "";
-                $scope.password = "";
-            };
-        }]
-    );
-})();
-    
-(function () {
-    'use strict';
 
-    var bk = angular.module('BrewKeeper');
-    bk.controller('SignupCtrl', ['$scope', '$location', 'Auth', 'Notifier',
+    angular.module('BrewKeeper').controller('SignupCtrl', 
+        
+        ['$scope', '$location', 'Auth', 'Notifier',
         function ($scope, $location, Auth, Notifier) {
-            $scope.getNewUserData = function () {
+
+            function getNewUserData() {
                 return {
                     username: $scope.username,
                     password: $scope.password,
                     firstName: $scope.firstName,
                     lastName: $scope.lastName
                 };
-            };
+            }
         
             $scope.signup = function () {
-                var newUserData = $scope.getNewUserData();
+
+                var newUserData = getNewUserData();
+
                 Auth.createUser(newUserData).then(function () {
+
                     Auth.authenticateUser(newUserData.username, newUserData.password).then(function () {
                         Notifier.notify('User account created!');
                         $location.path('/');
@@ -2506,10 +2499,14 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
 (function () {
     'use strict';
 
-    angular.module('BrewKeeper').service('Identity', ['$window', 'User',
+    angular.module('BrewKeeper').service('Identity',
+        ['$window', 'User',
         function ($window, User) {
+
             this.currentUser = null;
+
             this.bootstrapCurrentUserFromWindow = function () {
+
                 if (!!$window.bkCurrentUser) {
                     this.currentUser = new User();
                     angular.extend(this.currentUser, $window.bkCurrentUser);
@@ -2517,6 +2514,7 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
             };
         
             this.getCurrentUserId = function () {
+
                 if (!!this.currentUser) {
                     return this.currentUser._id;
                 }
@@ -2557,58 +2555,66 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
 (function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('AddBrewCtrl', ['$scope', '$controller', 'Brew', 'BrewStatus', 'DatePicker', 'Identity', 'Notifier', 'Recipe', 
-        function ($scope, $controller, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
+    angular.module('BrewKeeper').controller('AddBrewCtrl', 
+
+        ['$scope', '$controller', 'BaseCtrl', 'Brew', 'BrewStatus', 'DatePicker', 'Identity', 'Notifier', 'Recipe', 
+        function ($scope, $controller, BaseCtrl, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
+
             $controller('BaseAddEditBrewCtrl', { $scope: $scope });
         
-            $scope.getCurrentUserRecipes = function () {
+            function getCurrentUserRecipes() {
+
                 Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+
                     $scope.recipes = response.data;
                     $scope.hasRecipes = !!$scope.recipes.length;
 
                     if (!!$scope.recipes && $scope.recipes.length) {
                         $scope.brewRecipe = $scope.recipes[0];
-                        $scope.updateName();
+                        $scope.updateBrewName();
                     }
                 });
-            };
-
-            $scope.submitBrew = function () {
-                var newBrewData = $scope.getFormBrewData();
-                Brew.save(newBrewData).then(function (response) {
-                    $scope.successRedirect('Brew added', '/brew/');
-                }, function (reason) {
-                    Notifier.error(reason);
-                });
-            };
-        
-            $scope.setDefaultControlValues = function () {
+            }
+            
+            function setDefaultControlValues() {
                 if (!!$scope.statuses) {
                     $scope.brewStatusCde = $scope.statuses[0];
                 }
-
+                
                 $scope.brewBatchSize = 1;
-            };
-        
+            }
+
             // updates the name to "<recipe> #<timesBrewed>"
-            $scope.updateName = function () {
+            $scope.updateBrewName = function () {
                 var recipeId = $scope.brewRecipe._id,
                     recipeName = $scope.brewRecipe.name;
-            
-                Recipe.getBrewCount(recipeId).then(function (response) {
-                    $scope.brewName = recipeName + ' #' + (response.data.count + 1);
                 
+                Recipe.getBrewCount(recipeId).then(function (response) {
+
+                    $scope.brewName = recipeName + ' #' + (response.data.count + 1);
+                }, function (err) {
+                    Notifier.error(err);
+                });
+            };
+            
+            $scope.submitBrew = function () {
+                var newBrewData = $scope.getFormBrewData();
+                Brew.save(newBrewData).then(function (response) {
+                    BaseCtrl.successRedirect('Brew added.', '/brew/');
                 }, function (reason) {
                     Notifier.error(reason);
                 });
             };
         
-            // initialze
-            $scope.brewUrl = '/brew/';
-            $scope.statuses = BrewStatus.getStatuses();
-            $scope.setDefaultControlValues();
-            $scope.getCurrentUserRecipes();
+            BaseCtrl.init(function () {
+                $scope.recipes = [];
+                $scope.hasRecipes = false;
+                $scope.brewUrl = '/brew/';
+                $scope.statuses = BrewStatus.getStatuses();
+
+                setDefaultControlValues();
+                getCurrentUserRecipes();
+            });
         }
     ]);
 })();
@@ -2616,9 +2622,11 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
 (function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('BaseAddEditBrewCtrl', ['$scope', '$location', 'Identity', 'Notifier',
+    angular.module('BrewKeeper').controller('BaseAddEditBrewCtrl', 
+        
+        ['$scope', '$location', 'Identity', 'Notifier',
         function ($scope, $location, Identity, Notifier) {
+
             $scope.getFormBrewData = function () {
                 return {
                     id: $scope.brewId,
@@ -2633,11 +2641,6 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                     chillDate: $scope.brewChillDate
                 };
             };
-
-            $scope.successRedirect = function (msg, path) {
-                Notifier.notify(msg);
-                $location.path(path);
-            };
         }
     ]);
 })();
@@ -2645,16 +2648,18 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
 (function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('BrewListCtrl', ['$scope', '$location', 'Brew', 'BrewStatus', 'Identity',
-        function ($scope, $location, Brew, BrewStatus, Identity) {
-  
-            $scope.getTopCurrentUserBrews = function () {
-                var userId = Identity.getCurrentUserId();
-            
-                Brew.getCountByUserId(userId).then(function (response) {
-                    var brewCount = response.data.count;
+    angular.module('BrewKeeper').controller('BrewListCtrl', 
 
+        ['$scope', '$location', 'BaseCtrl', 'Brew', 'BrewStatus', 'Identity',
+        function ($scope, $location, BaseCtrl, Brew, BrewStatus, Identity) {
+            
+            var userId = Identity.getCurrentUserId();
+
+            function getTopCurrentUserBrews() {
+
+                Brew.getCountByUserId(userId).then(function (response) {
+
+                    var brewCount = response.data.count;
                     $scope.showNoBrews = (brewCount === 0);
 
                     if (brewCount > $scope.listLimit) {
@@ -2667,11 +2672,10 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                         $scope.getAllCurrentUserBrews();
                     }
                 });
-            };
+            }
         
             $scope.getAllCurrentUserBrews = function () {
                 $scope.limitResults = false;
-                var userId = Identity.getCurrentUserId();
                 Brew.getByUserId(userId).then(function (response) {
                     $scope.brews = response.data;
                 });
@@ -2686,15 +2690,17 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                 $scope.predicate = predicate;
             };
         
-            // initialize
-            $scope.listLimit = 10;
-            $scope.showNoBrews = false;
-            $scope.limitResults = false;
-            $scope.brews = null;
-            $scope.predicate = 'brewDate';
-            $scope.reverse = true;
-            $scope.getStatusDisplay = BrewStatus.getDisplay;
-            $scope.getTopCurrentUserBrews();
+            BaseCtrl.init(function () {
+                $scope.listLimit = 10;
+                $scope.showNoBrews = false;
+                $scope.limitResults = false;
+                $scope.brews = null;
+                $scope.predicate = 'brewDate';
+                $scope.reverse = true;
+                $scope.getStatusDisplay = BrewStatus.getDisplay;
+                
+                getTopCurrentUserBrews();
+            });
         }
     ]);
 })();
@@ -2702,19 +2708,11 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
 (function () {
     'use strict';
 
-    var bk = angular.module('BrewKeeper');
-    bk.controller('DeleteBrewCtrl', ['$scope', '$routeParams', '$location', 'Brew', 'Identity', 'Notifier', 
-        function ($scope, $routeParams, $location, Brew, Identity, Notifier) {
-            $scope.getBrew = function (brewId) {
-                Brew.getByBrewId(brewId).then(function (response) {
-                    if (Brew.isBrewOwnedByUser(response.data, Identity.getCurrentUserId())) {
-                        $scope.brew = response.data;
-                    } else {
-                        $location.path('/');
-                    }
-                });
-            };
+    angular.module('BrewKeeper').controller('DeleteBrewCtrl', 
         
+        ['$scope', '$routeParams', '$location', 'BaseCtrl', 'Brew', 'Identity', 'Notifier', 
+        function ($scope, $routeParams, $location, BaseCtrl, Brew, Identity, Notifier) {
+
             $scope.onConfirmDelete = function () {
                 Brew.remove($routeParams.id).then(function (response) {
                     Notifier.notify('Brew deleted');
@@ -2726,9 +2724,18 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                 $location.path('/brew/view/' + $routeParams.id);
             };
         
-            // initialize
-            $scope.brew = null;
-            $scope.getBrew($routeParams.id);
+            BaseCtrl.init(function () {
+                $scope.brew = null;
+               
+                Brew.getByBrewId($routeParams.id).then(function (response) {
+
+                    if (Brew.isBrewOwnedByUser(response.data, Identity.getCurrentUserId())) {
+                        $scope.brew = response.data;
+                    } else {
+                        $location.path('/');
+                    }
+                });
+            });
         }
     ]);
 })();
@@ -2736,31 +2743,14 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
 (function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('EditBrewCtrl', ['$scope', '$controller', '$filter', '$routeParams', 'Brew', 'BrewStatus', 'DatePicker', 'Identity', 'Notifier', 'Recipe',
-        function ($scope, $controller, $filter, $routeParams, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
+    angular.module('BrewKeeper').controller('EditBrewCtrl', 
+        
+        ['$scope', '$q', '$controller', '$filter', '$routeParams', 'BaseCtrl', 'Brew', 'BrewStatus', 'DatePicker', 'Identity', 'Notifier', 'Recipe',
+        function ($scope, $q, $controller, $filter, $routeParams, BaseCtrl, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
 
             $controller('BaseAddEditBrewCtrl', { $scope: $scope });
         
-            $scope.getBrew = function (brewId) {
-                Brew.getByBrewId(brewId).then(function (response) {
-                    $scope.setCurrentBrew(response.data);
-                    $scope.getCurrentUserRecipes(response.data);
-                });
-            };
-        
-            $scope.getCurrentUserRecipes = function (currentBrew) {
-                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
-                    $scope.recipes = response.data;
-                    $scope.hasRecipes = ($scope.recipes.length > 0);
-
-                    $scope.brewRecipe = $scope.recipes.filter(function (recipe) {
-                        return (currentBrew && recipe._id === currentBrew.recipeId);
-                    })[0];
-                });
-            };
-        
-            $scope.setCurrentBrew = function (brew) {
+            function setCurrentBrew(brew) {
                 $scope.brewId = brew._id;
                 $scope.brewName = brew.name;
                 $scope.brewBatchSize = brew.batchSize;
@@ -2774,24 +2764,42 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                 $scope.brewStatusCde = $scope.statuses.filter(function (status) {
                     return (status.id === brew.statusCde);
                 })[0];
-            };
+            }
 
             $scope.submitBrew = function () {
                 var updatedBrewData = $scope.getFormBrewData(),
                     redirectUrl = '/brew/view/' + $scope.brewId;
             
                 Brew.update(updatedBrewData).then(function () {
-                    $scope.successRedirect('Brew updated', redirectUrl);
+                    BaseCtrl.successRedirect('Brew updated.', redirectUrl);
 
                 }, function (reason) {
                     Notifier.error(reason);
                 });
             };
         
-            // initialize
-            $scope.statuses = BrewStatus.getStatuses();
-            $scope.getBrew($routeParams.id);
-            $scope.getCurrentUserRecipes();
+            BaseCtrl.init(function () {
+                $scope.recipes = [];
+                $scope.statuses = BrewStatus.getStatuses();
+                
+                $q.all([
+                    Brew.getByBrewId($routeParams.id).then(function (response) {
+                        $scope.brew = response.data;
+                        setCurrentBrew(response.data);
+                    }),
+
+                    Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                        $scope.recipes = response.data;
+                        $scope.hasRecipes = ($scope.recipes.length > 0);
+                    }),
+                ])
+                .then(function () {
+
+                    $scope.brewRecipe = $scope.recipes.filter(function (recipe) {
+                        return ($scope.brew && recipe._id === $scope.brew.recipeId);
+                    })[0];
+                });
+            });
         }
     ]);
 })();
@@ -2799,35 +2807,25 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
 (function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('ViewBrewCtrl', ['$scope', '$routeParams', '$location', '$window', 'Brew', 'BrewStatus', 'Identity', 'Notifier', 'Recipe', 
-        function ($scope, $routeParams, $location, $window, Brew, BrewStatus, Identity, Notifier, Recipe) {
-            $scope.statusLookup = BrewStatus;
+    angular.module('BrewKeeper').controller('ViewBrewCtrl', 
 
-            $scope.getBrew = function (brewId) {
-                Brew.getByBrewId(brewId).then(function (response) {
-                    $scope.brew = response.data;
-                    $scope.getRecipeName($scope.brew.recipeId);
-                }, function (response) {
-                    Notifier.error(response);
-                    $location.path('/brew');
-                });
-            };
-        
-            $scope.isBrewOwnedByCurrentUser = function () {
-                if ($scope.brew) {
-                    return Brew.isBrewOwnedByUser($scope.brew, Identity.getCurrentUserId());
-                }
-            };
-        
-            $scope.getRecipeName = function (recipeId) {
+        ['$scope', '$routeParams', '$location', '$window', 'BaseCtrl', 'Brew', 'BrewStatus', 'Identity', 'Notifier', 'Recipe', 
+        function ($scope, $routeParams, $location, $window, BaseCtrl, Brew, BrewStatus, Identity, Notifier, Recipe) {
+
+            function getRecipeName(recipeId) {
                 Recipe.getByRecipeId(recipeId).then(function (response) {
                     $scope.recipeName = response.data.name;
                 }, function (response) {
                     Notifier.error(response);
                 });
+            }
+
+            $scope.isBrewOwnedByCurrentUser = function () {
+                if ($scope.brew) {
+                    return Brew.isBrewOwnedByUser($scope.brew, Identity.getCurrentUserId());
+                }
             };
-        
+
             $scope.doEdit = function () {
                 $window.location = '/brew/edit/' + $scope.brew._id;
             };
@@ -2836,9 +2834,20 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                 $window.location = '/brew/delete/' + $scope.brew._id;
             };
         
-            // initialize
-            $scope.getBrew($routeParams.id);
-            $scope.recipeName = '';
+            BaseCtrl.init(function () {
+                
+                $scope.statusLookup = BrewStatus;
+                $scope.recipeName = '';
+                $scope.brew = null;
+
+                Brew.getByBrewId($routeParams.id).then(function (response) {
+                    $scope.brew = response.data;
+                    getRecipeName($scope.brew.recipeId);
+                }, function (response) {
+                    Notifier.error(response);
+                    $location.path('/brew');
+                });
+            });
         }
     ]);
 })();
@@ -2849,6 +2858,28 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
     var bk = angular.module('BrewKeeper');
     bk.factory('Brew', ['$q', 'BrewKeeperApi', 'Identity', 
         function ($q, BrewKeeperApi, Identity) {
+            
+            function getByUserId(userId, limit, activeOnly) {
+
+                var dfd = $q.defer(),
+                    url = '/api/brew/user/' + userId;
+                
+                limit = limit || 0;
+                url += '?limit=' + limit;
+
+                if (!!activeOnly) {
+                    url += '&active=1';
+                }
+                
+                BrewKeeperApi.get(url).then(function (response) {
+                    dfd.resolve(response);
+                }, function (response) {
+                    dfd.reject(response.data.reason);
+                });
+                
+                return dfd.promise;
+            }
+
             return {
                 isBrewOwnedByUser: function (brew, userId) {
                     if (brew) {
@@ -2871,22 +2902,11 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                 },
             
                 getByUserId: function (userId, limit) {
-                    var dfd = $q.defer(),
-                        url;
-
-                    if (!limit) {
-                        limit = -1;
-                    }
+                    return getByUserId(userId, limit, false);
+                },
                 
-                    url = '/api/brew/user/' + userId + '/' + limit;
-                
-                    BrewKeeperApi.get(url).then(function (response) {
-                        dfd.resolve(response);
-                    }, function (response) {
-                        dfd.reject(response.data.reason);
-                    });
-                
-                    return dfd.promise;
+                getActiveByUserId: function (userId) {
+                    return getByUserId(userId, -1, true);
                 },
             
                 getCountByUserId: function (userId) {
@@ -2969,6 +2989,7 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
             { id: 4, name: 'Gone' }
         ];
         
+        
         return {
             getDisplay: function (brewStatusCde) {
                 if (brewStatusCde >= 0 && brewStatusCde < statuses.length) {
@@ -2980,9 +3001,53 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
             
             getStatuses: function () {
                 return statuses;
-            }
+            },
+
+            NotStartedYet: 0,
+            Fermenting: 1,
+            Bottled: 2,
+            Chilling: 3,
+            Gone: 4,
         };
     });
+})();
+
+(function () {
+    'use strict';
+    
+    angular.module('BrewKeeper').factory('BaseCtrl',
+
+        ['$location', 'Identity', 'Notifier',
+        function ($location, Identity, Notifier) {
+            
+            function init(scopeInitFn) {
+                
+                if (!Identity.isAuthenticated()) {
+                    errorRedirect('Please log in.', '/');
+                }
+                
+                if (scopeInitFn) {
+                    scopeInitFn();
+                }
+            } 
+
+            function successRedirect(msg, path) {
+                Notifier.notify(msg);
+                $location.path(path);
+            }
+
+            function errorRedirect(msg, path) {
+                Notifier.notify(msg);
+                $location.path(path);
+            }
+
+            return {
+                init: init,
+                successRedirect: successRedirect,
+                errorRedirect: errorRedirect,
+            };
+        }
+    ]);
 })();
 
 angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
@@ -3067,8 +3132,12 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
     
     var bk = angular.module('BrewKeeper');
     bk.value('Toastr', toastr);
-    bk.service('Notifier', ['Toastr', 
+
+    bk.service('Notifier', 
+
+        ['Toastr', 
         function (Toastr) {
+
             this.notify = function (msg) {
                 Toastr.success(msg);
             };
@@ -3083,14 +3152,20 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
 (function () {
     'use strict';
 
-    var bk = angular.module('BrewKeeper');
-    bk.controller('MainCtrl', ['$scope', 'Auth', 'Identity', 'Notifier',
-        function ($scope, Auth, Identity, Notifier) {
+    angular.module('BrewKeeper').controller('MainCtrl', 
+
+        ['$scope', '$location', 'Auth', 'Identity', 'Notifier',
+        function ($scope, $location, Auth, Identity, Notifier) {
+
             $scope.identity = Identity;
         
             $scope.signin = function (username, password) {
+
                 Auth.authenticateUser(username, password).then(function (success) {
-                    if (!success) {
+                    if (success) {
+                        $location.path('/home');
+                    }
+                    else {
                         Notifier.error('Username/password incorrect.');
                     }
                 });
@@ -3100,6 +3175,10 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
                     $('.navbar-collapse').collapse('hide');
                 }
             };
+
+            if (Identity.isAuthenticated()) {
+                $location.path('/home');
+            }
         }
     ]);
 })();
@@ -3107,21 +3186,95 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
 (function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('AddRecipeCtrl', ['$scope', '$location', 'Recipe', 'Identity', 'Notifier',
+    angular.module('BrewKeeper').controller('NavBarLoginCtrl', 
+
+        ['$scope', '$location', 'Auth', 'Identity', 'Notifier',
+        function ($scope, $location, Auth, Identity, Notifier) {
+            
+            $scope.identity = Identity;
+            
+            function clearCurrentUser() {
+                $scope.username = "";
+                $scope.password = "";
+            }
+            
+            $scope.signout = function () {
+
+                Auth.logoutUser().then(function () {
+                    clearCurrentUser();
+                    $('.navbar-collapse').collapse('hide');
+                    Notifier.notify('Logged out');
+                    $location.path('/');
+                });
+            };
+        }]
+    );
+})();
+
+(function () {
+    'use strict';
+    
+    angular.module('BrewKeeper').controller('UserHomeCtrl', 
+
+        ['$scope', '$location', 'BaseCtrl', 'Brew', 'BrewStatus', 'Identity',
+        function ($scope, $location, BaseCtrl, Brew, BrewStatus, Identity) {
+            
+            $scope.hasActivity = true;
+            $scope.fermentingBrews = [];
+            $scope.bottledBrews = [];
+            $scope.chillingBrews = [];
+
+            BaseCtrl.init(function () {
+
+                Brew.getActiveByUserId(Identity.getCurrentUserId()).then(function (response) {
+
+                    var brews = response.data;
+
+                    $scope.fermentingBrews = brews.filter(function (brew) {
+                        return (brew.statusCde === BrewStatus.Fermenting);
+                    });
+                    
+                    $scope.bottledBrews = brews.filter(function (brew) {
+                        return (brew.statusCde === BrewStatus.Bottled);
+                    });
+
+                    $scope.chillingBrews = brews.filter(function (brew) {
+                        return (brew.statusCde === BrewStatus.Chilling);
+                    });
+
+                    var notYetStartedCount = brews.filter(function (brew) {
+                        return (brew.statusCde == BrewStatus.NotStartedYet);
+                    }).length;
+
+                    $scope.hasActivity = !!brews.length || !notYetStartedCount;
+                });
+            });
+        }
+    ]);
+})();
+
+(function () {
+    'use strict';
+    
+    angular.module('BrewKeeper').controller('AddRecipeCtrl', 
+        
+        ['$scope', '$location', 'Recipe', 'Identity', 'Notifier',
         function ($scope, $location, Recipe, Identity, Notifier) {
-            $scope.getFormRecipeData = function () {
+
+            function getFormRecipeData() {
+
                 return {
                     ownerId: Identity.getCurrentUserId(),
                     name: $scope.recipeName,
                     description: $scope.recipeDescription,
                     sourceName: $scope.recipeSourceName,
-                    sourceUrl: $scope.recipeSourceUrl
+                    sourceUrl: $scope.recipeSourceUrl,
                 };
-            };
+            }
 
             $scope.submitRecipe = function () {
-                var newRecipeData = $scope.getFormRecipeData();
+
+                var newRecipeData = getFormRecipeData();
                 Recipe.save(newRecipeData).then(function (response) {
                     Notifier.notify('Recipe added!');
                     $location.path('/recipe');
@@ -3136,23 +3289,14 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
 (function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('DeleteRecipeCtrl', ['$scope', '$routeParams', '$location', 'Identity', 'Recipe', 'Notifier',
-        function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
-            $scope.getRecipe = function (recipeId) {
-                Recipe.getByRecipeId(recipeId).then(function (response) {
-                    if (Recipe.isRecipeOwnedByUser(response.data), Identity.getCurrentUserId()) {
-                        $scope.recipe = response.data;
-                    } 
-                    else {
-                        $location.path('/');
-                    }
-                });
-            };
+    angular.module('BrewKeeper').controller('DeleteRecipeCtrl', 
         
+        ['$scope', '$routeParams', '$location', 'BaseCtrl', 'Identity', 'Recipe', 'Notifier',
+        function ($scope, $routeParams, $location, BaseCtrl, Identity, Recipe, Notifier) {
+            
             $scope.onConfirmDelete = function () {
                 Recipe.remove($routeParams.id).then(function (response) {
-                    Notifier.notify('Recipe deleted');
+                    Notifier.notify('Recipe "' + $scope.recipe.name +'" deleted');
                     $location.path('/recipe');
                 });
             };
@@ -3161,9 +3305,18 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
                 $location.path('/recipe/view/' + $routeParams.id);
             };
 
-            // initialize
-            $scope.recipe = null;
-            $scope.getRecipe($routeParams.id);
+            BaseCtrl.init(function () {
+                $scope.recipe = null;
+
+                Recipe.getByRecipeId($routeParams.id).then(function (response) {
+                    if (Recipe.isRecipeOwnedByUser(response.data), Identity.getCurrentUserId()) {
+                        $scope.recipe = response.data;
+                    } 
+                    else {
+                        $location.path('/');
+                    }
+                });
+            });
         }
     ]);
 })();
@@ -3171,20 +3324,11 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
 (function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('EditRecipeCtrl', ['$scope', '$routeParams', '$location', 'Identity', 'Recipe', 'Notifier',
-        function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
-            $scope.getRecipe = function (recipeId) {
-                Recipe.getByRecipeId(recipeId).then(function (response) {
-                    var recipe = response.data;
-
-                    $scope.recipeId = recipe._id;
-                    $scope.recipeName = recipe.name;
-                    $scope.recipeDescription = recipe.description;
-                    $scope.recipeSourceName = recipe.sourceName;
-                    $scope.recipeSourceUrl = recipe.sourceUrl;
-                });
-            };
+    angular.module('BrewKeeper').controller('EditRecipeCtrl', 
+        
+        ['$scope', '$routeParams', '$location', 'BaseCtrl', 'Identity', 'Recipe', 'Notifier',
+        function ($scope, $routeParams, $location, BaseCtrl, Identity, Recipe, Notifier) {
+            
 
             $scope.getFormRecipeData = function () {
                 return {
@@ -3209,8 +3353,20 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
                 });
             };
 
-            // initialize
-            $scope.getRecipe($routeParams.id);
+            BaseCtrl.init(function () {
+
+                Recipe.getByRecipeId($routeParams.id).then(function (response) {
+                    var recipe = response.data;
+                    
+                    $scope.recipeId = recipe._id;
+                    $scope.recipeName = recipe.name;
+                    $scope.recipeDescription = recipe.description;
+                    $scope.recipeSourceName = recipe.sourceName;
+                    $scope.recipeSourceUrl = recipe.sourceUrl;
+                    
+                    $scope.recipeUrl = '/recipe/view/' + recipe._id;
+                });
+            });
         }
      ]);
 })();
@@ -3218,18 +3374,12 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
 (function () {
     'use strict';
 
-    var bk = angular.module('BrewKeeper');
-    bk.controller('RecipeListCtrl', ['$scope', '$location', 'Identity', 'Recipe',
-        function ($scope, $location, Identity, Recipe) {
+    angular.module('BrewKeeper').controller('RecipeListCtrl', 
         
-            $scope.getCurrentUserRecipes = function () {
-                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
-                    $scope.recipes = response.data;
-                    $scope.showNoRecipes = ($scope.recipes.length === 0);
-                });
-            };
+        ['$scope', '$location', 'BaseCtrl', 'Identity', 'Recipe',
+        function ($scope, $location, BaseCtrl, Identity, Recipe) {
         
-            $scope.doAdd = function () {
+            $scope.doAddRecipe = function () {
                 $location.path('/recipe/add');
             };
         
@@ -3238,10 +3388,16 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
                 $scope.predicate = predicate;
             };
         
-            // initialize
-            $scope.predicate = 'name';
-            $scope.showNoRecipes = false;
-            $scope.getCurrentUserRecipes();
+            BaseCtrl.init(function () {
+                $scope.recipes = [];
+                $scope.predicate = 'name';
+                $scope.showNoRecipes = false;
+                
+                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                    $scope.recipes = response.data;
+                    $scope.showNoRecipes = ($scope.recipes.length === 0);
+                });
+            });
         }
     ]);
 })();
@@ -3249,42 +3405,25 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
 (function () {
     'use strict';
     
-    var bk = angular.module('BrewKeeper');
-    bk.controller('ViewRecipeCtrl', ['$scope', '$routeParams', '$location', 'Identity', 'Recipe', 'Notifier',
-        function ($scope, $routeParams, $location, Identity, Recipe, Notifier) {
-
-            $scope.getRecipe = function (recipeId) {
-                Recipe.getByRecipeId(recipeId).then(function (response) {
-                    var recipe = response.data;
-                    $scope.recipe = recipe;
-                    $scope.recipe.sourceUrl = $scope.getRecipeUrl(recipe);
-                }, function (reason) {
-                    Notifier.error(reason);
-                    $location.path('/recipe');
-                });
-            };
+    angular.module('BrewKeeper').controller('ViewRecipeCtrl', 
         
+        ['$scope', '$q', '$routeParams', '$location', 'BaseCtrl', 'Identity', 'Recipe', 'Notifier',
+        function ($scope, $q, $routeParams, $location, BaseCtrl, Identity, Recipe, Notifier) {
+            
+            function getRecipeUrl(recipe) {
+                if (recipe.sourceUrl && recipe.sourceUrl.indexOf('http://') !== 0) {
+                    recipe.sourceUrl = 'http://' + recipe.sourceUrl;
+                }
+                
+                return recipe.sourceUrl;
+            }
+
             $scope.isRecipeOwnedByCurrentUser = function () {
                 if ($scope.recipe) {
                     return Recipe.isRecipeOwnedByUser($scope.recipe, Identity.getCurrentUserId());
                 }
             };
 
-            $scope.getRecipeBrewCount = function (recipeId) {
-                Recipe.getBrewCount(recipeId).then(function (response) {
-                    var timesBrewed = response.data.count;
-                    $scope.recipe.timesBrewed = timesBrewed;
-                });
-            };
-        
-            $scope.getRecipeUrl = function (recipe) {
-                if (recipe.sourceUrl && recipe.sourceUrl.indexOf('http://') !== 0) {
-                    recipe.sourceUrl = 'http://' + recipe.sourceUrl;
-                }
-
-                return recipe.sourceUrl;
-            };
-        
             $scope.doEdit = function () {
                 $location.path('/recipe/edit/' + $scope.recipe._id);
             };
@@ -3293,9 +3432,24 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
                 $location.path('/recipe/delete/' + $scope.recipe._id);
             };
         
-            // initialize
-            $scope.getRecipe($routeParams.id);
-            $scope.getRecipeBrewCount($routeParams.id);
+            BaseCtrl.init(function () {
+                
+                $q.all([
+                    Recipe.getByRecipeId($routeParams.id).then(function (response) {
+                        var recipe = response.data;
+                        $scope.recipe = recipe;
+                        $scope.recipe.sourceUrl = getRecipeUrl(recipe);
+                    }, function (reason) {
+                        Notifier.error(reason);
+                        $location.path('/recipe');
+                    }),
+
+                    Recipe.getBrewCount($routeParams.id).then(function (response) {
+                        var timesBrewed = response.data.count;
+                        $scope.recipe.timesBrewed = timesBrewed;
+                    }),
+                ]);
+            });
         }
     ]);
 })();
