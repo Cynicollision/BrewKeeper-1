@@ -7,18 +7,19 @@
         recipe = require('../controllers/recipe');
     
     module.exports = function (app) {
-        // user stuff
-        app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
-        app.post('/api/users', users.createUser);
-        app.put('/api/users', users.updateUser);
+        // authentication
         app.post('/login', auth.authenticate);
         app.post('/logout', function (req, res) {
             req.logout();
             res.end();
         });
-        
+
+        // accounts
+        app.get('/api/users', auth.requiresRole('admin'), users.getUsers);
+        app.post('/api/users', users.createUser);
+        app.put('/api/users', users.updateUser);
+
         // brews
-        app.get('/api/brew', brew.getAllBrews); // TODO: maybe require admin role "all" retrieval?
         app.get('/api/brew/:id', brew.getBrewById);
         app.get('/api/brew/user/count/:id', brew.getBrewCountByUserId);
         app.get('/api/brew/user/:id', brew.getBrewsByUserId);
@@ -28,7 +29,6 @@
         app.delete('/api/brew/:id', brew.deleteBrew);
         
         // recipes
-        app.get('/api/recipe', recipe.getRecipes); // TODO: maybe require admin role for "all" retrieval?
         app.get('/api/recipe/:id', recipe.getRecipeById);
         app.get('/api/recipe/user/:id', recipe.getRecipesByUserId);
         app.get('/api/recipe/user/count/:id', recipe.getRecipeCountByUserId);

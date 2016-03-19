@@ -2,13 +2,7 @@
     'use strict';
 
     var Brew = require('mongoose').model('Brew');
-    
-    exports.getAllBrews = function (req, res) {
-        Brew.find({}).exec(function (err, collection) {
-            res.send(collection);
-        });
-    };
-    
+
     exports.getBrewsByUserId = function (req, res) {
         var userId = req.params.id,
             limit = req.params.limit;

@@ -6,12 +6,6 @@
     var Recipe = mongoose.model('Recipe'),
         Brew = mongoose.model('Brew');
     
-    exports.getRecipes = function (req, res) {
-        Recipe.find({}).exec(function (err, collection) {
-            res.send(collection);
-        });
-    };
-    
     exports.getRecipeById = function (req, res) {
         Recipe.findOne({ _id: req.params.id }).exec(function (err, recipe) {
             if (recipe) {
