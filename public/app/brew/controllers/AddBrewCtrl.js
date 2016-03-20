@@ -7,21 +7,7 @@
         function ($scope, $controller, BaseCtrl, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
 
             $controller('BaseAddEditBrewCtrl', { $scope: $scope });
-        
-            function getCurrentUserRecipes() {
 
-                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
-
-                    $scope.recipes = response.data;
-                    $scope.hasRecipes = !!$scope.recipes.length;
-
-                    if (!!$scope.recipes && $scope.recipes.length) {
-                        $scope.brewRecipe = $scope.recipes[0];
-                        $scope.updateBrewName();
-                    }
-                });
-            }
-            
             function setDefaultControlValues() {
                 if (!!$scope.statuses) {
                     $scope.brewStatusCde = $scope.statuses[0];
@@ -59,7 +45,19 @@
                 $scope.statuses = BrewStatus.getStatuses();
 
                 setDefaultControlValues();
-                getCurrentUserRecipes();
+                
+                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                    
+                    $scope.recipes = response.data.sort(function (a, b) {
+                        return a.name > b.name;
+                    });
+                    $scope.hasRecipes = !!$scope.recipes.length;
+                    
+                    if (!!$scope.recipes && $scope.recipes.length) {
+                        $scope.brewRecipe = $scope.recipes[0];
+                        $scope.updateBrewName();
+                    }
+                });
             });
         }
     ]);

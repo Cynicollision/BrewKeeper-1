@@ -47,8 +47,10 @@
                     }),
 
                     Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
-                        $scope.recipes = response.data;
-                        $scope.hasRecipes = ($scope.recipes.length > 0);
+                        $scope.recipes = response.data.sort(function (a, b) {
+                            return a.name > b.name;
+                        });
+                        $scope.hasRecipes = !!$scope.recipes.length;
                     }),
                 ])
                 .then(function () {
