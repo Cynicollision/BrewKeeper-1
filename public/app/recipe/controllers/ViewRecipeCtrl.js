@@ -27,6 +27,10 @@
             $scope.doDelete = function () {
                 $location.path('/recipe/delete/' + $scope.recipe._id);
             };
+            
+            $scope.doGoBack = function () {
+                $location.path('/recipe/');
+            };
         
             BaseCtrl.init(function () {
                 

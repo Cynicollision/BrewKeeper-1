@@ -21,11 +21,15 @@
             };
 
             $scope.doEdit = function () {
-                $window.location = '/brew/edit/' + $scope.brew._id;
+                $location.path('/brew/edit/' + $scope.brew._id);
             };
         
             $scope.doDelete = function () {
-                $window.location = '/brew/delete/' + $scope.brew._id;
+                $location.path('/brew/delete/' + $scope.brew._id);
+            };
+            
+            $scope.doGoBack = function () {
+                $location.path('/brew/');
             };
         
             BaseCtrl.init(function () {
