@@ -5,6 +5,8 @@
         
         ['$scope', '$location', 'Recipe', 'Identity', 'Notifier',
         function ($scope, $location, Recipe, Identity, Notifier) {
+            
+            $scope.recipeUrl = '/recipe/';
 
             function getFormRecipeData() {
 

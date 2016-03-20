@@ -87,12 +87,12 @@
                 })
 
             .when('/recipe/add', {
-                    templateUrl: '/partials/recipe/views/edit-recipe', 
+                    templateUrl: '/partials/recipe/views/add-edit-recipe', 
                     controller: 'AddRecipeCtrl'
                 })
 
             .when('/recipe/edit/:id', {
-                    templateUrl: '/partials/recipe/views/edit-recipe', 
+                    templateUrl: '/partials/recipe/views/add-edit-recipe', 
                     controller: 'EditRecipeCtrl'
                 })
 

@@ -10,8 +10,13 @@
         Recipe.findOne({ _id: req.params.id }).exec(function (err, recipe) {
             if (recipe) {
                 res.send(recipe);
-            } else {
-                res.send(404, { reason: 'Invalid recipe ID given.' });
+            } 
+            else {
+                var msg = 'Invalid recipe ID given.';
+                if (req.params.id === "0") {
+                    msg = 'This brew\'s recipe has been deleted.';
+                }
+                res.send(404, { reason: msg });
             }
         });
     };
@@ -34,6 +39,19 @@
         });
     };
     
+    function sanitizeUndefinedRecipeValues(recipe) {
+
+        if (recipe.sourceName === 'undefined') {
+            recipe.sourceName = undefined;
+        }
+        if (recipe.sourceUrl === 'undefined') {
+            recipe.sourceUrl = undefined;
+        }
+        if (recipe.description === 'undefined') {
+            recipe.description = '';
+        }
+    }
+    
     exports.saveNewRecipe = function (req, res) {
         var currentUserId, queryForExisting,
             recipeData = req.body;
@@ -42,6 +60,8 @@
         if (!!req.user) {
             currentUserId = req.user._id.toString();
         }
+        
+        sanitizeUndefinedRecipeValues(recipeData);
         
         // verify this user doesn't have a recipe with the given name already
         queryForExisting = {
@@ -108,9 +128,21 @@
         if (!!req.user) {
             currentUserId = req.user._id.toString();
         }
-
+       
         Recipe.findOne(query).exec(function (err, recipe) {
             if (!!recipe && recipe.ownerId === currentUserId) {
+                
+                // clear related brews' recipes
+                var brewQuery = {
+                    ownerId: currentUserId,
+                    recipeId: deleteRecipeId,
+                };
+                Brew.update(brewQuery, { recipeId: "0" }, { multi: true }, function (err) {
+                    if (err) {
+                        console.log('Error updating brews from deleted recipe: ' + err);
+                    }
+                });
+
                 Recipe.remove(query, function (err) {
                     if (err) {
                         res.send({ reason: err.toString() });

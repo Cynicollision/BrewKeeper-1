@@ -14,8 +14,13 @@
             BaseCtrl.init(function () {
 
                 Brew.getActiveByUserId(Identity.getCurrentUserId()).then(function (response) {
-
-                    var brews = response.data;
+                    
+                    // exclude "not yet started" brews
+                    var brews = response.data.filter(function (brew) {
+                        return (brew.statusCde !== BrewStatus.NotStartedYet);
+                    });
+                    
+                    $scope.hasActivity = !!brews.length;
 
                     $scope.fermentingBrews = brews.filter(function (brew) {
                         return (brew.statusCde === BrewStatus.Fermenting);
@@ -28,12 +33,6 @@
                     $scope.chillingBrews = brews.filter(function (brew) {
                         return (brew.statusCde === BrewStatus.Chilling);
                     });
-
-                    var notYetStartedCount = brews.filter(function (brew) {
-                        return (brew.statusCde == BrewStatus.NotStartedYet);
-                    }).length;
-
-                    $scope.hasActivity = !!brews.length || !notYetStartedCount;
                 });
             });
         }

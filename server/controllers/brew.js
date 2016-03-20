@@ -51,7 +51,6 @@
         });
     };
     
-    // TODO... doing it wrong: why do these undefined values come in as strings?
     function sanitizeUndefinedBrewValues(brew) {
         if (brew.brewDate === 'undefined') {
             brew.brewDate = undefined;
@@ -118,6 +117,8 @@
         if (!!req.user) {
             currentUserId = req.user._id.toString();
         }
+        
+        sanitizeUndefinedBrewValues(brewUpdates);
         
         Brew.findOne(query).exec(function (err, brew) {
             if (!!brew && brew.ownerId === currentUserId) {

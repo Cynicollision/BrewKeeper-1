@@ -31,15 +31,15 @@
                 .form-group
                     label.col-md-4.control-label(for="brewBrewDate") Brew date
                     .col-md-6
-                        input.datepicker.add-on.form-control(type='text', name="brewBrewDate", ng-model="brewBrewDate", placeholder="In the jug", ng-disabled="!hasRecipes", required)
+                        input.datepicker.add-on.form-control(type='text', name="brewBrewDate", ng-model="brewBrewDate", placeholder="In the jug", ng-disabled="!hasRecipes")
                 .form-group
                     label.col-md-4.control-label(for="brewBottleDate") Bottle date
                     .col-md-6
-                        input.datepicker.add-on.form-control(type="text", name="brewBottleDate", ng-model="brewBottleDate", placeholder="In the bottles", ng-disabled="!hasRecipes", required)
+                        input.datepicker.add-on.form-control(type="text", name="brewBottleDate", ng-model="brewBottleDate", placeholder="In the bottles", ng-disabled="!hasRecipes")
                 .form-group
                     label.col-md-4.control-label(for="brewChillDate") Chill date
                     .col-md-6
-                        input.datepicker.add-on.form-control(type="text", name="brewChillDate", ng-model="brewChillDate", placeholder="In the fridge", ng-disabled="!hasRecipes", required)
+                        input.datepicker.add-on.form-control(type="text", name="brewChillDate", ng-model="brewChillDate", placeholder="In the fridge", ng-disabled="!hasRecipes")
                 .form-group
                     .div(style="text-align:center")
                         button.btn.btn-primary(ng-click="submitBrew()", ng-disabled="addBrewForm.$invalid") Save
