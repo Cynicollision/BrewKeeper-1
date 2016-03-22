@@ -1,5 +1,5 @@
 ﻿.container.top-padding-med
-    h4.text-center Overview
+    h3.text-center Overview
     .col-md-12
         div(ng-show="hasActivity")
             .col-md-6(ng-show="!!fermentingBrews.length")
@@ -7,14 +7,12 @@
                     caption Fermenting brews
                     thead
                         tr
-                            th.col-md-4 Batch name
-                            th.col-md-4 Brew date
-                            th.col-md-4 Bottle date
+                            th.col-md-3 Batch name
+                            th.col-md-3 Bottle date
                     tbody
                         tr(ng-repeat="brew in fermentingBrews | orderBy:brewDate:reverse")
                             td
                                 a(href="/brew/view/{{brew._id}}") {{ brew.name }}
-                            td {{ brew.brewDate | date:'M/d/yyyy' }}
                             td {{ brew.bottleDate | date:'M/d/yyyy' }}
 
             .col-md-6(ng-show="!!bottledBrews.length")
@@ -22,28 +20,13 @@
                     caption Bottled brews
                     thead
                         tr
-                            th.col-md-4 Batch name
-                            th.col-md-4 Brew date
-                            th.col-md-4 Chill date
+                            th.col-md-3 Batch name
+                            th.col-md-3 Chill date
                     tbody
                         tr(ng-repeat="brew in bottledBrews | orderBy:brewDate:reverse")
                             td
                                 a(href="/brew/view/{{brew._id}}") {{ brew.name }}
-                            td {{ brew.brewDate | date:'M/d/yyyy' }}
                             td {{ brew.chillDate | date:'M/d/yyyy' }}
 
-            .col-md-6.col-md-offset-3(ng-show="!!chillingBrews.length")
-                table.table.table-hover.table-striped.table-condensed
-                    caption Chilling brews
-                    thead
-                        tr
-                            th.col-md-6 Batch name
-                            th.col-md-6 Brew date
-                    tbody
-                        tr(ng-repeat="brew in chillingBrews | orderBy:brewDate:reverse")
-                            td
-                                a(href="/brew/view/{{brew._id}}") {{ brew.name }}
-                            td {{ brew.brewDate | date:'M/d/yyyy' }}
-    
         div.text-center(ng-show="!hasActivity") Get brewing! You have no active brews.
             
