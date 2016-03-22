@@ -2292,12 +2292,12 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                 })
 
             .when('/recipe/add', {
-                    templateUrl: '/partials/recipe/views/edit-recipe', 
+                    templateUrl: '/partials/recipe/views/add-edit-recipe', 
                     controller: 'AddRecipeCtrl'
                 })
 
             .when('/recipe/edit/:id', {
-                    templateUrl: '/partials/recipe/views/edit-recipe', 
+                    templateUrl: '/partials/recipe/views/add-edit-recipe', 
                     controller: 'EditRecipeCtrl'
                 })
 
@@ -2561,21 +2561,7 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
         function ($scope, $controller, BaseCtrl, Brew, BrewStatus, DatePicker, Identity, Notifier, Recipe) {
 
             $controller('BaseAddEditBrewCtrl', { $scope: $scope });
-        
-            function getCurrentUserRecipes() {
 
-                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
-
-                    $scope.recipes = response.data;
-                    $scope.hasRecipes = !!$scope.recipes.length;
-
-                    if (!!$scope.recipes && $scope.recipes.length) {
-                        $scope.brewRecipe = $scope.recipes[0];
-                        $scope.updateBrewName();
-                    }
-                });
-            }
-            
             function setDefaultControlValues() {
                 if (!!$scope.statuses) {
                     $scope.brewStatusCde = $scope.statuses[0];
@@ -2613,7 +2599,19 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                 $scope.statuses = BrewStatus.getStatuses();
 
                 setDefaultControlValues();
-                getCurrentUserRecipes();
+                
+                Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
+                    
+                    $scope.recipes = response.data.sort(function (a, b) {
+                        return a.name > b.name;
+                    });
+                    $scope.hasRecipes = !!$scope.recipes.length;
+                    
+                    if (!!$scope.recipes && $scope.recipes.length) {
+                        $scope.brewRecipe = $scope.recipes[0];
+                        $scope.updateBrewName();
+                    }
+                });
             });
         }
     ]);
@@ -2789,8 +2787,10 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
                     }),
 
                     Recipe.getByUserId(Identity.getCurrentUserId()).then(function (response) {
-                        $scope.recipes = response.data;
-                        $scope.hasRecipes = ($scope.recipes.length > 0);
+                        $scope.recipes = response.data.sort(function (a, b) {
+                            return a.name > b.name;
+                        });
+                        $scope.hasRecipes = !!$scope.recipes.length;
                     }),
                 ])
                 .then(function () {
@@ -2827,11 +2827,15 @@ var e=c.find(".active:last a"),f=a.Event("hide.bs.tab",{relatedTarget:b[0]}),g=a
             };
 
             $scope.doEdit = function () {
-                $window.location = '/brew/edit/' + $scope.brew._id;
+                $location.path('/brew/edit/' + $scope.brew._id);
             };
         
             $scope.doDelete = function () {
-                $window.location = '/brew/delete/' + $scope.brew._id;
+                $location.path('/brew/delete/' + $scope.brew._id);
+            };
+            
+            $scope.doGoBack = function () {
+                $location.path('/brew/');
             };
         
             BaseCtrl.init(function () {
@@ -3227,8 +3231,13 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
             BaseCtrl.init(function () {
 
                 Brew.getActiveByUserId(Identity.getCurrentUserId()).then(function (response) {
-
-                    var brews = response.data;
+                    
+                    // exclude "not yet started" brews
+                    var brews = response.data.filter(function (brew) {
+                        return (brew.statusCde !== BrewStatus.NotStartedYet);
+                    });
+                    
+                    $scope.hasActivity = !!brews.length;
 
                     $scope.fermentingBrews = brews.filter(function (brew) {
                         return (brew.statusCde === BrewStatus.Fermenting);
@@ -3241,12 +3250,6 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
                     $scope.chillingBrews = brews.filter(function (brew) {
                         return (brew.statusCde === BrewStatus.Chilling);
                     });
-
-                    var notYetStartedCount = brews.filter(function (brew) {
-                        return (brew.statusCde == BrewStatus.NotStartedYet);
-                    }).length;
-
-                    $scope.hasActivity = !!brews.length || !notYetStartedCount;
                 });
             });
         }
@@ -3260,6 +3263,8 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
         
         ['$scope', '$location', 'Recipe', 'Identity', 'Notifier',
         function ($scope, $location, Recipe, Identity, Notifier) {
+            
+            $scope.recipeUrl = '/recipe/';
 
             function getFormRecipeData() {
 
@@ -3430,6 +3435,10 @@ angular.module('BrewKeeper').factory('BrewKeeperApi', ['$http',
         
             $scope.doDelete = function () {
                 $location.path('/recipe/delete/' + $scope.recipe._id);
+            };
+            
+            $scope.doGoBack = function () {
+                $location.path('/recipe/');
             };
         
             BaseCtrl.init(function () {
