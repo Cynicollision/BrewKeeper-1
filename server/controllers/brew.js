@@ -53,13 +53,13 @@
     
     function sanitizeUndefinedBrewValues(brew) {
         if (brew.brewDate === 'undefined') {
-            brew.brewDate = undefined;
+            brew.brewDate = '';
         }
         if (brew.bottleDate === 'undefined') {
-            brew.bottleDate = undefined;
+            brew.bottleDate = '';
         }
         if (brew.chillDate === 'undefined') {
-            brew.chillDate = undefined;
+            brew.chillDate = '';
         }
         if (brew.description === 'undefined') {
             brew.description = '';

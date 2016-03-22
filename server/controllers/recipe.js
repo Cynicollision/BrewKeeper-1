@@ -42,10 +42,10 @@
     function sanitizeUndefinedRecipeValues(recipe) {
 
         if (recipe.sourceName === 'undefined') {
-            recipe.sourceName = undefined;
+            recipe.sourceName = '';
         }
         if (recipe.sourceUrl === 'undefined') {
-            recipe.sourceUrl = undefined;
+            recipe.sourceUrl = '';
         }
         if (recipe.description === 'undefined') {
             recipe.description = '';
@@ -105,6 +105,8 @@
             currentUserId = req.user._id.toString();
         }
         
+        sanitizeUndefinedRecipeValues(update);
+
         Recipe.findOne(query).exec(function (err, recipe) {
             if (!!recipe && recipe.ownerId === currentUserId) {
                 Recipe.update(query, update, options, function (err) {
