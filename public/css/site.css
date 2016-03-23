@@ -11,6 +11,10 @@ select {
     padding: 0.1em;
 }
 
+.nav a {
+    font-size: 1.2em;
+}
+
 .navbar-inverse .navbar-nav li a {
     color: #ddd;
 }
@@ -18,27 +22,6 @@ select {
 .navbar-header a.navbar-brand {
     color: #eee;
     font-size: 2em;
-}
-
-.nav a {
-    font-size: 1.2em;
-}
-
-.panel {
-    border-color: #006666;
-}
-
-.panel .panel-heading {
-    border-color: #006666;
-    background-color: #006666;
-}
-
-footer {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-footer p {
-    border-top: 1px solid #d7e0e2;
 }
 
 .navbar-form .form-group {
@@ -49,13 +32,36 @@ footer p {
     margin-left: 10px;
 }
 
+.navbar-collapse {
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+     /*TODO: hack from Stack Overflow... better but not right (horizontal scrollbar appears when navbar links are clicked (not mobile))*/ 
+    -webkit-transition: height 0.02s;
+    -moz-transition: height 0.02s;
+    -o-transition: height 0.02s;
+    transition: height 0.02s;
+}
+
+.panel {
+    border-color: #006666;
+}
+
+footer {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+footer p {
+    border-top: 1px solid #d7e0e2;
+}
+
 .toast-top-right {
     top: 70px;
 }
 
-.toast-success {
+/*.toast-success {
     background-color: #23A98f;
-}
+}*/
 
 .top-padding-med {
     padding-top: 10px;
@@ -65,13 +71,11 @@ footer p {
     margin-left: 10px;
 }
 
-.navbar-collapse {
-    overflow-x: hidden;
-    overflow-y: hidden;
+h4 {
+    color: #888;
+}
 
-    /* TODO: hack from Stack Overflow... better but not right (horizontal scrollbar appears when navbar links are clicked (not mobile)) */
-    -webkit-transition: height 0.02s;
-    -moz-transition: height 0.02s;
-    -o-transition: height 0.02s;
-    transition: height 0.02s;
+h3 {
+    margin: 0;
+    padding-bottom: 10px;
 }
