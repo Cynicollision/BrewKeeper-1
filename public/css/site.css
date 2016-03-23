@@ -47,6 +47,11 @@ select {
     border-color: #006666;
 }
 
+.panel .panel-heading {
+    border-color: #006666;
+    background-color: #006666;
+}
+
 footer {
     padding-left: 15px;
     padding-right: 15px;
