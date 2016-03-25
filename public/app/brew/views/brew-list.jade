@@ -1,8 +1,8 @@
 ﻿.container.top-padding-med
-    h3.pull-left My Brews
+    h3.pull-left Brews
     .pull-right.btn.btn-default(ng-click="doAdd()")
         span.glyphicon.glyphicon-plus  
-    .col-md-12.text-center(ng-show="showNoBrews") You have no brews! You should
+    .text-center(ng-show="showNoBrews") You have no brews! You should
         a(href="/brew/add")&nbsp;add one.
     table.table.table-hover.table-striped.table-condensed(ng-show="!showNoBrews")
         thead

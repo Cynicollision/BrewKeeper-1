@@ -2,13 +2,10 @@
     .col-md-8.col-md-offset-2
         .btn.btn-default(ng-click="doGoBack()")
             span.glyphicon.glyphicon-circle-arrow-left  
-         h3.pull-right Recipe Details
     .col-md-8.col-md-offset-2
+        h3.text-center {{ recipe.name }}
         table.table.table-bordered
             tbody
-                tr
-                    td Name
-                    td {{ recipe.name }}
                 tr
                     td Source
                     td 
