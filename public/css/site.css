@@ -93,4 +93,5 @@ h3 {
 .view-label {
     font-weight: bold;
     text-align: right;
+    width: 50%;
 }
