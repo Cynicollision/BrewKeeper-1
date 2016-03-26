@@ -48,9 +48,6 @@
                 
                 $controller('BrewListCtrl', {
                     $scope: $scope,
-                    $routeParams : {
-                        id: 123
-                    },
                     Brew: BrewMock,
                     Identity: IdentityMock,
                 });
@@ -71,7 +68,7 @@
             expect($scope.limitResults).toEqual(false);
         });
         
-        it('Queries all brews for the given user', function () {
+        it('Retrieves all brews for the given user', function () {
             $scope.getAllCurrentUserBrews();
             expect(BrewMock.getByUserId).toHaveBeenCalledWith(82589);
             $scope.$apply();

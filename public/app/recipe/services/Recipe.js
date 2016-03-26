@@ -25,9 +25,12 @@
                     return dfd.promise;
                 },
             
-                getByUserId: function (userId) {
+                getByUserId: function (userId, limit) {
                     var dfd = $q.defer(),
                         url = '/api/recipe/user/' + userId;
+                    
+                    limit = limit || 0;
+                    url += '?limit=' + limit;
                 
                     BrewKeeperApi.get(url).then(function (response) {
                         dfd.resolve(response);

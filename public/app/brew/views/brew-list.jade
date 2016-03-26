@@ -5,9 +5,9 @@
             .btn.btn-default.pull-right(ng-click="doAddBrew()")
                 span.glyphicon.glyphicon-plus  
         .col-md-12
-            .text-center(ng-show="showNoBrews") You have no brews! You should
+            .text-center(ng-show="!hasBrews") You have no brews! You should
                 a(href="/brew/add")&nbsp;add one.
-            table.table.table-hover.table-striped.table-condensed(ng-show="!showNoBrews")
+            table.table.table-hover.table-striped.table-condensed(ng-show="hasBrews")
                 thead
                     tr
                         th.col-md-4 

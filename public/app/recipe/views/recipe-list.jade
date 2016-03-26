@@ -5,9 +5,9 @@
             .btn.btn-default.pull-right(ng-click="doAddRecipe()")
                 span.glyphicon.glyphicon-plus  
         .col-md-12
-            .text-center(ng-show="showNoRecipes") You have no recipes! You should
+            .text-center(ng-show="!hasRecipes") You have no recipes! You should
                 a(href="/recipe/add")&nbsp;add one.
-            table.table.table-hover.table-striped.table-condensed(ng-show="!showNoRecipes")
+            table.table.table-hover.table-striped.table-condensed(ng-show="hasRecipes")
                 thead
                     tr
                         th.col-md-6
@@ -19,3 +19,6 @@
                         td 
                             a(href="/recipe/view/{{recipe._id}}") {{ recipe.name }}
                         td {{ recipe.sourceName }}
+        .col-md-12.text-center 
+            .div(ng-show="limitResults") Showing {{ listLimit }} recipes. 
+                a(href="", ng-click="getAllCurrentUserRecipes()") Show All.      

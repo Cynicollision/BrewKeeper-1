@@ -6,6 +6,35 @@
     var Recipe = mongoose.model('Recipe'),
         Brew = mongoose.model('Brew');
     
+    exports.getRecipesByUserId = function (req, res) {
+
+        var userId = req.params.id,
+            limit = req.query.limit;
+        
+        // set a default limit if one is not specified
+        if (!limit || limit <= 0) {
+            limit = 1000;
+        }
+        
+        var query = {
+            ownerId: userId,
+        };
+        
+        Recipe.find(query).sort({ name: 1 }).limit(limit).exec(function (err, collection) {
+            res.send(collection);
+        });
+    };
+    
+    exports.getRecipeCountByUserId = function (req, res) {
+        var userId = req.params.id;
+        
+        Recipe.count({ ownerId: userId }).exec(function (err, count) {
+            res.send({
+                count: count
+            });
+        });
+    };
+
     exports.getRecipeById = function (req, res) {
         Recipe.findOne({ _id: req.params.id }).exec(function (err, recipe) {
             if (recipe) {
@@ -20,25 +49,7 @@
             }
         });
     };
-    
-    exports.getRecipesByUserId = function (req, res) {
-        var userId = req.params.id;
-        
-        Recipe.find({ ownerId: userId }).exec(function (err, collection) {
-            res.send(collection);
-        });
-    };
-    
-    exports.getRecipeCountByUserId = function (req, res) {
-        var userId = req.params.id;
-        
-        Recipe.count({ ownerId: userId }).exec(function (err, count) {
-            res.send({
-                count: count
-            });
-        });
-    };
-    
+
     function sanitizeUndefinedRecipeValues(recipe) {
 
         if (recipe.sourceName === 'undefined') {
@@ -159,6 +170,7 @@
     };
 
     exports.getRecipeBrewCountById = function (req, res) {
+
         var findRecipeId = req.params.id;
         Brew.count({ recipeId: findRecipeId }).exec(function (err, count) {
             if (err) {
@@ -169,5 +181,13 @@
                 count: count
             });
         });
+    };
+
+    exports.getTopRecipes = function (req, res) {
+        // TODO: get the mode, sort desc by brew count, return top N
+        //http://stackoverflow.com/questions/1053843/get-the-element-with-the-highest-occurrence-in-an-array
+
+        var currentUserId = req.user._id.toString(),
+            recipeLimit = req.params.limit;
     };
 })();
