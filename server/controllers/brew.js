@@ -19,8 +19,11 @@
             ]
         };
         
-        // filter by status code if one is provided
+        // if restricting to active brews, filter out "not yet started" and "gone" statuses
         if (!!req.query.active) {
+            query.$and.push({
+                statusCde: { $ne: 0 }
+            });
             query.$and.push({
                 statusCde: { $ne: 4 }
             });
@@ -160,7 +163,7 @@
     };
 
     exports.debugGetAllBrews = function (req, res) {
-
+        
         Brew.find({}).exec(function (err, collection) {
             if (err) {
                 res.send({ reason: err.toString() });
@@ -169,5 +172,5 @@
                 res.send(collection);
             }
         });
-    }
+    };
 })();

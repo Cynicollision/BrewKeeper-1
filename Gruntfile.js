@@ -122,6 +122,7 @@
                 'public/app/app.js',
                 'public/app/account/controllers/EditProfileCtrl.js',
                 'public/app/account/controllers/SignupCtrl.js',
+                'public/app/account/controllers/ViewProfileCtrl.js',
                 'public/app/account/services/Auth.js',
                 'public/app/account/services/Identity.js',
                 'public/app/account/services/User.js',

@@ -33,6 +33,8 @@
   <ItemGroup>
     <Compile Include="Gruntfile.js" />
     <Compile Include="public\app\account\controllers\EditProfileCtrl_test.js" />
+    <Compile Include="public\app\account\controllers\ViewProfileCtrl.js" />
+    <Compile Include="public\app\account\controllers\ViewProfileCtrl_test.js" />
     <Compile Include="public\app\common\controllers\BaseCtrl.js" />
     <Compile Include="public\app\main\controllers\NavBarLoginCtrl_test.js" />
     <Compile Include="public\app\account\controllers\SignupCtrl_test.js" />
@@ -98,8 +100,9 @@
     <Compile Include="public\app\brew\services\Brew_test.js" />
     <Compile Include="server\utilities\validation.js" />
     <Content Include="package.json" />
+    <Content Include="public\app\account\views\view-profile.jade" />
     <Content Include="public\app\main\views\navbar-login.jade" />
-    <Content Include="public\app\account\views\profile.jade" />
+    <Content Include="public\app\account\views\edit-profile.jade" />
     <Content Include="public\app\account\views\signup.jade" />
     <Content Include="public\app\brew\views\add-edit-brew.jade" />
     <Content Include="public\app\brew\views\view-brew.jade" />

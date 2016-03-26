@@ -19,7 +19,7 @@
         rootPath: rootPath,
         port: process.env.PORT || 80
         // for local testing:
-        //port: 3030
+        //port: 3030,
     };
 
     module.exports = (env === 'production' ? productionConfig : developmentConfig);

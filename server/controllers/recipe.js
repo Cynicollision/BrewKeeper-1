@@ -2,7 +2,7 @@
     'use strict';
     
     var mongoose = require('mongoose'),
-        validation = require('../utilities/validation')
+        validation = require('../utilities/validation');
 
     var Recipe = mongoose.model('Recipe'),
         Brew = mongoose.model('Brew');
@@ -188,8 +188,12 @@
     exports.getTopRecipes = function (req, res) {
 
         var reqUserId = req.params.id,
-            recipeLimit = req.query.limit,
+            recipeLimit = +req.query.limit,
             query;
+        
+        if (!recipeLimit || recipeLimit < 0) {
+            recipeLimit = 0;
+        }
         
         if (validation.validateUserRequest(req, res, reqUserId)) {
 
@@ -197,17 +201,44 @@
                 ownerId: reqUserId,
             };
             
-            Recipe.find(query).exec(function getTopRecipes(err, collection) {
+            Brew.find(query).exec(function (err, brews) {
                 
-                var topRecipes = [],
-                    modeMap = [];
+                var countMap = [];
                 
-                collection.forEach(function (recipe) {
-                    var inList = !!modeMap[recipe.id];
+                brews.forEach(function (brew) {
+                    var recipeId = brew.recipeId.toString();
+                    if (!countMap[recipeId]) {
+                        countMap[recipeId] = {
+                            id: recipeId,
+                            count: 1,
+                        };
+                    }
+                    else {
+                        countMap[recipeId].count++;
+                    }
                 });
-                
-                res.send({
-                    topRecipes: topRecipes,
+
+                Recipe.find(query).exec(function (err, recipes) {
+
+                    var topRecipes = recipes.filter(function (recipe) {
+                        return !!countMap[recipe._id];
+                    })
+                    .map(function (recipe) {
+                        return {
+                            _id: recipe._id,
+                            name: recipe.name,
+                            count: countMap[recipe._id].count,
+                        };
+                    })
+                    .sort(function (a, b) {
+                        return -(a.count - b.count);
+                    });
+                    
+                    if (recipeLimit) {
+                        topRecipes = topRecipes.slice(0, recipeLimit);
+                    }
+
+                    res.send(topRecipes);
                 });
             });
         }

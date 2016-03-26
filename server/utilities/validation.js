@@ -10,7 +10,7 @@
             }
             
             if (!req.user) {
-                return returnInvalid(403, 'Not logged in.')
+                return returnInvalid(403, 'Not logged in.');
             }
             
             if (reqUserId && reqUserId !== req.user._id.toString()) {
@@ -19,5 +19,5 @@
             
             return true;
         }
-    }
+    };
 })();
