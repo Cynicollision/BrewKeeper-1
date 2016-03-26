@@ -4,17 +4,17 @@
             span.glyphicon.glyphicon-circle-arrow-left  
     .col-md-8.col-md-offset-2
         h3.text-center {{ recipe.name }}
-        table.table.table-bordered
+        table.table
             tbody
                 tr
-                    td Source
+                    td.view-label Source
                     td 
                         a(href="{{ recipe.sourceUrl }} ", target="_blank") {{ recipe.sourceName }}
                 tr
-                    td Times Brewed
+                    td.view-label Times Brewed
                     td {{ recipe.timesBrewed }}
                 tr
-                    td Description
+                    td.view-label Description
                     td {{ recipe.description }}
                 
     .col-md-8.col-md-offset-2

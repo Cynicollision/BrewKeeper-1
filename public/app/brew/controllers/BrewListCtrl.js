@@ -34,7 +34,7 @@
                 });
             };
         
-            $scope.doAdd = function () {
+            $scope.doAddBrew = function () {
                 $location.path('/brew/add');
             };
         

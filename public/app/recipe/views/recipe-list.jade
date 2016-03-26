@@ -1,19 +1,21 @@
 ﻿.container.top-padding-med
-    h3.pull-left Recipes
-    .pull-right.btn.btn-default(ng-click="doAddRecipe()")
-        span.glyphicon.glyphicon-plus  
-    .col-md-12.text-center(ng-show="showNoRecipes") You have no recipes! You should
-        a(href="/recipe/add")&nbsp;add one.
-    table.table.table-hover.table-striped.table-condensed(ng-show="!showNoRecipes")
-        thead
-            tr
-                th.col-md-6
-                    a(href="" ng-click="order('name')")  Name
-                th.col-md-6 
-                    a(href="" ng-click="order('sourceName')") Source
-        tbody
-            tr(ng-repeat="recipe in recipes | orderBy:predicate:reverse")
-                td 
-                    a(href="/recipe/view/{{recipe._id}}") {{recipe.name}}
-                td {{recipe.sourceName }}
-                
+    .row
+        .col-md-12
+            span.list-header Recipes
+            .btn.btn-default.pull-right(ng-click="doAddRecipe()")
+                span.glyphicon.glyphicon-plus  
+        .col-md-12
+            .text-center(ng-show="showNoRecipes") You have no recipes! You should
+                a(href="/recipe/add")&nbsp;add one.
+            table.table.table-hover.table-striped.table-condensed(ng-show="!showNoRecipes")
+                thead
+                    tr
+                        th.col-md-6
+                            a(href="" ng-click="order('name')")  Name
+                        th.col-md-6 
+                            a(href="" ng-click="order('sourceName')") Source
+                tbody
+                    tr(ng-repeat="recipe in recipes | orderBy:predicate:reverse")
+                        td 
+                            a(href="/recipe/view/{{recipe._id}}") {{ recipe.name }}
+                        td {{ recipe.sourceName }}
