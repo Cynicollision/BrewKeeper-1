@@ -52,16 +52,16 @@
     };
     
     function sanitizeUndefinedBrewValues(brew) {
-        if (brew.brewDate === 'undefined') {
+        if (brew.brewDate === 'undefined' || brew.brewDate === 'null') {
             brew.brewDate = '';
         }
-        if (brew.bottleDate === 'undefined') {
+        if (brew.bottleDate === 'undefined' || brew.bottleDate === 'null') {
             brew.bottleDate = '';
         }
-        if (brew.chillDate === 'undefined') {
+        if (brew.chillDate === 'undefined' || brew.chillDate === 'null') {
             brew.chillDate = '';
         }
-        if (brew.description === 'undefined') {
+        if (brew.description === 'undefined' || brew.description === 'null') {
             brew.description = '';
         }
     }
@@ -122,7 +122,7 @@
         
         Brew.findOne(query).exec(function (err, brew) {
             if (!!brew && brew.ownerId === currentUserId) {
-                Brew.update(query, update, options, function (err) {
+                Brew.update(query, brewUpdates, options, function (err) {
                     if (err) {
                         res.send(500, { reason: err.toString() });
                     } else {
