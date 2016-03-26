@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
-
+    
     module.exports = function (grunt) {
-
+        
         // load tasks
         grunt.loadNpmTasks('grunt-exec');
         grunt.loadNpmTasks('grunt-contrib-clean');
@@ -10,10 +10,10 @@
         grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-contrib-concat');
-
+        
         var fileLists = getFileLists(),
             allProdFiles = fileLists.vendorMinFiles.concat(fileLists.appProdFiles);
-
+        
         console.log('Production app files (incl. vendor): ' + allProdFiles.length);
         
         grunt.initConfig({
@@ -51,10 +51,10 @@
                     }
                 }
             },
-
+            
             concat: {
                 dist: {
-                    src: fileLists.vendorMinFiles.concat([ 'public/brewkeeper.min.js' ]),
+                    src: fileLists.vendorMinFiles.concat(['public/brewkeeper.min.js']),
                     dest: 'public/application.js',
                 },
                 
@@ -64,7 +64,7 @@
                 }
             },
         });
-
+        
         grunt.registerTask('test', ['jshint', 'jasmine']);
         grunt.registerTask('mongod', 'exec');
         grunt.registerTask('build', ['clean', 'uglify', 'concat']);
@@ -73,7 +73,7 @@
             grunt.log.write('So vast!').ok();
         });
     };
-
+    
     function getFileLists() {
         return {
             appFilesWithTests: [
