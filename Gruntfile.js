@@ -54,7 +54,7 @@
 
             concat: {
                 dist: {
-                    src: fileLists.vendorMinFiles.concat(fileLists.appProdFiles),
+                    src: fileLists.vendorMinFiles.concat([ 'public/brewkeeper.min.js' ]),
                     dest: 'public/application.js',
                 },
                 
