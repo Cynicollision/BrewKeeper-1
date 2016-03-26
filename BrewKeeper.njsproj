@@ -96,6 +96,7 @@
     <Compile Include="server\models\User.js" />
     <Compile Include="server\utilities\encryption.js" />
     <Compile Include="public\app\brew\services\Brew_test.js" />
+    <Compile Include="server\utilities\validation.js" />
     <Content Include="package.json" />
     <Content Include="public\app\main\views\navbar-login.jade" />
     <Content Include="public\app\account\views\profile.jade" />

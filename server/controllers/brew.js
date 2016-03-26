@@ -158,4 +158,16 @@
             }
         });
     };
+
+    exports.debugGetAllBrews = function (req, res) {
+
+        Brew.find({}).exec(function (err, collection) {
+            if (err) {
+                res.send({ reason: err.toString() });
+            }
+            else {
+                res.send(collection);
+            }
+        });
+    }
 })();

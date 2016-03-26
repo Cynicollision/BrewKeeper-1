@@ -1,7 +1,8 @@
 ﻿(function () {
     'use strict';
     
-    var mongoose = require('mongoose');
+    var mongoose = require('mongoose'),
+        validation = require('../utilities/validation')
 
     var Recipe = mongoose.model('Recipe'),
         Brew = mongoose.model('Brew');
@@ -172,6 +173,7 @@
     exports.getRecipeBrewCountById = function (req, res) {
 
         var findRecipeId = req.params.id;
+
         Brew.count({ recipeId: findRecipeId }).exec(function (err, count) {
             if (err) {
                 res.send(500, { reason: err.toString() });
@@ -184,10 +186,30 @@
     };
 
     exports.getTopRecipes = function (req, res) {
-        // TODO: get the mode, sort desc by brew count, return top N
-        //http://stackoverflow.com/questions/1053843/get-the-element-with-the-highest-occurrence-in-an-array
 
-        var currentUserId = req.user._id.toString(),
-            recipeLimit = req.params.limit;
+        var reqUserId = req.params.id,
+            recipeLimit = req.query.limit,
+            query;
+        
+        if (validation.validateUserRequest(req, res, reqUserId)) {
+
+            query = {
+                ownerId: reqUserId,
+            };
+            
+            Recipe.find(query).exec(function getTopRecipes(err, collection) {
+                
+                var topRecipes = [],
+                    modeMap = [];
+                
+                collection.forEach(function (recipe) {
+                    var inList = !!modeMap[recipe.id];
+                });
+                
+                res.send({
+                    topRecipes: topRecipes,
+                });
+            });
+        }
     };
 })();
