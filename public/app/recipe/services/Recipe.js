@@ -2,8 +2,8 @@
     'use strict';
     
     var bk = angular.module('BrewKeeper');
-    bk.factory('Recipe', ['$q', 'BrewKeeperApi', 'Identity', 
-        function ($q, BrewKeeperApi, Identity) {
+    bk.factory('Recipe', ['$q', 'BrewKeeperApi', 
+        function ($q, BrewKeeperApi) {
             return {
                 isRecipeOwnedByUser: function (recipe, userId) {
                     if (recipe) {
@@ -114,6 +114,23 @@
                         dfd.reject(reason);
                     });
                 
+                    return dfd.promise;
+                },
+
+                getTopBrewedRecipes: function (userId, limit) {
+                    var dfd = $q.defer(),
+                        url = '/api/recipe/user/top/' + userId;
+                    
+                    limit = limit || 0;
+                    
+                    url += '?limit=' + limit;
+
+                    BrewKeeperApi.get(url).then(function (response) {
+                        dfd.resolve(response);
+                    }, function (reason) {
+                        dfd.resolve(reason);
+                    });
+
                     return dfd.promise;
                 }
             };

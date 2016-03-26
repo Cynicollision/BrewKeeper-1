@@ -1,0 +1,35 @@
+﻿.container
+    .col-md-12
+        .panel.panel-default.col-md-5   
+            .panel-title
+                h4.overview-widget-header.text-center Stats
+            .panel-body
+                table.table.table-condensed
+                    tbody
+                        tr(ng-repeat="stat in basicStats | orderBy:name")
+                            td {{ stat.name }}
+                            td {{ stat.value }}
+
+        .panel.panel-default.col-md-5.col-md-offset-2
+            .panel-title
+                h4.overview-widget-header.text-center Utility
+            .panel-body 
+                .li 
+                    a(href="profile/edit") Edit Profile
+               
+    .col-md-12
+        .panel.panel-default.col-md-8.col-md-offset-2  
+            .panel-title
+                h4.overview-widget-header.text-center More Stats
+            .panel-body Most brewed recipes
+                
+                table.table.table-condensed
+                    thead
+                        tr
+                        th.col-md-4 Recipe Name
+                        th.col-md-4 Times brewed
+                    tbody
+                        tr(ng-repeat="recipe in mostBrewedRecipes")
+                            td 
+                                a(href="recipe/{{ recipe._id }}") {{ recipe.name }}
+                            td {{ recipe.count }}

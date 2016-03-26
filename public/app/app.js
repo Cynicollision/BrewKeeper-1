@@ -43,63 +43,69 @@
                 controller: 'SignupCtrl'
             })
 
-            .when('/profile', {
-                templateUrl: '/partials/account/views/profile', 
+            .when('/profile/edit', {
+                templateUrl: '/partials/account/views/edit-profile', 
                 controller: 'EditProfileCtrl',
+                resolve: routeRoleChecks.user
+            })
+
+            .when('/profile', {
+                templateUrl: '/partials/account/views/view-profile',
+                controller: 'ViewProfileCtrl',
                 resolve: routeRoleChecks.user
             })
 
             // brew
             .when('/brew', {
-                    templateUrl: '/partials/brew/views/brew-list', 
-                    controller: 'BrewListCtrl'
-                })
+                templateUrl: '/partials/brew/views/brew-list', 
+                controller: 'BrewListCtrl'
+            })
 
             .when('/brew/add', {
-                    templateUrl: '/partials/brew/views/add-edit-brew', 
-                    controller: 'AddBrewCtrl'
-                })
+                templateUrl: '/partials/brew/views/add-edit-brew', 
+                controller: 'AddBrewCtrl'
+            })
 
             .when('/brew/view/:id', {
-                    templateUrl: '/partials/brew/views/view-brew', 
-                    controller: 'ViewBrewCtrl'
-                })
+                templateUrl: '/partials/brew/views/view-brew', 
+                controller: 'ViewBrewCtrl'
+            })
 
             .when('/brew/edit/:id', {
-                    templateUrl: '/partials/brew/views/add-edit-brew', 
-                    controller: 'EditBrewCtrl'
-                })
+                templateUrl: '/partials/brew/views/add-edit-brew', 
+                controller: 'EditBrewCtrl'
+            })
 
             .when('/brew/delete/:id', {
-                    templateUrl: '/partials/brew/views/delete-brew', 
-                    controller: 'DeleteBrewCtrl'
-                })
+                templateUrl: '/partials/brew/views/delete-brew', 
+                controller: 'DeleteBrewCtrl'
+            })
 
             // recipes
             .when('/recipe', {
-                    templateUrl: '/partials/recipe/views/recipe-list', 
-                    controller: 'RecipeListCtrl'
-                })
+                templateUrl: '/partials/recipe/views/recipe-list', 
+                controller: 'RecipeListCtrl'
+            })
 
             .when('/recipe/view/:id', {
-                    templateUrl: '/partials/recipe/views/view-recipe', 
-                    controller: 'ViewRecipeCtrl'
-                })
+                templateUrl: '/partials/recipe/views/view-recipe', 
+                controller: 'ViewRecipeCtrl'
+            })
 
             .when('/recipe/add', {
-                    templateUrl: '/partials/recipe/views/add-edit-recipe', 
-                    controller: 'AddRecipeCtrl'
-                })
+                templateUrl: '/partials/recipe/views/add-edit-recipe', 
+                controller: 'AddRecipeCtrl'
+            })
 
             .when('/recipe/edit/:id', {
-                    templateUrl: '/partials/recipe/views/add-edit-recipe', 
-                    controller: 'EditRecipeCtrl'
-                })
+                templateUrl: '/partials/recipe/views/add-edit-recipe', 
+                controller: 'EditRecipeCtrl'
+            })
 
             .when('/recipe/delete/:id', {
-                    templateUrl: '/partials/recipe/views/delete-recipe', 
-                    controller: 'DeleteRecipeCtrl'
-                });
+                templateUrl: '/partials/recipe/views/delete-recipe', 
+                controller: 'DeleteRecipeCtrl'
+            });
         }
     ]);
 

@@ -16,10 +16,8 @@
                 Brew.getActiveByUserId(Identity.getCurrentUserId()).then(function (response) {
                     
                     // exclude "not yet started" brews
-                    var brews = response.data.filter(function (brew) {
-                        return (brew.statusCde !== BrewStatus.NotStartedYet);
-                    });
-                    
+                    var brews = response.data;
+
                     $scope.hasActivity = !!brews.length;
 
                     $scope.fermentingBrews = brews.filter(function (brew) {
@@ -28,10 +26,6 @@
                     
                     $scope.bottledBrews = brews.filter(function (brew) {
                         return (brew.statusCde === BrewStatus.Bottled);
-                    });
-
-                    $scope.chillingBrews = brews.filter(function (brew) {
-                        return (brew.statusCde === BrewStatus.Chilling);
                     });
                 });
             });
