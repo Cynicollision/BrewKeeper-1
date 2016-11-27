@@ -6,3 +6,4 @@ node_modules
 # will need to include this when deploying
 .ntvs_analysis.dat
 .vs/config/applicationhost.config
+/typings

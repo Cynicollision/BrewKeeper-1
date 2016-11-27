@@ -162,6 +162,24 @@
         });
     };
 
+    exports.getFirstBrewByDate = function (req, res) {
+
+        var userId = req.params.id;
+
+        var query = {
+            $and: [
+                { ownerId: userId },
+            ]
+        };
+
+        Brew.find(query).sort('brewDate').exec(function (err, collection) {
+
+            var brew = collection[0];
+
+            res.send(brew);
+        });
+    };
+
     exports.debugGetAllBrews = function (req, res) {
         
         Brew.find({}).exec(function (err, collection) {

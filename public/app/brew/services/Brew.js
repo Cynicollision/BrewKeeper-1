@@ -116,7 +116,21 @@
                     });
                 
                     return dfd.promise;
-                }
+                },
+
+                getFirstBrewByDate: function (userId) {
+                    var dfd = $q.defer(),
+                        url = '/api/brew/user/first/' + userId;
+
+                    BrewKeeperApi.get(url).then(function (response) {
+                        var brew = response.data === "" ? { noBrews: true } : response.data;
+                        dfd.resolve(brew);
+                    }, function (response) {
+                        dfd.reject(response.data.reason);
+                    });
+
+                    return dfd.promise;
+                },
             };
         }
     ]);
