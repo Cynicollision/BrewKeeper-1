@@ -20,7 +20,7 @@
 
             module('BrewKeeper');
 
-            BrewMock = jasmine.createSpyObj('BrewMock', ['getCountByUserId']);
+            BrewMock = jasmine.createSpyObj('BrewMock', ['getCountByUserId', 'getFirstBrewByDate']);
             IdentityMock = jasmine.createSpyObj('IdentityMock', ['getCurrentUserId']);
             RecipeMock = jasmine.createSpyObj('RecipeMock', ['getCountByUserId', 'getTopBrewedRecipes']);
 
@@ -32,6 +32,14 @@
                     var dfd = $q.defer();
                     dfd.resolve({
                         data: { count: recipeCount }
+                    });
+                    return dfd.promise;
+                });
+
+                BrewMock.getFirstBrewByDate.and.callFake(function () {
+                    var dfd = $q.defer();
+                    dfd.resolve({
+                        data: {}
                     });
                     return dfd.promise;
                 });
@@ -67,10 +75,11 @@
 
         it('Retrieves brew and recipe stats.', function () {
             expect(BrewMock.getCountByUserId).toHaveBeenCalledWith(fakeUserId);
+            expect(BrewMock.getFirstBrewByDate).toHaveBeenCalledWith(fakeUserId);
             expect(RecipeMock.getCountByUserId).toHaveBeenCalledWith(fakeUserId);
             expect(RecipeMock.getTopBrewedRecipes).toHaveBeenCalledWith(fakeUserId);
 
-            expect($scope.basicStats.length).toBe(3);
+            expect($scope.basicStats.length).toBe(4);
         });
 
         it('Retrieves the most frequently brewed recipes.', function () {
