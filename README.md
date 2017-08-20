@@ -6,4 +6,6 @@ A web app for beer homebrewers to help track the status of current batches:
 - Store recipes and their sources.
 - Statistics such as most popular recipe and brew trends.
 
+The application is live on Heroku: http://brewkeeper.herokuapp.com/home
+
 ![BrewKeeper screenshot](https://raw.githubusercontent.com/Cynicollision/BrewKeeper/master/screenshot.png)
